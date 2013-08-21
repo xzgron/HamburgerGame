@@ -24,6 +24,7 @@ public class GWorld {
 		addGO(new Tree(600,70,200,200));
 		addGO(new Tree(200,550,200,200));
 		addGO(new Tree(75,400,200,200));
+		addGO(new Dragon(625,400,500,500));
 		//addGO(new Rektangel(200));
 		
 	}

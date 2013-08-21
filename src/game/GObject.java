@@ -16,6 +16,7 @@ public abstract class GObject {
 	private float xPos, yPos;
 	private float textureWidth;
 	private float textureHeight;
+	private float hitBoxRadie = -1;
 	
 	private float red = 1, green = 1, blue = 1;
 	private float transparency = 1;
@@ -137,6 +138,15 @@ public abstract class GObject {
 			System.out.println("This object has is not kvadratic");
 		
 		return textureWidth;
+	}
+	
+
+	
+	public float getRadie(){
+		return hitBoxRadie;
+	}
+	public void setRadie(float f){
+		hitBoxRadie = f;
 	}
 
 }

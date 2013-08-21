@@ -2,7 +2,7 @@ package game;
 
 import static java.lang.Math.*;
 import static java.awt.geom.Line2D.*;
-
+import static game.GMath.*;
 public class GPhysics {
 /*
 	public static void handleCollision(GObject go1, GObject go2) {
@@ -94,10 +94,7 @@ public class GPhysics {
 	 * 
 	 * */
 	
-	public static float getDistance(float x1,float y1,float x2, float y2) {
-		return (float) sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
-	}
-	
+
 	public static float getAngle(float x1,float y1,float x2, float y2){
 		float dx = x2-x1;
 		float dy = y2-y1;
@@ -111,5 +108,12 @@ public class GPhysics {
 			angle += 360;
 		return angle;
 
+	}
+	
+	public static boolean checkCollision(GObject go1, GObject go2){
+		if(getDistance(go1.getX(), go1.getY(), go2.getX(), go2.getY()) > go1.getRadie() + go2.getRadie())
+			return true;
+		else
+			return false;
 	}
 }

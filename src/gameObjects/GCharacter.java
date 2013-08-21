@@ -11,13 +11,14 @@ import game.GObject;
 import game.GPhysics;
 import game.GTexture;
 import game.Game;
+import game.Main;
+
 import input.Controller;
 
 public abstract class GCharacter extends GObject {
 
 	private String characterFolder;
 	float speed;
-	float hitBoxRadie;
 	boolean walking = false;
 	int textureMode;
 	int rotationState;
@@ -35,7 +36,7 @@ public abstract class GCharacter extends GObject {
 			float textureSize, float hitBoxSize) {
 		super(xPos, yPos, textureSize);
 		this.characterFolder = characterFolder;
-		this.hitBoxRadie = hitBoxSize / 2;
+		setRadie(hitBoxSize / 2);
 		
 		
 		for (int i = 0; i < 3; i++) {
@@ -118,6 +119,12 @@ public abstract class GCharacter extends GObject {
 			textureMode = 0;
 		}
 		 changeTexture(rotationState, textureMode);
+		 
+		 
+		 for(GObject go: Main.game.world.worldObjects){
+			 if(go != this)
+				 GPhysics.checkCollision(this,go);
+		 }
 	}
 
 	public void setSpeed(float speed) {
