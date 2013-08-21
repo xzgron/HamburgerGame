@@ -41,6 +41,7 @@ public abstract class GObject {
 
 	public void render() {
 		draw(xPos,yPos);
+		
 	}
 	
 	public void setTexture(Texture texture){
