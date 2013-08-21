@@ -42,9 +42,25 @@ public class GWorld {
 	}
 
 	public void render() {
+		sortObjects();
 		for(GObject go : worldObjects)
 			go.render();
 	}
 	
-
+	private void sortObjects(){
+		boolean moved = true;
+		GObject temp;
+		
+		while(moved){
+			moved = false;
+			for(int i = 0; i < worldObjects.size()-1; i++){
+				if(worldObjects.get(i).getY()<worldObjects.get(i+1).getY()){
+					temp = worldObjects.get(i);
+					worldObjects.set(i, worldObjects.get(i+1));
+					worldObjects.set(i+1, temp);
+					moved = true;
+				}			
+			}
+		}
+	}
 }

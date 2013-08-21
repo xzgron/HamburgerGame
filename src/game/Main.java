@@ -61,7 +61,7 @@ public class Main {
 		long frames = 0;
 		float deltaTimePerWantedFps = 0;
 		
-		while (!Display.isCloseRequested() && !Game.isCloseRequest()) {
+		while (!Display.isCloseRequested() && !Game.isCloseRequested()) {
 			frames++;
 			long currentTime = System.nanoTime();
 			Game.deltaTime = (currentTime - previousTime)/1000000000.0f;
@@ -72,11 +72,12 @@ public class Main {
 				fps = (int) (wanted_fps/deltaTimePerWantedFps);
 				deltaTimePerWantedFps = 0;
 			}
+			
+			Display.setTitle(title + "   fps: " + fps);
+			
 			handleInput();
 			update();
 			render();
-			
-			Display.setTitle(title + "...fps: " + fps);
 		}
 	}
 
