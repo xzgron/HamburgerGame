@@ -18,7 +18,7 @@ public class Inventory {
 	public void addItem(GItem go){
 		for(int i = 0; i < slots.length; i++){
 				if(slots[i] == null){
-					slots.
+					slots.;
 			}	
 		}
 	}
