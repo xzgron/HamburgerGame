@@ -1,8 +1,8 @@
 package gameObjects;
 
-public class Burger extends GCharacter{
+public class Human extends GCharacter{
 
-	public Burger(float xPos, float yPos) {
+	public Human(float xPos, float yPos) {
 		super(xPos, yPos, "human", 150, 100);
 		setSpeed(150);
 	}
