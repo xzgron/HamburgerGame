@@ -31,7 +31,7 @@ public class DefaultController extends Controller {
 				r.setWalking(false);
 			
 			
-			/*
+			
 			if(isKeyDown(KEY_SPACE) && !jumping){
 				jumping = true;
 				ySpeed = 15;
@@ -45,7 +45,7 @@ public class DefaultController extends Controller {
 					jumping = false;
 
 			}
-			*/
+			
 			
 			if(isKeyDown(KEY_LSHIFT))
 				r.setSpeed(250);

@@ -1,7 +1,8 @@
 package game;
 
 import static org.lwjgl.opengl.GL11.*;
-import menu.GMenu;
+import menu.GameMenu;
+import menu.StartMenu;
 import input.Input;
 
 public class Game {
@@ -9,16 +10,18 @@ public class Game {
 	
 	public Input input;
 	public GWorld world;
-	public GMenu menu;
+	public StartMenu startMenu;
+	public GameMenu gameMenu;
 
 
-	public GStates gameState = GStates.MENU;
+	public GStates gameState = GStates.STARTMENU;
 
 	public static float deltaTime;
 
 	public Game() {
 		input = new Input();
-		menu = new GMenu();
+		startMenu = new StartMenu();
+		gameMenu = new GameMenu();
 		world = new GWorld();
 		
 	}
@@ -28,7 +31,10 @@ public class Game {
 		case INTRO:
 			input.handleIntro();
 			break;
-		case MENU:
+		case STARTMENU:
+			input.handleMenu();
+			break;
+		case GAMEMENU:
 			input.handleMenu();
 			break;
 		case GAME:
@@ -41,8 +47,11 @@ public class Game {
 		switch (gameState) {
 		case INTRO:
 			break;
-		case MENU:
-			menu.update();
+		case STARTMENU:
+			startMenu.update();
+			break;
+		case GAMEMENU:
+			gameMenu.update();
 			break;
 		case GAME:
 			world.update();
@@ -54,8 +63,13 @@ public class Game {
 		switch (gameState) {
 		case INTRO:
 			break;
-		case MENU:
-			menu.render();
+		case STARTMENU:
+			glClearColor(0,0,0,1);
+			startMenu.render();
+			break;
+		case GAMEMENU:
+			glClearColor(0,0,0,1);
+			gameMenu.render();
 			break;
 		case GAME:
 			glClearColor(1,1,1,1);

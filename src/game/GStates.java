@@ -1,7 +1,7 @@
 package game;
 
 public enum GStates {
-	INTRO, MENU, GAME 
+	INTRO, STARTMENU, GAMEMENU, GAME 
 	
 	
 

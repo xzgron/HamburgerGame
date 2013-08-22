@@ -33,7 +33,7 @@ public class Input {
 	
 	public void handleGame() {
 		if(isKeyDown(KEY_ESCAPE))
-			Main.game.setGameState(GStates.MENU);
+			Main.game.setGameState(GStates.GAMEMENU);
 		
 		for(Controller c: controllers){
 			
