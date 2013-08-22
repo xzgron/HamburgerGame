@@ -1,6 +1,7 @@
 package game;
 import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
+import input.GController;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,87 +15,38 @@ import org.newdawn.slick.opengl.TextureLoader;
 public abstract class GObject {
 
 	private float xPos, yPos;
-	private float textureWidth;
-	private float textureHeight;
-	private float hitBoxRadie = -1;
-	
-	private float red = 1, green = 1, blue = 1;
-	private float transparency = 1;
+	private float xPrev, yPrev;
 	
 	private Texture texture;
+	private float xTex = 0, yTex = 0;
+	private float texWidth, texHeight;
 	
-	public GObject(float xPos, float yPos, float textureSize) {
-		this.xPos = xPos;
-		this.yPos = yPos;
-		this.textureWidth = textureSize;
-		this.textureHeight = textureSize;
-	}
+	private float radie = -1;
+	
+	private float red = 1, green = 1, blue = 1, transparency = 1;
+	
+	private GController controller;
+	
+	private String texFolder = "";
 
-	public GObject(float xPos, float yPos, float textureWidth, float textureHeight) {
+	public GObject(float xPos, float yPos, float texWidth, float texHeight) {
 		this.xPos = xPos;
 		this.yPos = yPos;
-		this.textureWidth = textureWidth;
-		this.textureHeight = textureHeight;
+		this.texWidth = texWidth;
+		this.texHeight = texHeight;
 	}
 
 	public abstract void update();
 
 	public void render() {
-		draw(xPos,yPos);
-		
+		GSprite.draw(texture, xPos + xTex, yPos + yTex, texWidth, texHeight, red, green, blue, transparency);	
 	}
 	
-	public void setTexture(Texture texture){
-		this.texture = texture;
-	}
-
-	public void setTexture(String fileName) {
-		texture = GTexture.getTexture(fileName);
+	public void setPosition(float x, float y) {
+		this.xPos = x;
+		this.yPos = y;
 	}
 	
-
-	public Texture getTexture() {
-		return texture;
-	}
-
-	public void draw(float x, float y) {
-		glPushMatrix();
-		{
-			if(texture != null)
-				texture.bind();
-			else
-				glBindTexture(GL_TEXTURE_2D,0);
-
-			glColor4f(red, green, blue, transparency);
-			glTranslatef(x, y, 0);
-			glBegin(GL_QUADS);
-			{
-				glTexCoord2f(0, 0);
-				glVertex2f(-textureWidth/2f,textureHeight/2f);
-
-				glTexCoord2f(1f, 0);
-				glVertex2f(textureWidth/2f,textureHeight/2f);
-
-				glTexCoord2f(1f, 1f);
-				glVertex2f(textureWidth/2f,-textureHeight/2f);
-
-				glTexCoord2f(0, 1f);
-				glVertex2f(-textureWidth/2f,-textureHeight/2f);
-			}
-			glEnd();
-		}
-		glPopMatrix();
-	}
-
-	public float getX() {
-		return xPos;
-	}
-
-	public float getY() {
-		return yPos;
-	}
-
-
 	public void move(float x, float y) {
 		this.xPos += x;
 		this.yPos += y;
@@ -106,48 +58,70 @@ public abstract class GObject {
 		move(dx,dy);
 	}
 
-	public void setPosition(float x, float y) {
-		this.xPos = x;
-		this.yPos = y;
-	}	
-
-	public void useColor() {
-		glColor4f(red, green, blue, transparency);
+	public float getX() {
+		return xPos;
 	}
 
-	public void setColor(float r, float g, float b) {
+	public float getY() {
+		return yPos;
+	}
+	
+	public void setTexture(Texture texture){
+		this.texture = texture;
+	}
+
+	public void setTexture(String fileName) {
+		texture = GTexture.getTexture(texFolder + fileName);
+	}
+	
+	public Texture getTexture() {
+		return texture;
+	}
+	
+	public void setTexFolder(String texFolder){
+		this.texFolder = texFolder;
+	}
+	
+	public void setTexPos(float x, float y){
+		xTex = x;
+		yTex = y;
+	}
+	
+	public String getTexFolder(){
+		return texFolder;
+	}
+	
+	public float getTexWidth(){
+		return texWidth;
+	}
+	
+	public float getTexHeight(){
+	 return texHeight;
+	}
+	
+
+
+	public void setColor(float r, float g, float b, float t) {
 		this.red = r / 255;
 		this.green = g / 255;
 		this.blue = b / 255;
+		this.transparency = t;
 	}
 
 
-	public void setTransparency(float transparency) {
-		this.transparency = transparency;
-	}
-	
-	public float getTextureWidth(){
-		return textureWidth;
-	}
-	
- public float getTextureHeight(){
-	 return textureHeight;
- }
-	
-	public float getTextureSize(){
-		if(textureWidth != textureHeight)
-			System.out.println("This object has is not kvadratic");
-		
-		return textureWidth;
-	}
 	
 
+	public void setRadie(float f){
+		radie = f;
+	}
 	
 	public float getRadie(){
-		return hitBoxRadie;
+		return radie;
 	}
-	public void setRadie(float f){
-		hitBoxRadie = f;
+	/*
+	public void giveController(GController controller){
+		controller.addReciever(this);	
 	}
-
+	
+	public void removeController()*/
 }

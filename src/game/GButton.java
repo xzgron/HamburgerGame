@@ -20,8 +20,8 @@ public abstract class GButton extends GObject {
 	public abstract void click();
 	
 	private boolean isClicked(){
-		if(isButtonDown(0) && Mouse.getX() >= this.getX() - this.getTextureWidth()/2 &&  Mouse.getX() <= this.getX() + this.getTextureWidth()/2 && 
-				Mouse.getY() >= this.getY() - this.getTextureHeight()/2 &&  Mouse.getY() <= this.getY() + this.getTextureHeight()/2)
+		if(isButtonDown(0) && Mouse.getX() >= this.getX() - this.getTexWidth()/2 &&  Mouse.getX() <= this.getX() + this.getTexWidth()/2 && 
+				Mouse.getY() >= this.getY() - this.getTexHeight()/2 &&  Mouse.getY() <= this.getY() + this.getTexHeight()/2)
 			return true;
 		else
 			return false;

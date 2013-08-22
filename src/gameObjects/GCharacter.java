@@ -13,11 +13,9 @@ import game.GTexture;
 import game.Game;
 import game.Main;
 
-import input.Controller;
+import input.GController;
 
 public abstract class GCharacter extends GObject {
-
-	private String characterFolder;
 	float speed;
 	boolean walking = false;
 	int textureMode;
@@ -32,22 +30,21 @@ public abstract class GCharacter extends GObject {
 	Texture[] left = new Texture[3];
 	Texture[] leftUp = new Texture[3];
 
-	public GCharacter(float xPos, float yPos, String characterFolder,
-			float textureSize, float hitBoxSize) {
-		super(xPos, yPos, textureSize);
-		this.characterFolder = characterFolder;
+	public GCharacter(float xPos, float yPos, String texFolder,
+			float texSize, float hitBoxSize) {
+		super(xPos, yPos, texSize,texSize);
+		setTexFolder("characters/" + texFolder + "/");
 		setRadie(hitBoxSize / 2);
 		
-		
 		for (int i = 0; i < 3; i++) {
-			up[i] = getTexture("up"+i);
-			rightUp[i] = getTexture("rightUp"+i);
-			right[i] = getTexture("right"+i);
-			rightDown[i] = getTexture("rightDown"+i);
-			down[i] = getTexture("down"+i);
-			leftDown[i] = getTexture("leftDown"+i);
-			left[i] = getTexture("left"+i);
-			leftUp[i] = getTexture("leftUp"+i);
+			up[i] = GTexture.getTexture(getTexFolder() + "up"+i);
+			rightUp[i] = GTexture.getTexture(getTexFolder() + "rightUp"+i);
+			right[i] = GTexture.getTexture(getTexFolder() + "right"+i);
+			rightDown[i] = GTexture.getTexture(getTexFolder() + "rightDown"+i);
+			down[i] = GTexture.getTexture(getTexFolder() + "down"+i);
+			leftDown[i] = GTexture.getTexture(getTexFolder() +"leftDown"+i);
+			left[i] = GTexture.getTexture(getTexFolder() +"left"+i);
+			leftUp[i] = GTexture.getTexture(getTexFolder() +"leftUp"+i);
 		}
 		
 		setTexture(down[0]);
@@ -81,11 +78,6 @@ public abstract class GCharacter extends GObject {
 			setTexture(leftUp[mode]);
 			break;
 		}
-	}
-
-	public Texture getTexture(String fileName) {
-		return GTexture.getTexture("characters/" + characterFolder + "/"
-				+ fileName);
 	}
 
 	float walkCounter = 0;

@@ -10,7 +10,7 @@ public abstract class GItem extends GObject {
 	
 	
 	public GItem(float x, float y,float size) {
-		super(x, y, size);
+		super(x, y, size,size);
 		// TODO Auto-generated constructor stub
 	}
 
