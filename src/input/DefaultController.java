@@ -37,12 +37,14 @@ public class DefaultController extends Controller {
 				ySpeed = 15;
 			}
 			if(jumping){
-				r.move(0,ySpeed); 
+				r.setTexPos(0,jumpMovement); 
 				jumpMovement += ySpeed;
 				ySpeed -= 150  * Game.deltaTime; 
 				
-				if(jumpMovement <= 0)
+				if(jumpMovement <= 0){
 					jumping = false;
+					r.setTexPos(0,0);
+					}
 
 			}
 			
