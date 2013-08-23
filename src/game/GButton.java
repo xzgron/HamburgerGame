@@ -1,7 +1,4 @@
 package game;
-import static org.lwjgl.input.Mouse.*;
-
-import org.lwjgl.input.Mouse;
 
 public abstract class GButton extends GObject {
 
@@ -18,13 +15,4 @@ public abstract class GButton extends GObject {
 		super.setTexture("buttons/"+fileName);
 	}
 	public abstract void click();
-	
-	private boolean isClicked(){
-		if(isButtonDown(0) && Mouse.getX() >= this.getX() - this.getTexWidth()/2 &&  Mouse.getX() <= this.getX() + this.getTexWidth()/2 && 
-				Mouse.getY() >= this.getY() - this.getTexHeight()/2 &&  Mouse.getY() <= this.getY() + this.getTexHeight()/2)
-			return true;
-		else
-			return false;
-	}
-
 }

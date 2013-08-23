@@ -1,5 +1,6 @@
 package game;
 import static java.lang.Math.*;
+import static org.lwjgl.input.Mouse.isButtonDown;
 import static org.lwjgl.opengl.GL11.*;
 import input.GController;
 
@@ -8,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
@@ -20,13 +22,11 @@ public abstract class GObject {
 	private Texture texture;
 	private float texWidth, texHeight;
 	
-	private float radie = -1;
+	private String texFolder = "";
 	
 	private float red = 1, green = 1, blue = 1, transparency = 1;
 	
-	private GController controller;
-	
-	private String texFolder = "";
+	private float radie = -1;
 
 	public GObject(float xPos, float yPos, float texWidth, float texHeight) {
 		this.xPos = xPos;
@@ -107,6 +107,21 @@ public abstract class GObject {
 	
 	public float getRadie(){
 		return radie;
+	}
+	
+	public boolean isMouseWithinTexture(){
+		if(Mouse.getX() >= this.getX() - this.getTexWidth()/2 &&  Mouse.getX() <= this.getX() + this.getTexWidth()/2 && 
+				Mouse.getY() >= this.getY() - this.getTexHeight()/2 &&  Mouse.getY() <= this.getY() + this.getTexHeight()/2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isClicked(){
+		if(isButtonDown(0) && isMouseWithinTexture())
+			return true;
+		else
+			return false;
 	}
 	/*
 	public void giveController(GController controller){

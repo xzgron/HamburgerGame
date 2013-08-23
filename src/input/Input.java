@@ -19,7 +19,7 @@ public class Input {
 	
 	
 	public Input(){
-		controllers.add(new HumanController());
+		//controllers.add(new HumanController());
 	}
 	
 	public void handleIntro() {
