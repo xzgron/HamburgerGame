@@ -1,4 +1,4 @@
-package ingredients;
+package food.ingredients;
 
 import game.GObject;
 
@@ -11,7 +11,7 @@ public abstract class GIngredient extends GObject {
 	
 	public GIngredient(float x, float y,float size) {
 		super(x, y, size,size);
-		setTexFolder("food/");
+		setTexFolder("food/ingredients/");
 	}
 
 	@Override

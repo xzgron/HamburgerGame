@@ -1,4 +1,4 @@
-package ingredients;
+package food.ingredients;
 
 public class HamburgerBreadOverPart extends GIngredient{
 

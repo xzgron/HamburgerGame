@@ -18,7 +18,6 @@ public abstract class GObject {
 	private float xPrev, yPrev;
 	
 	private Texture texture;
-	private float xTex = 0, yTex = 0;
 	private float texWidth, texHeight;
 	
 	private float radie = -1;
@@ -39,7 +38,7 @@ public abstract class GObject {
 	public abstract void update();
 
 	public void render() {
-		GSprite.draw(texture, xPos + xTex, yPos + yTex, texWidth, texHeight, red, green, blue, transparency);	
+		GSprite.draw(texture, xPos, yPos, texWidth, texHeight, red, green, blue, transparency);	
 	}
 	
 	public void setPosition(float x, float y) {
@@ -82,11 +81,6 @@ public abstract class GObject {
 		this.texFolder = texFolder;
 	}
 	
-	public void setTexPos(float x, float y){
-		xTex = x;
-		yTex = y;
-	}
-	
 	public String getTexFolder(){
 		return texFolder;
 	}
@@ -98,7 +92,6 @@ public abstract class GObject {
 	public float getTexHeight(){
 	 return texHeight;
 	}
-	
 
 
 	public void setColor(float r, float g, float b, float t) {
@@ -107,10 +100,7 @@ public abstract class GObject {
 		this.blue = b / 255;
 		this.transparency = t;
 	}
-
-
 	
-
 	public void setRadie(float f){
 		radie = f;
 	}

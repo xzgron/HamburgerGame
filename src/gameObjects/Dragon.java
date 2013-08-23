@@ -12,7 +12,6 @@ public class Dragon extends GObject {
 		super(xPos, yPos, texSize, texSize);
 		setRadie(hitBoxSize/2);
 		setTexture("nature/Dragon");
-		setTexPos(0,150);
 
 	}
 

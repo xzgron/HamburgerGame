@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL11.glBegin;
 import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glVertex2f;
+import food.Hamburger;
 import gameObjects.*;
 import input.Input;
 
@@ -15,11 +16,10 @@ public class GWorld {
 	
 	public ArrayList<GObject> worldObjects = new ArrayList<GObject>();
 	
-	public static Human player  = new Human(400,400); ;
+	public static Hamburger player  = new Hamburger(400,400,200); ;
 	
 	public GWorld() {
 		addGO(player);
-		addGO(new Hamburger(300f, 400f, 200f));
 		addGO(new Tree(150,30,200,200));
 		addGO(new Tree(600,70,200,200));
 		addGO(new Tree(200,550,200,200));
