@@ -26,10 +26,12 @@ public class Hamburger extends GFood {
 	
 	public void render() {
 		
+		float totalHeight = 0;
 		for(int i = 0; i < ingredients.size(); i++){
-			ingredients.get(i).setPosition(getX(),getY() + i*50);
+			ingredients.get(i).setPosition(getX(),getY() + totalHeight);
 			ingredients.get(i).render();
-			;
+	
+			totalHeight += ingredients.get(i).getHeight();
 		}
 	}
 	

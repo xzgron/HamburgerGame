@@ -8,9 +8,11 @@ public abstract class GIngredient extends GObject {
 
 	boolean heldByMouse;
 	
+	private final float height;
 	
-	public GIngredient(float x, float y,float size) {
+	public GIngredient(float x, float y, float size, float height) {
 		super(x, y, size,size);
+		this.height = height;
 		setTexFolder("food/ingredients/");
 	}
 
@@ -20,4 +22,8 @@ public abstract class GIngredient extends GObject {
 		
 	}
 
+	
+	public float getHeight(){
+		return height;
+	}
 }
