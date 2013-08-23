@@ -41,6 +41,10 @@ public abstract class GObject {
 		GSprite.draw(texture, xPos, yPos, texWidth, texHeight, red, green, blue, transparency);	
 	}
 	
+	public void setSize(float w, float h){
+		texWidth = w;
+		texHeight = h;
+	}
 	public void setPosition(float x, float y) {
 		this.xPos = x;
 		this.yPos = y;

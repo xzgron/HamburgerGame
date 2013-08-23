@@ -1,37 +1,43 @@
 package input;
-import static org.lwjgl.input.Keyboard.*;
+
 import java.util.LinkedList;
 
-import gameObjects.*;
+import food.GFood;
 
-public abstract class GController<recType> {
+public abstract class GController {
 	
-	private LinkedList<recType> recievers;
+private GFood reciever;
 	
 
 	protected abstract void handleInput();
 	
-	public GController(){
-		recievers = new LinkedList<recType>();
+	public GController(GFood gf){
+		reciever = gf;
 	}
 	
-	protected void addReciever(recType GC){
-		recievers.add(GC);
+	protected void setReciever(GFood gf){
+		reciever = gf;
 	}
 	
-	protected void removeReciever(recType GC){
-		recievers.remove(GC);
+	protected GFood getReciever(){
+		return reciever;
 	}
 	
-	protected void emptyRecievers(){
-		recievers.clear();
-	}
-	protected LinkedList<recType> getRecievers(){
-		return recievers;
+	protected void removeReciever(){
+		reciever = null;
 	}
 	
-	public recType reciever(int i) {
-		return recievers.get(i);
+
+
+	
+	
+	public void add(){
+		Input.controllers.add(this);
+	}
+	
+	public void remove(){
+		Input.controllers.remove(this);
+		
 	}
 	
 

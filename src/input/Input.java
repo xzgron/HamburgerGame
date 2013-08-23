@@ -15,7 +15,7 @@ import game.Main;
 
 public class Input {
 	
-	private LinkedList<GController> controllers = new LinkedList<GController>();
+	protected static LinkedList<GController> controllers = new LinkedList<GController>();
 	
 	
 	public Input(){

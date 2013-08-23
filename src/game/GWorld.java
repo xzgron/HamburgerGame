@@ -7,6 +7,7 @@ import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 import food.Hamburger;
 import gameObjects.*;
+import input.DefaultController;
 import input.Input;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class GWorld {
 	
 	public GWorld() {
 		addGO(player);
+		player.setController(new DefaultController(player));
 		addGO(new Tree(150,30,200,200));
 		addGO(new Tree(600,70,200,200));
 		addGO(new Tree(200,550,200,200));
