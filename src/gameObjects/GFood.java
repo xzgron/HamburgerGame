@@ -13,5 +13,4 @@ public class GFood extends GObject {
 	public void update() {
 		
 	}
-
 }

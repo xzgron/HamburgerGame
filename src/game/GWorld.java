@@ -19,7 +19,7 @@ public class GWorld {
 	
 	public GWorld() {
 		addGO(player);
-		
+		addGO(new Hamburger(300f, 400f, 200f));
 		addGO(new Tree(150,30,200,200));
 		addGO(new Tree(600,70,200,200));
 		addGO(new Tree(200,550,200,200));

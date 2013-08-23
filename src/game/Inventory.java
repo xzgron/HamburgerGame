@@ -1,6 +1,6 @@
 package game;
 
-import gameObjects.GItem;
+import items.GItem;
 
 import java.util.ArrayList;
 

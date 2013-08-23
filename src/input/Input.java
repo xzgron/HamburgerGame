@@ -15,11 +15,11 @@ import game.Main;
 
 public class Input {
 	
-	private LinkedList<Controller> controllers = new LinkedList<Controller>();
+	private LinkedList<GController> controllers = new LinkedList<GController>();
 	
 	
 	public Input(){
-		controllers.add(new DefaultController());
+		controllers.add(new HumanController());
 	}
 	
 	public void handleIntro() {
@@ -35,14 +35,9 @@ public class Input {
 		if(isKeyDown(KEY_ESCAPE))
 			Main.game.setGameState(GStates.GAMEMENU);
 		
-		for(Controller c: controllers){
+		for(GController c: controllers){
 			
 			c.handleInput();
 		}
 	}
-	
-
-	
-
-
 }

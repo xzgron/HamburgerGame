@@ -8,9 +8,9 @@ import static game.GPhysics.*;
 import game.*;
 import gameObjects.GCharacter;
 
-public class DefaultController extends Controller {
+public class HumanController extends GCharacterController {
 
-	public DefaultController() {
+	public HumanController() {
 		addReciever(GWorld.player);
 	}
 	

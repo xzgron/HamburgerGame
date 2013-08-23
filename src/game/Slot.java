@@ -1,16 +1,16 @@
 package game;
 
-import gameObjects.GItem;
+import ingredients.GIngredient;
 
 public class Slot {
-	GItem item;
+	GIngredient item;
 	float size;
 	
-	public void set(GItem item){
+	public void set(GIngredient item){
 		this.item = item;
 	}
 	
-	public GItem get(){
+	public GIngredient get(){
 		return item;
 	}
 	
