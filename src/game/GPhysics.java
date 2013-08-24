@@ -119,7 +119,7 @@ public class GPhysics {
 			return false;
 	}
 	
-	public static boolean isWithinTexture(float x, float y, GObject go){
+	public static boolean isPosWithinTex(float x, float y, GObject go){
 		if(x >= go.getX() - go.getTexWidth()/2 &&  x <= go.getX() + go.getTexWidth()/2 && 
 				y >= go.getY() - go.getTexHeight()/2 &&  y <= go.getY() + go.getTexHeight()/2)
 			return true;

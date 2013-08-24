@@ -111,11 +111,8 @@ public abstract class GObject {
 
 	
 	public boolean isMouseWithinTexture(){
-		if(Mouse.getX() >= this.getX() - this.getTexWidth()/2 &&  Mouse.getX() <= this.getX() + this.getTexWidth()/2 && 
-				Mouse.getY() >= this.getY() - this.getTexHeight()/2 &&  Mouse.getY() <= this.getY() + this.getTexHeight()/2)
-			return true;
-		else
-			return false;
+		return GPhysics.isPosWithinTex(Mouse.getX(), Mouse.getY(), this);
+
 	}
 	
 	public boolean isClicked(){
