@@ -1,21 +1,17 @@
 package game;
 
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glColor3f;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glVertex2f;
-import food.Hamburger;
-import gameObjects.*;
+
 import input.DefaultController;
-import input.Input;
 
 import java.util.ArrayList;
+
+import worldObjects.*;
+import worldObjects.food.Hamburger;
 
 public class GWorld {
 	
 	
-	public ArrayList<GObject> worldObjects = new ArrayList<GObject>();
+	public ArrayList<GWorldObject> worldObjects = new ArrayList<GWorldObject>();
 	
 	public static Hamburger player  = new Hamburger(400,400,100); ;
 	
@@ -26,37 +22,36 @@ public class GWorld {
 		addGO(new Tree(600,70,200,200));
 		addGO(new Tree(200,550,200,200));
 		addGO(new Tree(75,400,200,200));
-		//addGO(new Rektangel(200));
 		
 	}
 	
-	public void addGO(GObject GO){
+	public void addGO(GWorldObject GO){
 		worldObjects.add(GO);
 	}
 	
-	public void removeGO(GObject GO){
+	public void removeGO(GWorldObject GO){
 		worldObjects.remove(GO);
 	}
 	
 	public void update() {
-		for(GObject go : worldObjects)
+		for(GWorldObject go : worldObjects)
 			go.update();
 	}
 
 	public void render() {
 		sortObjects();
-		for(GObject go : worldObjects)
+		for(GWorldObject go : worldObjects)
 			go.render();
 	}
 	
 	private void sortObjects(){
 		boolean moved = true;
-		GObject temp;
+		GWorldObject temp;
 		
 		while(moved){
 			moved = false;
 			for(int i = 0; i < worldObjects.size()-1; i++){
-				if(worldObjects.get(i).getY()<worldObjects.get(i+1).getY()){
+				if(worldObjects.get(i).getFootPos()<worldObjects.get(i+1).getFootPos()){
 					temp = worldObjects.get(i);
 					worldObjects.set(i, worldObjects.get(i+1));
 					worldObjects.set(i+1, temp);

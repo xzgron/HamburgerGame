@@ -1,4 +1,4 @@
-package food.ingredients;
+package worldObjects.food.ingredients;
 
 public class HamburgerBreadOverPart extends GIngredient{
 

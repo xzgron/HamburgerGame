@@ -1,6 +1,6 @@
 package input.commands;
 
-import food.GFood;
+import worldObjects.food.GFood;
 
 //tanken med den här är att göra enklare commandon
 

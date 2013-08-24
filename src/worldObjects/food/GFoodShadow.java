@@ -1,6 +1,7 @@
-package food;
+package worldObjects.food;
 
 import game.GObject;
+import game.GWorldObject;
 
 public class GFoodShadow extends GObject{
 	

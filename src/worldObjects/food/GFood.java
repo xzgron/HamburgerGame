@@ -1,9 +1,10 @@
-package food;
+package worldObjects.food;
 
 import input.GController;
 import game.GObject;
+import game.GWorldObject;
 
-public abstract class GFood extends GObject {
+public abstract class GFood extends GWorldObject {
 	
 	boolean walking = false;
 	float walkingSpeed = 200; // pixels per second

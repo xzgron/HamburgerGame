@@ -1,8 +1,9 @@
 package input;
 import static org.lwjgl.input.Keyboard.*;
+
 import java.util.LinkedList;
 
-import gameObjects.*;
+import worldObjects.*;
 
 /*
  * Den här klassen kanske vi aldrig kommer använda men ta inte bort den!

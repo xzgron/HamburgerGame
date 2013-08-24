@@ -1,4 +1,4 @@
-package food.ingredients;
+package worldObjects.food.ingredients;
 
 import game.GObject;
 

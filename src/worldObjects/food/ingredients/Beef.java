@@ -1,4 +1,4 @@
-package food.ingredients;
+package worldObjects.food.ingredients;
 
 public class Beef extends GIngredient{
 

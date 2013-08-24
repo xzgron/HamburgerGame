@@ -1,9 +1,8 @@
-package food;
-
-import food.ingredients.*;
+package worldObjects.food;
 
 import java.util.ArrayList;
 
+import worldObjects.food.ingredients.*;
 import game.GObject;
 
 public class Hamburger extends GFood {
@@ -13,7 +12,6 @@ public class Hamburger extends GFood {
 	public Hamburger(float xPos, float yPos, float texSize) {
 		super(xPos, yPos, texSize, texSize);
 		ingredients.add(new HamburgerBreadUnderPart(xPos, yPos, texSize));
-		ingredients.add(new Beef(xPos, yPos, texSize));
 		ingredients.add(new Beef(xPos, yPos, texSize));
 		ingredients.add(new HamburgerBreadUnderPart(xPos, yPos, texSize));
 		ingredients.add(new Beef(xPos, yPos, texSize));

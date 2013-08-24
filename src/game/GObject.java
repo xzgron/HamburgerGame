@@ -17,7 +17,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 public abstract class GObject {
 
 	private float xPos, yPos;
-	private float xPrev, yPrev;
+
 	
 	private Texture texture;
 	private float texWidth, texHeight;
@@ -26,7 +26,7 @@ public abstract class GObject {
 	
 	private float red = 1, green = 1, blue = 1, transparency = 1;
 	
-	private float radie = -1;
+
 
 	public GObject(float xPos, float yPos, float texWidth, float texHeight) {
 		this.xPos = xPos;
@@ -105,13 +105,7 @@ public abstract class GObject {
 		this.transparency = t;
 	}
 	
-	public void setRadie(float f){
-		radie = f;
-	}
-	
-	public float getRadie(){
-		return radie;
-	}
+
 	
 	public boolean isMouseWithinTexture(){
 		if(Mouse.getX() >= this.getX() - this.getTexWidth()/2 &&  Mouse.getX() <= this.getX() + this.getTexWidth()/2 && 

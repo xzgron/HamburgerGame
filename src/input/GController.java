@@ -2,7 +2,7 @@ package input;
 
 import java.util.LinkedList;
 
-import food.GFood;
+import worldObjects.food.GFood;
 
 public abstract class GController {
 	

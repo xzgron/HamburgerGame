@@ -3,7 +3,7 @@ package input;
 import static org.lwjgl.input.Keyboard.*;
 import static org.lwjgl.input.Mouse.*;
 import static game.GPhysics.*;
-import food.GFood;
+import worldObjects.food.GFood;
 import game.*;
 
 public class DefaultController extends GController {
@@ -32,7 +32,7 @@ public class DefaultController extends GController {
 			
 			if(isKeyDown(KEY_SPACE) && !jumping){
 				jumping = true;
-				ySpeed = 7;
+				ySpeed = 10;
 			}
 			if(jumping){
 				getReciever().setZ(jumpMovement); 
