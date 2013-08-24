@@ -26,4 +26,7 @@ public abstract class GIngredient extends GObject {
 	public float getHeight(){
 		return height;
 	}
+	
+	public abstract void useFirstAbility();
+	public abstract void useSecondAbility();
 }

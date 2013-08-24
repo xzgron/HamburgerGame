@@ -18,11 +18,7 @@ public class GWorld {
 	public GWorld() {
 		addGO(player);
 		player.setController(new DefaultController(player));
-		addGO(new Tree(150,30,200,200));
-		addGO(new Tree(600,70,200,200));
-		addGO(new Tree(200,550,200,200));
-		addGO(new Tree(75,400,200,200));
-		
+		addGO(new Tree(150,30,500));		
 	}
 	
 	public void addGO(GWorldObject GO){
@@ -59,5 +55,14 @@ public class GWorld {
 				}			
 			}
 		}
+		for(GWorldObject go: worldObjects){
+			if(go != player && go.getFootPos() < player.getFootPos() + player.getZ() && GPhysics.isWithinTexture(player.getX(), player.getY(), go)){
+				go.setTransparency(0.5f);
+				}
+			else
+				go.setTransparency(1);
+
+		}
+			
 	}
 }

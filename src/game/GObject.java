@@ -105,6 +105,9 @@ public abstract class GObject {
 		this.transparency = t;
 	}
 	
+	public void setTransparency(float f){
+		transparency = f;
+	}
 
 	
 	public boolean isMouseWithinTexture(){
@@ -121,10 +124,5 @@ public abstract class GObject {
 		else
 			return false;
 	}
-	/*
-	public void giveController(GController controller){
-		controller.addReciever(this);	
-	}
-	
-	public void removeController()*/
+
 }

@@ -1,10 +1,10 @@
 package worldObjects.food.ingredients;
 
-public class Beef extends GIngredient{
+public class Sallad extends GIngredient{
 
-	public Beef(float x, float y, float size) {
-		super(x, y, size, size * 0.2f);
-		setTexture("beef");
+	public Sallad(float x, float y, float size) {
+		super(x, y, size, size *0.1f);
+		setTexture("sallad");
 	}
 
 	@Override
@@ -18,4 +18,5 @@ public class Beef extends GIngredient{
 		// TODO Auto-generated method stub
 		
 	}
+
 }

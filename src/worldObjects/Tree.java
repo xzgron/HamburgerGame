@@ -8,9 +8,9 @@ import game.GPhysics;
 
 public class Tree extends GWorldObject {
 	
-	public Tree(float xPos, float yPos, float texSize,float hitBoxSize) {
+	public Tree(float xPos, float yPos, float texSize) {
 		super(xPos, yPos, texSize,texSize);
-		setRadie(hitBoxSize / 2);
+		setRadie(texSize / 2);
 		setTexture("nature/tree");
 		setFootPos(0.2f);
 		

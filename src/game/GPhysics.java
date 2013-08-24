@@ -3,6 +3,8 @@ package game;
 import static java.lang.Math.*;
 import static java.awt.geom.Line2D.*;
 import static game.GMath.*;
+
+import org.lwjgl.input.Mouse;
 public class GPhysics {
 /*
 	public static void handleCollision(GObject go1, GObject go2) {
@@ -110,8 +112,16 @@ public class GPhysics {
 
 	}
 	
-	public static boolean checkCollision(GObject go1, GObject go2){
+	public static boolean checkCollision(GWorldObject go1, GWorldObject go2){
 		if(getDistance(go1.getX(), go1.getY(), go2.getX(), go2.getY()) > go1.getRadie() + go2.getRadie())
+			return true;
+		else
+			return false;
+	}
+	
+	public static boolean isWithinTexture(float x, float y, GObject go){
+		if(x >= go.getX() - go.getTexWidth()/2 &&  x <= go.getX() + go.getTexWidth()/2 && 
+				y >= go.getY() - go.getTexHeight()/2 &&  y <= go.getY() + go.getTexHeight()/2)
 			return true;
 		else
 			return false;
