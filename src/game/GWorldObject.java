@@ -4,6 +4,8 @@ public abstract class GWorldObject extends GObject{
 
 	private float xPrev, yPrev;
 	
+	private float zPos;// en extra y variabel för texture som inte påväerkar objektets position.
+	
 	private float radie = -1;
 	
 	private float footPosition = 0.5f;
@@ -12,6 +14,8 @@ public abstract class GWorldObject extends GObject{
 		super(xPos, yPos, texWidth, texHeight);
 		// TODO Auto-generated constructor stub
 	}
+	
+
 	
 	public void setRadie(float f){
 		radie = f;
@@ -22,6 +26,14 @@ public abstract class GWorldObject extends GObject{
 	}
 	
 	
+	
+	public void setZ(float z){
+		zPos = z;
+	}
+	
+	public float getZ(){
+		return zPos;
+	}
 	
 	
 	// foten bestämmer procentuellt var på bilden som går i marken
@@ -35,5 +47,10 @@ public abstract class GWorldObject extends GObject{
 	public float getFootPos(){
 		return(getY() - getTexHeight()/2 + getTexHeight()*footPosition);
 	}
+	
+	public float getFootPos(float y){
+		return(y - getTexHeight()/2 + getTexHeight()*footPosition);
+	}
+	
 
 }

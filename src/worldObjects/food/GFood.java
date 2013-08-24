@@ -9,7 +9,7 @@ public abstract class GFood extends GWorldObject {
 	boolean walking = false;
 	float walkingSpeed = 200; // pixels per second
 	
-	private float zPos;// en extra y variabel för texture som inte påväerkar objektets position.
+	
 	
 	private GController controller;
 	
@@ -45,13 +45,6 @@ public abstract class GFood extends GWorldObject {
 		return walkingSpeed;
 	}
 	
-	public void setZ(float z){
-		zPos = z;
-	}
-	
-	public float getZ(){
-		return zPos;
-	}
 	
 	public void createShadow(){
 		shadow = new GFoodShadow(this);
