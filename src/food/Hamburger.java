@@ -14,6 +14,9 @@ public class Hamburger extends GFood {
 		super(xPos, yPos, texSize, texSize);
 		ingredients.add(new HamburgerBreadUnderPart(xPos, yPos, texSize));
 		ingredients.add(new Beef(xPos, yPos, texSize));
+		ingredients.add(new Beef(xPos, yPos, texSize));
+		ingredients.add(new HamburgerBreadUnderPart(xPos, yPos, texSize));
+		ingredients.add(new Beef(xPos, yPos, texSize));
 		ingredients.add(new HamburgerBreadOverPart(xPos, yPos, texSize));
 		createShadow();
 	}
@@ -21,11 +24,11 @@ public class Hamburger extends GFood {
 
 	
 	public void update() {
-		super.update();
+		renderShadow();
 	}
 	
 	public void render() {
-		super.render();
+		updateShadow();		
 		float totalHeight = 0;
 		for(int i = 0; i < ingredients.size(); i++){
 			ingredients.get(i).setPosition(getX(),getY() + totalHeight + getZ());

@@ -17,7 +17,7 @@ public class GWorld {
 	
 	public ArrayList<GObject> worldObjects = new ArrayList<GObject>();
 	
-	public static Hamburger player  = new Hamburger(400,400,200); ;
+	public static Hamburger player  = new Hamburger(400,400,100); ;
 	
 	public GWorld() {
 		addGO(player);

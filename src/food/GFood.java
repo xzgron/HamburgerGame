@@ -19,15 +19,7 @@ public abstract class GFood extends GObject {
 		setTexFolder("food/");
 	}
 
-	public void render() {
-		if(shadow != null)
-			shadow.render();
-		super.render();
-	}
 
-	public void update() {
-		shadow.update();
-	}
 	
 	public void setController(GController controller){
 		controller.add();
@@ -64,5 +56,12 @@ public abstract class GFood extends GObject {
 		shadow = new GFoodShadow(this);
 	}
 	
+	public void renderShadow() {
+		shadow.render();
+	}
+
+	public void updateShadow() {
+		shadow.update();
+	}
 
 }
