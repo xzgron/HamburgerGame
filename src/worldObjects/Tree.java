@@ -12,7 +12,7 @@ public class Tree extends GWorldObject {
 		super(xPos, yPos, texSize,texSize);
 		setRadie(texSize / 2);
 		setTexture("nature/tree");
-		setFootPos(0.2f);
+		setFootPos(0.15f);
 		
 	}
 

@@ -56,7 +56,8 @@ public class GWorld {
 			}
 		}
 		for(GWorldObject go: worldObjects){
-			if(go != player && go.getFootPos() < player.getFootPos() + player.getZ() && GPhysics.isWithinTexture(player.getX(), player.getY(), go)){
+			System.out.println(player.getZ());
+			if(go != player && go.getFootPos() < player.getFootPos() && GPhysics.isWithinTexture(player.getX(), player.getY()+ player.getZ(), go)){
 				go.setTransparency(0.5f);
 				}
 			else
