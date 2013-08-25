@@ -10,8 +10,9 @@ public class GameMenu {
 	
 	LinkedList<GButton> buttons = new LinkedList<GButton>();
 	
+	
 	public GameMenu(){
-		buttons.add(new ContinueButton(Main.window_width/2,Main.window_height/2+100, 300, 80));
+		new MenuArea(Main.window_width/2,Main.window_height/2, 600, 680);
 		buttons.add(new ContinueButton(Main.window_width/2,Main.window_height/2+100, 300, 80));
 		buttons.add(new ExitButton(Main.window_width/2,Main.window_height/2-100, 300, 80));
 	}
