@@ -68,7 +68,7 @@ public class Game {
 			startMenu.render();
 			break;
 		case GAMEMENU:
-			glClearColor(0,0,0,1);
+			world.render();
 			gameMenu.render();
 			break;
 		case GAME:
