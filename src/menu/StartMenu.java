@@ -15,6 +15,7 @@ public class StartMenu {
 	}
 	
 	public void update() {
+		
 		for(GButton b: buttons)
 			b.update();
 	}

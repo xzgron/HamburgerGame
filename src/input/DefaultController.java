@@ -37,7 +37,7 @@ public class DefaultController extends GController {
 			if(jumping){
 				getReciever().setZ(jumpMovement); 
 				jumpMovement += ySpeed;
-				ySpeed -= 30  * Game.deltaTime; 
+				ySpeed -= GWorld.gravity  * Game.deltaTime; 
 				
 				if(jumpMovement <= 0){
 					jumping = false;

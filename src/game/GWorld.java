@@ -6,12 +6,14 @@ import input.DefaultController;
 import java.util.ArrayList;
 
 import worldObjects.*;
-import worldObjects.food.Hamburger;
+import worldObjects.food.*;
 
 public class GWorld {
 	
 	
 	public ArrayList<GWorldObject> worldObjects = new ArrayList<GWorldObject>();
+	
+	public static float gravity = 30;
 	
 	public static Hamburger player  = new Hamburger(400,400,100); ;
 	
@@ -19,6 +21,8 @@ public class GWorld {
 		addGO(player);
 		player.setController(new DefaultController(player));
 		addGO(new Tree(150,30,500));		
+		for(int i = 0; i < 10;i++)
+			addGO(new BlueBerry((float)Math.random()*1000-150,(float)Math.random()*1000-150));
 	}
 	
 	public void addGO(GWorldObject GO){

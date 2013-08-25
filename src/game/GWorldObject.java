@@ -15,6 +15,9 @@ public abstract class GWorldObject extends GObject{
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void render(){
+		GSprite.draw(getTexture(), getX(), getY() + getZ(), getTexWidth(), getTexHeight(), getRed(), getGreen(), getBlue(),  getTransparency());	
+	}
 
 	
 	public void setRadie(float f){

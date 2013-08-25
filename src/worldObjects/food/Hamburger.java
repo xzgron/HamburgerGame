@@ -19,6 +19,7 @@ public class Hamburger extends GFood {
 		ingredients.add(new Sallad(xPos, yPos, texSize));
 		ingredients.add(new HamburgerBreadOverPart(xPos, yPos, texSize));
 		createShadow();
+		setFootPos(0.4f);
 	}
 
 

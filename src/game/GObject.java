@@ -104,10 +104,27 @@ public abstract class GObject {
 		this.blue = b / 255;
 		this.transparency = t;
 	}
-	
 	public void setTransparency(float f){
 		transparency = f;
 	}
+	
+	public float getRed(){
+		return red;
+	}
+	
+	public float getGreen(){
+		return green;
+	}
+	
+	public float getBlue(){
+		return blue;
+	}
+	
+	public float getTransparency(){
+		return transparency;
+	}
+	
+
 
 	
 	public boolean isMouseWithinTexture(){
