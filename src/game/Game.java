@@ -68,7 +68,11 @@ public class Game {
 			startMenu.render();
 			break;
 		case GAMEMENU:
+			glClearColor(1,1,1,1);
+			glPushMatrix();
+			focusTarget(world.player);
 			world.render();
+			glPopMatrix();
 			gameMenu.render();
 			break;
 		case GAME:

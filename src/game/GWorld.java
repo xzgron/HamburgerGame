@@ -61,8 +61,6 @@ public class GWorld {
 				}
 			else
 				go.setTransparency(1);
-
 		}
-			
 	}
 }
