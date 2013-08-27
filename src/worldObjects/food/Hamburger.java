@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import worldObjects.food.ingredients.*;
 import game.GObject;
+import game.GPhysics;
+import game.GWorld;
+import game.Game;
 
 public class Hamburger extends GFood {
 
 	ArrayList<GIngredient> ingredients = new ArrayList<GIngredient>();
-	
+
 	public Hamburger(float xPos, float yPos, float texSize) {
 		super(xPos, yPos, texSize, texSize);
 
@@ -23,24 +26,28 @@ public class Hamburger extends GFood {
 	}
 
 
-	
 	public void update() {
-		updateShadow();		
-	}
-	
-	public void render() {
+
 		
+		
+		GPhysics.handleGravity(this);
+		if (getZ() == 0 && walking)
+			setZSpeed(4);
+		updateShadow();
+	}
+
+	public void render() {
+
 		renderShadow();
 		float totalHeight = 0;
-		for(int i = 0; i < ingredients.size(); i++){
-			if(i!=0)
+		for (int i = 0; i < ingredients.size(); i++) {
+			if (i != 0)
 				totalHeight += ingredients.get(i).getHeight();
-			ingredients.get(i).setPosition(getX(),getY() + totalHeight + getZ());
+			ingredients.get(i).setPosition(getX(),
+					getY() + totalHeight + getZ());
 			ingredients.get(i).render();
-	
 
 		}
 	}
-	
 
 }

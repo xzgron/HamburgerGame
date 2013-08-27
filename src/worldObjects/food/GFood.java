@@ -8,7 +8,7 @@ public abstract class GFood extends GWorldObject {
 	
 	boolean walking = false;
 	float walkingSpeed = 200; // pixels per second
-	
+	float zSpeed = 0;
 	
 	
 	private GController controller;
@@ -56,6 +56,13 @@ public abstract class GFood extends GWorldObject {
 
 	public void updateShadow() {
 		shadow.update();
+	}
+	
+	public void setZSpeed(float f){
+		zSpeed = f;
+	}
+	public float getZSpeed(){
+		return zSpeed;
 	}
 
 }

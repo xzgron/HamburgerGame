@@ -1,6 +1,7 @@
 package worldObjects.food;
 
 import input.HostileController;
+import game.GPhysics;
 import game.GWorld;
 import game.GWorldObject;
 import game.Game;
@@ -12,22 +13,20 @@ public class BlueBerry extends GFood{
 		createShadow();
 		setTexture("blueBerry");
 		setFootPos(0.2f);
-		setWalkingSpeed(40);
+		setWalkingSpeed(80);
 		setController(new HostileController(this));
 		setWalking(true);
 	}
 
-	float zSpeed = 0;
-	
 	public void update() {
-		if(walking){			
-			if(getZ() == 0)
-				zSpeed = 4;
-			setZ(getZ() + zSpeed);
-			zSpeed -= GWorld.gravity * Game.deltaTime;
-			if(getZ() < 0)
-				setZ(0);
+
+		if(getZ() == 0){
+			float r = (float) (Math.random()*4 +2);
+			setZSpeed(r);
+			setWalkingSpeed(r * 30);
 		}
+		GPhysics.handleGravity(this);
+		
 		updateShadow();
 	}
 	

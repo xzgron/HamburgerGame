@@ -5,6 +5,8 @@ import static java.awt.geom.Line2D.*;
 import static game.GMath.*;
 
 import org.lwjgl.input.Mouse;
+
+import worldObjects.food.GFood;
 public class GPhysics {
 /*
 	public static void handleCollision(GObject go1, GObject go2) {
@@ -125,5 +127,18 @@ public class GPhysics {
 			return true;
 		else
 			return false;
+	}
+
+	public static void handleGravity(GFood gf) {
+		if(gf.getZ() > 0)
+			gf.setZSpeed(gf.getZSpeed() - GWorld.gravity * Game.deltaTime);
+		
+		gf.setZ(gf.getZ() + gf.getZSpeed());
+		
+		if (gf.getZ() < 0)
+			gf.setZ(0);
+		
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -15,8 +15,6 @@ public class DefaultController extends GController {
 	}
 
 	private boolean jumping = false;
-	private float ySpeed = 0;
-	private float jumpMovement = 0;
 	
 	protected void handleInput() {
 		
@@ -30,22 +28,15 @@ public class DefaultController extends GController {
 			
 			
 			
+			if(jumping && getReciever().getZ() <= 0)
+				jumping = false;
+			
 			if(isKeyDown(KEY_SPACE) && !jumping){
 				jumping = true;
-				ySpeed = 10;
+				getReciever().setZSpeed(10);
 			}
-			if(jumping){
-				getReciever().setZ(jumpMovement); 
-				jumpMovement += ySpeed;
-				ySpeed -= GWorld.gravity  * Game.deltaTime; 
-				
-				if(jumpMovement <= 0){
-					jumping = false;
-					getReciever().setZ(0); 
-					}
 				
 
-			}
 			/*
 			
 			if(isKeyDown(KEY_LSHIFT))
