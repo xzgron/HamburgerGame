@@ -17,14 +17,17 @@ public class BlueBerry extends GFood{
 		setController(new HostileController(this));
 		setWalking(true);
 	}
+	
 
 	public void update() {
+		//setSize(40 + getZ()/2, 40 + getZ()/2);
 
-		if(getZ() == 0){
+		if(getZ() == 0 && isWalking()){
 			float r = (float) (Math.random()*4 +2);
 			setZSpeed(r);
-			setWalkingSpeed(r * 30);
+			setWalkingSpeed(r * 40);
 		}
+		
 		GPhysics.handleGravity(this);
 		
 		updateShadow();

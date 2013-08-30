@@ -16,15 +16,14 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 public abstract class GObject {
 
-	private float xPos, yPos;
-
+	protected float xPos, yPos;
 	
-	private Texture texture;
-	private float texWidth, texHeight;
+	protected Texture texture;
+	protected float texWidth, texHeight;
 	
-	private String texFolder = "";
+	protected String texFolder = "";
 	
-	private float red = 1, green = 1, blue = 1, transparency = 1;
+	protected float red = 1, green = 1, blue = 1, transparency = 1;
 	
 
 

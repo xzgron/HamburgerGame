@@ -6,16 +6,4 @@ public class Beef extends GIngredient{
 		super(x, y, size, size * 0.17f);
 		setTexture("beef");
 	}
-
-	@Override
-	public void useFirstAbility() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void useSecondAbility() {
-		// TODO Auto-generated method stub
-		
-	}
 }

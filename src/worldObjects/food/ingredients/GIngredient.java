@@ -1,10 +1,11 @@
 package worldObjects.food.ingredients;
 
 import game.GObject;
+import game.GWorldObject;
 
 
 
-public abstract class GIngredient extends GObject {
+public abstract class GIngredient extends GWorldObject {
 
 	boolean heldByMouse;
 	
@@ -27,6 +28,5 @@ public abstract class GIngredient extends GObject {
 		return height;
 	}
 	
-	public abstract void useFirstAbility();
-	public abstract void useSecondAbility();
+
 }

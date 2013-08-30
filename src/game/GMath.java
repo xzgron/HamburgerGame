@@ -9,4 +9,7 @@ public class GMath {
 	}
 	
 
+	public static float random(float a, float b){
+		return (float) (Math.random()*Math.abs(a-b) + Math.min(a, b));
+	}
 }

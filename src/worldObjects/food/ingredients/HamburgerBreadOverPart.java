@@ -7,16 +7,6 @@ public class HamburgerBreadOverPart extends GIngredient{
 		setTexture("hamburgerBreadOverPart");
 	}
 
-	@Override
-	public void useFirstAbility() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void useSecondAbility() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

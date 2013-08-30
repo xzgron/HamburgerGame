@@ -1,6 +1,6 @@
 package worldObjects.food.ingredients;
 
-public class Sallad extends GIngredient{
+public class Sallad extends GIngredient implements Activateable{
 
 	public Sallad(float x, float y, float size) {
 		super(x, y, size, size *0.1f);
