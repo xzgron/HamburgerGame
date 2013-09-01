@@ -9,11 +9,8 @@ public abstract class GIngredient extends GWorldObject {
 
 	boolean heldByMouse;
 	
-	private final float height;
-	
-	public GIngredient(float x, float y, float size, float height) {
-		super(x, y, size,size);
-		this.height = height;
+	public GIngredient(float xPos, float yPos, float texSize, float weight, float headPos, float footPos) {
+		super( xPos,  yPos,  texSize,  weight,  headPos,  footPos);
 		setTexFolder("food/ingredients/");
 	}
 
@@ -22,11 +19,4 @@ public abstract class GIngredient extends GWorldObject {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-	public float getHeight(){
-		return height;
-	}
-	
-
 }

@@ -2,8 +2,8 @@ package worldObjects.food.ingredients;
 
 public class Cheese extends GIngredient implements Activateable{
 
-	public Cheese(float x, float y, float size) {
-		super(x, y, size, size * 0.1f);
+	public Cheese(float x, float y) {
+		super(x, y, 115, 10, 0.5f, 0.55f);
 		setTexture("Cheese");
 	}
 

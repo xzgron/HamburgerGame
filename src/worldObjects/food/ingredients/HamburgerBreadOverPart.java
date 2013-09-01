@@ -2,8 +2,8 @@ package worldObjects.food.ingredients;
 
 public class HamburgerBreadOverPart extends GIngredient{
 
-	public HamburgerBreadOverPart(float x, float y, float size) {
-		super(x, y, size, size * 0.17f);
+	public HamburgerBreadOverPart(float x, float y) {
+		super(x, y, 100, 20, 0.415f, 0.585f);
 		setTexture("hamburgerBreadOverPart");
 	}
 

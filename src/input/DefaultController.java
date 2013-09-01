@@ -2,7 +2,7 @@ package input;
 
 import static org.lwjgl.input.Keyboard.*;
 import static org.lwjgl.input.Mouse.*;
-import static game.GPhysics.*;
+import static game.GMath.*;
 import worldObjects.food.GFood;
 import game.*;
 

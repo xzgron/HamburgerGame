@@ -8,10 +8,19 @@ import org.lwjgl.input.Mouse;
 
 import worldObjects.food.GFood;
 public class GPhysics {
-/*
-	public static void handleCollision(GObject go1, GObject go2) {
-		if(getDistance(go1,go2) > go1.getHyp()+go2.getHyp())
+	
+	
+	
+	public static void handleCollision(GWorldObject go1, GWorldObject go2) {
+		
+		if (go1.getRadie() == -1 || go2.getRadie() == -1)
 			return;
+		//KÖR STRÄCK COLLISION AND SHIT////
+		
+		if(GMath.getDistance(go1,go2) > go1.getRadie()+go2.getRadie())
+			return;
+		
+		
 		
 	}
 
@@ -57,15 +66,7 @@ public class GPhysics {
 		return (float) acos(dx/hyp);
 	}
 
-	
-	public static float getDistance(GObject go1, GObject go2) {
-		return getDistance(go1.getX(),go1.getY(),go2.getX(), go2.getY());
-	}
 
-	public static float getDistance(GPoint p1, GPoint p2) {
-		return getDistance(p1.getX(),p1.getY(),p2.getX(), p2.getY());
-	}
-	*/
 
 	/*
 	public static float[] getPosInRotGraph(float a, GPoint p){
@@ -99,20 +100,7 @@ public class GPhysics {
 	 * */
 	
 
-	public static float getAngle(float x1,float y1,float x2, float y2){
-		float dx = x2-x1;
-		float dy = y2-y1;
-		float hyp = getDistance(x1,y1,x2,y2);
-		
-		float angle = (float) (toDegrees(asin(dx/hyp)));
-		
-		if (dy <= 0)
-			angle = 180-angle;
-		if (angle < 0)
-			angle += 360;
-		return angle;
 
-	}
 	
 	public static boolean checkCollision(GWorldObject go1, GWorldObject go2){
 		if(getDistance(go1.getX(), go1.getY(), go2.getX(), go2.getY()) > go1.getRadie() + go2.getRadie())

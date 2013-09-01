@@ -51,7 +51,7 @@ public class GWorld {
 		while(moved){
 			moved = false;
 			for(int i = 0; i < worldObjects.size()-1; i++){
-				if(worldObjects.get(i).getFootPos()<worldObjects.get(i+1).getFootPos()){
+				if(worldObjects.get(i).getFootPos()-worldObjects.get(i).getZ()<worldObjects.get(i+1).getFootPos()-worldObjects.get(i+1).getZ()){
 					temp = worldObjects.get(i);
 					worldObjects.set(i, worldObjects.get(i+1));
 					worldObjects.set(i+1, temp);
@@ -60,7 +60,7 @@ public class GWorld {
 			}
 		}
 		for(GWorldObject go: worldObjects){
-			if(go != player && go.getFootPos() < player.getFootPos() && GPhysics.isPosWithinTex(player.getX(), player.getY()+ player.getZ(), go)){
+			if(go != player && go.getFootPos()- go.getZ()< player.getFootPos() -player.getZ() && GPhysics.isPosWithinTex(player.getX(), player.getY()+ player.getZ(), go)){
 				go.setTransparency(0.5f);
 				}
 			else

@@ -9,6 +9,7 @@ public abstract class GFood extends GWorldObject {
 	boolean walking = false;
 	float walkingSpeed = 200; // pixels per second
 	float zSpeed = 0;
+	float health;
 	
 	
 	private GController controller;
@@ -68,5 +69,8 @@ public abstract class GFood extends GWorldObject {
 	public float getZSpeed(){
 		return zSpeed;
 	}
-
+	
+	public void jumpedOn(float weight){
+		/////////////OM MAN BLIR HOPPAD PÅ//////
+	}
 }

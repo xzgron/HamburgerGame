@@ -1,5 +1,6 @@
 package input;
 
+import game.GMath;
 import game.GPhysics;
 import game.GTimer;
 import game.GWorld;
@@ -42,7 +43,7 @@ public class HostileController extends GController {
 		if (r.isWalking()) {
 			if (r.getZ() == 0) {
 				a2 = -a2;
-				a = GPhysics.getAngle(r.getX(), r.getY(), GWorld.player.getX(),
+				a = GMath.getAngle(r.getX(), r.getY(), GWorld.player.getX(),
 						GWorld.player.getY()) + a2;
 			}
 			getReciever().moveByAngle(r.getWalkingSpeed() * Game.deltaTime, a);

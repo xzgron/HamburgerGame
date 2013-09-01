@@ -9,10 +9,9 @@ import game.Game;
 public class BlueBerry extends GFood{
 
 	public BlueBerry(float xPos, float yPos) {
-		super(xPos, yPos, 40, 40);
+		super(xPos, yPos, 40, 0.1f,0.2f,0.8f);
 		createShadow();
 		setTexture("blueBerry");
-		setFootPos(0.2f);
 		setWalkingSpeed(80);
 		setController(new HostileController(this));
 		setWalking(true);

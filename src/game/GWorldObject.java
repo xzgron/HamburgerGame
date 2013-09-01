@@ -10,12 +10,12 @@ public abstract class GWorldObject extends GObject{
 	
 	private float radie = -1;
 	
-	private float weight; // i kg kan man väl säga
+	private float weight = -1; // i g kan man väl säga -1 betyder orrublig
 	
 	private float footPos;
 	private float headPos;
 	
-	public GWorldObject(float xPos, float yPos, float texSize, float weight, float headPos, float footPos) {
+	public GWorldObject(float xPos, float yPos, float texSize, float weight, float footPos, float headPos) {
 		super(xPos, yPos, texSize, texSize);
 		this.weight = weight;
 		if(headPos > 1 || headPos < 0){
@@ -101,6 +101,15 @@ public abstract class GWorldObject extends GObject{
 	
 	
 	
+	public float getHeight(){
+		return texHeight*headPos - texHeight*footPos ;
+		
+	}
+	
+	public float getOrigoAndFootDiff(){
+		return texHeight/2-texHeight*footPos;
+	}
+	
 	
 	///////////////////////////////COORDINATER//////////////////////////////////
 	
@@ -183,6 +192,13 @@ public abstract class GWorldObject extends GObject{
 		if(xSpeed != 0 && ySpeed != 0)
 			return true;
 		else 
+			return false;
+	}
+	
+	public boolean isJumping(){
+		if(zPos > 0)
+			return true;
+		else
 			return false;
 	}
 	
