@@ -15,6 +15,8 @@ public class Hamburger extends GFood {
 	public Hamburger(float xPos, float yPos, float texSize) {
 		super(xPos, yPos, texSize, 0, 0.415f, 0);
 
+		setRadie(texSize/2.1f);
+		
 		ingredients.add(new HamburgerBreadUnderPart(xPos, yPos));
 
 		//ingredients.add(new UnionRings(xPos, yPos));
@@ -29,11 +31,10 @@ public class Hamburger extends GFood {
 	public void update() {
 
 		//setSize(100 + getZ()/2, 100 + getZ()/2);
+		//System.out.println(getYSpeed() + getXSpeed());
+		useSpeed();
 		
 		GPhysics.handleGravity(this);
-		
-		if (getZ() == 0 && walking)
-			setZSpeed(4);
 		
 		updateIngredients();
 

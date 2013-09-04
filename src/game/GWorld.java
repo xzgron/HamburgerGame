@@ -36,12 +36,23 @@ public class GWorld {
 	public void update() {
 		for(GWorldObject go : worldObjects)
 			go.update();
+		handleCollision();
 	}
 
 	public void render() {
 		sortObjects();
 		for(GWorldObject go : worldObjects)
 			go.render();
+	}
+	
+	
+	private void handleCollision(){
+		for(int j = 0; j < worldObjects.size()-1; j++){
+			for(int i = j; i < worldObjects.size()-1; i++){
+				GPhysics.handleCollision(worldObjects.get(i),worldObjects.get(i+1));
+	
+			}
+		}
 	}
 	
 	private void sortObjects(){
@@ -51,7 +62,7 @@ public class GWorld {
 		while(moved){
 			moved = false;
 			for(int i = 0; i < worldObjects.size()-1; i++){
-				if(worldObjects.get(i).getFootPos()-worldObjects.get(i).getZ()<worldObjects.get(i+1).getFootPos()-worldObjects.get(i+1).getZ()){
+				if(worldObjects.get(i).getGroundPos()<worldObjects.get(i+1).getGroundPos()){
 					temp = worldObjects.get(i);
 					worldObjects.set(i, worldObjects.get(i+1));
 					worldObjects.set(i+1, temp);
@@ -60,7 +71,7 @@ public class GWorld {
 			}
 		}
 		for(GWorldObject go: worldObjects){
-			if(go != player && go.getFootPos()- go.getZ()< player.getFootPos() -player.getZ() && GPhysics.isPosWithinTex(player.getX(), player.getY()+ player.getZ(), go)){
+			if(go != player && go.getGroundPos()< player.getGroundPos() && GPhysics.isPosWithinTex(player.getX(), player.getY()+ player.getZ(), go)){
 				go.setTransparency(0.5f);
 				}
 			else

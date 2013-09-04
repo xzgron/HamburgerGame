@@ -6,7 +6,6 @@ import game.GWorldObject;
 
 public abstract class GFood extends GWorldObject {
 	
-	boolean walking = false;
 	float walkingSpeed = 200; // pixels per second
 	float zSpeed = 0;
 	float health;
@@ -34,14 +33,6 @@ public abstract class GFood extends GWorldObject {
 		
 	}
 	
-	public void setWalking(boolean b){
-		walking = b;
-	}
-	
-	public boolean isWalking(){
-		return walking;
-	}
-	
 	public void setWalkingSpeed(float f){
 		walkingSpeed = f;
 	}
@@ -61,13 +52,6 @@ public abstract class GFood extends GWorldObject {
 
 	public void updateShadow() {
 		shadow.update();
-	}
-	
-	public void setZSpeed(float f){
-		zSpeed = f;
-	}
-	public float getZSpeed(){
-		return zSpeed;
 	}
 	
 	public void jumpedOn(float weight){
