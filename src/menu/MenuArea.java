@@ -9,7 +9,7 @@ public class MenuArea extends GObject{
 
 	public MenuArea(float xPos, float yPos, float textureWidth, float textureHeight) {
 		super(xPos, yPos, textureWidth, textureHeight);
-		setTexture("nature/tree");
+		setTexture("buttons/area");
 	}
 
 	@Override
