@@ -15,7 +15,7 @@ public class GFoodShadow extends GObject{
 	}
 
 	public void update() {	
-		setPosition(owner.getX(), owner.getFootPos());
+		setPosition(owner.getX(), owner.getFootPos() - owner.getZ());
 		setSize(owner.getTexWidth() + (owner.getZ()/2),owner.getTexHeight()+(owner.getZ())/2);
 	}
 

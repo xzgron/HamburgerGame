@@ -6,7 +6,7 @@ import menu.StartMenu;
 import input.Input;
 
 public class Game {
-	public static boolean isCloseRequest = false;
+	private static boolean isCloseRequested = false;
 	
 	public Input input;
 	public GWorld world;
@@ -88,10 +88,11 @@ public class Game {
 	}
 	
 	public static void close(){
-		isCloseRequest = true;
+		isCloseRequested = true;
 	}
+	
 	public static boolean isCloseRequested(){
-		return isCloseRequest;
+		return isCloseRequested;
 	}
 	public void focusTarget(GObject target){
 		glTranslatef(-target.getX()+Main.window_width/2, -target.getY()+Main.window_height/2, 0);

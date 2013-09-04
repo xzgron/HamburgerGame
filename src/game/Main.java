@@ -72,7 +72,6 @@ public class Main {
 				fps = (int) (wanted_fps/deltaTimePerWantedFps);
 				deltaTimePerWantedFps = 0;
 			}
-			
 			Display.setTitle(title + "   fps: " + fps);
 			
 			handleInput();

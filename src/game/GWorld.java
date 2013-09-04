@@ -21,7 +21,7 @@ public class GWorld {
 		addGO(player);
 		player.setController(new DefaultController(player));
 		addGO(new Tree(150,30,500));		
-		for(int i = 0; i < 10;i++)
+		for(int i = 0; i < 1;i++)
 			addGO(new BlueBerry((float)Math.random()*1000-150,(float)Math.random()*1000-150));
 	}
 	
@@ -51,7 +51,7 @@ public class GWorld {
 		while(moved){
 			moved = false;
 			for(int i = 0; i < worldObjects.size()-1; i++){
-				if(worldObjects.get(i).getFootPos()<worldObjects.get(i+1).getFootPos()){
+				if(worldObjects.get(i).getFootPos()-worldObjects.get(i).getZ()<worldObjects.get(i+1).getFootPos()-worldObjects.get(i+1).getZ()){
 					temp = worldObjects.get(i);
 					worldObjects.set(i, worldObjects.get(i+1));
 					worldObjects.set(i+1, temp);
@@ -60,7 +60,7 @@ public class GWorld {
 			}
 		}
 		for(GWorldObject go: worldObjects){
-			if(go != player && go.getFootPos() < player.getFootPos() && GPhysics.isPosWithinTex(player.getX(), player.getY()+ player.getZ(), go)){
+			if(go != player && go.getFootPos()- go.getZ()< player.getFootPos() -player.getZ() && GPhysics.isPosWithinTex(player.getX(), player.getY()+ player.getZ(), go)){
 				go.setTransparency(0.5f);
 				}
 			else

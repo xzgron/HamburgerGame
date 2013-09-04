@@ -1,9 +1,9 @@
 package worldObjects.food.ingredients;
 
-public class UnionRings extends GIngredient{
+public class UnionRings extends GIngredient implements Activateable{
 
 	public UnionRings(float x, float y, float size) {
-		super(x, y, size, size * 0.1f);
+		super(x, y, 100, 8, 0.45f, 0.55f);
 		setTexture("unionRings");
 	}
 

@@ -9,14 +9,15 @@ public abstract class GFood extends GWorldObject {
 	boolean walking = false;
 	float walkingSpeed = 200; // pixels per second
 	float zSpeed = 0;
+	float health;
 	
 	
 	private GController controller;
 	
 	private GFoodShadow shadow = null;
 	
-	public GFood(float xPos, float yPos, float texWidth, float texHeight) {
-		super(xPos, yPos, texWidth, texHeight);
+	public GFood(float xPos, float yPos, float texSize, float weight, float headPos, float footPos) {
+		super(xPos, yPos, texSize, weight, headPos, footPos);
 		setTexFolder("food/");
 	}
 
@@ -35,6 +36,10 @@ public abstract class GFood extends GWorldObject {
 	
 	public void setWalking(boolean b){
 		walking = b;
+	}
+	
+	public boolean isWalking(){
+		return walking;
 	}
 	
 	public void setWalkingSpeed(float f){
@@ -64,5 +69,8 @@ public abstract class GFood extends GWorldObject {
 	public float getZSpeed(){
 		return zSpeed;
 	}
-
+	
+	public void jumpedOn(float weight){
+		/////////////OM MAN BLIR HOPPAD PÅ//////
+	}
 }
