@@ -12,7 +12,12 @@ public class BlueBerry extends GFood{
 		super(xPos, yPos, 40, 0.1f,0.2f,0.8f);
 		createShadow();
 		setTexture("blueBerry");
+<<<<<<< HEAD
+		setFootPos(0.2f);
+		setWalkingSpeed(40);
+=======
 		setWalkingSpeed(80);
+>>>>>>> 9d83df220e1c9e6b6624d6d039e096ad9fb1e190
 		setController(new HostileController(this));
 		setRadie(19);
 	}
