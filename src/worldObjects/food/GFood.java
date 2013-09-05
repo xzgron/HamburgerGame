@@ -16,7 +16,8 @@ public abstract class GFood extends GWorldObject {
 	private GFoodShadow shadow = null;
 	
 	public GFood(float xPos, float yPos, float texSize, float weight, float headPos, float footPos) {
-		super(xPos, yPos, texSize, weight, headPos, footPos);
+		super(xPos, yPos, texSize,  headPos, footPos);
+		setWeight(weight);
 		setTexFolder("food/");
 	}
 

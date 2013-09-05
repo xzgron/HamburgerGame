@@ -19,9 +19,8 @@ public abstract class GWorldObject extends GObject{
 	private float footPos;
 	private float headPos;
 	
-	public GWorldObject(float xPos, float yPos, float texSize, float weight, float footPos, float headPos) {
+	public GWorldObject(float xPos, float yPos, float texSize, float footPos, float headPos) {
 		super(xPos, yPos, texSize, texSize);
-		this.weight = weight;
 		if(headPos > 1 || headPos < 0){
 			System.out.println("huvudet ska vara mellan 0 och 1");
 			this.headPos = 0.5f;
@@ -64,6 +63,10 @@ public abstract class GWorldObject extends GObject{
 	
 	public float getRadie(){
 		return radie;
+	}
+	
+	public void setWeight(float f){
+		weight = f;
 	}
 	
 	public float getWeight(){

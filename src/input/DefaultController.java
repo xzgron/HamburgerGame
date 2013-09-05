@@ -11,7 +11,7 @@ public class DefaultController extends GController {
 	public DefaultController(GFood gf) {
 		super(gf);
 	}
-
+	boolean jumping = false;
 	protected void handleInput() {
 
 		GWorldObject r = getReciever();
@@ -23,10 +23,15 @@ public class DefaultController extends GController {
 		} else
 			r.stop();
 		
+		if(!r.isJumping())
+			jumping = false;
+		
 		if (!r.isJumping() && r.isWalking())
 			r.setZSpeed(4);
 		
-		if (isKeyDown(KEY_SPACE) && !r.isJumping()) {
+		
+		if (isKeyDown(KEY_SPACE) && !jumping) {
+			jumping = true;
 			r.setZSpeed(10);
 		}
 

@@ -11,25 +11,23 @@ public class GPhysics {
 	
 	
 	
-	public static void handleCollision(GWorldObject go1, GWorldObject go2) {
+	public static boolean handleCollision(GWorldObject go1, GWorldObject go2) {
 		
 		if (go1.getRadie() == -1 || go2.getRadie() == -1)
-			return;
+			return false;
 		//KÖR STRÄCK COLLISION AND SHIT////
 		
 		float dist = GMath.getDistance(go1.xPos, go1.getGroundPos(),go2.xPos,go2.getGroundPos());
 		float totRadie = go1.getRadie()+go2.getRadie();
 		
-		System.out.println(go1.getPrevGroundPos());
-		if(dist > totRadie)
-			return;
+		if(dist >= totRadie)
+			return false ;
 		
-		if(go1.getFootPos() > go2.getHeadPos() ||  go2.getFootPos() > go1.getHeadPos()   )
-			return;
+		//if(go1.getFootPos() > go2.getHeadPos() ||  go2.getFootPos() > go1.getHeadPos()   )
+			//return false;
 		
 	
-		
-		
+		//System.out.println("dist " + dist);
 		//GO1
 		
 		//rörelsevinkel
@@ -38,13 +36,27 @@ public class GPhysics {
 		float a2 = GMath.getAngle(go2.xPos, go2.getGroundPos(), go2.getXPrev(), go2.getPrevGroundPos());	
 		*/
 		//objectvinkel
+
+		
+		float ww = Math.min(go1.getWeight(),go2.getWeight())/Math.max(go1.getWeight(),go2.getWeight()); // hur mcyket mer väger lättast än tyngst
+		
 		float oa = GMath.getAngle(go1.xPos,go1.getGroundPos(),go2.xPos,go2.getPrevGroundPos());
 		
-		if(go1.getWeight()<go2.getWeight())
-			go1.moveByAngle((totRadie-dist), oa+180);
-		else
+		if(go1.getWeight() == -1)
 			go2.moveByAngle((totRadie-dist), oa);
-
+		else if(go2.getWeight() == -1)
+			go1.moveByAngle((totRadie-dist), oa+180);
+		else if(go1.getWeight() > go2.getWeight()){
+			
+			go1.moveByAngle((totRadie-dist)*ww/2, oa+180);
+			go2.moveByAngle((totRadie-dist)-(totRadie-dist)*ww/2, oa);
+		}
+		else{
+			go2.moveByAngle((totRadie-dist)*ww/2, oa);
+			go1.moveByAngle((totRadie-dist)-(totRadie-dist)*ww/2, oa+180);
+		}
+		System.out.println(GMath.getDistance(go1.xPos, go1.getGroundPos(),go2.xPos,go2.getGroundPos()));
+		return true;
 		}
 		//go2.setSpeedByAngle(go2.getXYSpeed(), a2 + (a2-a1));*/
 		/*
