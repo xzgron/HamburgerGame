@@ -23,13 +23,14 @@ public class GMath {
 		float dx = x2-x1;
 		float dy = y2-y1;
 		float hyp = getDistance(x1,y1,x2,y2);
-		
 		float angle = (float) (toDegrees(asin(dx/hyp)));
 		
 		if (dy <= 0)
 			angle = 180-angle;
 		if (angle < 0)
 			angle += 360;
+	
+		//System.out.println(angle);
 		return angle;
 
 	}

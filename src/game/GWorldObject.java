@@ -1,23 +1,26 @@
 package game;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static java.lang.Math.toRadians;
+
 public abstract class GWorldObject extends GObject{
 
-	private float xPrev, yPrev, zPrev;
+	//private float xPrev, yPrev, zPrev;
 	
-	private float zPos;// en extra y variabel för texture som inte påväerkar objektets position.
+	private float zPos;// en extra y variabel för texture som inte påväerkar objektets position det vill säga hur högt objectet befinner sig.
 	
 	private float xSpeed, ySpeed, zSpeed; // används som pixel per sek
 	
-	private float radie = -1;
+	private float radie = -1; // i pixlar -1 betyder annan typ collision
 	
 	private float weight = -1; // i g kan man väl säga -1 betyder orrublig
 	
 	private float footPos;
 	private float headPos;
 	
-	public GWorldObject(float xPos, float yPos, float texSize, float weight, float footPos, float headPos) {
+	public GWorldObject(float xPos, float yPos, float texSize, float footPos, float headPos) {
 		super(xPos, yPos, texSize, texSize);
-		this.weight = weight;
 		if(headPos > 1 || headPos < 0){
 			System.out.println("huvudet ska vara mellan 0 och 1");
 			this.headPos = 0.5f;
@@ -48,7 +51,7 @@ public abstract class GWorldObject extends GObject{
 		
 		
 		useSpeed();
-		updatePrevPos();
+		//updatePrevPos();
 	}
 	
 	
@@ -60,6 +63,10 @@ public abstract class GWorldObject extends GObject{
 	
 	public float getRadie(){
 		return radie;
+	}
+	
+	public void setWeight(float f){
+		weight = f;
 	}
 	
 	public float getWeight(){
@@ -99,7 +106,21 @@ public abstract class GWorldObject extends GObject{
 		return(yPos + zPos - texHeight/2 + texHeight*footPos);
 	}
 	
+	public void setGroundPos(float y){
+		yPos = y - texHeight/2 + texHeight*footPos;
+	}
 	
+	public float getGroundPos(){
+		return(yPos - texHeight/2 + texHeight*footPos);
+	}
+	
+	public float getPrevFootPos() {
+		return(getYPrev() + getZPrev() - texHeight/2 + texHeight*footPos);
+	}
+	
+	public float getPrevGroundPos() {
+		return(getYPrev() - texHeight/2 + texHeight*footPos);
+	}
 	
 	public float getHeight(){
 		return texHeight*headPos - texHeight*footPos ;
@@ -112,12 +133,54 @@ public abstract class GWorldObject extends GObject{
 	
 	
 	///////////////////////////////COORDINATER//////////////////////////////////
+	public void setSpeedByAngle(float amt, float angle){
+		float xs = (float) (amt * sin(toRadians(angle)));
+		float ys = (float) (amt * cos(toRadians(angle)));
+		setSpeed(xs,ys);
+	}
 	
+	public void setSpeed(float xs, float ys, float zs) {
+		xSpeed = xs;
+		ySpeed = ys;
+		zSpeed = zs;
+		
+	}
+	
+	public void setSpeed(float xs, float ys) {
+		xSpeed = xs;
+		ySpeed = ys;
+		
+	}
+	
+	public void setZSpeed(float f){
+		zSpeed = f;
+	}
+	
+	public void stop(){
+		xSpeed = 0;
+		ySpeed = 0;
+		
+	}
+
 	public void setPosition(float x, float y, float z){
 		xPos = x;
 		yPos = y;
 		zPos = z;
 	}
+	
+	public float getXPrev(){
+		return xPos-xSpeed*Game.deltaTime;
+	}
+	
+	public float getYPrev(){
+		return yPos-ySpeed*Game.deltaTime;
+	}
+	
+	public float getZPrev(){
+		return zPos-zSpeed*Game.deltaTime;
+	}
+	
+	/*
 	
 	public float getXPrev(){
 		return xPrev;
@@ -137,7 +200,7 @@ public abstract class GWorldObject extends GObject{
 		yPrev = yPos;
 		zPrev = yPos;
 		
-	}
+	}*/
 	
 	public float getXSpeed(){
 		return xSpeed;
@@ -149,6 +212,11 @@ public abstract class GWorldObject extends GObject{
 	public float getZSpeed(){
 		return zSpeed;
 	}
+	
+	public float getXYSpeed(){
+		return GMath.getDistance(0,xSpeed,0,ySpeed);
+	}
+	
 	
 	public void useSpeed(){
 		xPos += xSpeed * Game.deltaTime;
@@ -171,25 +239,27 @@ public abstract class GWorldObject extends GObject{
 		return zPos;
 	}
 	
+
+	
 	
 	//////////////////////////////////COMMAND HELP//////////////////////
 	
 	public boolean justLanded(){
-		if(zPrev > 0 && zPos == 0)
+		if(getZPrev() > 0 && zPos == 0)
 			return true;
 		else 
 			return false;
 	}
 	
 	public boolean justJumped(){
-		if(zPrev == 0 && zPos > 0)
+		if(getZPrev() == 0 && zPos > 0)
 			return true;
 		else 
 			return false;
 	}
 
 	public boolean isWalking(){
-		if(xSpeed != 0 && ySpeed != 0)
+		if(xSpeed != 0 || ySpeed != 0)
 			return true;
 		else 
 			return false;
@@ -202,5 +272,12 @@ public abstract class GWorldObject extends GObject{
 			return false;
 	}
 	
+////////////////////////////OTHERS//////////////////////////
+	
+	public void scale(float f){
+		texHeight *= f;
+		texWidth *= f;
+	}
+
 
 }

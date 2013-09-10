@@ -11,16 +11,91 @@ public class GPhysics {
 	
 	
 	
-	public static void handleCollision(GWorldObject go1, GWorldObject go2) {
+	public static boolean handleCollision(GWorldObject go1, GWorldObject go2) {
 		
 		if (go1.getRadie() == -1 || go2.getRadie() == -1)
-			return;
+			return false;
 		//KÖR STRÄCK COLLISION AND SHIT////
 		
-		if(GMath.getDistance(go1,go2) > go1.getRadie()+go2.getRadie())
-			return;
+		float dist = GMath.getDistance(go1.xPos, go1.getGroundPos(),go2.xPos,go2.getGroundPos());
+		float totRadie = go1.getRadie()+go2.getRadie();
 		
+		if(dist >= totRadie)
+			return false ;
 		
+		//if(go1.getFootPos() > go2.getHeadPos() ||  go2.getFootPos() > go1.getHeadPos()   )
+			//return false;
+		
+	
+		//System.out.println("dist " + dist);
+		//GO1
+		
+		//rörelsevinkel
+		/*
+		float a1 = GMath.getAngle(go1.xPos, go1.getGroundPos(), go1.getXPrev(), go1.getPrevGroundPos());
+		float a2 = GMath.getAngle(go2.xPos, go2.getGroundPos(), go2.getXPrev(), go2.getPrevGroundPos());	
+		*/
+		//objectvinkel
+
+		
+		float ww = Math.min(go1.getWeight(),go2.getWeight())/Math.max(go1.getWeight(),go2.getWeight()); // hur mcyket mer väger lättast än tyngst
+		
+		float oa = GMath.getAngle(go1.xPos,go1.getGroundPos(),go2.xPos,go2.getPrevGroundPos());
+		
+		if(go1.getWeight() == -1)
+			go2.moveByAngle((totRadie-dist), oa);
+		else if(go2.getWeight() == -1)
+			go1.moveByAngle((totRadie-dist), oa+180);
+		else if(go1.getWeight() > go2.getWeight()){
+			
+			go1.moveByAngle((totRadie-dist)*ww/2, oa+180);
+			go2.moveByAngle((totRadie-dist)-(totRadie-dist)*ww/2, oa);
+		}
+		else{
+			go2.moveByAngle((totRadie-dist)*ww/2, oa);
+			go1.moveByAngle((totRadie-dist)-(totRadie-dist)*ww/2, oa+180);
+		}
+		System.out.println(GMath.getDistance(go1.xPos, go1.getGroundPos(),go2.xPos,go2.getGroundPos()));
+		return true;
+		}
+		//go2.setSpeedByAngle(go2.getXYSpeed(), a2 + (a2-a1));*/
+		/*
+		float px1 = go1.getXPrev();
+		float py1 = go1.getPrevGroundPos();
+		
+
+		
+		float px2 = go2.getXPrev();
+		float py2 = go2.getPrevGroundPos();
+		
+		float dx1 = go1.getXSpeed();
+		float dy1 = go1.getYSpeed();
+	
+		float dx2 = go2.getXSpeed();
+		float dy2 = go2.getYSpeed();
+		
+		//inte riktigt dx och dy
+		float dx = dx1-dx2;
+		float dy = dy1-dy2;
+		
+		float q = -(totRadie*totRadie + px1*px2 + py1*py2 - px1*px1-py1*py1-px2*px2-py2*py2)/(dx+dy);
+		
+		float p = 2*(dx*px1-dx*px2+dy*py1-dy*py2)/(dx+dy);
+		
+		System.out.println(p);
+		System.out.println(q);
+		
+		float t1 = (float) (-p/2 + Math.sqrt((p/2)*(p/2) - q));
+		float t2 = (float) (-p/2 - Math.sqrt((p/2)*(p/2) - q));
+		
+		System.out.println(t1);
+		System.out.println(t2);
+		go1.setPosition(go1.getXPrev() + go1.getXSpeed()*Game.deltaTime*t1, go1.getPrevGroundPos() + go1.getYSpeed()*Game.deltaTime*t1);
+		
+		go2.setPosition(go2.getXPrev() + go2.getXSpeed()*Game.deltaTime*t1, go2.getPrevGroundPos() + go2.getYSpeed()*Game.deltaTime*t1);
+		
+		//go1.setSpeedByAngle(go1.getXYSpeed(), a2 + (a2-a1));
+		/*
 		
 	}
 
@@ -43,27 +118,6 @@ public class GPhysics {
 		}
 		
 		return false;
-	}
-
-
-
-	// gives x value at line stuff
-	public static float getX(GPoint a, GPoint b, GPoint c) {
-		float vab = getDistance(a, b);
-		float x = (float) (c.orgy / atan(vab));
-		return x;
-	}
-
-	public static float getY(GPoint a, GPoint b, GPoint c) {
-		float vab = getDistance(a, b);
-		float y = (float) (c.orgx * atan(vab));
-		return y;
-	}
-
-	public static float getV(GPoint p1, GPoint p2) {
-		float dx = p1.getX() - p2.getX();
-		float hyp = getDistance(p1,p2);
-		return (float) acos(dx/hyp);
 	}
 
 

@@ -1,11 +1,12 @@
 package worldObjects.food.ingredients;
 
+import worldObjects.food.GFood;
 import game.GObject;
 import game.GWorldObject;
 
 
 
-public abstract class GIngredient extends GWorldObject {
+public abstract class GIngredient extends GFood{
 
 	boolean heldByMouse;
 	

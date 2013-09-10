@@ -28,13 +28,22 @@ public class HostileController extends GController {
 
 		if (r.getZ() == 0.0f) {
 			timer.update();
-			r.setWalking(false);
 		}
 		
 
 		if (timer.exceeded()) {
-			r.setWalking(true);
+			if (r.getZ() == 0) {
+				float ra = (float) (Math.random()*4 +2);
+				r.setZSpeed(ra);
+				r.setWalkingSpeed(ra * 40);
+				a2 = -a2;
+				a = GMath.getAngle(r.getX(), r.getY(), GWorld.player.getX(),
+						GWorld.player.getY()) + a2;
+				getReciever().setSpeedByAngle(r.getWalkingSpeed() * Game.deltaTime, a);
+			}		
 		}
+		else
+			r.stop();
 		
 
  

@@ -9,28 +9,26 @@ import game.Game;
 public class BlueBerry extends GFood{
 
 	public BlueBerry(float xPos, float yPos) {
-		super(xPos, yPos, 40, 0.1f,0.2f,0.8f);
+		super(xPos, yPos, 40, 10,0.2f,0.8f);
 		createShadow();
 		setTexture("blueBerry");
 
 		setFootPos(0.2f);
 		setWalkingSpeed(40);
 
+<<<<<<< HEAD
 		setWalkingSpeed(80);
 
+=======
+>>>>>>> 037cd3bbf08f184304a72c9ee2ffa05233affc0f
 		setController(new HostileController(this));
-		setWalking(true);
+		setRadie(19);
 	}
 	
 
 	public void update() {
 		//setSize(40 + getZ()/2, 40 + getZ()/2);
 
-		if(getZ() == 0 && isWalking()){
-			float r = (float) (Math.random()*4 +2);
-			setZSpeed(r);
-			setWalkingSpeed(r * 40);
-		}
 		
 		GPhysics.handleGravity(this);
 		
