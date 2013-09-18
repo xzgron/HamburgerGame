@@ -10,7 +10,7 @@ import worldObjects.food.*;
 public class GWorld {
 
 	public ArrayList<GWorldObject> worldObjects = new ArrayList<GWorldObject>();
-
+	//hej jag klofkaopfm
 	public static float gravity = 30;
 
 	public static Hamburger player = new Hamburger(400, 400, 100);;
