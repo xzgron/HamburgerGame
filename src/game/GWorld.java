@@ -22,9 +22,6 @@ public class GWorld {
 		for (int i = 0; i < 5; i++)
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
-		
-		addGO(new Melon((float) Math.random() * 1000 - 150,
-				(float) Math.random() * 1000 - 150));
 	}
 	
 
