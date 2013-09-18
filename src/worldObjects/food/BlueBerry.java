@@ -16,11 +16,10 @@ public class BlueBerry extends GFood{
 		setFootPos(0.2f);
 		setWalkingSpeed(40);
 
-<<<<<<< HEAD
+
 		setWalkingSpeed(80);
 
-=======
->>>>>>> 037cd3bbf08f184304a72c9ee2ffa05233affc0f
+
 		setController(new HostileController(this));
 		setRadie(19);
 	}
