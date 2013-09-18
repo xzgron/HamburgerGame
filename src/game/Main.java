@@ -29,7 +29,7 @@ public class Main {
 		initGL();
 
 		initGame();
-
+		
 		gameLoop();
 
 		cleanUp();

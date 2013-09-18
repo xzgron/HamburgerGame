@@ -19,10 +19,14 @@ public class GWorld {
 		addGO(player);
 		player.setController(new DefaultController(player));
 		addGO(new Tree(150, 30, 500));
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 5; i++)
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
+		
+		addGO(new Melon((float) Math.random() * 1000 - 150,
+				(float) Math.random() * 1000 - 150));
 	}
+	
 
 	public void addGO(GWorldObject GO) {
 		worldObjects.add(GO);
