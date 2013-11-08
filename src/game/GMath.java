@@ -5,6 +5,7 @@ import static java.lang.Math.asin;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toDegrees;
+import world.WorldObject;
 import worldObjects.food.GFood;
 import worldObjects.food.Hamburger;
 
@@ -13,7 +14,7 @@ public class GMath {
 		return (float) sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 	}
 	
-	public static float getDistance(GObject go1,GObject go2) {
+	public static float getDistance(GSprite go1,GSprite go2) {
 		return getDistance(go1.xPos, go1.yPos,go2.xPos, go2.yPos);
 	}
 
@@ -37,7 +38,7 @@ public class GMath {
 
 	}
 
-	public static float getAngle(GWorldObject go1, GWorldObject go2) {
+	public static float getAngle(WorldObject go1, WorldObject go2) {
 		return getAngle(go1.getX(),go1.getGroundYPos(),go2.getX(),go2.getGroundYPos());
 	}
 	
@@ -46,6 +47,8 @@ public class GMath {
 	public static float[] succesivElimination(float[][] matrix){
 		int p = matrix.length; // height
 		int n = matrix[0].length-1; // antal obekanta (width)
+		
+		//UTSKRIVNING
 		for(int i = 0; i <p; i++){
 			String s = "";
 			for(int j = 0; j < n+1; j++){
@@ -64,8 +67,8 @@ public class GMath {
 				}
 			}
 		}
-		
-		for(int i = 0; i <p; i++){
+		//UTSKRIVNING
+		for(int i = 0; i < p; i++){
 			String s = "";
 			for(int j = 0; j < n+1; j++){
 				s += matrix[i][j] + "  ";

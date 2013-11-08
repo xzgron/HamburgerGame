@@ -12,13 +12,19 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Main {
 
-	public static int window_height = 600;
-	public static int window_width = 800;
+	private static boolean isCloseRequested = false;
+	
+	static String title = "Game";
 
-	public static int wanted_fps = 60;
-	public static int fps;
-	public static String title = "SPEL";
+	static int window_height = 600;
+	static int window_width = 900;
 
+	static int fps;
+	static int wanted_fps = 60;
+	
+	static long time = System.nanoTime();
+	static float delta_time;
+	
 	public static Game game;
 	
 	public static void main(String[] arg) throws Exception {
@@ -56,33 +62,50 @@ public class Main {
 	}
 
 	private static void gameLoop() {
-
-		long previousTime = System.nanoTime();
 		long frames = 0;
 		float deltaTimePerWantedFps = 0;
-		
-		while (!Display.isCloseRequested() && !Game.isCloseRequested()) {
+
+		while (!Display.isCloseRequested() && !isCloseRequested) {
 			frames++;
-			long currentTime = System.nanoTime();
-			Game.deltaTime = (currentTime - previousTime)/1000000000.0f;
-			previousTime = currentTime;
 			
-			deltaTimePerWantedFps += Game.deltaTime;
-			if(frames%wanted_fps==1){
-				fps = (int) (wanted_fps/deltaTimePerWantedFps);
+			///////////////UPPDATERA TID///////////
+			long newTime = System.nanoTime();
+			delta_time = (newTime - time)/1000000000.0f;
+			time = newTime;
+			delta_time = 1f/60f;
+			////////////////////////
+			
+			//////////////RÄKNA UT FPS//////////
+			deltaTimePerWantedFps += delta_time;
+			if(frames%wanted_fps==0){
+				fps = Math.round(wanted_fps/deltaTimePerWantedFps);
 				deltaTimePerWantedFps = 0;
 			}
-			Display.setTitle(title + "   fps: " + fps);
+			////////////////////////////
 			
+			/////UPPDATERA TITEL/////////
+			Display.setTitle(title + "   fps: " + fps);
+			/////////////////////////////
+			
+			/////UPPDATERA DISPLAY VARIABLER/////
+			prevDisplayX = Display.getX();
+			prevDisplayY = Display.getY();
+			window_width = Display.getWidth();
+			window_height = Display.getHeight();
+			//////////////////////////////////
+			
+			////HANTERA SPELET////////////
 			handleInput();
 			update();
 			render();
+			///////////////////////////////
 		}
 	}
 
 	private static void initDisplay() {
 		try {
 			Display.setDisplayMode(new DisplayMode(window_width, window_height));
+			Display.setResizable(true);
 			Display.create();
 			Display.setVSyncEnabled(true);
 			
@@ -120,5 +143,26 @@ public class Main {
 		Display.destroy();
 		Keyboard.destroy();
 		Mouse.destroy();
+	}
+	
+	public static float getTime(){
+		return time;
+	}
+	
+	public static float getDelta(){
+		return delta_time;
+	}
+	
+	public static void close(){
+		isCloseRequested = true;
+	}
+	static int prevDisplayX;
+	static int prevDisplayY;
+	
+	public static boolean isDisplayRedimensioned(){
+		if(Display.getWidth() != window_width || Display.getHeight() != window_height || prevDisplayX != Display.getX() || prevDisplayY != Display.getY())
+			return true;
+		else
+			return false;
 	}
 }

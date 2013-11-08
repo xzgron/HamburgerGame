@@ -1,10 +1,10 @@
 package worldObjects.food;
 
-import input.HostileController;
+import world.WorldObject;
+import controllers.HostileController;
 import game.GPhysics;
-import game.GWorld;
-import game.GWorldObject;
 import game.Game;
+import game.parts.GameWorld;
 
 public class Melon extends GFood{
 

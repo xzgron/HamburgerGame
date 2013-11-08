@@ -12,7 +12,8 @@ public class GTimer {
 	}
 	
 	public void update(){
-		time += Game.deltaTime;
+		
+		time += Main.getDelta();
 		
 		if(time >= exceedTime){
 			exceed = true;
@@ -23,7 +24,7 @@ public class GTimer {
 	}
 	
 	
-	public boolean exceeded(){
+	public boolean hasExceeded(){
 		return exceed;
 	}
 	
@@ -35,7 +36,7 @@ public class GTimer {
 		this.time = time;
 	}
 	
-	public void startOver(){
+	public void reset(){
 		time = 0;
 	}
 	

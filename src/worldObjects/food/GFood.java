@@ -1,24 +1,29 @@
 package worldObjects.food;
 
-import input.GController;
-import game.GObject;
+import world.WorldObject;
+import controllers.GController;
+import game.GSprite;
 import game.GPhysics;
-import game.GWorld;
-import game.GWorldObject;
+import game.parts.GameWorld;
 
-public abstract class GFood extends GWorldObject {
+public abstract class GFood extends WorldObject {
 	
 	float walkingSpeed = 200; // pixels per second
 	float zSpeed = 0;
-	float health;
+	
+	float maxHealth;
+	float currentHealth;
+	
 	
 	
 	private GController controller;
 	
 	
 	
-	public GFood(float xPos, float yPos, float texSize, float weight, float headPos, float footPos) {
+	public GFood(float xPos, float yPos, float texSize, float weight, float headPos, float footPos, float health) {
 		super(xPos, yPos, texSize,  headPos, footPos);
+		maxHealth = health;
+		currentHealth = maxHealth;
 		setWeight(weight);
 		setTexFolder("food/");
 	}
@@ -47,10 +52,33 @@ public abstract class GFood extends GWorldObject {
 		return walkingSpeed;
 	}
 	
-	
+	public void damage(float amt){
+		currentHealth -= amt;
+		//System.out.println(currentHealth);
+		if(currentHealth < 0) {
+			currentHealth = 0;
+			this.die();
+			}
+	}
 
+	public void die() {
+		System.out.println("Something fainted");
+	}
+
+	public void health(float amt){
+		currentHealth += amt;
+		if(currentHealth > maxHealth)
+			currentHealth = maxHealth;
+	}
 	
-	public void jumpedOn(float weight){
-		/////////////OM MAN BLIR HOPPAD PÅ//////
+	public boolean isDead(){
+		if(currentHealth == 0)
+			return true;
+		else
+			return false;
+	}
+	
+	public void landedOn(WorldObject go){
+		((GFood) go).damage((getWeight()*getYSpeed()/1000));
 	}
 }

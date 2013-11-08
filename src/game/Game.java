@@ -1,44 +1,45 @@
 package game;
 
 import static org.lwjgl.opengl.GL11.*;
-import menu.GameMenu;
-import menu.StartMenu;
-import input.Input;
+import game.parts.Actionbar;
+import game.parts.GameWorld;
+import game.parts.GameMenu;
+import game.parts.Intro;
+import game.parts.StartMenu;
 
 public class Game {
+	
+	public enum GStates { INTRO, START_MENU, GAME_MENU, GAME }
+	
 	private static boolean isCloseRequested = false;
 	
-	public Input input;
-	public GWorld world;
-	public StartMenu startMenu;
-	public GameMenu gameMenu;
+	public GamePart intro = new Intro();
+	public GamePart gameWorld = new GameWorld();
+	public GamePart startMenu = new StartMenu();
+	public GamePart gameMenu  = new GameMenu();
+	public GamePart actionbar = new Actionbar();
 
+	public static GStates gameState = GStates.START_MENU;
 
-	public GStates gameState = GStates.STARTMENU;
-
-	public static float deltaTime;
 
 	public Game() {
-		input = new Input();
-		startMenu = new StartMenu();
-		gameMenu = new GameMenu();
-		world = new GWorld();
 		
 	}
 
 	public void handleInput() {
+		
 		switch (gameState) {
 		case INTRO:
-			input.handleIntro();
+			intro.handleInput();
 			break;
-		case STARTMENU:
-			input.handleMenu();
+		case START_MENU:
+			startMenu.handleInput();
 			break;
-		case GAMEMENU:
-			input.handleMenu();
+		case GAME_MENU:
+			gameMenu.handleInput();
 			break;
 		case GAME:
-			input.handleGame();
+			gameWorld.handleInput();
 			break;
 		}
 	}
@@ -47,14 +48,14 @@ public class Game {
 		switch (gameState) {
 		case INTRO:
 			break;
-		case STARTMENU:
+		case START_MENU:
 			startMenu.update();
 			break;
-		case GAMEMENU:
+		case GAME_MENU:
 			gameMenu.update();
 			break;
 		case GAME:
-			world.update();
+			gameWorld.update();
 			break;
 		}
 	}
@@ -63,27 +64,31 @@ public class Game {
 		switch (gameState) {
 		case INTRO:
 			break;
-		case STARTMENU:
-			glClearColor(0,0,0,1);
+		case START_MENU:
+			glClearColor(1,1,1,1);
 			startMenu.render();
 			break;
-		case GAMEMENU:
+		case GAME_MENU:
 			glClearColor(1,1,1,1);
 			glPushMatrix();
-			focusTarget(world.player);
-			world.render();
+			focusTarget(GameWorld.getPlayer());
+			gameWorld.render();
 			glPopMatrix();
 			gameMenu.render();
 			break;
 		case GAME:
 			glClearColor(1,1,1,1);
-			focusTarget(world.player);
-			world.render();
+			glPushMatrix();
+			focusTarget(GameWorld.getPlayer());
+			gameWorld.render();
+			glPopMatrix();
+			
+			actionbar.render();
 			break;
 		}
 	}
 	
-	public void setGameState(GStates STATE){
+	public static void setGameState(GStates STATE){
 		gameState = STATE;
 	}
 	
@@ -94,7 +99,7 @@ public class Game {
 	public static boolean isCloseRequested(){
 		return isCloseRequested;
 	}
-	public void focusTarget(GObject target){
+	public void focusTarget(GSprite target){
 		glTranslatef(-target.getX()+Main.window_width/2, -target.getY()+Main.window_height/2, 0);
 	}
 	

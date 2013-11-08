@@ -3,15 +3,17 @@ package game;
 import static java.lang.Math.*;
 import static java.awt.geom.Line2D.*;
 import static game.GMath.*;
+import game.parts.GameWorld;
 
 import org.lwjgl.input.Mouse;
 
+import world.WorldObject;
 import worldObjects.food.GFood;
 public class GPhysics {
 	
 	
 	
-	public static boolean handleCollision(GWorldObject go1, GWorldObject go2) {
+	public static boolean handleCollision(WorldObject go1, WorldObject go2) {
 		
 		if (go1.getRadie() == -1 || go2.getRadie() == -1)
 			return false;
@@ -48,29 +50,24 @@ public class GPhysics {
 		if(go1.getFootZPos() > go2.getHeadZPos() || go2.getFootZPos() > go1.getHeadZPos())
 			return false;
 	
-		
-		
-		if(go1.getPrevFootZPos() >= go2.getHeadZPos()){
-			System.out.println("hej1");
+		////GO1 landar på GO2///
+		if(go1.getPrevFootZPos() > go2.getHeadZPos()|| go2.getPrevHeadZPos() < go1.getFootZPos()){
+			go1.landedOn((GFood) go2);
 			go1.setFootZPos(go2.getHeadZPos());
 			go2.setZSpeed(0);
 			return true;
 		}
-		else if(go2.getFootZPos() < go1.getHeadZPos() && go2.getPrevFootZPos() >= go1.getHeadZPos()){
-			System.out.println("hej2");
+		////GO2 landar på GO1///
+		else if(go2.getPrevFootZPos() > go1.getHeadZPos() || go1.getPrevHeadZPos() < go2.getFootZPos() ){
+			go2.landedOn((GFood) go1);
 			go2.setFootZPos(go1.getHeadZPos());
-			go1.setZSpeed(0);
+			go1.setZSpeed(go2.getZSpeed());
 			return true;
 		}
 
 		
 		
-		//TODO///
-		//Oval Collision
-		//höjd anpassad
-
-		
-		float ww = Math.min(go1.getWeight(),go2.getWeight())/Math.max(go1.getWeight(),go2.getWeight()); // hur mcyket mer väger lättast än tyngst
+		float ww = Math.min(go1.getWeight(),go2.getWeight())/Math.max(go1.getWeight(),go2.getWeight()); // hur mycket mer väger lättast än tyngst
 		
 
 		
@@ -187,14 +184,14 @@ public class GPhysics {
 
 
 	
-	public static boolean checkCollision(GWorldObject go1, GWorldObject go2){
+	public static boolean checkCollision(WorldObject go1, WorldObject go2){
 		if(getDistance(go1.getX(), go1.getY(), go2.getX(), go2.getY()) > go1.getRadie() + go2.getRadie())
 			return true;
 		else
 			return false;
 	}
 	
-	public static boolean isPosWithinTex(float x, float y, GObject go){
+	public static boolean isPosWithinTex(float x, float y, GSprite go){
 		if(x >= go.getX() - go.getTexWidth()/2 &&  x <= go.getX() + go.getTexWidth()/2 && 
 				y >= go.getY() - go.getTexHeight()/2 &&  y <= go.getY() + go.getTexHeight()/2)
 			return true;
@@ -204,7 +201,7 @@ public class GPhysics {
 
 	public static void useGravity(GFood gf) {
 		if(gf.isInAir())
-			gf.accelerate(0,0,-GWorld.gravity);
+			gf.accelerate(0,0,-GameWorld.getGravity());
 
 		
 		if (gf.getZ() < 0){

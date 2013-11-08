@@ -39,7 +39,6 @@ public class GTexture {
 	
 	
 	public static int addAlphaColor(File image, float red, float green, float blue) {
-		
 		final int BYTES_PER_PIXEL = 4;// 3 for RGB, 4 for RGBA
 		
 		BufferedImage bufferedImage = null;

@@ -3,17 +3,17 @@ package worldObjects.food;
 import java.util.LinkedList;
 
 import worldObjects.food.ingredients.*;
-import game.GObject;
+import game.GSprite;
 import game.GPhysics;
-import game.GWorld;
 import game.Game;
+import game.parts.GameWorld;
 
 public class Hamburger extends GFood {
 
 	LinkedList<GIngredient> ingredients = new LinkedList<GIngredient>();
 
 	public Hamburger(float xPos, float yPos, float texSize) {
-		super(xPos, yPos, texSize, 0, 0.415f, 0);
+		super(xPos, yPos, texSize, 0, 0.415f, 0,500);
 
 		setRadie(texSize/2);
 		
@@ -72,7 +72,7 @@ public class Hamburger extends GFood {
 	
 	// huvudet bestämmer procentuellt var på bilden som går i taget...?
 	
-	public void setHeadPos(float f){
+	public void setHeadZPos(float f){
 		setZ(f + ingredients.getLast().getTexHeight()/2 - ingredients.getLast().getTexHeight()*ingredients.getLast().getHeadPosVar());
 	}
 	
