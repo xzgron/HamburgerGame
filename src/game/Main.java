@@ -1,7 +1,11 @@
 package game;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 
 import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
@@ -18,12 +22,14 @@ public class Main {
 	public static int wanted_fps = 60;
 	public static int fps;
 	public static String title = "SPEL";
+	public static int fullscreenChoice=-1;
 
 	public static Game game;
 	
 	public static void main(String[] arg) throws Exception {
+		
 		LibraryLoader.loadNativeLibraries();
-
+	
 		initDisplay();
 		initInputTools();
 		initGL();
@@ -82,7 +88,9 @@ public class Main {
 
 	private static void initDisplay() {
 		try {
+			
 			Display.setDisplayMode(new DisplayMode(window_width, window_height));
+			
 			Display.create();
 			Display.setVSyncEnabled(true);
 			
