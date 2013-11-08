@@ -72,7 +72,6 @@ public class Main {
 			long newTime = System.nanoTime();
 			delta_time = (newTime - time)/1000000000.0f;
 			time = newTime;
-			delta_time = 1f/60f;
 			////////////////////////
 			
 			//////////////RÄKNA UT FPS//////////
