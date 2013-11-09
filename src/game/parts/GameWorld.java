@@ -100,10 +100,7 @@ public class GameWorld implements GamePart {
 		}
 		////G…RA OBJECT FRAMF…R PLAYER GENOMSKINLIGA///
 		for (WorldObject go : worldObjects) {
-			System.out.println(player.getHeight());
-			System.out.println(go.getHeight());
-			
-			if (go != player && go.getGroundYPos() < player.getGroundYPos() && GPhysics.isPosWithinTex(player.getX(), player.getY() + player.getFootZPos(), go) && go.getFootZPos() < player.getHeadZPos() && go.getHeight() > player.getHeight()/1.5f) {
+			if (go != player && go.getGroundYPos() < player.getGroundYPos() && GPhysics.isPosWithinTex(player.getX(), player.getY() + player.getFootZPos(), go) && go.getFootZPos() < player.getHeadZPos() && go.getHeight() > player.getHeight()) {
 				go.setTransparency(0.5f);
 			} else
 				go.setTransparency(1);

@@ -119,7 +119,7 @@ public class Hamburger extends GFood {
 	// höjden är höjden i z mellan huvud och fot
 	
 	public float getHeight(){
-		return texHeight*getHeadPosVar() - texHeight*getFootPosVar() ;
+		return ingredients.getLast().getHeadZPos() - ingredients.get(0).getFootZPos();
 		
 	}
 	
