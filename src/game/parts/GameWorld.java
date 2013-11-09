@@ -25,8 +25,10 @@ public class GameWorld implements GamePart {
 	public GameWorld() {
 		addGO(player);
 		player.setController(new DefaultController(player));
-		addGO(new Tree(150, 30, 500));
-		for (int i = 0; i < 1; i++)
+		addGO(new Tree(150, 30, 300));
+		addGO(new Tree(350, 80, 400));
+		addGO(new Tree(50, 170, 500));
+		for (int i = 0; i < 13; i++)
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
 	}

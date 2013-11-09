@@ -23,6 +23,7 @@ public class Actionbar implements GamePart{
 		background.render();
 		GText.font.drawString(100, Display.getHeight()-50, "THE LIGHTWEIGHT JAVA GAMES LIBRARY", Color.yellow);
 		//GImage.font2.drawString(100, 100, "NICE LOOKING FONTS!", Color.green);
+
 		
 	}
 

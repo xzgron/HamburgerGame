@@ -1,6 +1,9 @@
 package game;
 
 import static org.lwjgl.opengl.GL11.*;
+
+
+
 import game.parts.Actionbar;
 import game.parts.GameWorld;
 import game.parts.GameMenu;
@@ -102,5 +105,6 @@ public class Game {
 	public void focusTarget(GSprite target){
 		glTranslatef(-target.getX()+Main.window_width/2, -target.getY()+Main.window_height/2, 0);
 	}
+	
 	
 }
