@@ -2,6 +2,7 @@ package game.parts;
 
 import org.lwjgl.opengl.Display;
 
+import game.GImage;
 import game.GSprite;
 import game.GamePart;
 
@@ -22,6 +23,8 @@ public class Actionbar implements GamePart{
 	@Override
 	public void render() {
 		background.render();
+		GImage.drawString("Welcome to burgerworld, in the burgersolarsystem!", Display.getWidth()/60, 80);
+		
 		
 	}
 
