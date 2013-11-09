@@ -85,11 +85,11 @@ public class DefaultController extends GController {
 		float x = 0;
 		float y = 0;
 		if (isKeyDown(KEY_W) || isKeyDown(KEY_UP))
-			y += 1;
+			y -= 1;
 		if (isKeyDown(KEY_D) || isKeyDown(KEY_RIGHT))
 			x += 1;
 		if (isKeyDown(KEY_S) || isKeyDown(KEY_DOWN))
-			y -= 1;
+			y += 1;
 		if (isKeyDown(KEY_A) || isKeyDown(KEY_LEFT))
 			x -= 1;
 

@@ -19,9 +19,9 @@ public class StartMenu implements GamePart {
 	GButton exitButton;
 	
 	public StartMenu(){
-		continueButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
+		continueButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
 		continueButton.setTexture("continueButton");
-		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
+		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
 		exitButton.setTexture("exitButton");
 	}
 	

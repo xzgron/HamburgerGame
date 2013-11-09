@@ -90,7 +90,7 @@ public class GameWorld implements GamePart {
 		while (moved) {
 			moved = false;
 			for (int i = 0; i < worldObjects.size() - 1; i++) {
-				if (worldObjects.get(i).getGroundYPos() < worldObjects.get(i + 1).getGroundYPos()) {
+				if (worldObjects.get(i).getGroundYPos() > worldObjects.get(i + 1).getGroundYPos()) {
 					temp = worldObjects.get(i);
 					worldObjects.set(i, worldObjects.get(i + 1));
 					worldObjects.set(i + 1, temp);
@@ -100,7 +100,7 @@ public class GameWorld implements GamePart {
 		}
 		////G…RA OBJECT FRAMF…R PLAYER GENOMSKINLIGA///
 		for (WorldObject go : worldObjects) {
-			if (go != player && go.getGroundYPos() < player.getGroundYPos() && GPhysics.isPosWithinTex(player.getX(), player.getY() + player.getFootZPos(), go) && go.getFootZPos() < player.getHeadZPos() && go.getHeight() > player.getHeight()) {
+			if (go != player && go.getGroundYPos() > player.getGroundYPos() && GPhysics.isPosWithinTex(player.getX(), player.getY() - player.getFootZPos(), go) && go.getFootZPos() < player.getHeadZPos() && go.getHeight() > player.getHeight()) {
 				go.setTransparency(0.5f);
 			} else
 				go.setTransparency(1);

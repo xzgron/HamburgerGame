@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
@@ -143,7 +144,8 @@ public class GSprite {
 	
 	public boolean isCursorOver(){
 		int mx = Mouse.getX();
-		int my = Mouse.getY();
+		int my = Display.getHeight()-Mouse.getY()-3;
+		System.out.println(mx + "   " +my);
 		if(mx >= getX() - getTexWidth()/2 && mx <= getX()+getTexWidth()/2 && my >= getY() - getTexHeight()/2 && my <= getY()+getTexHeight()/2)
 			return true;
 		else 

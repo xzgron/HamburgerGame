@@ -32,29 +32,16 @@ public abstract class WorldObject extends GSprite{
 	
 	public WorldObject(float xPos, float yPos, float texSize, float footPos, float headPos) {
 		super(xPos, yPos, texSize, texSize);
-		if(headPos > 1 || headPos < 0){
-			System.out.println("huvudet ska vara mellan 0 och 1");
-			this.headPos = 0.5f;
-			}
-		else
-			this.headPos = headPos;
-		
-		
-		if(footPos > 1 || footPos < 0){
-			System.out.println("footen ska vara mellan 0 och 1");
-			this.footPos = 0.5f;
-			}
-		else
-			this.footPos = footPos;
 
-		// TODO Auto-generated constructor stub
+		this.headPos = headPos;
+		this.footPos = footPos;
 	}
 	
 	public abstract void update();
 	
 	public void render(){
 		renderShadow();
-		GImage.draw(texture, xPos, yPos + zPos, texWidth, texHeight, red, green, blue, transparency);	
+		GImage.draw(texture, xPos, yPos - zPos, texWidth, texHeight, red, green, blue, transparency);	
 	}
 
 
@@ -87,9 +74,6 @@ public abstract class WorldObject extends GSprite{
 	// huvudet bestämmer procentuellt var på bilden som går i taget...?
 	
 	public void setHeadPosVar(float f){
-		if(f > 1 || f < 0)
-			System.out.println("headen ska vara mellan 0 och 1");
-		else
 			headPos = f;
 	}
 	
@@ -111,10 +95,7 @@ public abstract class WorldObject extends GSprite{
 	
 	// foten bestämmer procentuellt var på bilden som går i marken
 	public void setFootPosVar(float f){
-		if(f > 1 || f < 0)
-			System.out.println("footen ska vara mellan 0 och 1");
-		else
-			footPos = f;
+		footPos = f;
 	}
 	
 	public float getFootPosVar(){
@@ -130,7 +111,7 @@ public abstract class WorldObject extends GSprite{
 	}
 	
 	public float getFootYPos(){
-		return(yPos+zPos-texHeight/2 + texHeight*footPos);
+		return(yPos - getFootZPos());
 	}
 	
 	
@@ -143,21 +124,21 @@ public abstract class WorldObject extends GSprite{
 	//grounden är kort sagt gubben yPos värde för footen när objectet står i marken
 	
 	public void setGroundPos(float y){
-		yPos = y + texHeight/2 - texHeight*footPos;
+		yPos = y - texHeight/2 + texHeight*footPos;
 	}
 	
 	public float getGroundYPos(){
-		return(yPos - texHeight/2 + texHeight*getFootPosVar());
+		return(yPos + texHeight/2 - texHeight*getFootPosVar());
 	}
 	
 	public float getPrevGroundYPos() {
-		return(getPrevYPos() - texHeight/2 + texHeight*getFootPosVar());
+		return(getPrevYPos() + texHeight/2 - texHeight*getFootPosVar());
 	}
 	
 	// höjden är höjden i z mellan huvud och fot
 	
 	public float getHeight(){
-		return texHeight*headPos- texHeight*footPos ;
+		return getHeadZPos() - getFootZPos() ;
 		
 	}
 	
