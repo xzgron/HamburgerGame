@@ -11,7 +11,7 @@ public class BlueBerry extends GFood{
 	public BlueBerry(float xPos, float yPos) {
 		super(xPos, yPos, 40, 10,0.13f,0.73f, 50);
 		createShadow();
-		setTexture("B" + (Math.random()*5));
+		setTexture("Blueberrys/B" + ((int)(Math.random()*4)));
 
 		setWalkingSpeed(40);
 
