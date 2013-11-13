@@ -15,7 +15,7 @@ public class GameMenu implements GamePart{
 	
 	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, 600, 480, 0.48f,0.69f,0.71f,0.9f);
 	
-	GButton continueButton;
+	GButton continueButton;	
 	GButton exitButton;
 	
 	public GameMenu(){

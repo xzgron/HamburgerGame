@@ -11,7 +11,8 @@ import controllers.GController;
 import world.WorldObject;
 import worldObjects.*;
 import worldObjects.food.*;
-
+import static org.lwjgl.input.Keyboard.*;
+import static game.Game.*;
 public class GameWorld implements GamePart {
 
 	public static ArrayList<WorldObject> worldObjects = new ArrayList<WorldObject>();
@@ -33,6 +34,9 @@ public class GameWorld implements GamePart {
 	}
 	
 	public void handleInput() {
+		if(isKeyDown(KEY_ESCAPE))
+			setGameState(GStates.GAME_MENU);
+			
 		for(GController c: controllers)
 			c.handle();
 		
