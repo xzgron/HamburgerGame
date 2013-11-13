@@ -144,8 +144,8 @@ public class GSprite {
 	
 	public boolean isCursorOver(){
 		int mx = Mouse.getX();
-		int my = Display.getHeight()-Mouse.getY()-3;
-		System.out.println(mx + "   " +my);
+		//Detta kan behšva justeras.
+		int my = Display.getHeight()-Mouse.getY();
 		if(mx >= getX() - getTexWidth()/2 && mx <= getX()+getTexWidth()/2 && my >= getY() - getTexHeight()/2 && my <= getY()+getTexHeight()/2)
 			return true;
 		else 
