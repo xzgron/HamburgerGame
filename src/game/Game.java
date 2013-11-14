@@ -30,7 +30,8 @@ public class Game {
 	}
 
 	public void handleInput() {
-		
+
+			
 		switch (gameState) {
 		case INTRO:
 			intro.handleInput();

@@ -15,13 +15,13 @@ public class GameMenu implements GamePart{
 	
 	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, 600, 480, 0.48f,0.69f,0.71f,0.9f);
 	
-	GButton continueButton;	
+	GButton continueButton;
 	GButton exitButton;
 	
 	public GameMenu(){
-		continueButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
+		continueButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
 		continueButton.setTexture("continueButton");
-		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
+		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
 		exitButton.setTexture("exitButton");
 	}
 	
@@ -29,7 +29,6 @@ public class GameMenu implements GamePart{
 	public void handleInput() {
 		if(continueButton.isRightReleasedOver())
 			Game.setGameState(Game.GStates.GAME);
-
 		if(exitButton.isRightReleasedOver())
 			Main.close();
 	}
@@ -38,18 +37,18 @@ public class GameMenu implements GamePart{
 		continueButton.update();
 		
 		if(continueButton.isRightClicked())
-			continueButton.setColor(1,1,1,0.7f);
+			continueButton.setColor(255,255,255,0.7f);
 		else
-			continueButton.setColor(1,1,1,1);
+			continueButton.setColor(255,255,255,1);
 		///////////////////
 		
 		//exit button
 		exitButton.update();
 		
 		if(exitButton.isRightClicked())
-			exitButton.setColor(1,1,1,0.7f);
+			exitButton.setColor(255,255,255,0.7f);
 		else
-			exitButton.setColor(1,1,1,1);
+			exitButton.setColor(255,255,255,1);
 		
 		////////////////
 
@@ -61,6 +60,7 @@ public class GameMenu implements GamePart{
 		continueButton.render();
 		exitButton.render();
 	}
+
 
 
 

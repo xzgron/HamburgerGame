@@ -1,5 +1,6 @@
-package game;
+package game.parts;
 
+import game.GamePart;
 import items.GItem;
 
 import java.util.ArrayList;

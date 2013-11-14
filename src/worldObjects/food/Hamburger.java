@@ -2,6 +2,8 @@ package worldObjects.food;
 
 import java.util.LinkedList;
 
+import actionbar.MeasureBar;
+
 import worldObjects.food.ingredients.*;
 import game.GSprite;
 import game.GPhysics;
@@ -12,9 +14,12 @@ public class Hamburger extends GFood {
 
 	LinkedList<GIngredient> ingredients = new LinkedList<GIngredient>();
 
+	MeasureBar healthBar = new MeasureBar(0, -100, 100, 10, 1f, 0, 0, 1f, this);
+	
 	public Hamburger(float xPos, float yPos, float texSize) {
 		super(xPos, yPos, texSize, 0, 0.415f, 0,500);
 
+		healthBar.setFollow(true);
 		setRadie(texSize/2);
 		
 		ingredients.add(new HamburgerBreadUnderPart(xPos, yPos));
@@ -39,6 +44,8 @@ public class Hamburger extends GFood {
 		
 		for(GIngredient gi: ingredients)
 			gi.render();
+		
+		healthBar.render();
 	}
 	
 	

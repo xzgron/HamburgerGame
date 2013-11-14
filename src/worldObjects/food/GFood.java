@@ -81,4 +81,12 @@ public abstract class GFood extends WorldObject {
 	public void landedOn(WorldObject go){
 		((GFood) go).damage((getWeight()*getYSpeed()/1000));
 	}
+	
+	public float getHealth(){
+		return currentHealth;
+	}
+	
+	public float getMaxHealth(){
+		return maxHealth;
+	}
 }
