@@ -30,7 +30,7 @@ public class GameWorld implements GamePart {
 		addGO(new Tree(350, 80, 400));
 		addGO(new Tree(50, 170, 500));
 		
-		for (int i = 0; i < 1; i++)
+		for (int i = 0; i < 5; i++)
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
 	}
@@ -38,6 +38,20 @@ public class GameWorld implements GamePart {
 	public void handleInput() {
 		if(isKeyDown(KEY_ESCAPE))
 			setGameState(GStates.GAME_MENU);
+		
+	
+		if(isKeyDown(KEY_I) && !Inventory.wasIDown){
+			setGameState(GStates.INVENTORY_MENU);
+			Inventory.wasIDown = true;
+			}
+		else if(!isKeyDown(KEY_I))
+			Inventory.wasIDown = false;
+			
+		
+		
+		
+		
+		
 			
 		for(GController c: controllers)
 			c.handle();
