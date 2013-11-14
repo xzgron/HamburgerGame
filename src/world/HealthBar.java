@@ -1,4 +1,4 @@
-package actionbar;
+package world;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -8,27 +8,27 @@ import worldObjects.food.GFood;
 
 import game.*;
 
-public class MeasureBar extends GSprite {
+public class HealthBar extends GSprite {
 	
-	GFood parent;
+	GFood owner;
 	
 	boolean follow = false;
 	
-	public MeasureBar(float xPos, float yPos, float texWidth, float texHeight,String texture, GFood parent) {
+	public HealthBar(float xPos, float yPos, float texWidth, float texHeight,String texture, GFood parent) {
 		super(xPos, yPos, texWidth, texHeight, texture);
-		this.parent = parent;
+		this.owner = parent;
 	}
 
 	
-	public MeasureBar(float xPos, float yPos, float texWidth, float texHeight,
+	public HealthBar(float xPos, float yPos, float texWidth, float texHeight,
 			float r, float g, float b, float t, GFood parent) {
 		super(xPos, yPos, texWidth, texHeight, r, g, b, t);
-		this.parent = parent;
+		this.owner = parent;
 	}
 
 	public void render() {
 		if(follow)
-			draw(texture, xPos + parent.getX(), yPos + parent.getY() - parent.getZ(), texWidth, texHeight, red, green, blue, transparency);	
+			draw(texture, xPos + owner.getX(), yPos + owner.getY() - owner.getZ(), texWidth, texHeight, red, green, blue, transparency);	
 		else
 			draw(texture, xPos, yPos, texWidth, texHeight, red, green, blue, transparency);	
 	}
@@ -50,11 +50,11 @@ public class MeasureBar extends GSprite {
 				glTexCoord2f(0, 0);
 				glVertex2f(-w / 2, -h / 2);
 
-				glTexCoord2f(parent.getHealth()/parent.getMaxHealth(), 0);
+				glTexCoord2f(owner.getHealth()/owner.getMaxHealth(), 0);
 				glVertex2f(w / 2, -h / 2);
 
 				
-				glTexCoord2f(parent.getHealth()/parent.getMaxHealth(), 1);
+				glTexCoord2f(owner.getHealth()/owner.getMaxHealth(), 1);
 				glVertex2f(w / 2, h / 2);
 				
 
@@ -68,6 +68,14 @@ public class MeasureBar extends GSprite {
 	
 	public void setFollow(boolean b){
 		follow = b;
+	}
+	
+	public int getHealth(){
+		return owner.getHealth();
+	}
+	
+	public int getMaxHealth(){
+		return owner.getMaxHealth();
 	}
 
 }
