@@ -11,8 +11,8 @@ public abstract class GFood extends WorldObject {
 	float walkingSpeed = 200; // pixels per second
 	float zSpeed = 0;
 	
-	float maxHealth;
-	float currentHealth;
+	int maxHealth;
+	int currentHealth;
 	
 	
 	
@@ -20,7 +20,7 @@ public abstract class GFood extends WorldObject {
 	
 	
 	
-	public GFood(float xPos, float yPos, float texSize, float weight, float headPos, float footPos, float health) {
+	public GFood(float xPos, float yPos, float texSize, float weight, float headPos, float footPos, int health) {
 		super(xPos, yPos, texSize,  headPos, footPos);
 		maxHealth = health;
 		currentHealth = maxHealth;
@@ -80,5 +80,13 @@ public abstract class GFood extends WorldObject {
 	
 	public void landedOn(WorldObject go){
 		((GFood) go).damage((getWeight()*getYSpeed()/1000));
+	}
+	
+	public int getHealth(){
+		return currentHealth;
+	}
+	
+	public int getMaxHealth(){
+		return maxHealth;
 	}
 }

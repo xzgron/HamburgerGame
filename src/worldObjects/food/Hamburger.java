@@ -2,6 +2,8 @@ package worldObjects.food;
 
 import java.util.LinkedList;
 
+
+import world.HealthBar;
 import worldObjects.food.ingredients.*;
 import game.GSprite;
 import game.GPhysics;
@@ -11,10 +13,9 @@ import game.parts.GameWorld;
 public class Hamburger extends GFood {
 
 	LinkedList<GIngredient> ingredients = new LinkedList<GIngredient>();
-
+	
 	public Hamburger(float xPos, float yPos, float texSize) {
-		super(xPos, yPos, texSize, 0, 0.415f, 0,500);
-
+		super(xPos, yPos, texSize, 0, 0.415f, 0, 500);
 		setRadie(texSize/2);
 		
 		ingredients.add(new HamburgerBreadUnderPart(xPos, yPos));

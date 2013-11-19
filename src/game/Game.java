@@ -21,7 +21,6 @@ public class Game {
 	public GamePart gameWorld = new GameWorld();
 	public GamePart startMenu = new StartMenu();
 	public GamePart gameMenu = new GameMenu();
-	public GamePart Inventory = new Inventory();
 	public GamePart actionbar = new Actionbar();
 
 	public static GStates gameState = GStates.START_MENU;
@@ -31,6 +30,7 @@ public class Game {
 	}
 
 	public void handleInput() {
+
 
 		switch (gameState) {
 		case INTRO:
