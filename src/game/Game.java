@@ -22,6 +22,7 @@ public class Game {
 	public GamePart startMenu = new StartMenu();
 	public GamePart gameMenu = new GameMenu();
 	public GamePart actionbar = new Actionbar();
+	public GamePart Inventory = new Inventory();
 
 	public static GStates gameState = GStates.START_MENU;
 

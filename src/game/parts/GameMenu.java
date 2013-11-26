@@ -60,12 +60,5 @@ public class GameMenu implements GamePart {
 		continueButton.render();
 		exitButton.render();
 	}
-
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> fe1d24671393eeab4550cb217426620e0df0bdbe
 }
 
