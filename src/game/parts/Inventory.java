@@ -17,7 +17,7 @@ import game.Game.GStates;
 import org.lwjgl.opengl.Display;
 
 public class Inventory implements GamePart{
-
+	GSprite Inventory = new GSprite(Display.getWidth()/2,Display.getHeight()/2, 600, 480, "buttons/area");
 
 	public static boolean wasIDown;
 	
@@ -34,8 +34,7 @@ public class Inventory implements GamePart{
  	}
  
 	public void Inventory(int size) {
-	//	slots = new GItem[size];
-
+	
 	}
 
  	@Override
@@ -46,7 +45,7 @@ public class Inventory implements GamePart{
  	}
  
 	public void render() {
-		
+		Inventory.render();
 	
 		
  	}
