@@ -2,6 +2,7 @@ package game.parts;
 
 import game.GButton;
 import game.GSprite;
+import game.GTexture;
 import game.Game;
 import game.GamePart;
 import game.Main;
@@ -9,6 +10,7 @@ import game.Main;
 import java.util.LinkedList;
 
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.opengl.Texture;
 
 
 public class GameMenu implements GamePart {
@@ -17,12 +19,15 @@ public class GameMenu implements GamePart {
 	
 	GButton continueButton;
 	GButton exitButton;
-	
+	Texture exit1 = GTexture.getTexture("buttons/exit1");
+	Texture exit2 = GTexture.getTexture("buttons/exit2");
+	Texture continue1 = GTexture.getTexture("buttons/continue1");
+	Texture continue2 = GTexture.getTexture("buttons/continue2");
 	public GameMenu(){
 		continueButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
-		continueButton.setTexture("continueButton");
+		continueButton.setTexture(continue1);
 		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
-		exitButton.setTexture("exitButton");
+		exitButton.setTexture(exit1);
 	}
 	
 	
@@ -37,18 +42,18 @@ public class GameMenu implements GamePart {
 		continueButton.update();
 		
 		if(continueButton.isRightClicked())
-			continueButton.setColor(255,255,255,0.7f);
+			continueButton.setTexture(continue2);
 		else
-			continueButton.setColor(255,255,255,1);
+			continueButton.setTexture(continue1);
 		///////////////////
 		
 		//exit button
 		exitButton.update();
 		
 		if(exitButton.isRightClicked())
-			exitButton.setColor(255,255,255,0.7f);
+			exitButton.setTexture(exit2);
 		else
-			exitButton.setColor(255,255,255,1);
+			exitButton.setTexture(exit1);
 		
 		////////////////
 
