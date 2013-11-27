@@ -13,14 +13,14 @@ import org.lwjgl.opengl.Display;
 
 public class StartMenu implements GamePart {
 	
-	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, 600, 480, 0.48f,0.69f,0.71f,0.9f);
+	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, Display.getWidth(), Display.getHeight(), 0.48f,0.69f,0.71f,0.9f);
 	
 	GButton startButton;
 	GButton exitButton;
 	
 	public StartMenu(){
 		startButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
-		startButton.setTexture("startButton");
+		startButton.setTexture("Start");
 		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
 		exitButton.setTexture("exitButton");
 	}
@@ -33,7 +33,7 @@ public class StartMenu implements GamePart {
 			Main.close();
 	}
 	public void update() {
-		//continue button
+		//start button
 		startButton.update();
 		
 		if(startButton.isRightClicked())

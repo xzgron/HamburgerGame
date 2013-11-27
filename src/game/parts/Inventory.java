@@ -17,7 +17,7 @@ import game.Game.GStates;
 import org.lwjgl.opengl.Display;
 
 public class Inventory implements GamePart{
-	GSprite Inventory = new GSprite(Display.getWidth()/2,Display.getHeight()/2, 600, 480, "buttons/area");
+	GSprite Inventory = new GSprite(Display.getWidth()/2,Display.getHeight()/2, 600, 480, "UI/Inventory");
 
 	public static boolean wasIDown;
 	
