@@ -29,19 +29,17 @@ public abstract class GFood extends WorldObject {
 	}
 	
 	public void update(){
+		controller.handle(this);
 		GPhysics.useGravity(this);
 		useSpeed();	
 	}
 	
 	public void setController(GController controller){
-		controller.add();
 		this.controller = controller;
 	}
 	
 	public void removeController(){
-		controller.remove();
 		controller = null;
-		
 	}
 	
 	public void setWalkingSpeed(float f){
@@ -54,7 +52,6 @@ public abstract class GFood extends WorldObject {
 	
 	public void damage(float amt){
 		currentHealth -= amt;
-		//System.out.println(currentHealth);
 		if(currentHealth < 0) {
 			currentHealth = 0;
 			this.die();

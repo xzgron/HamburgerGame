@@ -8,33 +8,28 @@ import game.*;
 
 public class DefaultController extends GController {
 
-	public DefaultController(GFood gf) {
-		super(gf);
-	}
 	boolean jumping = false;
-	public void handle() {
-
-		GFood r = getReciever();
-
+	
+	public void handle(GFood food) {
 		
 		float keyAngle = getKeyAngle();
 		if (keyAngle != -1) {
-			r.setSpeedByAngle(getReciever().getWalkingSpeed(),
+			food.setSpeedByAngle(food.getWalkingSpeed(),
 					keyAngle);
 		} else
-			r.stop();
+			food.stop();
 		
-		if(!r.isInAir())
+		if(!food.isInAir())
 			jumping = false;
 		
 		
-		if (!r.isInAir() && r.isWalking())
-			r.setZSpeed(120);
+		if (!food.isInAir() && food.isWalking())
+			food.setZSpeed(120);
 		
 		
 		if (isKeyDown(KEY_SPACE) && !jumping) {
 			jumping = true;
-			r.setZSpeed(300);
+			food.setZSpeed(300);
 		}
 
 		/*

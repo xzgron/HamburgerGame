@@ -15,7 +15,7 @@ public class BlueBerry extends GFood{
 
 		setWalkingSpeed(40);
 
-		setController(new HostileController(this));
+		setController(new HostileController());
 		setRadie(19);
 	}
 

@@ -16,8 +16,6 @@ import static game.Game.*;
 public class GameWorld implements GamePart {
 
 	public static ArrayList<WorldObject> worldObjects = new ArrayList<WorldObject>();
-	
-	public static LinkedList<GController> controllers = new LinkedList<GController>();
 
 	private static float gravity = 800;
 
@@ -25,26 +23,16 @@ public class GameWorld implements GamePart {
 
 	public GameWorld() {
 		addGO(player);
-		player.setController(new DefaultController(player));
 		addGO(new Tree(150, 30, 300));
 		addGO(new Tree(350, 80, 400));
 		addGO(new Tree(50, 170, 500));
 		
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < 4; i++)
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
-					(float) Math.random() * 1000 - 150));
-		for (int i = 0; i < 3; i++)
-			addGO(new MegaMushroom((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
 	}
 	
-<<<<<<< HEAD
-	
 	///////////MAIN PART////////////////
-=======
-
->>>>>>> 296821e238698245f3741a5f4a500ffdb55360ad
-	
 	public void handleInput() {
 		if(isKeyDown(KEY_ESCAPE))
 			setGameState(GStates.GAME_MENU);
@@ -56,18 +44,8 @@ public class GameWorld implements GamePart {
 			}
 		else if(!isKeyDown(KEY_I))
 			Inventory.wasIDown = false;
-			
-		
-		
-		
-		
-		
-			
-		for(GController c: controllers)
-			c.handle();
-		
-	}
 	
+	}
 	
 	public void update() {
 		for (WorldObject go : worldObjects)
