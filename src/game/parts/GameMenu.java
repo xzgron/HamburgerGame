@@ -54,7 +54,6 @@ public class GameMenu implements GamePart {
 			exitButton.setTexture(exit2);
 		else
 			exitButton.setTexture(exit1);
-		
 		////////////////
 
 		

@@ -30,10 +30,10 @@ public class GButton extends GSprite{
 		return(GMouse.isButtonPressed(button) && isCursorWithin());
 	}
 	public boolean isReleasedOver(int button){
-		return(!Mouse.isButtonDown(0) && isCursorWithin() && wasHeldIn[button]);
+		return(!Mouse.isButtonDown(button) && isCursorWithin() && wasHeldIn[button]);
 	}
 	public boolean isReleased(int button){
-		return(!Mouse.isButtonDown(0) && wasHeldIn[button]);
+		return(!Mouse.isButtonDown(button) && wasHeldIn[button]);
 	}	
 	public boolean isReleased(){
 		for(int i = 0; i < 5; i++)
@@ -41,7 +41,7 @@ public class GButton extends GSprite{
 				return true;
 		return false;
 	}	
-	public boolean isPressedOver(int button){
+	public boolean isPressed(int button){
 		return(Mouse.isButtonDown(button) && isCursorWithin());
 	}
 	public boolean isHeldIn(int button){

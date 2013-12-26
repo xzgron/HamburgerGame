@@ -22,6 +22,7 @@ public class GameWorld implements GamePart {
 	private static GFood player = new Hamburger(400, 400, 100);;
 
 	public GameWorld() {
+		player.setController(new DefaultController());
 		addGO(player);
 		addGO(new Tree(150, 30, 300));
 		addGO(new Tree(350, 80, 400));
@@ -124,6 +125,7 @@ public class GameWorld implements GamePart {
 				go.setTransparency(0.5f);
 			} else
 				go.setTransparency(1);
+		////////////////////////////////
 		}
 	}
 

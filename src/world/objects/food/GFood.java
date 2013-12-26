@@ -29,7 +29,8 @@ public abstract class GFood extends WorldObject {
 	}
 	
 	public void update(){
-		controller.handle(this);
+		if(controller != null)
+			controller.handle(this);
 		GPhysics.useGravity(this);
 		useSpeed();	
 	}

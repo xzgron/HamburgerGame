@@ -90,16 +90,19 @@ public class Main {
 			Display.setTitle(title + "   fps: " + fps);
 			/////////////////////////////
 			
+			
+	
+			
 			////HANTERA SPELET////////////
 			handleInput();
 			update();
-			render();
-			///////////////////////////////
-			
 			//////UPPDATERA INPUT CLASSER////
 			GKeyboard.update();
 			GMouse.update();
 			///////////////////
+			render();
+			///////////////////////////////
+
 		}
 	}
 
@@ -129,7 +132,6 @@ public class Main {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, Display.getWidth(), Display.getHeight(),0, -1, 1);
-
 		glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_BLEND);
 		glEnable(GL_TEXTURE_2D);

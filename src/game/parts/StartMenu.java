@@ -6,9 +6,11 @@ import game.GTexture;
 import game.Game;
 import game.GamePart;
 import game.Main;
+import game.input.GMouse;
 
 import java.util.LinkedList;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
@@ -32,9 +34,9 @@ public class StartMenu implements GamePart {
 	
 	
 	public void handleInput() {
-		if(startButton.isReleasedOver(1))
+		if(startButton.isReleasedOver(0))
 			Game.setGameState(Game.GStates.GAME);
-		if(exitButton.isReleasedOver(1))
+		if(exitButton.isReleasedOver(0))
 			Main.close();
 	}
 	public void update() {
@@ -42,7 +44,7 @@ public class StartMenu implements GamePart {
 		startButton.update();
 		
 
-		if(startButton.isClicked(1))
+		if(startButton.isPressed(0))
 			startButton.setTexture(start2);
 		else
 			startButton.setTexture(start1);
@@ -52,7 +54,7 @@ public class StartMenu implements GamePart {
 		exitButton.update();
 		
 
-		if(exitButton.isClicked(1))
+		if(exitButton.isPressed(0))
 			exitButton.setTexture(exit2);
 		else
 			exitButton.setTexture(exit1);
