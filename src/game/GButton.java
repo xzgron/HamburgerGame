@@ -1,7 +1,7 @@
 package game;
 
 import game.GSprite;
-
+import game.input.GMouse;
 
 import org.lwjgl.input.Mouse;
 
@@ -9,44 +9,46 @@ import org.lwjgl.input.Mouse;
 
 public class GButton extends GSprite{
 	
-	
-	boolean[] held = new boolean[3];
-	boolean[] clicked = new boolean[3];
-	
 	public GButton(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		setTexFolder("buttons/");
 	}
-	public boolean rightClicked = false;
+	public GButton(int x, int y, int width, int height, String texture) {
+		super(x, y, width, height, texture);
+	}
+
+	private boolean[] wasHeldIn = new boolean[5];
 	
 	public void update(){
-		rightClicked = isRightClicked();
+		for(int i = 0; i < wasHeldIn.length; i++){
+			if (isClicked(i))  //sann om man klickar på den med knappen
+				wasHeldIn[i] = true;
+			else if(!Mouse.isButtonDown(i)) //falsk om knappen inte är nere
+				wasHeldIn[i] = false;
+		}
+	}
+	public boolean isClicked(int button){
+		return(GMouse.isButtonPressed(button) && isCursorWithin());
+	}
+	public boolean isReleasedOver(int button){
+		return(!Mouse.isButtonDown(0) && isCursorWithin() && wasHeldIn[button]);
+	}
+	public boolean isReleased(int button){
+		return(!Mouse.isButtonDown(0) && wasHeldIn[button]);
+	}	
+	public boolean isReleased(){
+		for(int i = 0; i < 5; i++)
+			if(isReleased(i))
+				return true;
+		return false;
+	}	
+	public boolean isPressedOver(int button){
+		return(Mouse.isButtonDown(button) && isCursorWithin());
+	}
+	public boolean isHeldIn(int button){
+		return(wasHeldIn[button] && Mouse.isButtonDown(button));
 	}
 	
-	public boolean isRightClicked(){
-		if(Mouse.isButtonDown(0) && isCursorOver())
-			return true;
-		else
-			return false;
-	}
-	
-	public boolean wasRightClicked(){
-		return rightClicked;
-	}
-	
-	public boolean isRightReleasedOver(){
-		if(!Mouse.isButtonDown(0) && wasRightClicked() && isCursorOver())
-			return true;
-		else
-			return false;
-	}
-	
-	public boolean isRightReleased(){
-		if(!Mouse.isButtonDown(0) && wasRightClicked())
-			return true;
-		else
-			return false;
-	}
+
 	
 
 	

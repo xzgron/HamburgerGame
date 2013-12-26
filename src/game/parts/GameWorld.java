@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import controllers.DefaultController;
 import controllers.GController;
 import world.WorldObject;
-import worldObjects.*;
-import worldObjects.food.*;
+import world.objects.*;
+import world.objects.food.*;
 import static org.lwjgl.input.Keyboard.*;
 import static game.Game.*;
 public class GameWorld implements GamePart {
@@ -34,6 +34,9 @@ public class GameWorld implements GamePart {
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
 	}
+	
+	
+	///////////MAIN PART////////////////
 	
 	public void handleInput() {
 		if(isKeyDown(KEY_ESCAPE))
@@ -63,6 +66,17 @@ public class GameWorld implements GamePart {
 			if(!go.isSurface())
 				go.render();
 	}
+	
+	
+	
+	////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
 
 	public void addGO(WorldObject GO) {
 		worldObjects.add(GO);

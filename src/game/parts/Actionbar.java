@@ -12,11 +12,12 @@ import game.GText;
 import game.GamePart;
 
 public class Actionbar implements GamePart{
+	GSprite background = new GSprite(Display.getWidth()/2, Display.getHeight()-50 , Display.getWidth(), 100, 0.48f,0.69f,0.71f,0.9f);
 	
 	HealthBar healthBar = new HealthBar(170, Display.getHeight()-75, 300, 20, 1f, 0, 0, 1f, GameWorld.getPlayer());
 	GSprite healthBarBackground = new GSprite(healthBar.getX(), healthBar.getY() , healthBar.getTexWidth() + 6, healthBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
 		
-	GSprite background = new GSprite(Display.getWidth()/2, Display.getHeight()-50 , Display.getWidth(), 100, 0.48f,0.69f,0.71f,0.9f);
+	
 	public void handleInput() {
 		
 	}

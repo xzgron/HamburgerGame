@@ -1,5 +1,8 @@
 package game;
 
+import game.input.GKeyboard;
+import game.input.GMouse;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -75,7 +78,7 @@ public class Main {
 			delta_time = 1/60f;
 			////////////////////////
 			
-			//////////////RÄKNA UT FPS//////////
+			//////////////R€KNA UT FPS//////////
 			deltaTimePerWantedFps += delta_time;
 			if(frames%wanted_fps==0){
 				fps = Math.round(wanted_fps/deltaTimePerWantedFps);
@@ -87,25 +90,23 @@ public class Main {
 			Display.setTitle(title + "   fps: " + fps);
 			/////////////////////////////
 			
-			/////UPPDATERA DISPLAY VARIABLER/////
-			prevDisplayX = Display.getX();
-			prevDisplayY = Display.getY();
-			window_width = Display.getWidth();
-			window_height = Display.getHeight();
-			//////////////////////////////////
-			
 			////HANTERA SPELET////////////
 			handleInput();
 			update();
 			render();
 			///////////////////////////////
+			
+			//////UPPDATERA INPUT CLASSER////
+			GKeyboard.update();
+			GMouse.update();
+			///////////////////
 		}
 	}
 
 	private static void initDisplay() {
 		try {
 			Display.setDisplayMode(new DisplayMode(window_width, window_height));
-			Display.setResizable(true);
+			Display.setResizable(false);
 			Display.create();
 			Display.setVSyncEnabled(true);
 			
@@ -145,7 +146,7 @@ public class Main {
 		Mouse.destroy();
 	}
 	
-	public static float getTime(){
+	public static long getTime(){
 		return time;
 	}
 	
@@ -155,14 +156,5 @@ public class Main {
 	
 	public static void close(){
 		isCloseRequested = true;
-	}
-	static int prevDisplayX;
-	static int prevDisplayY;
-	
-	public static boolean isDisplayRedimensioned(){
-		if(Display.getWidth() != window_width || Display.getHeight() != window_height || prevDisplayX != Display.getX() || prevDisplayY != Display.getY())
-			return true;
-		else
-			return false;
 	}
 }

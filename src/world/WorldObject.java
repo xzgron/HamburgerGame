@@ -8,8 +8,8 @@ import game.GMath;
 import game.GSprite;
 import game.Game;
 import game.Main;
-import worldObjects.food.GFood;
-import worldObjects.food.GFoodShadow;
+import world.objects.food.GFood;
+import world.objects.food.GFoodShadow;
 
 public abstract class WorldObject extends GSprite{
 
@@ -19,9 +19,9 @@ public abstract class WorldObject extends GSprite{
 	
 	private float xSpeed, ySpeed, zSpeed; // anv‰nds som pixel per sek
 	
-	private float radie = -1; // i pixlar -1 betyder annan typ collision
+	private float radie = -1; // i pixlar.  -1 betyder sträck collision istället för cirkel
 	
-	private float weight = -1; // i g kan man v‰l s‰ga -1 betyder orrublig
+	private float weight = -1; // i gram.  -1 betyder orrublig
 	
 	private float footPos;
 	private float headPos;

@@ -3,7 +3,7 @@ import static org.lwjgl.input.Keyboard.*;
 
 import java.util.LinkedList;
 
-import worldObjects.*;
+import world.objects.*;
 
 /*
  * Den här klassen kanske vi aldrig kommer använda men ta inte bort den!

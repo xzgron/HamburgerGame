@@ -6,8 +6,8 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toDegrees;
 import world.WorldObject;
-import worldObjects.food.GFood;
-import worldObjects.food.Hamburger;
+import world.objects.food.GFood;
+import world.objects.food.Hamburger;
 
 public class GMath {
 	public static float getDistance(float x1,float y1,float x2, float y2) {

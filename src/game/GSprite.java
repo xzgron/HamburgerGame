@@ -142,7 +142,7 @@ public class GSprite {
 		return transparency;
 	}
 	
-	public boolean isCursorOver(){
+	public boolean isCursorWithin(){
 		int mx = Mouse.getX();
 		//Detta kan behšva justeras.
 		int my = Display.getHeight()-Mouse.getY();

@@ -27,16 +27,16 @@ public class StartMenu implements GamePart {
 	
 	
 	public void handleInput() {
-		if(continueButton.isRightReleasedOver())
+		if(continueButton.isReleasedOver(1))
 			Game.setGameState(Game.GStates.GAME);
-		if(exitButton.isRightReleasedOver())
+		if(exitButton.isReleasedOver(1))
 			Main.close();
 	}
 	public void update() {
 		//continue button
 		continueButton.update();
 		
-		if(continueButton.isRightClicked())
+		if(continueButton.isClicked(1))
 			continueButton.setColor(255,255,255,0.7f);
 		else
 			continueButton.setColor(255,255,255,1);
@@ -45,7 +45,7 @@ public class StartMenu implements GamePart {
 		//exit button
 		exitButton.update();
 		
-		if(exitButton.isRightClicked())
+		if(exitButton.isClicked(1))
 			exitButton.setColor(255,255,255,0.7f);
 		else
 			exitButton.setColor(255,255,255,1);
