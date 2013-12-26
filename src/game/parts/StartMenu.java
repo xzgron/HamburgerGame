@@ -2,6 +2,7 @@ package game.parts;
 
 import game.GButton;
 import game.GSprite;
+import game.GTexture;
 import game.Game;
 import game.GamePart;
 import game.Main;
@@ -9,46 +10,52 @@ import game.Main;
 import java.util.LinkedList;
 
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.opengl.Texture;
 
 
 public class StartMenu implements GamePart {
 	
-	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, 600, 480, 0.48f,0.69f,0.71f,0.9f);
+	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, Display.getWidth(), Display.getHeight(), 0.48f,0.69f,0.71f,0.9f);
 	
-	GButton continueButton;
+	GButton startButton;
 	GButton exitButton;
-	
+	Texture start1 = GTexture.getTexture("buttons/start1");
+	Texture start2 = GTexture.getTexture("buttons/start2");
+	Texture exit1 = GTexture.getTexture("buttons/exit1");
+	Texture exit2 = GTexture.getTexture("buttons/exit2");
 	public StartMenu(){
-		continueButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
-		continueButton.setTexture("continueButton");
+		startButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
+		startButton.setTexture(start1);
 		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
-		exitButton.setTexture("exitButton");
+		exitButton.setTexture(exit1);
 	}
 	
 	
 	public void handleInput() {
-		if(continueButton.isReleasedOver(1))
+		if(startButton.isReleasedOver(1))
 			Game.setGameState(Game.GStates.GAME);
 		if(exitButton.isReleasedOver(1))
 			Main.close();
 	}
 	public void update() {
-		//continue button
-		continueButton.update();
+		//start button
+		startButton.update();
 		
-		if(continueButton.isClicked(1))
-			continueButton.setColor(255,255,255,0.7f);
+
+		if(startButton.isClicked(1))
+			startButton.setTexture(start2);
 		else
-			continueButton.setColor(255,255,255,1);
+			startButton.setTexture(start1);
 		///////////////////
 		
 		//exit button
 		exitButton.update();
 		
+
 		if(exitButton.isClicked(1))
-			exitButton.setColor(255,255,255,0.7f);
+			exitButton.setTexture(exit2);
 		else
-			exitButton.setColor(255,255,255,1);
+			exitButton.setTexture(exit1);
 		
 		////////////////
 
@@ -57,7 +64,7 @@ public class StartMenu implements GamePart {
 
 	public void render() {
 		background.render();
-		continueButton.render();
+		startButton.render();
 		exitButton.render();
 	}
 
