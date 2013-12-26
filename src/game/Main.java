@@ -21,7 +21,7 @@ public class Main {
 
 	static int window_height = 600;
 	static int window_width = 900;
-
+	
 	static int fps;
 	static int wanted_fps = 60;
 	
