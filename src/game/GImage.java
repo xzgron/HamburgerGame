@@ -38,7 +38,7 @@ public class GImage {
 				glTexCoord2f(1, 0);
 				glVertex2f(w / 2, -h / 2);
 
-				
+				glColor4f(r*0.7f, g*0.7f, b*0.7f, t);
 				glTexCoord2f(1, 1);
 				glVertex2f(w / 2, h / 2);
 				

@@ -53,7 +53,7 @@ public class HealthBar extends GSprite {
 				glTexCoord2f(owner.getHealth()/owner.getMaxHealth(), 0);
 				glVertex2f(w / 2, -h / 2);
 
-				
+				glColor4f(r*0.7f, g*0.7f, b*0.7f, t);
 				glTexCoord2f(owner.getHealth()/owner.getMaxHealth(), 1);
 				glVertex2f(w / 2, h / 2);
 				
