@@ -13,7 +13,7 @@ public class HostileController extends GController {
 	GTimer waitTimer = new GTimer(0.3f);
 
 	public void handle(GFood food) {
-		if (!food.justLanded()) {
+		if (!food.justLanded()|| waitTimer.getExceededTime() > 3) {
 			waitTimer.reset();
 		}
 		
@@ -21,7 +21,7 @@ public class HostileController extends GController {
 			food.stop();
 
 		if (waitTimer.hasExceeded()) {
-			if (GMath.getDistance(GameWorld.getPlayer(), food) < 150) {
+			if (GMath.getDistance(GameWorld.getPlayer(), food) < 120) {
 				if (!food.isInAir()) {
 					food.setSpeedByVector(300, GameWorld.getPlayer().getX() - food.getX(),GameWorld.getPlayer().getY() - food.getY());
 					food.setZSpeed(170);

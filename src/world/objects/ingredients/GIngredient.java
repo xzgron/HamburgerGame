@@ -13,7 +13,7 @@ public abstract class GIngredient extends WorldObject{
 	
 	public GIngredient(float xPos, float yPos, float texSize, float radius, float footPos, float headPos, int weight, int durability) {
 		super(xPos,  yPos,  texSize,  footPos,  headPos);
-		setTexFolder("food/ingredients/");
+		setTexFolder("ingredients/");
 		
 		setWeight(weight);
 		setRadius(radius);

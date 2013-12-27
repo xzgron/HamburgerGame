@@ -60,7 +60,7 @@ public class GPhysics {
 		if(go1.getFootZPos() >= go2.getHeadZPos() || go2.getFootZPos() >= go1.getHeadZPos()) //om object 1 Šr šver eller under object 2
 			return false;
 	
-		/*////GO1 landar på GO2///
+		////GO1 landar på GO2///
 		if(go1.getFootZPrev() > go2.getHeadZPos() || go2.getHeadZPrev() < go1.getFootZPos()){
 			System.out.println("landed on");
 			go1.setFootZPos(go2.getHeadZPos());
@@ -79,7 +79,7 @@ public class GPhysics {
 			return true;
 		}
 
-		*/
+		
 		///SIDCOLLISION
 		float ww = Math.min(go1.getWeight(),go2.getWeight())/Math.max(go1.getWeight(),go2.getWeight()); // vad vŠger lŠttast i fšrhŒllande till tyngst
 		
@@ -120,6 +120,40 @@ public class GPhysics {
 		return true;
 		}
 
+	
+	public static boolean objectsOverlapp(WorldObject go1, WorldObject go2){
+		
+		if (go1.getRadius() == -1 || go2.getRadius() == -1)
+			return false;
+		//KÖR STRÄCK COLLISION AND SHIT////
+		
+		
+		float dist = GMath.getDistance(go1.xPos, go1.getGroundYPos(),go2.xPos,go2.getGroundYPos());
+		
+		if(dist >= go1.getRadius()+go2.getRadius()) //utanfšr varandras max radie = snabbt sŠtt att sŠga ingen collision.
+			return false;
+
+		float dx = go1.getX() - go2.getX(); //frŒn go2 till go1
+		float dy = go1.getGroundYPos() - go2.getGroundYPos();
+		
+		float ovalDistance = GMath.getDistance(0,0,dx,dy*2);
+		
+		float x1 = dx/ovalDistance * go1.getRadius();
+		float y1 = dy/ovalDistance * go1.getRadius();
+		float r1 = GMath.getDistance(0,0,x1,y1);
+		
+		float x2 = dx/ovalDistance * go2.getRadius();
+		float y2 = dy/ovalDistance * go2.getRadius();
+		float r2 = GMath.getDistance(0,0,x2,y2);
+		
+		float totRadie = r1+r2; //max avstŒnd mellan object 1 och 2 i fšr hŒllande till vinkeln mellan dem
+		
+		if(dist >= totRadie) // objecten stŒr precis bredvid varann eller fšrlŒngt bort fšr att kollidera
+			return false ;
+		
+		return true;
+	}
+	
 	public static boolean isPosWithinTex(float x, float y, GSprite go){
 		if(x >= go.getX() - go.getTexWidth()/2 &&  x <= go.getX() + go.getTexWidth()/2 && 
 				y >= go.getY() - go.getTexHeight()/2 &&  y <= go.getY() + go.getTexHeight()/2)

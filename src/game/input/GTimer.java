@@ -33,6 +33,11 @@ public class GTimer {
 		return (Main.getTime() - startTime) / 1000000000.0f;
 	}
 	
+	public float getExceededTime(){
+		return (Main.getTime() - startTime -length)/1000000000.0f;
+		
+	}
+	
 	public float getLength(){
 		return length/1000000000.0f;
 	}

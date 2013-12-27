@@ -1,10 +1,15 @@
 package game.parts;
 
+import game.GImage;
 import game.GPhysics;
+import game.GTexture;
 import game.GamePart;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import org.lwjgl.opengl.Display;
+import org.newdawn.slick.opengl.Texture;
 
 import controllers.DefaultController;
 import controllers.GController;
@@ -28,7 +33,7 @@ public class GameWorld implements GamePart {
 		addGO(new Tree(350, 80, 400));
 		addGO(new Tree(50, 170, 500));
 		
-		for (int i = 0; i < 400; i++)
+		for (int i = 0; i < 4; i++)
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
 	}
@@ -60,6 +65,7 @@ public class GameWorld implements GamePart {
 	}
 
 	public void render() {
+		renderGrass();
 		sortObjects();
 		for (WorldObject go : worldObjects)
 			if(go.isSurface())
@@ -73,12 +79,8 @@ public class GameWorld implements GamePart {
 	
 	
 	////////////////////////////////////////////////
-	
-	
-	
-	
-	
-	
+
+	/////////////HANTERA OBJECT/////////////
 	
 
 	public void addGO(WorldObject GO) {
@@ -89,7 +91,7 @@ public class GameWorld implements GamePart {
 		worldObjects.remove(GO);
 	}
 
-
+//////////////////////////////////
 
 	private void handleCollision() {
 		for (int i = 0; i < worldObjects.size(); i++) 
@@ -105,13 +107,22 @@ public class GameWorld implements GamePart {
 			moved = false;
 			for (int i = 0; i < worldObjects.size() - 1; i++) {
 				if (worldObjects.get(i).getGroundYPos() > worldObjects.get(i + 1).getGroundYPos()) {
-					temp = worldObjects.get(i);
+					temp = worldObjects.get(i); // object i flyttas innan i + 1
 					worldObjects.set(i, worldObjects.get(i + 1));
 					worldObjects.set(i + 1, temp);
 					moved = true;
 				}
 			}
 		}
+		//////////OBJECT …VER ANDRA SKA RENDRAS EFTER/////////FUNKAR F…R TILLF€LLET..
+		for (int i = 0; i < worldObjects.size() - 1; i++) {
+			if (GPhysics.objectsOverlapp(worldObjects.get(i), worldObjects.get(i + 1)) && worldObjects.get(i).getFootZPos() >= worldObjects.get(i+1).getHeadZPos()) {
+				temp = worldObjects.get(i); // object i flyttas innan i + 1
+				worldObjects.set(i, worldObjects.get(i + 1));
+				worldObjects.set(i + 1, temp);
+			}
+		}
+		
 		////G…RA OBJECT FRAMF…R PLAYER GENOMSKINLIGA///
 		for (WorldObject go : worldObjects) {
 			if (go != player && go.getGroundYPos() > player.getGroundYPos() && GPhysics.isPosWithinTex(player.getX(), player.getY() - player.getFootZPos(), go) && go.getFootZPos() < player.getHeadZPos() && go.getHeight() > player.getHeight()) {
@@ -122,6 +133,24 @@ public class GameWorld implements GamePart {
 		}
 	}
 
+	Texture grass = GTexture.getTexture("nature/grass");
+	
+	public void renderGrass(){
+		//100x100
+		float grassSize = 100;
+		
+		float startX = (player.getX() - Display.getWidth()/2);
+		startX = startX-startX%grassSize-grassSize/2;
+		//System.out.println(startX);
+		float startY = (player.getY() - Display.getHeight()/2);
+		startY = startY-startY%grassSize-grassSize/2;
+		
+		for(int i = (int) startX; i-grassSize/2 <= Display.getWidth()/2+player.getX(); i += grassSize)
+			for(int j = (int) startY; j-grassSize/2 <= Display.getHeight()/2+player.getY(); j += grassSize)
+				GImage.draw(grass, i, j, grassSize, grassSize);
+	}
+	
+	
 	public static float getGravity() {
 		return gravity;
 	}

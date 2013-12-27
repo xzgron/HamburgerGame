@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 
 import world.HealthBar;
+import world.WorldObject;
 import world.objects.ingredients.*;
 import game.GSprite;
 import game.GPhysics;
@@ -28,14 +29,11 @@ public class Hamburger extends GFood {
 		createShadow();
 		
 		setWalkingSpeed(200);
-		setJumpingSpeed(300);
+		setJumpingSpeed(400);
 	}
 
 	public void update() {
 		super.update();
-		//for(GIngredient gi: ingredients) //rensa fšrburkade ingredienser
-			//if(gi.getDurability() == 0)
-				//ingredients.remove(gi);
 	}
 
 	public void render() {
@@ -200,5 +198,16 @@ public class Hamburger extends GFood {
 	public float getTexWidth(){
 		return getRadius()*2;
 		
+	}
+	
+	///////////////////////////
+	
+	///////////////////COMBAT/////////////////
+	
+	public void landedOn(WorldObject go){
+		if(go instanceof GFood){
+			jump();
+			((GFood)go).damage(30);
+		}
 	}
 }
