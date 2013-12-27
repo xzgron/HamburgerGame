@@ -3,7 +3,7 @@ package world.objects.ingredients;
 public class Sallad extends GIngredient implements Activateable{
 
 	public Sallad(float x, float y) {
-		super(x, y, 120, 5, 0.45f, 0.55f,40);
+		super(x, y, 120, 50, 0.45f, 0.55f,10, -1);
 		setTexture("sallad");
 	}
 

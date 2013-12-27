@@ -20,8 +20,7 @@ public class HealthBar extends GSprite {
 	}
 
 	
-	public HealthBar(float xPos, float yPos, float texWidth, float texHeight,
-			float r, float g, float b, float t, GFood parent) {
+	public HealthBar(float xPos, float yPos, float texWidth, float texHeight,float r, float g, float b, float t, GFood parent) {
 		super(xPos, yPos, texWidth, texHeight, r, g, b, t);
 		this.owner = parent;
 	}
@@ -51,11 +50,11 @@ public class HealthBar extends GSprite {
 				glVertex2f(-w / 2, -h / 2);
 
 				glTexCoord2f(owner.getHealth()/owner.getMaxHealth(), 0);
-				glVertex2f(w / 2, -h / 2);
+				glVertex2f(-(w / 2 - w * owner.getHealth()/owner.getMaxHealth()), -h / 2);
 
 				glColor4f(r*0.7f, g*0.7f, b*0.7f, t);
 				glTexCoord2f(owner.getHealth()/owner.getMaxHealth(), 1);
-				glVertex2f(w / 2, h / 2);
+				glVertex2f(-(w / 2 - w * owner.getHealth()/owner.getMaxHealth()), h / 2);
 				
 
 				glTexCoord2f(0, 1);

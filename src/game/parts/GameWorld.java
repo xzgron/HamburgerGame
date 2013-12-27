@@ -28,7 +28,7 @@ public class GameWorld implements GamePart {
 		addGO(new Tree(350, 80, 400));
 		addGO(new Tree(50, 170, 500));
 		
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 400; i++)
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
 	}
@@ -49,11 +49,14 @@ public class GameWorld implements GamePart {
 	}
 	
 	public void update() {
+		for	(WorldObject go : worldObjects){ //rensa dštt
+			if(go.getClass().isAssignableFrom(GFood.class) && ((GFood) go).isDead())
+				removeGO(go);
+			}
+		
 		for (WorldObject go : worldObjects)
 			go.update();
-		
 		handleCollision();
-		
 	}
 
 	public void render() {
@@ -89,20 +92,10 @@ public class GameWorld implements GamePart {
 
 
 	private void handleCollision() {
-		boolean collide = true;
-		while (collide) {
-			collide = false;
-			for (WorldObject go1 : worldObjects) {
-				for (WorldObject go2 : worldObjects) {
-					if (go2 != go1){
-						if(GPhysics.handleCollision(go1, go2));
-							//collide = true;
-						
-					}
-				}
-			}		
+		for (int i = 0; i < worldObjects.size(); i++) 
+			for (int j = i +1 ; j < worldObjects.size(); j++)
+				GPhysics.handleCollision(worldObjects.get(i), worldObjects.get(j));
 		}
-	}
 
 	private void sortObjects() {
 		boolean moved = true;

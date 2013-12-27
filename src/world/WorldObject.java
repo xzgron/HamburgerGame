@@ -13,22 +13,22 @@ import world.objects.food.GFoodShadow;
 
 public abstract class WorldObject extends GSprite{
 
-	//private float xPrev, yPrev, zPrev;
+	private float xPrev, yPrev, zPrev;
 	
 	private float zPos;// en extra y variabel för texture som inte påväerkar objektets position det vill säga hur högt objectet befinner sig.
 	
 	private float xSpeed, ySpeed, zSpeed; // används som pixel per sek
 	
-	private float radie = -1; // i pixlar.  -1 betyder strŠck collision istŠllet fšr cirkel
+	private float radius = -1; // i pixlar.  -1 betyder strŠck collision istŠllet fšr cirkel
 	
-	private float weight = -1; // i gram.  -1 betyder orrublig
+	private int weight = -1; // i gram.  -1 betyder orrublig
 	
-	private float footPos;
-	private float headPos;
+	private float footPos = 0;
+	private float headPos = 1;
 	
-	private boolean surface = false;
+	private boolean surface = false; ///////om nŒgot ska ligga pŒ marken
 	
-	private GFoodShadow shadow = null;
+	private GFoodShadow shadow = null; ///////skugga??
 	
 	public WorldObject(float xPos, float yPos, float texSize, float footPos, float headPos) {
 		super(xPos, yPos, texSize, texSize);
@@ -37,44 +37,54 @@ public abstract class WorldObject extends GSprite{
 		this.footPos = footPos;
 	}
 	
-	public abstract void update();
+	public WorldObject(float xPos, float yPos, float texWidth, float texHeight, float footPos, float headPos) {
+		super(xPos, yPos, texWidth, texHeight);
+
+		this.headPos = headPos;
+		this.footPos = footPos;
+	}
+	
+	
+	///////////////MAIN STUFF//////////
+	public void update(){
+	}
 	
 	public void render(){
 		renderShadow();
 		GImage.draw(texture, xPos, yPos - zPos, texWidth, texHeight, red, green, blue, transparency);	
 	}
-
+	//////////////////////////////
 
 	
 	/////////////////////////////////////COLLISION////////////////////////////////////
 	
-	public void setRadie(float f){
-		radie = f;
+	public void setRadius(float f){
+		radius = f;
 	}
 	
-	public float getRadie(){
-		return radie;
+	public float getRadius(){
+		return radius;
 	}
 	
-	public void setWeight(float f){
-		weight = f;
+	public void setWeight(int i){
+		weight = i;
 	}
 	
-	public float getWeight(){
+	public int getWeight(){
 		return weight;
 	}
 	
 	
-	
+	////////////////////////////////////////////
 
 	
 	
 	/////////////////////////////HEADS AND FOOTS////////////////////////////
 	
-	// huvudet bestämmer procentuellt var på bilden som går i taget...?
 	
+	///////////HEAD/////////
 	public void setHeadPosVar(float f){
-			headPos = f;
+		headPos = f;
 	}
 	
 	public float getHeadPosVar(){
@@ -88,12 +98,12 @@ public abstract class WorldObject extends GSprite{
 		return(zPos - texHeight/2 + texHeight*headPos);
 	}
 	
-	public float getPrevHeadZPos() {
-		return(getPrevZPos() - texHeight/2 + texHeight*headPos);
+	public float getHeadZPrev() {
+		return(getZPrev() - texHeight/2 + texHeight*headPos);
 	}
+	//////////////////////////////////////////
 	
-	
-	// foten bestämmer procentuellt var på bilden som går i marken
+	///////////FOOT/////////////////////
 	public void setFootPosVar(float f){
 		footPos = f;
 	}
@@ -110,18 +120,15 @@ public abstract class WorldObject extends GSprite{
 		return(zPos - texHeight/2 + texHeight*footPos);
 	}
 	
-	public float getFootYPos(){
-		return(yPos - getFootZPos());
+	public float getFootZPrev() {
+		return(getZPrev() - texHeight/2 + texHeight*footPos);
 	}
 	
-	
-	public float getPrevFootZPos() {
-		return(getPrevZPos() - texHeight/2 + texHeight*footPos);
-	}
-	
+	////////////////////////////////////////////
 
 	
 	//grounden är kort sagt gubben yPos värde för footen när objectet står i marken
+	///////////////GROUNDPOSITION//////////////////////////
 	
 	public void setGroundPos(float y){
 		yPos = y - texHeight/2 + texHeight*footPos;
@@ -131,27 +138,37 @@ public abstract class WorldObject extends GSprite{
 		return(yPos + texHeight/2 - texHeight*getFootPosVar());
 	}
 	
-	public float getPrevGroundYPos() {
-		return(getPrevYPos() + texHeight/2 - texHeight*getFootPosVar());
+	public float getGroundYPrev() {
+		return(getYPrev() + texHeight/2 - texHeight*getFootPosVar());
 	}
 	
+	/////////////////////////////////////////
 	// höjden är höjden i z mellan huvud och fot
 	
+	
+	/////////////HEIGHT//////////////////
 	public float getHeight(){
 		return getHeadZPos() - getFootZPos() ;
 		
 	}
-	
-	public float getOrigoAndFootDiff(){
-		return texHeight/2-texHeight*getFootPosVar();
-	}
+
+	////////////////////////////////////////////
 	
 	
 	///////////////////////////////COORDINATER//////////////////////////////////
+	
+	//////////SPEED///////////////
 	public void setSpeedByAngle(float amt, float angle){
 		float xs = (float) (amt * cos(toRadians(angle)));
 		float ys = (float) (amt * sin(toRadians(angle)));
 		setSpeed(xs,ys);
+	}
+	
+	public void setSpeedByVector(float amt, float xDirection, float yDirection){
+		float directionLength = GMath.getDistance(0, 0, xDirection, yDirection);
+		xDirection = xDirection/directionLength*amt;
+		yDirection = yDirection/directionLength*amt;
+		setSpeed(xDirection,yDirection);
 	}
 	
 	public void setSpeed(float x, float y, float z) {
@@ -176,29 +193,16 @@ public abstract class WorldObject extends GSprite{
 		ySpeed = 0;
 		
 	}
-
+////////////////////////////////////
+	
 	public void setPosition(float x, float y, float z){
 		xPos = x;
 		yPos = y;
 		zPos = z;
 	}
 	
-	public float getPrevXPos(){
-		return xPos-xSpeed*Main.getDelta();
-	}
-	
-	public float getPrevYPos(){
-		return yPos-ySpeed*Main.getDelta();
-	}
-	
-	public float getPrevZPos(){
-		return zPos-zSpeed*Main.getDelta();
-	}
-	
-	public void landedOn(WorldObject go){}
-	
-	/*
-	
+
+	/////////////PREVIOUS POSITION///////////
 	public float getXPrev(){
 		return xPrev;
 	}
@@ -212,12 +216,13 @@ public abstract class WorldObject extends GSprite{
 	
 	
 	public void updatePrevPos(){
-		
 		xPrev = xPos;
 		yPrev = yPos;
 		zPrev = yPos;
 		
-	}*/
+	}
+	
+	////////////////////////////
 	
 	public float getXSpeed(){
 		return xSpeed;
@@ -231,7 +236,7 @@ public abstract class WorldObject extends GSprite{
 	}
 	
 	public float getXYSpeed(){
-		return GMath.getDistance(0,xSpeed,0,ySpeed);
+		return GMath.getDistance(0,0,xSpeed,ySpeed);
 	}
 	
 	
@@ -263,17 +268,17 @@ public abstract class WorldObject extends GSprite{
 	}
 	
 
-	
+	//////////////////////////////
 	
 	//////////////////////////////////COMMAND HELP//////////////////////
 	
 	public boolean justLanded(){
-		return(getPrevZPos() > 0 && getZ() == 0);
+		return(getZPrev() > 0 && getZ() == 0);
 
 	}
 	
 	public boolean justJumped(){
-		return (getPrevZPos() == 0 && getZ() > 0);
+		return (getZPrev() == 0 && getZ() > 0);
 
 	}
 
@@ -307,7 +312,7 @@ public abstract class WorldObject extends GSprite{
 			shadow.render();
 	}
 	
-///////////isOnGround/////////
+///////////SURFACE/////////
 	
 	public boolean isSurface(){
 		return surface;
@@ -316,4 +321,20 @@ public abstract class WorldObject extends GSprite{
 	public void setIfSurface(boolean b){
 		surface = b;
 	}
+	
+////////////////////////////
+	
+	
+///////////////COLLISION//////////////////
+	
+	public void landedOn(WorldObject go){
+		
+	}
+	
+	public void collidedWith(WorldObject go){
+		
+	}
+	
+/////////////////////////////////////////
+	
 }

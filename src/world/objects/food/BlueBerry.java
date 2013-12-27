@@ -1,23 +1,43 @@
 package world.objects.food;
 
+import world.HealthBar;
 import world.WorldObject;
 import controllers.HostileController;
-import game.GPhysics;
-import game.Game;
+import game.*;
 import game.parts.GameWorld;
 
-public class BlueBerry extends GFood{
+public class BlueBerry extends GFood {
+
+	HealthBar healthBar = new HealthBar(0, -30, 50, 7, 0, 1, 0, 1, this);
 
 	public BlueBerry(float xPos, float yPos) {
-		super(xPos, yPos, 40, 10,0.13f,0.73f, 50);
+		super(xPos, yPos, 40, 0.13f, 0.73f, 10, 50);
+		healthBar.setFollow(true);
 		createShadow();
-		setTexture("Blueberrys/B" + ((int)(Math.random()*4)));
-		setWalkingSpeed(40);
+		setTexture("Blueberrys/B" + ((int) (Math.random() * 4)));
 		setController(new HostileController());
-		setRadie(19);
-		
+
+		setRadius(19);
+
+		setWalkingSpeed(80);
+		setJumpingSpeed(120);
+
 	}
-	
-	
+
+	public void render() {
+		super.render();
+		healthBar.render();
+	}
+
+	public void collidedWith(WorldObject go) {
+		if (go == GameWorld.getPlayer()){
+			float dmg = GMath.getDistance(0,0,getXSpeed()+go.getXSpeed(),getYSpeed()+ go.getYSpeed())/200;
+			if(dmg > 0)
+				((GFood) go).damage((int) dmg);
+		}
+		jump();
+		setSpeedByVector(200, getX() - go.getX(), getY() - go.getY());
+		//addSpeed(go.getXSpeed(), go.getYSpeed(), 0);
+	}
 
 }

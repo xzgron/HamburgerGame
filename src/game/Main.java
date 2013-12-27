@@ -16,20 +16,20 @@ import static org.lwjgl.opengl.GL11.*;
 public class Main {
 
 	private static boolean isCloseRequested = false;
-	
+
 	static String title = "Game";
 
 	static int window_height = 600;
 	static int window_width = 900;
-	
+
 	static int fps;
 	static int wanted_fps = 60;
-	
+
 	static long time = System.nanoTime();
 	static float delta_time;
-	
+
 	public static Game game;
-	
+
 	public static void main(String[] arg) throws Exception {
 		LibraryLoader.loadNativeLibraries();
 
@@ -67,41 +67,43 @@ public class Main {
 	private static void gameLoop() {
 		long frames = 0;
 		float deltaTimePerWantedFps = 0;
+		float unprossesedSeconds = 0;
 
 		while (!Display.isCloseRequested() && !isCloseRequested) {
 			frames++;
-			
-			///////////////UPPDATERA TID///////////
+
+			// /////////////UPPDATERA TID///////////
 			long newTime = System.nanoTime();
-			delta_time = (newTime - time)/1000000000.0f;
+			delta_time = (newTime - time) / 1000000000.0f;
+			unprossesedSeconds += delta_time;
 			time = newTime;
-			delta_time = 1/60f;
-			////////////////////////
-			
-			//////////////R€KNA UT FPS//////////
+			// //////////////////////
+
+			// ////////////R€KNA UT FPS//////////
 			deltaTimePerWantedFps += delta_time;
-			if(frames%wanted_fps==0){
-				fps = Math.round(wanted_fps/deltaTimePerWantedFps);
+			if (frames % wanted_fps == 0) {
+				fps = Math.round(wanted_fps / deltaTimePerWantedFps);
 				deltaTimePerWantedFps = 0;
 			}
-			////////////////////////////
-			
-			/////UPPDATERA TITEL/////////
+			// //////////////////////////
+
+			// ///UPPDATERA TITEL/////////
 			Display.setTitle(title + "   fps: " + fps);
-			/////////////////////////////
+			// ///////////////////////////
+
+			// //HANTERA SPELET////////////
+			while (unprossesedSeconds >= getDelta()) {
+				handleInput();
+				update();
+				// ////UPPDATERA INPUT CLASSER////
+				GKeyboard.update();
+				GMouse.update();
+				unprossesedSeconds -= getDelta();
+			}
+			// /////////////////
 			
-			
-	
-			
-			////HANTERA SPELET////////////
-			handleInput();
-			update();
-			//////UPPDATERA INPUT CLASSER////
-			GKeyboard.update();
-			GMouse.update();
-			///////////////////
 			render();
-			///////////////////////////////
+			// /////////////////////////////
 
 		}
 	}
@@ -112,12 +114,12 @@ public class Main {
 			Display.setResizable(false);
 			Display.create();
 			Display.setVSyncEnabled(true);
-			
+
 		} catch (LWJGLException e) {
 			Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
-	
+
 	private static void initInputTools() {
 		try {
 			Keyboard.create();
@@ -125,19 +127,21 @@ public class Main {
 		} catch (LWJGLException e) {
 			Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
 		}
-		
+
 	}
 
 	private static void initGL() {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0, Display.getWidth(), Display.getHeight(),0, -1, 1);
+		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, -1, 1);
 		glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_BLEND);
 		glEnable(GL_TEXTURE_2D);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		/*glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		glColor4f(1,1,1,1);*/
+		/*
+		 * glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		 * glColor4f(1,1,1,1);
+		 */
 		glClearColor(0, 0, 0, 1);
 		glDisable(GL_DEPTH_TEST);
 	}
@@ -147,16 +151,16 @@ public class Main {
 		Keyboard.destroy();
 		Mouse.destroy();
 	}
-	
-	public static long getTime(){
+
+	public static long getTime() {
 		return time;
 	}
-	
-	public static float getDelta(){
-		return delta_time;
+
+	public static float getDelta() {
+		return 1 / 60f;
 	}
-	
-	public static void close(){
+
+	public static void close() {
 		isCloseRequested = true;
 	}
 }

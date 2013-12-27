@@ -7,7 +7,7 @@ public class GTimer {
 	long startTime;
 	long length;
 	
-	public GTimer(float length){
+	public GTimer(float length){ //length i sekunder
 		startTime = Main.getTime();
 		
 		this.length = (long) (length * 1000000000.0); 
@@ -17,11 +17,11 @@ public class GTimer {
 		return (Main.getTime() >= startTime + length); 
 	}
 	
-	public void restart(){
+	public void reset(){
 		startTime = Main.getTime();
 	}
 	
-	public void restartFromEnd(){
+	public void resetFromEnd(){
 		startTime += length; 
 	}
 	

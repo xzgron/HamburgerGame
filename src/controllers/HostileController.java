@@ -10,43 +10,28 @@ import world.objects.food.GFood;
 
 public class HostileController extends GController {
 
-	float a = 0;
-	float a2 = 0;
-	float time = 0.5f;
+	GTimer waitTimer = new GTimer(0.3f);
 
-	GTimer timer = new GTimer(time);
-	
 	public void handle(GFood food) {
-		
-		if (timer.hasExceeded()) {
-			if (!food.isInAir()) {
-				float ra = (float) (Math.random()*100 +200);
-				food.setZSpeed(ra);
-				food.setWalkingSpeed(ra/4);
-				a2 = -a2;
-				a = GMath.getAngle(food,GameWorld.getPlayer()) + a2;
-				food.setSpeedByAngle(food.getWalkingSpeed(), a);
-			}		
+		if (!food.justLanded()) {
+			waitTimer.reset();
 		}
-		else
+		
+		if(!food.isInAir())
 			food.stop();
-		
 
- 
-
-
-		if (food.isWalking()) {
-			if (food.getZ() == 0) {
-				a2 = -a2;
-				a = GMath.getAngle(food.getX(), food.getY(), GameWorld.getPlayer().getX(),
-						GameWorld.getPlayer().getY()) + a2;
+		if (waitTimer.hasExceeded()) {
+			if (GMath.getDistance(GameWorld.getPlayer(), food) < 150) {
+				if (!food.isInAir()) {
+					food.setSpeedByVector(300, GameWorld.getPlayer().getX() - food.getX(),GameWorld.getPlayer().getY() - food.getY());
+					food.setZSpeed(170);
+				}
+			} else {
+				food.tryGroundWalk(GameWorld.getPlayer().getX() - food.getX(), GameWorld.getPlayer().getY() - food.getY());
+				food.tryJump();
 			}
-			food.moveByAngle(food.getWalkingSpeed() * Main.getDelta(), a);
 		}
-		
-		
-		
-		
+
 	}
 
 }

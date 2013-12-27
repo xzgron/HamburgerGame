@@ -11,13 +11,21 @@ public class DefaultController extends GController {
 	boolean jumping = false;
 	
 	public void handle(GFood food) {
+		float x = 0;
+		float y = 0;
+		if (isKeyDown(KEY_W) || isKeyDown(KEY_UP))
+			y -= 1;
+		if (isKeyDown(KEY_D) || isKeyDown(KEY_RIGHT))
+			x += 1;
+		if (isKeyDown(KEY_S) || isKeyDown(KEY_DOWN))
+			y += 1;
+		if (isKeyDown(KEY_A) || isKeyDown(KEY_LEFT))
+			x -= 1;
 		
-		float keyAngle = getKeyAngle();
-		if (keyAngle != -1) {
-			food.setSpeedByAngle(food.getWalkingSpeed(),
-					keyAngle);
-		} else
+		if(x == 0 && y == 0)
 			food.stop();
+		else
+			food.walk(x,y);
 		
 		if(!food.isInAir())
 			jumping = false;
@@ -29,7 +37,7 @@ public class DefaultController extends GController {
 		
 		if (isKeyDown(KEY_SPACE) && !jumping) {
 			jumping = true;
-			food.setZSpeed(300);
+			food.jump();
 		}
 
 		/*
@@ -74,24 +82,6 @@ public class DefaultController extends GController {
 		 * (),Mouse.getY()); int rotationState = (int)((a+45/2)/360*8);
 		 * getReciever().setRotationState(rotationState); }
 		 */
-	}
-
-	private float getKeyAngle() {
-		float x = 0;
-		float y = 0;
-		if (isKeyDown(KEY_W) || isKeyDown(KEY_UP))
-			y -= 1;
-		if (isKeyDown(KEY_D) || isKeyDown(KEY_RIGHT))
-			x += 1;
-		if (isKeyDown(KEY_S) || isKeyDown(KEY_DOWN))
-			y += 1;
-		if (isKeyDown(KEY_A) || isKeyDown(KEY_LEFT))
-			x -= 1;
-
-		if (x == 0 && y == 0)
-			return -1;
-		else
-			return getAngle(0, 0, x, y);
 	}
 
 }

@@ -1,9 +1,9 @@
 package world.objects.ingredients;
 
-public class HamburgerBreadUnderPart extends GIngredient{
+public class HamburgerBreadUnderPart extends GIngredient implements Armor{
 
 	public HamburgerBreadUnderPart(float x, float y) {
-		super(x, y, 100, 20, 0.415f, 0.585f,100);
+		super(x, y, 103, 49, 0.415f, 0.585f,30,90);
 		setTexture("hamburgerBreadUnderPart");
 	}
 

@@ -78,6 +78,13 @@ public class GSprite {
 		float dy = (float) (amt * sin(toRadians(angle)));
 		move(dx,dy);
 	}
+	
+	public void moveByVector(float amt, float xDirection, float yDirection){
+		float directionLength = GMath.getDistance(0, 0, xDirection, yDirection);
+		xDirection = xDirection/directionLength*amt;
+		yDirection = yDirection/directionLength*amt;
+		move(xDirection,yDirection);
+	}
 
 	public float getX() {
 		return xPos;
