@@ -17,15 +17,15 @@ public class GameMenu implements GamePart {
 	
 	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, 600, 480, "buttons/area");
 	
-	GButton startButton;
+	GButton continueButton;
 	GButton exitButton;
 	Texture exit1 = GTexture.getTexture("buttons/exit1");
 	Texture exit2 = GTexture.getTexture("buttons/exit2");
-	Texture start1 = GTexture.getTexture("buttons/start1");
-	Texture start2 = GTexture.getTexture("buttons/start2");
+	Texture continue1 = GTexture.getTexture("buttons/continue1");
+	Texture continue2 = GTexture.getTexture("buttons/continue2");
 	public GameMenu(){
-		startButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
-		startButton.setTexture(start1);
+		continueButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
+		continueButton.setTexture(continue1);
 		
 		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
 		exitButton.setTexture(exit1);
@@ -33,19 +33,19 @@ public class GameMenu implements GamePart {
 	
 	
 	public void handleInput() {
-		if(startButton.isReleasedOver(2))
+		if(continueButton.isReleasedOver(2))
 			Game.setGameState(Game.GStates.GAME);
 		if(exitButton.isReleasedOver(2))
 			Main.close();
 	}
 	public void update() {
 		//start button
-		startButton.update();
+		continueButton.update();
 		
-		if(startButton.isClicked(2))
-			startButton.setTexture(start2);
+		if(continueButton.isClicked(2))
+			continueButton.setTexture(continue2);
 		else
-			startButton.setTexture(start1);
+			continueButton.setTexture(continue1);
 		///////////////////
 		
 		//exit button
@@ -62,7 +62,7 @@ public class GameMenu implements GamePart {
 
 	public void render() {
 		background.render();
-		startButton.render();
+		continueButton.render();
 		exitButton.render();
 	}
 }
