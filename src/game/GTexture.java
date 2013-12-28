@@ -7,9 +7,6 @@ public class GTexture {
 	private static LinkedList<Texture> textures = new LinkedList<Texture>();
 
 	public static Texture getTexture(String fileName) {
-		if(fileName == null)
-			return null;
-		
 		Texture t = null;
 
 		try {
