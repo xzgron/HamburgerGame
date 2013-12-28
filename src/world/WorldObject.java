@@ -312,6 +312,9 @@ public abstract class WorldObject extends GSprite{
 		if(shadow != null)
 			shadow.render();
 	}
+	public void removeShadow(){
+		shadow = null;
+	}
 	
 ///////////SURFACE/////////
 	

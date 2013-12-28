@@ -1,27 +1,12 @@
 package game;
-
-import static org.lwjgl.opengl.GL11.*;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.ByteBuffer;
+import java.io.*;
 import java.util.LinkedList;
-
-import javax.imageio.ImageIO;
-
-import org.lwjgl.BufferUtils;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-
+import org.newdawn.slick.opengl.*;
 
 public class GTexture {
-	//LinkedList<Texture> textures = new LinkedList<Texture>();
-	
+	private static LinkedList<Texture> textures = new LinkedList<Texture>();
+
 	public static Texture getTexture(String fileName) {
-		
 		Texture t = null;
 
 		try {
@@ -31,6 +16,11 @@ public class GTexture {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		for (Texture t2 : textures)
+			if (t.equals(t2))
+				return t2;
+
+		textures.add(t);
 		return t;
 	}
 }

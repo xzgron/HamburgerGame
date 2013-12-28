@@ -1,5 +1,8 @@
 package world.objects.food;
 
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.opengl.Texture;
+
 import world.WorldObject;
 import controllers.GController;
 import game.*;
@@ -11,6 +14,9 @@ public abstract class GFood extends WorldObject {
 
 	int maxHealth;
 	int currentHealth;
+	
+	String deathTexture = null;
+	String deathSound = null;
 
 	private GController controller;
 
@@ -24,8 +30,12 @@ public abstract class GFood extends WorldObject {
 	}
 
 	public void update() {
-		if (controller != null)
-			controller.handle(this);
+		if(!isDead()){
+			if (controller != null)
+				controller.handle(this);
+		}
+		else
+			stop();
 		
 		GPhysics.useGravity(this);
 		
@@ -69,7 +79,18 @@ public abstract class GFood extends WorldObject {
 	}
 
 	public void die() {
-		System.out.println("Something fainted");
+		setTexture(deathTexture);
+		GSound.playSound(deathSound);
+		setIfSurface(true);
+		removeShadow();
+	}
+	
+	public void setDeathTexture(String fileName){
+		deathTexture = fileName;
+	}
+	
+	public void setDeathSound(String fileName){
+		deathSound = fileName;
 	}
 
 	public boolean isDead() {

@@ -2,6 +2,7 @@ package game.parts;
 
 import game.GImage;
 import game.GPhysics;
+import game.GSound;
 import game.GTexture;
 import game.GamePart;
 
@@ -33,7 +34,7 @@ public class GameWorld implements GamePart {
 		addGO(new Tree(350, 80, 800));
 		addGO(new Tree(50, 170, 900));
 		
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 5; i++)
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
 	}

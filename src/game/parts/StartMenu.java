@@ -43,7 +43,6 @@ public class StartMenu implements GamePart {
 			Main.close();
 		if(isKeyDown(KEY_O)){
 			System.out.println("Play soundeffect");
-		GSound.blueberrydeath.playAsSoundEffect(1.0f, 1.0f, false);
 		SoundStore.get().poll(0);
 		}
 	}

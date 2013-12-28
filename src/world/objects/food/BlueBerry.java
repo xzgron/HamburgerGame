@@ -21,6 +21,9 @@ public class BlueBerry extends GFood {
 
 		setWalkingSpeed(80);
 		setJumpingSpeed(120);
+		
+		setDeathTexture("");
+		setDeathSound("");
 
 	}
 
