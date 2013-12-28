@@ -100,7 +100,7 @@ public class Main {
 			// ///////////////////////////
 
 			// //HANTERA SPELET////////////
-			while (unprossesedSeconds >= getDelta()) {
+			while (unprossesedSeconds > getDelta()) {
 				handleInput();
 				update();
 				// ////UPPDATERA INPUT CLASSER////
