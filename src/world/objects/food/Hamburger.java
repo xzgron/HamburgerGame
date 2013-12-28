@@ -34,6 +34,10 @@ public class Hamburger extends GFood {
 
 	public void update() {
 		super.update();
+		///UPDATE PREV POSITION//////
+		for(GIngredient gi: ingredients)
+			gi.updatePrevPos();
+		
 		updateIngredients();
 	}
 
