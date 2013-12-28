@@ -131,14 +131,14 @@ public class GSprite {
 	}
 
 
-	public void setColor(float r, float g, float b, float t) {
-		this.red = r / 255;
-		this.green = g / 255;
-		this.blue = b / 255;
-		this.alpha = t;
+	public void setColor(float r, float g, float b, float a) {
+		this.red = r;
+		this.green = g;
+		this.blue = b;
+		this.alpha = a;
 	}
-	public void setTransparency(float f){
-		alpha = f;
+	public void setAlpha(float a){
+		alpha = a;
 	}
 	
 	public float getRed(){
@@ -153,7 +153,7 @@ public class GSprite {
 		return blue;
 	}
 	
-	public float getTransparency(){
+	public float getAlpha(){
 		return alpha;
 	}
 	

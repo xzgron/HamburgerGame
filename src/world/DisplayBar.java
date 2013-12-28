@@ -22,9 +22,9 @@ import world.objects.food.GFood;
 public abstract class DisplayBar extends GSprite{
 	Texture backgroundTexture = null;
 	
-	float backgroundRed = 0;
-	float backgroundGreen = 0;
-	float backgroundBlue = 0;
+	float backgroundRed = 1;
+	float backgroundGreen = 1;
+	float backgroundBlue = 1;
 	float backgroundAlpha = 0;
 	
 	
@@ -42,7 +42,9 @@ public abstract class DisplayBar extends GSprite{
 		this.owner = owner;
 	}
 
-	public abstract void render();
+	public void render(){
+		draw(getMax(),getCurrent());
+	}
 	
 	public void draw(float full, float current) {
 		if (follow){

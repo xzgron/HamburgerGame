@@ -19,10 +19,6 @@ public class HealthBar extends DisplayBar {
 		super(xPos, yPos, texWidth, texHeight, owner);
 	}
 	
-	public void render(){
-		draw(owner.getMaxHealth(),owner.getHealth());
-	}
-
 	public float getMax() {
 		return owner.getMaxHealth();
 	}

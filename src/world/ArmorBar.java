@@ -28,11 +28,6 @@ public class ArmorBar extends DisplayBar{
 		super(xPos, yPos, texWidth, texHeight, owner);
 	}
 	
-	public void render(){
-		draw(((Hamburger)owner).getMaxArmor(),((Hamburger)owner).getArmor());
-	}
-
-	
 	public float getMax() {
 		return ((Hamburger)owner).getMaxArmor();
 	}
