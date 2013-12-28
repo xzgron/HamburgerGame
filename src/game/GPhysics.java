@@ -80,6 +80,7 @@ public class GPhysics {
 			return true;
 		}
 		//////////////////////////////////////////////
+		System.out.println(go2.getFootZPrev() + " " + go1.getHeadZPrev() + "  " + go2.getClass());
 		System.out.println(go1.getFootZPrev() + " " + go2.getHeadZPrev() + "  " + go1.getClass());
 		/////////////////SIDCOLLISION
 		float ww = Math.min(go1.getWeight(),go2.getWeight())/Math.max(go1.getWeight(),go2.getWeight()); // vad väger lättast i förhållande till tyngst

@@ -34,6 +34,7 @@ public class Hamburger extends GFood {
 
 	public void update() {
 		super.update();
+		updateIngredients();
 	}
 
 	public void render() {
