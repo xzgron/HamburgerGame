@@ -1,6 +1,5 @@
 package world;
 
-<<<<<<< HEAD
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glBegin;
@@ -79,10 +78,7 @@ public abstract class DisplayBar extends GSprite{
 	public void setBackgroundTexture(Texture texture){
 		this.backgroundTexture = texture;
 	}
-=======
-public class DisplayBar {
->>>>>>> d62e047f2b14654ee8a6b16277754e787a5e7309
-
+	
 	public void setBackgroundTexture(String fileName) {
 		this.backgroundTexture = GTexture.getTexture(texFolder + fileName);
 	}
