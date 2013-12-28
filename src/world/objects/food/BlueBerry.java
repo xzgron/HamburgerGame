@@ -15,7 +15,7 @@ public class BlueBerry extends GFood {
 		
 		healthBar.setFollow(true);
 		healthBar.setBackgroundColor(0.8f,0,0,1);
-		healthBar.setColor(0,0.8f,0,1);
+		healthBar.setColor(0, 0.8f,0,1);
 		
 		createShadow();
 		setTexture("Blueberrys/B" + ((int) (Math.random() * 4)));
