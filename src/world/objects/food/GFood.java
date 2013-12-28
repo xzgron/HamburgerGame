@@ -151,6 +151,7 @@ public abstract class GFood extends WorldObject {
 		GSound.playSound("hamburger/movement/jump");
 	}
 
+	
 	public void tryJump() {
 		if (!isInAir())
 			jump();
