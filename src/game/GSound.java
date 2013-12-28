@@ -15,7 +15,7 @@ import org.newdawn.slick.util.ResourceLoader;
 public class GSound {
 
 	private Audio oggEffect;
-	private Audio wavEffect;
+	public static Audio blueberrydeath;
 	private Audio aifEffect;
 	private Audio oggStream;
 	private Audio modStream;
@@ -23,22 +23,9 @@ public class GSound {
 	public void Sound() {
 		try {
 
-			oggEffect = AudioLoader.getAudio("OGG",
-					ResourceLoader.getResourceAsStream("testdata/restart.ogg"));
-
-			oggStream = AudioLoader.getStreamingAudio("OGG",
-					ResourceLoader.getResource("testdata/bongos.ogg"));
-
-			modStream = AudioLoader.getStreamingAudio("MOD",
-					ResourceLoader.getResource("testdata/SMB-X.XM"));
-
-			modStream.playAsMusic(1.0f, 1.0f, true);
-
-			aifEffect = AudioLoader.getAudio("AIF",
-					ResourceLoader.getResourceAsStream("testdata/burp.aif"));
-			wavEffect = AudioLoader
+			blueberrydeath = AudioLoader
 					.getAudio("WAV", ResourceLoader
-							.getResourceAsStream("testdata/cbrown01.wav"));
+							.getResourceAsStream("sounds/food/blueberry/blueberrydeath.wav"));
 
 		} catch (IOException e) {
 

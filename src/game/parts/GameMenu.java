@@ -26,6 +26,7 @@ public class GameMenu implements GamePart {
 	public GameMenu(){
 		startButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
 		startButton.setTexture(start1);
+		
 		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
 		exitButton.setTexture(exit1);
 	}

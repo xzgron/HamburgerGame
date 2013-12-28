@@ -10,6 +10,7 @@ import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.*;
+import org.newdawn.slick.openal.SoundStore;
 
 import static org.lwjgl.opengl.GL11.*;
 
