@@ -25,9 +25,18 @@ public class HostileController extends GController {
 			food.stop();
 		
 		if (waitTimer.hasExceeded()) {
-			if (GMath.getDistance(GameWorld.getPlayer(), food) < 120) {
+			float dx = GameWorld.getPlayer().getX() - food.getX();
+			float dy = GameWorld.getPlayer().getGroundYPos() - food.getGroundYPos();
+			
+			float ovalDistance = GMath.getLength(dx,dy*2);
+			
+			dx = dx/ovalDistance * GameWorld.getPlayer().getRadius();
+			dy = dy/ovalDistance * GameWorld.getPlayer().getRadius();
+			float r = GMath.getLength(dx,dy);
+			
+			if (GMath.getDistance(GameWorld.getPlayer(), food) < r +100 && !GPhysics.objectsOverlapp(GameWorld.getPlayer(), food)) {
 				if (!food.isInAir()) {
-					food.setSpeedByVector(300, GameWorld.getPlayer().getX() - food.getX(), GameWorld.getPlayer().getY() - food.getY());
+					food.setSpeedByVector(250, GameWorld.getPlayer().getX() - food.getX(), GameWorld.getPlayer().getY() - food.getY());
 					food.setZSpeed(170);
 				}
 			} else {
