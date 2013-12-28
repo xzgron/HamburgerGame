@@ -56,7 +56,15 @@ public class GSprite {
 	}
 
 	public void render() {
+		draw();
+	}
+	
+	public void draw() {
 		GImage.draw(texture, xPos, yPos, texWidth, texHeight, red, green, blue, alpha);	
+	}
+	
+	public void shadowDraw() {
+		GImage.shadowDraw(texture, xPos, yPos, texWidth, texHeight, red, green, blue, alpha);	
 	}
 	
 	public void setSize(float w, float h){

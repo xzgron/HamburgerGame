@@ -14,76 +14,30 @@ import static org.lwjgl.opengl.GL11.glVertex2f;
 import game.GSprite;
 
 import org.newdawn.slick.opengl.Texture;
+
+import world.objects.food.GFood;
 import world.objects.food.Hamburger;
 
-public class ArmorBar extends GSprite{
+public class ArmorBar extends DisplayBar{
 	
-	Hamburger owner;
+	public ArmorBar(float xPos, float yPos, float texWidth, float texHeight, String texture, GFood owner) {
+		super(xPos, yPos, texWidth, texHeight, texture, owner);
+	}
+
+	public ArmorBar(float xPos, float yPos, float texWidth, float texHeight, GFood owner){
+		super(xPos, yPos, texWidth, texHeight, owner);
+	}
 	
-	boolean follow = false;
-	
-	public ArmorBar(float xPos, float yPos, float texWidth, float texHeight,String texture, Hamburger parent) {
-		super(xPos, yPos, texWidth, texHeight, texture);
-		this.owner = parent;
+	public void render(){
+		draw(((Hamburger)owner).getMaxArmor(),((Hamburger)owner).getArmor());
 	}
 
 	
-	public ArmorBar(float xPos, float yPos, float texWidth, float texHeight, float r, float g, float b, float t, Hamburger parent) {
-		super(xPos, yPos, texWidth, texHeight, r, g, b, t);
-		this.owner = parent;
+	public float getMax() {
+		return ((Hamburger)owner).getMaxArmor();
 	}
 
-	public void render() {
-		if(follow)
-			draw(texture, xPos + owner.getX(), yPos + owner.getY() - owner.getZ(), texWidth, texHeight, red, green, blue, transparency);	
-		else
-			draw(texture, xPos, yPos, texWidth, texHeight, red, green, blue, transparency);	
+	public float getCurrent() {
+		return ((Hamburger)owner).getArmor();
 	}
-	
-	
-	public void draw(Texture tex, float x, float y, float w, float h,
-			float r, float g, float b, float t) {
-		glPushMatrix();
-		{
-			if (tex != null)
-				tex.bind();
-			else
-				glBindTexture(GL_TEXTURE_2D, 0);
-
-			glColor4f(r, g, b, t);
-			glTranslatef(x, y, 0);
-			glBegin(GL_QUADS);
-			{
-				glTexCoord2f(0, 0);
-				glVertex2f(-w / 2, -h / 2);
-
-				glTexCoord2f(owner.getArmor()/owner.getMaxArmor(), 0);
-				glVertex2f(-(w / 2 - w * owner.getArmor()/owner.getMaxArmor()), -h / 2);
-
-				glColor4f(r*0.7f, g*0.7f, b*0.7f, t);
-				glTexCoord2f(-(w / 2 - w * owner.getArmor()/owner.getMaxArmor()), 1);
-				glVertex2f(w / 2, h / 2);
-				
-
-				glTexCoord2f(0, 1);
-				glVertex2f(-w / 2, h / 2);
-			}
-			glEnd();
-		}
-		glPopMatrix();
-	}
-	
-	public void setFollow(boolean b){
-		follow = b;
-	}
-	
-	public int getArmor(){
-		return owner.getArmor();
-	}
-	
-	public int getMaxArmor(){
-		return owner.getMaxArmor();
-	}
-
-
 }

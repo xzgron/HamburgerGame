@@ -8,11 +8,15 @@ import game.parts.GameWorld;
 
 public class BlueBerry extends GFood {
 
-	HealthBar healthBar = new HealthBar(0, -30, 50, 7, 0, 1, 0, 1, this);
+	HealthBar healthBar = new HealthBar(0, -30, 50, 7,  this);
 
 	public BlueBerry(float xPos, float yPos) {
 		super(xPos, yPos, 40, 0.13f, 0.73f, 10, 50);
+		
 		healthBar.setFollow(true);
+		healthBar.setBackgroundColor(0.8f,0,0,1);
+		healthBar.setColor(0,0.8f,0,1);
+		
 		createShadow();
 		setTexture("Blueberrys/B" + ((int) (Math.random() * 4)));
 		setController(new HostileController());

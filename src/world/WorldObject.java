@@ -51,7 +51,7 @@ public abstract class WorldObject extends GSprite{
 	
 	public void render(){
 		renderShadow();
-		GImage.draw(texture, xPos, yPos - zPos, texWidth, texHeight, red, green, blue, transparency);	
+		GImage.draw(texture, xPos, yPos - zPos, texWidth, texHeight, red, green, blue, alpha);	
 	}
 	//////////////////////////////
 

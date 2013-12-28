@@ -13,18 +13,19 @@ import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 import game.GImage;
 import game.GSprite;
+import game.GTexture;
 
 import org.newdawn.slick.opengl.Texture;
 
 import world.objects.food.GFood;
 
 public abstract class DisplayBar extends GSprite{
-	Texture backgroundTexture;
+	Texture backgroundTexture = null;
 	
-	float backgroundRed = 1;
-	float backgroundGreen = 1;
-	float backgroundBlue = 1;
-	float backgroundAlpha = 1;
+	float backgroundRed = 0;
+	float backgroundGreen = 0;
+	float backgroundBlue = 0;
+	float backgroundAlpha = 0;
 	
 	
 	GFood owner;
@@ -41,14 +42,16 @@ public abstract class DisplayBar extends GSprite{
 		this.owner = owner;
 	}
 
-	public void render() {
-	}
+	public abstract void render();
+	
 	public void draw(float full, float current) {
 		if (follow){
-			GImage.shadowDraw();
+			GImage.shadowDraw(backgroundTexture, xPos + owner.getX(),yPos + owner.getY() - owner.getZ(), texWidth, texHeight, backgroundRed, backgroundGreen, backgroundBlue, backgroundAlpha);
 			GImage.drawDisplayBar(texture, xPos + owner.getX(),yPos + owner.getY() - owner.getZ(), texWidth, texHeight, red, green, blue, alpha, full, current);
 		}else{
-			}GImage.drawDisplayBar(texture, xPos, yPos, texWidth, texHeight, red, green, blue, alpha, full, current);
+			GImage.shadowDraw(backgroundTexture, xPos ,yPos, texWidth, texHeight, backgroundRed, backgroundGreen, backgroundBlue, backgroundAlpha);
+			GImage.drawDisplayBar(texture, xPos, yPos, texWidth, texHeight, red, green, blue, alpha, full, current);
+			}
 	}
 
 	
@@ -71,5 +74,19 @@ public abstract class DisplayBar extends GSprite{
 		backgroundBlue = b;
 		backgroundAlpha = a;
 	}
+	
+	public void setBackgroundTexture(Texture texture){
+		this.backgroundTexture = texture;
+	}
 
-}
+	public void setBackgroundTexture(String fileName) {
+		this.backgroundTexture = GTexture.getTexture(texFolder + fileName);
+	}
+	
+	public Texture getBackgroundTexture() {
+		return backgroundTexture;
+	}
+	
+	public abstract float getMax();
+	public abstract float getCurrent();
+	}
