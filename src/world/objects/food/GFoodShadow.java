@@ -19,7 +19,7 @@ public class GFoodShadow {
 	}
 	
 	public void render(){
-		GImage.draw(texture, owner.getX(), owner.getGroundYPos(), owner.getTexWidth()+ (owner.getFootZPos()/2), ( owner.getTexWidth()+ (owner.getFootZPos()/2))/2, 1, 1, 1, owner.getTransparency());	
+		GImage.draw(texture, owner.getX(), owner.getGroundYPos(), owner.getTexWidth()+ (owner.getFootZPos()/2), ( owner.getTexWidth()+ (owner.getFootZPos()/2))/2, 1, 1, 1, owner.getAlpha());	
 	}
 
 }
