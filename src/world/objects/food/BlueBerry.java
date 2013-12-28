@@ -30,14 +30,12 @@ public class BlueBerry extends GFood {
 	}
 
 	public void collidedWith(WorldObject go) {
-
-		
 		jump();
 		setSpeedByVector(200, getX() - go.getX(), getY() - go.getY());
-		//
+		
 		
 		if (go == GameWorld.getPlayer()){
-			float dmg = GMath.getDistance(0,0,getXSpeed()-go.getXSpeed(),getYSpeed()- go.getYSpeed())/200;
+			float dmg = GMath.getDistance(0,0,getXSpeed()+go.getXSpeed(),getYSpeed()+ go.getYSpeed())/200;
 			if(dmg > 0)
 				((GFood) go).damage((int) dmg);
 			

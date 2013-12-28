@@ -61,7 +61,7 @@ public class GPhysics {
 			return false;
 	
 		////GO1 landar på GO2///
-		if(go1.getFootZPrev() > go2.getHeadZPos() || go2.getHeadZPrev() < go1.getFootZPos()){
+		if(go1.getFootZPrev() > go2.getHeadZPrev() ){
 			System.out.println("landed on");
 			go1.setFootZPos(go2.getHeadZPos());
 			go2.setZSpeed(0);
@@ -70,7 +70,7 @@ public class GPhysics {
 			return true;
 		}
 		////GO2 landar på GO1///
-		else if(go2.getFootZPrev() > go1.getHeadZPos() || go1.getHeadZPrev() < go2.getFootZPos() ){
+		else if(go2.getFootZPrev() > go1.getHeadZPrev()){
 			System.out.println("landed on");	
 			go2.setFootZPos(go1.getHeadZPos());
 			go2.setZSpeed(0);

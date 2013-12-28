@@ -1,6 +1,5 @@
 package game.input;
 
-import static org.lwjgl.input.Keyboard.isKeyDown;
 import static org.lwjgl.input.Mouse.*;
 
 import java.util.LinkedList;

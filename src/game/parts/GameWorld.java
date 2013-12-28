@@ -24,16 +24,16 @@ public class GameWorld implements GamePart {
 
 	private static float gravity = 800;
 
-	private static GFood player = new Hamburger(400, 400, 100);;
+	private static GFood player = new Hamburger(0, 0, 100);;
 
 	public GameWorld() {
 		player.setController(new DefaultController());
 		addGO(player);
-		addGO(new Tree(150, 30, 300));
-		addGO(new Tree(350, 80, 400));
-		addGO(new Tree(50, 170, 500));
+		addGO(new Tree(150, 30, 700));
+		addGO(new Tree(350, 80, 800));
+		addGO(new Tree(50, 170, 900));
 		
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 400; i++)
 			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
 					(float) Math.random() * 1000 - 150));
 	}
@@ -145,9 +145,9 @@ public class GameWorld implements GamePart {
 		float startY = (player.getY() - Display.getHeight()/2);
 		startY = startY-startY%grassSize-grassSize/2;
 		
-		for(int i = (int) startX; i-grassSize/2 <= Display.getWidth()/2+player.getX(); i += grassSize)
-			for(int j = (int) startY; j-grassSize/2 <= Display.getHeight()/2+player.getY(); j += grassSize)
-				GImage.draw(grass, i, j, grassSize, grassSize);
+		for(int x = (int) startX; x-grassSize/2 <= Display.getWidth()/2+player.getX(); x += grassSize)
+			for(int y = (int) startY; y-grassSize/2 <= Display.getHeight()/2+player.getY(); y += grassSize)
+				GImage.draw(grass, x, y, grassSize, grassSize);
 	}
 	
 	

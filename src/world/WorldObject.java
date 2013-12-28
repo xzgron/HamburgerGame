@@ -210,6 +210,7 @@ public abstract class WorldObject extends GSprite{
 	public float getYPrev(){
 		return yPrev;
 	}
+	
 	public float getZPrev(){
 		return zPrev;
 	}
@@ -218,7 +219,7 @@ public abstract class WorldObject extends GSprite{
 	public void updatePrevPos(){
 		xPrev = xPos;
 		yPrev = yPos;
-		zPrev = yPos;
+		zPrev = zPos;
 		
 	}
 	

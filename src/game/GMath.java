@@ -15,7 +15,7 @@ public class GMath {
 	}
 	
 	public static float getDistance(GSprite go1,GSprite go2) {
-		return getDistance(go1.xPos, go1.yPos,go2.xPos, go2.yPos);
+		return getDistance(go1.getX(), go1.getY(), go2.getX(), go2.getY());
 	}
 
 	public static float random(float a, float b){

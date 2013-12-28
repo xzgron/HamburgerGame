@@ -10,7 +10,7 @@ public class GTimer {
 	public GTimer(float length){ //length i sekunder
 		startTime = Main.getTime();
 		
-		this.length = (long) (length * 1000000000.0); 
+		this.length = (long) (length * 1000000000.0f); 
 	}
 	
 	public boolean hasExceeded(){
@@ -26,7 +26,7 @@ public class GTimer {
 	}
 	
 	public void setLength(float length){
-		this.length = (long) (length * 1000000000.0); 
+		this.length = (long) (length * 1000000000.0f); 
 	}
 	
 	public float getPastTime(){
