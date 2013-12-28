@@ -23,7 +23,7 @@ public class BlueBerry extends GFood {
 		setJumpingSpeed(120);
 		
 		setDeathTexture("shadow");
-		setDeathSound("blueBerryDeath");
+		setDeathSound("food/blueberry/death");
 
 	}
 

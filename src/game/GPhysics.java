@@ -63,7 +63,6 @@ public class GPhysics {
 		
 		///////////////GO1 landar pÂ GO2//////////////
 		if(go1.getFootZPrev() > go2.getHeadZPrev()){
-			System.out.println("landed on" + go1.getClass());
 			go1.setFootZPos(go2.getHeadZPos());
 			go2.setZSpeed(0);
 			go1.setZSpeed(0);
@@ -74,7 +73,6 @@ public class GPhysics {
 			
 		/////////////////GO2 landar pÂ GO1/////////////////
 		else if(go2.getFootZPrev() > go1.getHeadZPrev()){ //object två var över object 1
-			System.out.println("landed on" + go2.getClass());	
 			go2.setFootZPos(go1.getHeadZPos());
 			go2.setZSpeed(0);
 			go1.setZSpeed(0);
