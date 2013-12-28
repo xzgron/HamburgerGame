@@ -14,7 +14,6 @@ import java.util.LinkedList;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
-import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.opengl.Texture;
 
 
@@ -41,10 +40,6 @@ public class StartMenu implements GamePart {
 			Game.setGameState(Game.GStates.GAME);
 		if(exitButton.isReleasedOver(0))
 			Main.close();
-		if(isKeyDown(KEY_O)){
-			System.out.println("Play soundeffect");
-		SoundStore.get().poll(0);
-		}
 	}
 	public void update() {
 		//start button
