@@ -148,7 +148,6 @@ public abstract class GFood extends WorldObject {
 
 	public void jump() {
 		setZSpeed(jumpingSpeed);
-		GSound.playSound("hamburger/movement/jump");
 	}
 
 	public void tryJump() {
