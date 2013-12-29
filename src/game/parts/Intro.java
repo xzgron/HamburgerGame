@@ -1,25 +1,40 @@
 package game.parts;
 
+import org.lwjgl.opengl.Display;
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.opengl.Texture;
+
+import game.GImage;
+import game.GSound;
+import game.GTexture;
+import game.Game;
 import game.GamePart;
+import game.Main;
+import game.input.GTimer;
 
 public class Intro implements GamePart {
 
-	@Override
+	GTimer introTime = new GTimer(7.0f);
+	Audio introSound  = GSound.getAudio("introSound");
+	Texture symbol = GTexture.getTexture("food/blueberry");
+	public Intro() {
+		introSound.playAsMusic(1, 1, false);
+	}
+	
 	public void handleInput() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void update() {
-		// TODO Auto-generated method stub
+		if(introTime.hasExceeded())
+			Main.game.setGameState(Game.GState.START_MENU);
+		
 		
 	}
 
-	@Override
 	public void render() {
-		// TODO Auto-generated method stub
-		
+		GImage.draw(symbol, Display.getWidth()/2, Display.getHeight()/2, 300,300);
 	}
 
 }

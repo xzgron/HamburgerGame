@@ -12,7 +12,7 @@ public abstract class GIngredient extends WorldObject{
 	int durability;
 	
 	public GIngredient(float xPos, float yPos, float texSize, float radius, float footPos, float headPos, int weight, int durability) {
-		super(xPos,  yPos,  texSize,  footPos,  headPos);
+		super(xPos,  yPos,  texSize, texSize,  footPos,  headPos);
 		setTexFolder("ingredients/");
 		
 		setWeight(weight);

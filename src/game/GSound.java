@@ -38,9 +38,4 @@ public class GSound {
 				return a2;
 		return a;
 	}
-	
-	public static void playSound(String fileName){
-		if(fileName != null)
-			getAudio(fileName).playAsSoundEffect(1,1, false);
-	}
 }

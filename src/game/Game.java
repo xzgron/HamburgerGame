@@ -2,38 +2,41 @@ package game;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.util.LinkedList;
+
 import game.parts.Actionbar;
 import game.parts.GameWorld;
 import game.parts.GameMenu;
 import game.parts.Intro;
 import game.parts.Inventory;
+import game.parts.Options;
 import game.parts.StartMenu;
 
 public class Game {
 
-	public enum GStates {
-		INTRO, START_MENU, GAME_MENU, GAME, INVENTORY_MENU
+	// //en pixel motsvarar en mm i verkligheten säger vi.
+
+	public static enum GState {
+		INTRO, START_MENU, GAME_MENU, GAME, INVENTORY_MENU, OPTIONS
 	}
 
-	private static boolean isCloseRequested = false;
+	private GamePart intro = new Intro();
+	private GamePart gameWorld = new GameWorld();
+	private GamePart startMenu = new StartMenu();
+	private GamePart gameMenu = new GameMenu();
+	private GamePart actionbar = new Actionbar();
+	private GamePart inventory = new Inventory();
+	private GamePart options = new Options();
 
-	public GamePart intro = new Intro();
-	public GamePart gameWorld = new GameWorld();
-	public GamePart startMenu = new StartMenu();
-	public GamePart gameMenu = new GameMenu();
-	public GamePart actionbar = new Actionbar();
-	public GamePart Inventory = new Inventory();
-
-	public static GStates gameState = GStates.START_MENU;
+	private LinkedList<GState> gameStateList = new LinkedList<GState>();
 
 	public Game() {
-
+		setGameState(GState.INTRO);
+		
 	}
 
 	public void handleInput() {
-
-
-		switch (gameState) {
+		switch (gameStateList.getLast()) {
 		case INTRO:
 			intro.handleInput();
 			break;
@@ -44,17 +47,21 @@ public class Game {
 			gameMenu.handleInput();
 			break;
 		case INVENTORY_MENU:
-			Inventory.handleInput();
+			inventory.handleInput();
 			break;
 		case GAME:
 			gameWorld.handleInput();
+			break;
+		case OPTIONS:
+			options.handleInput();
 			break;
 		}
 	}
 
 	public void update() {
-		switch (gameState) {
+		switch (gameStateList.getLast()) {
 		case INTRO:
+			intro.update();
 			break;
 		case START_MENU:
 			startMenu.update();
@@ -63,17 +70,21 @@ public class Game {
 			gameMenu.update();
 			break;
 		case INVENTORY_MENU:
-			Inventory.update();
+			inventory.update();
 			break;
 		case GAME:
 			gameWorld.update();
+			break;
+		case OPTIONS:
+			options.update();
 			break;
 		}
 	}
 
 	public void render() {
-		switch (gameState) {
+		switch (gameStateList.getLast()) {
 		case INTRO:
+			intro.render();
 			break;
 		case START_MENU:
 			glClearColor(1, 1, 1, 1);
@@ -93,7 +104,7 @@ public class Game {
 			focusTarget(GameWorld.getPlayer());
 			gameWorld.render();
 			glPopMatrix();
-			Inventory.render();
+			inventory.render();
 			break;
 		case GAME:
 			glClearColor(1, 1, 1, 1);
@@ -104,19 +115,36 @@ public class Game {
 
 			actionbar.render();
 			break;
+		case OPTIONS:
+			options.render();
+			break;
 		}
 	}
 
-	public static void setGameState(GStates STATE) {
-		gameState = STATE;
+	public void setGameState(GState STATE) {
+		switch (STATE) {
+		case INTRO:
+			break;
+		case START_MENU:
+			break;
+		case GAME_MENU:
+			break;
+		case INVENTORY_MENU:
+			break;
+		case GAME:
+			break;
+		case OPTIONS:
+			break;
+		}
+		gameStateList.add(STATE);
+	}
+	
+	public GState getGameState() {
+		return gameStateList.getLast();
 	}
 
-	public static void close() {
-		isCloseRequested = true;
-	}
-
-	public static boolean isCloseRequested() {
-		return isCloseRequested;
+	public void revertGameState() {
+		gameStateList.removeLast();
 	}
 
 	public void focusTarget(GSprite target) {

@@ -24,15 +24,17 @@ public class GPhysics {
 		float dx = go1.getX() - go2.getX(); //från go2 till go1
 		float dy = go1.getGroundYPos() - go2.getGroundYPos();
 		
-		float dist = getLength(dx,dy);
+		float dist = getLength(dx,dy); //avståndet mellan objekten
 		
-		float totRadius = go1.getRadius()+go2.getRadius();
+		float totRadius = go1.getRadius()+go2.getRadius(); //totala minradien mellan objekten
 		
-		if(dist >= totRadius) //utanför varandras max radie = snabbt sätt att säga ingen collision.
+		
+		
+		if(dist >= totRadius) //utanför varandras max ovalaradie = snabbt sätt att säga ingen collision.
 			return false; 
 		
-		
-		float ovalDistance = GMath.getDistance(0,0,dx,dy*2);
+	
+		float ovalDist = GMath.getLength(dx,dy*2);
 		
 		/*
 		float x1 = dx/ovalDistance * go1.getRadius(); //go1:s x värde på kanten mot go2
@@ -45,10 +47,7 @@ public class GPhysics {
 		*/
 		
 		/////////////KOMPIRMERAD VERSION//////////
-		float x = dx*totRadius/ovalDistance;
-		float y = dy*totRadius/ovalDistance;
-		
-		float minDist = getLength(x,y);
+		float minDist = totRadius*dist/ovalDist;
 		///////////////////////////
 		
 		if(dist >= minDist) // objecten står precis bredvid varann eller förlångt bort för att kollidera
@@ -64,9 +63,8 @@ public class GPhysics {
 		///////////////GO1 landar pÂ GO2//////////////
 		if(go1.getFootZPrev() > go2.getHeadZPrev()){
 			go1.setFootZPos(go2.getHeadZPos());
-			go2.setZSpeed(0);
-			go1.setZSpeed(0);
 			go1.landedOn(go2);
+			go2.gotLandedOnBy(go1);
 			return true;
 		}
 		//////////////////////////////////////////////
@@ -74,9 +72,8 @@ public class GPhysics {
 		/////////////////GO2 landar pÂ GO1/////////////////
 		else if(go2.getFootZPrev() > go1.getHeadZPrev()){ //object två var över object 1
 			go2.setFootZPos(go1.getHeadZPos());
-			go2.setZSpeed(0);
-			go1.setZSpeed(0);
 			go2.landedOn(go1);
+			go1.gotLandedOnBy(go2);
 			return true;
 		}
 		//////////////////////////////////////////////

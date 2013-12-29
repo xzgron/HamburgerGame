@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import world.HealthBar;
 import world.WorldObject;
 import world.objects.ingredients.*;
+import game.GMath;
 import game.GSprite;
 import game.GPhysics;
 import game.Game;
@@ -16,7 +17,7 @@ public class Hamburger extends GFood {
 	LinkedList<GIngredient> ingredients = new LinkedList<GIngredient>();
 	
 	public Hamburger(float xPos, float yPos, float texSize) {
-		super(xPos, yPos, 0, 0, 0, 0, 0);
+		super(xPos, yPos, 0, 0, 0, 0, 0, 0);
 		setRadius(texSize/2);
 		
 		ingredients.add(new HamburgerBreadUnderPart(xPos, yPos));
@@ -29,7 +30,7 @@ public class Hamburger extends GFood {
 		createShadow();
 		
 		setWalkingSpeed(200);
-		setJumpingSpeed(400);
+		setJumpingForce(80000);
 	}
 
 	public void update() {
@@ -211,8 +212,20 @@ public class Hamburger extends GFood {
 	
 	public void landedOn(WorldObject go){
 		if(go instanceof GFood){
+			float dmg = -(getZSpeed()-go.getZSpeed())*getWeight()/5000;
+			System.out.println(dmg);
+			((GFood)go).damage((int)dmg);
+			
+			if(!((GFood)go).isDead())
 			jump();
-			((GFood)go).damage(30);
 		}
+	}
+	
+	public void gotLandedOnBy(WorldObject go){
+		
+	}
+	
+	public void collidedWith(WorldObject go){
+		
 	}
 }

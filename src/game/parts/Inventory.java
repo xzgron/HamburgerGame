@@ -1,6 +1,5 @@
  package game.parts;
  
-import static game.Game.setGameState;
 import static org.lwjgl.input.Keyboard.*;
 
 import game.GButton;
@@ -8,7 +7,7 @@ import game.GSprite;
 import game.Game;
  import game.GamePart;
 import game.Main;
-import game.Game.GStates;
+import game.Game.GState;
 
 
  
@@ -24,7 +23,7 @@ public class Inventory implements GamePart{
 	@Override
  	public void handleInput() {
 		if(isKeyDown(KEY_I) && !wasIDown){
-			setGameState(GStates.GAME);
+			Main.game.setGameState(GState.GAME);
 			wasIDown=true;
 			}
 		else if(!isKeyDown(KEY_I))
