@@ -6,6 +6,7 @@ import game.GPhysics;
 import game.GSound;
 import game.GTexture;
 import game.GamePart;
+import game.Main;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -36,20 +37,22 @@ public class GameWorld implements GamePart {
 		addGO(new Tree(50, 170, 900,700));
 		
 
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < 5; i++)
 			addGO(new BlueBerry(GMath.random(500,-500),
 					GMath.random(500,-500), GMath.random(20,30)));
 
+		addGO(new BlueBerry(GMath.random(500,-500),
+				GMath.random(500,-500), 70));
 	}
 	
 	///////////MAIN PART////////////////
 	public void handleInput() {
 		if(isKeyDown(KEY_ESCAPE))
-			setGameState(GStates.GAME_MENU);
+			Main.game.setGameState(GState.GAME_MENU);
 		
 	
 		if(isKeyDown(KEY_I) && !Inventory.wasIDown){
-			setGameState(GStates.INVENTORY_MENU);
+			Main.game.setGameState(GState.INVENTORY_MENU);
 			Inventory.wasIDown = true;
 			}
 		else if(!isKeyDown(KEY_I))

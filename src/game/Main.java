@@ -30,7 +30,6 @@ public class Main {
 	static float delta_time;
 
 	public static Game game;
-	public static GSound sound;
 
 	public static void main(String[] arg) throws Exception {
 		LibraryLoader.loadNativeLibraries();
@@ -40,8 +39,7 @@ public class Main {
 		initGL();
 		
 		initGame();
-
-		initSound();
+		
 		
 		gameLoop();
 
@@ -50,9 +48,6 @@ public class Main {
 
 	private static void initGame() {
 		game = new Game();
-	}
-	private static void initSound() {
-		sound = new GSound();
 	}
 	
 

@@ -22,58 +22,62 @@ public class StartMenu implements GamePart {
 	
 	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, Display.getWidth(), Display.getHeight(), 0.48f,0.69f,0.71f,0.9f);
 	
-	GButton startButton;
-	GButton exitButton;
-	Texture start1 = GTexture.getTexture("buttons/start1");
-	Texture start2 = GTexture.getTexture("buttons/start2");
-	Texture exit1 = GTexture.getTexture("buttons/exit1");
-	Texture exit2 = GTexture.getTexture("buttons/exit2");
+	GButton startButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
+	GButton optionButton = new GButton(Display.getWidth()/2,Display.getHeight()/2, 300, 80);
+	GButton exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
+	
+	Texture startNormal = GTexture.getTexture("buttons/startNormal");
+	Texture startClicked = GTexture.getTexture("buttons/startClicked");
+	
+	Texture optionNormal = GTexture.getTexture("buttons/optionNormal");
+	Texture optionClicked = GTexture.getTexture("buttons/optionClicked");
+	
+	Texture exitNormal = GTexture.getTexture("buttons/exitNormal");
+	Texture exitClicked = GTexture.getTexture("buttons/exitClicked");
 	public StartMenu(){
-		startButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
-		startButton.setTexture(start1);
-		exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
-		exitButton.setTexture(exit1);
+		startButton.setTexture(startNormal);
+		exitButton.setTexture(exitNormal);
 	}
 	
 	
 	public void handleInput() {
+		/////START BUTTON//////
 		if(startButton.isReleasedOver(0))
-			Game.setGameState(Game.GStates.GAME);
+			Main.game.setGameState(Game.GState.GAME);
+		
+		if(startButton.isHeldIn(0))
+			startButton.setTexture(startClicked);
+		else
+			startButton.setTexture(startNormal);
+		
+		/////OPTION BUTTON//////
+		if(optionButton.isReleasedOver(0))
+			Main.game.setGameState(Game.GState.OPTIONS);
+		
+		if(optionButton.isHeldIn(0))
+			optionButton.setTexture(optionClicked);
+		else
+			optionButton.setTexture(optionNormal);
+		
+		/////EXIT BUTTON/////
 		if(exitButton.isReleasedOver(0))
 			Main.close();
-		if(isKeyDown(KEY_O)){
-			System.out.println("Play soundeffect");
-		SoundStore.get().poll(0);
-		}
+		
+		if(exitButton.isHeldIn(0))
+			exitButton.setTexture(exitClicked);
+		else
+			exitButton.setTexture(exitNormal);
 	}
 	public void update() {
-		//start button
 		startButton.update();
-		
-
-		if(startButton.isPressed(0))
-			startButton.setTexture(start2);
-		else
-			startButton.setTexture(start1);
-		///////////////////
-		
-		//exit button
+		optionButton.update();
 		exitButton.update();
-		
-
-		if(exitButton.isPressed(0))
-			exitButton.setTexture(exit2);
-		else
-			exitButton.setTexture(exit1);
-		
-		////////////////
-
-		
 	}
 
 	public void render() {
 		background.render();
 		startButton.render();
+		optionButton.render();
 		exitButton.render();
 	}
 

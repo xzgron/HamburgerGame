@@ -89,11 +89,11 @@ public abstract class GFood extends WorldObject {
 	}
 	
 	public void setDeathTexture(String fileName){
-		deathTexture = GTexture.getTexture(getTexFolder() +fileName) ;
+		deathTexture = GTexture.getTexture(getTexFolder() + fileName) ;
 	}
 	
 	public void setDeathSound(String fileName){
-		deathSound = GSound.getAudio(getTexFolder() +fileName);
+		deathSound = GSound.getAudio(getTexFolder() + fileName);
 	}
 
 	public boolean isDead() {
