@@ -11,6 +11,8 @@ import game.parts.StartMenu;
 
 public class Game {
 
+	////en pixel motsvarar en mm i verkligheten säger vi.
+	
 	public enum GStates {
 		INTRO, START_MENU, GAME_MENU, GAME, INVENTORY_MENU
 	}

@@ -1,6 +1,7 @@
 package game.parts;
 
 import game.GImage;
+import game.GMath;
 import game.GPhysics;
 import game.GSound;
 import game.GTexture;
@@ -30,13 +31,13 @@ public class GameWorld implements GamePart {
 	public GameWorld() {
 		player.setController(new DefaultController());
 		addGO(player);
-		addGO(new Tree(150, 30, 700));
-		addGO(new Tree(350, 80, 800));
-		addGO(new Tree(50, 170, 900));
+		addGO(new Tree(150, 30, 700,700));
+		addGO(new Tree(350, 80, 800,700));
+		addGO(new Tree(50, 170, 900,700));
 		
-		for (int i = 0; i < 1; i++)
-			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
-					(float) Math.random() * 1000 - 150));
+		for (int i = 0; i < 100; i++)
+			addGO(new BlueBerry(GMath.random(500,-500),
+					GMath.random(500,-500), GMath.random(20,30)));
 	}
 	
 	///////////MAIN PART////////////////

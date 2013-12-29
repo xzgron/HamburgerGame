@@ -10,21 +10,22 @@ import game.*;
 public abstract class GFood extends WorldObject {
 
 	float walkingSpeed = 100; // pixels per second
-	float jumpingSpeed = 100; // utgångs hastighet för ett hopp
+	float jumpingForce = 1000; // utgångs kraft från ett hopp v = jf/w
 
 	int maxHealth;
 	int currentHealth;
 	
-	String deathTexture = null;
-	String deathSound = null;
+	Texture deathTexture = null;
+	Audio deathSound = null;
 
 	private GController controller;
 
-	public GFood(float xPos, float yPos, float texSize, float footPos,
+	public GFood(float xPos, float yPos, float texWidth, float texHeight, float footPos,
 			float headPos, int weight, int health) {
-		super(xPos, yPos, texSize, footPos, headPos);
+		super(xPos, yPos, texWidth, texHeight, footPos, headPos);
 		maxHealth = health;
 		currentHealth = maxHealth;
+		setRadius(texWidth/2);
 		setWeight(weight);
 		setTexFolder("food/");
 	}
@@ -80,17 +81,19 @@ public abstract class GFood extends WorldObject {
 
 	public void die() {
 		setTexture(deathTexture);
-		GSound.playSound(deathSound);
+		if(deathSound != null)
+			deathSound.playAsSoundEffect(1, 1, false);
+		
 		setIfSurface(true);
 		removeShadow();
 	}
 	
 	public void setDeathTexture(String fileName){
-		deathTexture = fileName;
+		deathTexture = GTexture.getTexture(getTexFolder() +fileName) ;
 	}
 	
 	public void setDeathSound(String fileName){
-		deathSound = fileName;
+		deathSound = GSound.getAudio(getTexFolder() +fileName);
 	}
 
 	public boolean isDead() {
@@ -136,19 +139,18 @@ public abstract class GFood extends WorldObject {
 		return walkingSpeed;
 	}
 
-	public void setJumpingSpeed(float f) {
-		jumpingSpeed = f;
+	public void setJumpingForce(float f) {
+		jumpingForce = f;
 	}
 
-	public float getJumpingSpeed() {
-		return jumpingSpeed;
+	public float getJumpingForce() {
+		return jumpingForce;
 	}
 
 	// //////MOVEMENT HANDLING//////////////
 
 	public void jump() {
-		setZSpeed(jumpingSpeed);
-		GSound.playSound("hamburger/movement/jump");
+		setZSpeed(jumpingForce/getWeight());
 	}
 
 	
@@ -184,6 +186,10 @@ public abstract class GFood extends WorldObject {
 
 	public void landedOn(WorldObject go) {
 		jump();
+	}
+	
+	public void gotLandedOnBy(WorldObject go) {
+		
 	}
 
 	public void collidedWith(WorldObject go) {

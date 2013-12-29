@@ -1,10 +1,7 @@
 package game;
 
 import static game.GMath.getDistance;
-import static java.lang.Math.asin;
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
-import static java.lang.Math.toDegrees;
+import static java.lang.Math.*;
 import world.WorldObject;
 import world.objects.food.GFood;
 import world.objects.food.Hamburger;
@@ -44,6 +41,10 @@ public class GMath {
 
 	public static float getAngle(WorldObject go1, WorldObject go2) {
 		return getAngle(go1.getX(),go1.getGroundYPos(),go2.getX(),go2.getGroundYPos());
+	}
+	
+	public static float getSphereVolume(float radius){
+		return (float) (4/3*PI*pow(radius,3));
 	}
 	
 	

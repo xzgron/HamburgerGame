@@ -30,13 +30,6 @@ public abstract class WorldObject extends GSprite{
 	
 	private GFoodShadow shadow = null; ///////skugga??
 	
-	public WorldObject(float xPos, float yPos, float texSize, float footPos, float headPos) {
-		super(xPos, yPos, texSize, texSize);
-
-		this.headPos = headPos;
-		this.footPos = footPos;
-	}
-	
 	public WorldObject(float xPos, float yPos, float texWidth, float texHeight, float footPos, float headPos) {
 		super(xPos, yPos, texWidth, texHeight);
 
@@ -332,6 +325,10 @@ public abstract class WorldObject extends GSprite{
 ///////////////COLLISION//////////////////
 	
 	public void landedOn(WorldObject go){
+		
+	}
+	
+	public void gotLandedOnBy(WorldObject go){
 		
 	}
 	
