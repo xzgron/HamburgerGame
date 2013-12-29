@@ -42,10 +42,13 @@ public class GameMenu implements GamePart {
 		//continue button
 		continueButton.update();
 		
-		if(continueButton.isClicked(2))
+		if(continueButton.isClicked(2)){
 			continueButton.setTexture(continue2);
-		else
+			Game.setGameState(Game.GStates.GAME);
+		}
+		else{
 			continueButton.setTexture(continue1);
+		}
 		///////////////////
 		
 		//exit button
