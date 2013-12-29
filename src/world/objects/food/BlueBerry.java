@@ -44,9 +44,6 @@ public class BlueBerry extends GFood {
 	
 	//////////ACTION////////////////////
 	public void collidedWith(WorldObject go) {
-
-		
-		
 		if (go == GameWorld.getPlayer()){
 			float dmg = GMath.getLength(getXSpeed()-go.getXSpeed(),getYSpeed()-go.getYSpeed())*getWeight()/1500;
 			if(dmg > 0)
