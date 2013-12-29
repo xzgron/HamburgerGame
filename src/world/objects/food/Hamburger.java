@@ -212,8 +212,8 @@ public class Hamburger extends GFood {
 	
 	public void landedOn(WorldObject go){
 		if(go instanceof GFood){
-			float dmg = (getZSpeed()+go.getZSpeed())*getWeight()/10;
-			System.out.println(getWeight() + "   " + dmg);
+			float dmg = -(getZSpeed()-go.getZSpeed())*getWeight()/5000;
+			System.out.println(dmg);
 			((GFood)go).damage((int)dmg);
 			
 			if(!((GFood)go).isDead())

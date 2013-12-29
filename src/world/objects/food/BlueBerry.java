@@ -14,7 +14,6 @@ public class BlueBerry extends GFood {
 		super(xPos, yPos, size, size, 0.13f, 0.73f, (int)(GMath.getSphereVolume(size/2)/700+1), (int)(GMath.getSphereVolume(size/2)/700+1));
 		//System.out.println((GMath.getSphereVolume(size/2)/700));
 		//System.out.println(size + " " + getWeight() + " " + getMaxHealth());
-		System.out.println(getWeight());
 		setRadius(size/2.1f);
 		
 		healthBar.setFollow(true);
@@ -37,24 +36,27 @@ public class BlueBerry extends GFood {
 
 	public void render() {
 		super.render();
-		healthBar.render();
+		if(!isDead())
+			healthBar.render();
 	}
 
 	
 	
 	//////////ACTION////////////////////
 	public void collidedWith(WorldObject go) {
-		jump();
-		setSpeedByVector(200, getX() - go.getX(), getY() - go.getY());
+
 		
 		
 		if (go == GameWorld.getPlayer()){
-			float dmg = GMath.getLength(getXSpeed()+go.getXSpeed(),getYSpeed()+go.getYSpeed())*getWeight()/1500;
+			float dmg = GMath.getLength(getXSpeed()-go.getXSpeed(),getYSpeed()-go.getYSpeed())*getWeight()/1500;
 			if(dmg > 0)
 				((GFood) go).damage((int) dmg);
 			
 			addSpeed(go.getXSpeed(), go.getYSpeed(), 0);
 		}
+		
+		jump();
+		setSpeedByVector(200, getX() - go.getX(), getY() - go.getY());
 	}
 
 }

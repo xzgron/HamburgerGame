@@ -35,15 +35,11 @@ public class GameWorld implements GamePart {
 		addGO(new Tree(350, 80, 800,700));
 		addGO(new Tree(50, 170, 900,700));
 		
-<<<<<<< HEAD
-		for (int i = 0; i < 100; i++)
+
+		for (int i = 0; i < 1; i++)
 			addGO(new BlueBerry(GMath.random(500,-500),
 					GMath.random(500,-500), GMath.random(20,30)));
-=======
-		for (int i = 0; i < 50; i++)
-			addGO(new BlueBerry((float) Math.random() * 1000 - 150,
-					(float) Math.random() * 1000 - 150));
->>>>>>> 7477db8cd8f110509bbef7ba369608094b458deb
+
 	}
 	
 	///////////MAIN PART////////////////
