@@ -2,6 +2,7 @@ package game.parts;
 
 import static game.input.GKeyboard.isKeyPressed;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import world.objects.ingredients.*;
@@ -21,7 +22,7 @@ public class InventoryMenu extends GamePart {
 	}
 	
 	public void handleInput() {
-		if (isKeyPressed(Controlls.INVENTORY_KEY))
+		if (isKeyPressed(Controlls.INVENTORY_KEY)||isKeyPressed(Keyboard.KEY_ESCAPE))
 			Main.game.revertGameState();
 	}
 
