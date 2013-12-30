@@ -9,10 +9,10 @@ import org.lwjgl.input.Mouse;
 
 public class GButton extends GSprite{
 	
-	public GButton(int x, int y, int width, int height) {
+	public GButton(float x, float y, float width, float height) {
 		super(x, y, width, height);
 	}
-	public GButton(int x, int y, int width, int height, String texture) {
+	public GButton(float x, float y, float width, float height, String texture) {
 		super(x, y, width, height, texture);
 	}
 

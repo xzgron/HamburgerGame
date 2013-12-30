@@ -5,10 +5,17 @@ import org.newdawn.slick.opengl.*;
 
 public class GTexture {
 	private static LinkedList<Texture> textures = new LinkedList<Texture>();
+	private static LinkedList<String> textureLocations = new LinkedList<String>();
 
 	public static Texture getTexture(String fileName) {
 		Texture t = null;
+		for (int i = 0; i < textures.size(); i++){
+			if (textureLocations.get(i).equals(fileName)){
+				return textures.get(i);
+				}
+		}
 
+		
 		try {
 			t = TextureLoader.getTexture("PNG", new FileInputStream(new File("resources/textures/" + fileName + ".png")));
 		} catch (FileNotFoundException e) {
@@ -16,11 +23,10 @@ public class GTexture {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		for (Texture t2 : textures)
-			if (t.equals(t2))
-				return t2;
 
 		textures.add(t);
+		textureLocations.add(fileName);
+		
 		return t;
 	}
 }

@@ -1,5 +1,8 @@
 package world.objects.ingredients;
 
+import world.objects.GIngredient;
+import world.objects.ingredients.interfaces.Armor;
+
 public class HamburgerBreadOverPart extends GIngredient implements Armor{
 
 	public HamburgerBreadOverPart(float x, float y) {

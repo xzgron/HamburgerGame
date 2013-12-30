@@ -18,7 +18,7 @@ import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.opengl.Texture;
 
 
-public class StartMenu implements GamePart {
+public class StartMenu extends GamePart {
 	
 	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, Display.getWidth(), Display.getHeight(), 0.48f,0.69f,0.71f,0.9f);
 	

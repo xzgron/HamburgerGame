@@ -1,6 +1,9 @@
 package game.parts;
 
+import static org.lwjgl.opengl.GL11.*;
+
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.opengl.Texture;
 
@@ -12,7 +15,7 @@ import game.GamePart;
 import game.Main;
 import game.input.GTimer;
 
-public class Intro implements GamePart {
+public class Intro extends GamePart {
 
 	GTimer introTime = new GTimer(7.0f);
 	Audio introSound  = GSound.getAudio("introSound");
@@ -22,7 +25,6 @@ public class Intro implements GamePart {
 	}
 	
 	public void handleInput() {
-		
 	}
 
 	

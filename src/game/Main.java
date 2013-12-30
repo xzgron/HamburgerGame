@@ -62,6 +62,7 @@ public class Main {
 	private static void render() {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glLoadIdentity();
+		glClearColor(1,1,1,1);
 		game.render();
 		Display.update();
 		Display.sync(wanted_fps);
@@ -82,14 +83,7 @@ public class Main {
 			time = newTime;
 			// //////////////////////
 
-			// ////////////R€KNA UT FPS//////////
-			deltaTimePerWantedFps += delta_time;
-			if (frames % wanted_fps == 0) {
-				fps = Math.round(wanted_fps / deltaTimePerWantedFps);
-				deltaTimePerWantedFps = 0;
-			}
-			// //////////////////////////
-
+	
 			// ///UPPDATERA TITEL/////////
 			Display.setTitle(title + "   fps: " + fps);
 			// ///////////////////////////
@@ -102,6 +96,16 @@ public class Main {
 				GKeyboard.update();
 				GMouse.update();
 				unprossesedSeconds -= getDelta();
+				
+				
+				// ////////////R€KNA UT FPS//////////
+				deltaTimePerWantedFps += delta_time;
+				if (frames % wanted_fps == 0) {
+					fps = Math.round(wanted_fps / deltaTimePerWantedFps);
+					deltaTimePerWantedFps = 0;
+				}
+				// //////////////////////////
+
 			}
 			// /////////////////
 			
@@ -141,11 +145,6 @@ public class Main {
 		glEnable(GL_BLEND);
 		glEnable(GL_TEXTURE_2D);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		/*
-		 * glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		 * glColor4f(1,1,1,1);
-		 */
-		glClearColor(0, 0, 0, 1);
 		glDisable(GL_DEPTH_TEST);
 	}
 

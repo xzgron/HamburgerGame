@@ -1,9 +1,9 @@
 package game;
 
-public interface GamePart {
-	public void handleInput();
+public abstract class GamePart {
+	public abstract void handleInput();
 	
-	public void update();
+	public abstract void update();
 
-	public void render();
+	public abstract void render();
 }

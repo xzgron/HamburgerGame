@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
-public class GameMenu implements GamePart {
+public class GameMenu extends GamePart {
 
 	GSprite background = new GSprite(Display.getWidth() / 2,
 			Display.getHeight() / 2, 600, 480, "UI/gameMenuBackground");

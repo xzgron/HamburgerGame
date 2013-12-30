@@ -22,10 +22,16 @@ import org.newdawn.slick.util.ResourceLoader;
 public class GSound {
 
 	private static LinkedList<Audio> sounds = new LinkedList<Audio>();
-
+	private static LinkedList<String> audioLocations = new LinkedList<String>();
 
 	public static Audio getAudio(String fileName){
 		Audio a = null;
+		
+		for (int i = 0; i < sounds.size(); i++)
+			if (audioLocations.get(i).equals(fileName))
+				return sounds.get(i);
+
+
 		try {
 			a = AudioLoader.getAudio("WAV", ResourceLoader.getResourceAsStream("resources/sounds/" + fileName + ".wav"));
 		} catch (FileNotFoundException e) {
@@ -33,9 +39,12 @@ public class GSound {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
-		for (Audio a2 : sounds)
-			if (a.equals(a2))
-				return a2;
+
+
+		sounds.add(a);
+		audioLocations.add(fileName);
+		
+		
 		return a;
 	}
 }
