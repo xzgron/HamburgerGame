@@ -65,15 +65,29 @@ public abstract class GFood extends WorldObject {
 
 	// ///////////ABOUT HEALTH/////////////////////
 
+	public void aboveDamage(int amt){
+		damage(amt);
+	}
+
+	
 	public void damage(int amt) {
+		if(amt < 0)
+			return;
 		currentHealth -= amt;
 		if (currentHealth <= 0) {
 			currentHealth = 0;
 			this.die();
 		}
 	}
+	
+	public void underDamage(int amt){
+		damage(amt);
+	}
 
 	public void heal(int amt) {
+		if(amt < 0)
+			return;
+		
 		currentHealth += amt;
 		if (currentHealth > maxHealth)
 			currentHealth = maxHealth;
@@ -150,7 +164,11 @@ public abstract class GFood extends WorldObject {
 	// //////MOVEMENT HANDLING//////////////
 
 	public void jump() {
-		setZSpeed(jumpingForce/getWeight());
+		jump(jumpingForce);
+	}
+	
+	public void jump(float force){
+		setZSpeed(force/(float)Math.sqrt(getWeight()));
 	}
 
 	

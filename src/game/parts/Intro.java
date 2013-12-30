@@ -1,6 +1,9 @@
 package game.parts;
 
+import static org.lwjgl.opengl.GL11.*;
+
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.opengl.Texture;
 
@@ -22,7 +25,6 @@ public class Intro implements GamePart {
 	}
 	
 	public void handleInput() {
-		
 	}
 
 	

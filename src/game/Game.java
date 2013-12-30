@@ -84,6 +84,7 @@ public class Game {
 	public void render() {
 		switch (gameStateList.getLast()) {
 		case INTRO:
+			glClearColor(1, 1, 1, 1);
 			intro.render();
 			break;
 		case START_MENU:
@@ -92,27 +93,18 @@ public class Game {
 			break;
 		case GAME_MENU:
 			glClearColor(1, 1, 1, 1);
-			glPushMatrix();
-			focusTarget(GameWorld.getPlayer());
 			gameWorld.render();
-			glPopMatrix();
 			gameMenu.render();
 			break;
 		case INVENTORY_MENU:
 			glClearColor(1, 1, 1, 1);
-			glPushMatrix();
-			focusTarget(GameWorld.getPlayer());
 			gameWorld.render();
-			glPopMatrix();
+			actionbar.render();
 			inventory.render();
 			break;
 		case GAME:
 			glClearColor(1, 1, 1, 1);
-			glPushMatrix();
-			focusTarget(GameWorld.getPlayer());
 			gameWorld.render();
-			glPopMatrix();
-
 			actionbar.render();
 			break;
 		case OPTIONS:
@@ -147,9 +139,8 @@ public class Game {
 		gameStateList.removeLast();
 	}
 
-	public void focusTarget(GSprite target) {
-		glTranslatef(-target.getX() + Main.window_width / 2, -target.getY()
-				+ Main.window_height / 2, 0);
+	public static void focusPoint(float x, float y) {
+		glTranslatef(-x + Main.window_width / 2, -y + Main.window_height / 2, 0);
 	}
 
 }

@@ -1,5 +1,7 @@
 package world.objects.ingredients;
 
+import java.util.LinkedList;
+
 import world.WorldObject;
 import world.objects.food.GFood;
 import game.GSprite;
@@ -26,6 +28,10 @@ public abstract class GIngredient extends WorldObject{
 	public void update() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean isPositionLegal(LinkedList<GIngredient> list, int requestedPosition){
+		return true;
 	}
 	
 	public int getMaxDurability(){

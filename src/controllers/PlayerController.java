@@ -6,20 +6,20 @@ import static game.GMath.*;
 import world.objects.food.GFood;
 import game.*;
 
-public class DefaultController extends GController {
+public class PlayerController extends GController {
 
 	boolean jumping = false;
 	
 	public void handle(GFood food) {
 		float x = 0;
 		float y = 0;
-		if (isKeyDown(KEY_W) || isKeyDown(KEY_UP))
+		if (isKeyDown(Controlls.UP_KEY))
 			y -= 1;
-		if (isKeyDown(KEY_D) || isKeyDown(KEY_RIGHT))
+		if (isKeyDown(Controlls.RIGHT_KEY))
 			x += 1;
-		if (isKeyDown(KEY_S) || isKeyDown(KEY_DOWN))
+		if (isKeyDown(Controlls.DOWN_KEY))
 			y += 1;
-		if (isKeyDown(KEY_A) || isKeyDown(KEY_LEFT))
+		if (isKeyDown(Controlls.LEFT_KEY))
 			x -= 1;
 		
 		if(x == 0 && y == 0)
@@ -35,7 +35,7 @@ public class DefaultController extends GController {
 			food.setZSpeed(120);
 		
 		
-		if (isKeyDown(KEY_SPACE) && !jumping) {
+		if (isKeyDown(Controlls.JUMP_KEY) && !jumping) {
 			jumping = true;
 			food.jump();
 		}

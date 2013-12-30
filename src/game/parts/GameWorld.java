@@ -5,8 +5,10 @@ import game.GMath;
 import game.GPhysics;
 import game.GSound;
 import game.GTexture;
+import game.Game;
 import game.GamePart;
 import game.Main;
+import game.input.GKeyboard;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -14,12 +16,14 @@ import java.util.LinkedList;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 
-import controllers.DefaultController;
+import controllers.Controlls;
+import controllers.PlayerController;
 import controllers.GController;
 import world.WorldObject;
 import world.objects.*;
 import world.objects.food.*;
 import static org.lwjgl.input.Keyboard.*;
+import static org.lwjgl.opengl.GL11.*;
 import static game.Game.*;
 public class GameWorld implements GamePart {
 
@@ -30,7 +34,7 @@ public class GameWorld implements GamePart {
 	private static GFood player = new Hamburger(0, 0, 100);;
 
 	public GameWorld() {
-		player.setController(new DefaultController());
+		player.setController(new PlayerController());
 		addGO(player);
 		addGO(new Tree(150, 30, 700,700));
 		addGO(new Tree(350, 80, 800,700));
@@ -51,12 +55,8 @@ public class GameWorld implements GamePart {
 			Main.game.setGameState(GState.GAME_MENU);
 		
 	
-		if(isKeyDown(KEY_I) && !Inventory.wasIDown){
+		if(GKeyboard.isKeyPressed(Controlls.INVENTORY_KEY))
 			Main.game.setGameState(GState.INVENTORY_MENU);
-			Inventory.wasIDown = true;
-			}
-		else if(!isKeyDown(KEY_I))
-			Inventory.wasIDown = false;
 	
 	}
 	
@@ -72,6 +72,8 @@ public class GameWorld implements GamePart {
 	}
 
 	public void render() {
+		glPushMatrix();
+		Game.focusPoint(player.getX(),player.getY());
 		renderGrass();
 		sortObjects();
 		for (WorldObject go : worldObjects)
@@ -81,6 +83,8 @@ public class GameWorld implements GamePart {
 		for (WorldObject go : worldObjects)
 			if(!go.isSurface())
 				go.render();
+		
+		glPopMatrix();
 	}
 	
 	
