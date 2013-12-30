@@ -1,19 +1,18 @@
-package world.objects.food;
+package world;
 
 import org.newdawn.slick.opengl.Texture;
 
-import world.WorldObject;
 import game.GSprite;
 import game.GImage;
 import game.GTexture;
 
-public class GFoodShadow {
+public class Shadow {
 	
 	WorldObject owner;
 	
 	Texture texture = GTexture.getTexture("food/shadow");
 	
-	public GFoodShadow(WorldObject go) {
+	public Shadow(WorldObject go) {
 		owner = go;
 
 	}

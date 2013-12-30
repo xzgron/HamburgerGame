@@ -1,10 +1,7 @@
 package game;
 
-import static game.GMath.getDistance;
 import static java.lang.Math.*;
-import world.GFood;
 import world.WorldObject;
-import world.objects.food.Hamburger;
 
 public class GMath {
 	public static float getLength(float x, float y){

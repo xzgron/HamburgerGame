@@ -8,7 +8,6 @@ import game.GMath;
 import game.GSprite;
 import game.Game;
 import game.Main;
-import world.objects.food.GFoodShadow;
 
 public abstract class WorldObject extends GSprite{
 
@@ -27,7 +26,7 @@ public abstract class WorldObject extends GSprite{
 	
 	private boolean surface = false; ///////om något ska ligga på marken
 	
-	private GFoodShadow shadow = null; ///////skugga??
+	private Shadow shadow = null; ///////skugga??
 	
 	public WorldObject(float xPos, float yPos, float texWidth, float texHeight, float footPos, float headPos) {
 		super(xPos, yPos, texWidth, texHeight);
@@ -297,7 +296,7 @@ public abstract class WorldObject extends GSprite{
 	
 ////////////SHADOW////////////////////
 	public void createShadow(){
-		shadow = new GFoodShadow(this);
+		shadow = new Shadow(this);
 	}
 	
 	public void renderShadow() {

@@ -1,7 +1,7 @@
 package world.objects.food;
 
-import world.GFood;
 import world.WorldObject;
+import world.objects.GFood;
 import controllers.HostileController;
 import game.*;
 import game.HUDMaterial.HealthBar;

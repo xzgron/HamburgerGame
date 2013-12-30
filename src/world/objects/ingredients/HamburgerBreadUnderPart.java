@@ -1,6 +1,6 @@
 package world.objects.ingredients;
 
-import world.GIngredient;
+import world.objects.GIngredient;
 import world.objects.ingredients.interfaces.Armor;
 
 public class HamburgerBreadUnderPart extends GIngredient implements Armor{

@@ -1,6 +1,6 @@
 package world.objects.ingredients;
 
-import world.GIngredient;
+import world.objects.GIngredient;
 import world.objects.ingredients.interfaces.Activateable;
 
 public class OnionRings extends GIngredient implements Activateable{

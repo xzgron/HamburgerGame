@@ -15,7 +15,7 @@ import game.GSprite;
 
 import org.newdawn.slick.opengl.Texture;
 
-import world.GFood;
+import world.objects.GFood;
 import world.objects.food.Hamburger;
 
 public class ArmorBar extends DisplayBar{

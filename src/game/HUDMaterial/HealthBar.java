@@ -4,7 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 import org.newdawn.slick.opengl.Texture;
 
-import world.GFood;
+import world.objects.GFood;
 import world.objects.food.Hamburger;
 
 import game.*;

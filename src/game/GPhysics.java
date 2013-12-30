@@ -7,8 +7,8 @@ import game.parts.GameWorld;
 
 import org.lwjgl.input.Mouse;
 
-import world.GFood;
 import world.WorldObject;
+import world.objects.GFood;
 public class GPhysics {
 	
 	

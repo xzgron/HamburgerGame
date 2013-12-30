@@ -1,13 +1,16 @@
-package world;
+package world.objects;
 
 import java.util.LinkedList;
 
+import world.WorldObject;
+
 import game.GSprite;
 
-
+//Ingredients är npgot som hamburgaren kan ha på sig
 
 public abstract class GIngredient extends WorldObject{
 
+	
 	int maxDurability;
 	int durability;
 	

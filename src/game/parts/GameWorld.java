@@ -19,7 +19,6 @@ import org.newdawn.slick.opengl.Texture;
 import controllers.Controlls;
 import controllers.PlayerController;
 import controllers.GController;
-import world.GFood;
 import world.WorldObject;
 import world.objects.*;
 import world.objects.food.*;

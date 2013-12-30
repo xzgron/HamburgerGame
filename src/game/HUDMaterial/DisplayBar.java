@@ -17,7 +17,7 @@ import game.GTexture;
 
 import org.newdawn.slick.opengl.Texture;
 
-import world.GFood;
+import world.objects.GFood;
 
 public abstract class DisplayBar extends GSprite{
 	Texture backgroundTexture = null;

@@ -2,9 +2,9 @@ package world.objects.food;
 
 import java.util.LinkedList;
 
-import world.GFood;
-import world.GIngredient;
 import world.WorldObject;
+import world.objects.GFood;
+import world.objects.GIngredient;
 import world.objects.ingredients.*;
 import world.objects.ingredients.interfaces.Armor;
 import world.objects.ingredients.interfaces.HealthGiving;

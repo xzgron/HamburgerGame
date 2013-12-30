@@ -3,7 +3,7 @@ package controllers;
 import static org.lwjgl.input.Keyboard.*;
 import static org.lwjgl.input.Mouse.*;
 import static game.GMath.*;
-import world.GFood;
+import world.objects.GFood;
 import game.*;
 
 public class PlayerController extends GController {
