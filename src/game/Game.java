@@ -49,6 +49,7 @@ public class Game {
 			break;
 		case GAME:
 			gameWorld.handleInput();
+			HUD.handleInput();
 			break;
 		case OPTIONS:
 			options.handleInput();
@@ -72,6 +73,7 @@ public class Game {
 			break;
 		case GAME:
 			gameWorld.update();
+			HUD.update();
 			break;
 		case OPTIONS:
 			options.update();

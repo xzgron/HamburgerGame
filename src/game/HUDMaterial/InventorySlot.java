@@ -17,7 +17,7 @@ public class InventorySlot extends GButton{
 
 	float itemSize; // visuell storlek av objektet
 
-	TrueTypeFont durabilityFont = new TrueTypeFont(new Font("Times New Roman",Font.BOLD, 10), false);
+	TrueTypeFont durabilityFont = new TrueTypeFont(new Font("Times New Roman",Font.BOLD, 12), false);
 
 	public InventorySlot(float x, float y, float size, float itemSize) {
 		super(x, y, size, size);
@@ -56,11 +56,20 @@ public class InventorySlot extends GButton{
 					itemTexWidth, itemTexHeight);
 
 			if (item instanceof GIngredient) {
-				durabilityFont.drawString(getX() - getTexWidth(), getY()
-						- getTexHeight(), ((GIngredient) item).getDurability()
-						+ "", Color.white);
+				if(((GIngredient) item).getDurability() != -1)
+					durabilityFont.drawString(getX() - itemSize/2, getY() - itemSize/2, ((GIngredient) item).getDurability() + "", Color.white);
+				else
+					durabilityFont.drawString(getX() - itemSize/2, getY() - itemSize/2, "##", Color.white);
 			}
 		}
+	}
+	
+	public void setItem(GItem i){
+		item = i;
+	}
+
+	public GItem getItem() {
+		return item;
 	}
 
 

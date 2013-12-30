@@ -15,17 +15,26 @@ import game.GText;
 import game.GamePart;
 import game.HUDMaterial.ArmorBar;
 import game.HUDMaterial.HealthBar;
+import game.HUDMaterial.PlayerActionbar;
 
 public class HUD extends GamePart{
-	GSprite background = new GSprite(Display.getWidth()/2, Display.getHeight()-40 , Display.getWidth()-400, 80, "UI/actionbar");
 	
+	///////////HEALTHBAR////////
 	HealthBar healthBar = new HealthBar(15+150, 15, 300, 20, GameWorld.getPlayer());
 	GSprite healthBarBackground = new GSprite(healthBar.getX(), healthBar.getY() , healthBar.getTexWidth() + 6, healthBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
 	TrueTypeFont healthInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), false);
 	
+	//////////////////
+	
+	////////ARMORBAR///////
 	ArmorBar armorBar = new ArmorBar(15+150, 50, 300, 20,(Hamburger) GameWorld.getPlayer());
 	GSprite armorBarBackground = new GSprite(armorBar.getX(), armorBar.getY() , armorBar.getTexWidth() + 6, armorBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
-	TrueTypeFont armorInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), false);
+	TrueTypeFont armorInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), false);	
+	///////////////////////
+	
+	///////////ACTIONBAR///////////
+	PlayerActionbar actionbar = new PlayerActionbar();
+	
 	
 	public HUD() {
 		healthBar.setColor(0.2f, 0.8f, 0.2f, 1f);
@@ -36,15 +45,17 @@ public class HUD extends GamePart{
 	}
 	
 	public void handleInput() {
+		actionbar.handleInput();
 		 
 	}
 
 	public void update() {
-
+		actionbar.update();
 	}
 
 	public void render() {
-		//background.render();
+		actionbar.render();
+		
 		
 		{ //HEALTHBAR//
 			//GText.font.drawString(healthBar.getX()-155, healthBar.getY()-37, "Health", Color.yellow);

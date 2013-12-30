@@ -24,10 +24,10 @@ public class Hamburger extends GFood {
 
 		 equipments.add(new HamburgerBreadUnderPart(xPos, yPos));
 
-		// ingredients.add(new UnionRings(xPos, yPos));
+		equipments.add(new OnionRings(xPos, yPos));
 		equipments.add(new Beef90Gram(xPos, yPos));
-		equipments.add(new Beef60Gram(xPos, yPos));
-		// equipments.add(new Sallad(xPos, yPos));
+		//equipments.add(new Beef60Gram(xPos, yPos));
+		equipments.add(new Sallad(xPos, yPos));
 		// equipments.add(new Cheese(xPos, yPos));
 		 equipments.add(new HamburgerBreadOverPart(xPos, yPos));
 		createShadow();
@@ -290,7 +290,6 @@ public class Hamburger extends GFood {
 	public void landedOn(WorldObject go) {
 		if (go instanceof GFood) {
 			float dmg = -(getZSpeed() - go.getZSpeed()) * getWeight() / 1000;
-			System.out.println(dmg);
 			((GFood) go).damage((int) dmg);
 
 			if (!((GFood) go).isDead())

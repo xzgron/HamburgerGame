@@ -13,5 +13,7 @@ public class Controlls {
 	
 	static public int INVENTORY_KEY = KEY_I;
 	
+	static public int ACTIONBAR_SCROLL_DIRECTION = 1;
+	
 
 }

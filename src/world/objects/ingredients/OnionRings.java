@@ -5,7 +5,7 @@ import world.objects.ingredients.interfaces.Activateable;
 
 public class OnionRings extends GIngredient implements Activateable{
 
-	public OnionRings(float x, float y, float size) {
+	public OnionRings(float x, float y) {
 		super(x, y, 100,49, 0.45f, 0.55f,12,6);
 		setTexture("onionRings");
 	}

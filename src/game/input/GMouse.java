@@ -8,16 +8,24 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 public class GMouse {
+	public final static int BUTTON_LEFT = 0;
+	public final static int BUTTON_RIGHT = 1;
+	public final static int BUTTON_WHEEL = 2;
+	public final static int BUTTON_SPECIAL_1 = 3;
+	public final static int BUTTON_SPECIAL_2 = 4;
+	
 	private static boolean[] wasDown = new boolean[5];
 	
 	private static int dx;
 	private static int dy;
+	private static int dWheel;
 	
 	public static void update(){
 		for(int i = 0; i < wasDown.length; i++)
 			wasDown[i] = isButtonDown(i);
 		dx = Mouse.getDX();
-		dy = -Mouse.getDY();
+		dy = -Mouse.getDY()+1;
+		dWheel = Mouse.getDWheel();
 	}
 	
 	public static boolean isButtonPressed(int button){
@@ -60,6 +68,11 @@ public class GMouse {
 	
 	public static int getDX(){
 		return dx;
+	}
+	
+	public static int getDWheel(){
+		return dWheel;
+		
 	}
 	
 	

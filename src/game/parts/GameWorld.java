@@ -32,7 +32,7 @@ public class GameWorld extends GamePart {
 
 	private static float gravity = 800;
 
-	private static GFood player = new Hamburger(0, 0, 100);;
+	private static Hamburger player = new Hamburger(0, 0, 100);;
 
 	public GameWorld() {
 		player.setController(new PlayerController());
@@ -168,7 +168,7 @@ public class GameWorld extends GamePart {
 	}
 
 
-	public static GFood getPlayer(){
+	public static Hamburger getPlayer(){
 		return player;
 	}
 	
