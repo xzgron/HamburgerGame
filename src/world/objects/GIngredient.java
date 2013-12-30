@@ -8,7 +8,7 @@ import game.GSprite;
 
 //Ingredients är npgot som hamburgaren kan ha på sig
 
-public abstract class GIngredient extends WorldObject{
+public abstract class GIngredient extends GItem{
 
 	
 	int maxDurability;

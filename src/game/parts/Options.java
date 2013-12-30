@@ -2,7 +2,7 @@ package game.parts;
 
 import game.GamePart;
 
-public class Options implements GamePart{
+public class Options extends GamePart{
 
 	@Override
 	public void handleInput() {

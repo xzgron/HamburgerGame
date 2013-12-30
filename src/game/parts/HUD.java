@@ -16,7 +16,7 @@ import game.GamePart;
 import game.HUDMaterial.ArmorBar;
 import game.HUDMaterial.HealthBar;
 
-public class HUD implements GamePart{
+public class HUD extends GamePart{
 	GSprite background = new GSprite(Display.getWidth()/2, Display.getHeight()-40 , Display.getWidth()-400, 80, "UI/actionbar");
 	
 	HealthBar healthBar = new HealthBar(15+150, 15, 300, 20, GameWorld.getPlayer());

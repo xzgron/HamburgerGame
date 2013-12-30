@@ -26,7 +26,7 @@ import world.objects.nature.Tree;
 import static org.lwjgl.input.Keyboard.*;
 import static org.lwjgl.opengl.GL11.*;
 import static game.Game.*;
-public class GameWorld implements GamePart {
+public class GameWorld extends GamePart {
 
 	public static ArrayList<WorldObject> worldObjects = new ArrayList<WorldObject>();
 

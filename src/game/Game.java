@@ -4,13 +4,9 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.util.LinkedList;
 
-import game.parts.HUD;
-import game.parts.GameWorld;
-import game.parts.GameMenu;
-import game.parts.Intro;
-import game.parts.InventoryMenu;
-import game.parts.Options;
-import game.parts.StartMenu;
+import org.lwjgl.opengl.Display;
+
+import game.parts.*;
 
 public class Game {
 
