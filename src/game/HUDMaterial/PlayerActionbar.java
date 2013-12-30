@@ -10,6 +10,7 @@ import controllers.Controlls;
 
 import world.objects.GFood;
 import world.objects.GIngredient;
+import world.objects.GItem;
 import world.objects.food.Hamburger;
 import world.objects.ingredients.interfaces.Activateable;
 
@@ -130,5 +131,9 @@ public class PlayerActionbar {
 		for (InventorySlot slot : slots)
 			if (slot.getItem() != null)
 				slot.render();
+	}
+	
+	public GItem getSelectedItem(){
+		return slots[selectedSlot-1].getItem();
 	}
 }
