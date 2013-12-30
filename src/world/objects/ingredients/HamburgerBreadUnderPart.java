@@ -6,9 +6,4 @@ public class HamburgerBreadUnderPart extends GIngredient implements Armor{
 		super(x, y, 103, 51, 0.415f, 0.585f,30,90);
 		setTexture("hamburgerBreadUnderPart");
 	}
-	public void render(){
-		shadowDraw();
-	}
-
-
 }

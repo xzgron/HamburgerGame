@@ -54,7 +54,7 @@ public class Actionbar implements GamePart{
 			
 			armorBarBackground.render();
 			armorBar.render();
-			armorInfo.drawString(armorBar.getX()-145, armorBar.getY()-14, (int)armorBar.getCurrent() + "/" + (int)armorBar.getMax() + "   HP", Color.black);
+			armorInfo.drawString(armorBar.getX()-145, armorBar.getY()-14, (int)armorBar.getCurrent() + "/" + (int)armorBar.getMax() + "   ARMOR", Color.black);
 		}
 	}
 
