@@ -1,4 +1,4 @@
-package world.objects.ingredients;
+package world.objects.ingredients.interfaces;
 
 public interface Activateable {
 	

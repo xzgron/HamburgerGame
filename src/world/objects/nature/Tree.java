@@ -1,4 +1,4 @@
-package world.objects;
+package world.objects.nature;
 
 import world.WorldObject;
 import game.GSprite;

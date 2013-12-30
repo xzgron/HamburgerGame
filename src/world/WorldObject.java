@@ -8,7 +8,6 @@ import game.GMath;
 import game.GSprite;
 import game.Game;
 import game.Main;
-import world.objects.food.GFood;
 import world.objects.food.GFoodShadow;
 
 public abstract class WorldObject extends GSprite{

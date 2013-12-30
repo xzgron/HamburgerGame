@@ -1,4 +1,4 @@
-package world;
+package game.HUDMaterial;
 
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
@@ -17,7 +17,7 @@ import game.GTexture;
 
 import org.newdawn.slick.opengl.Texture;
 
-import world.objects.food.GFood;
+import world.GFood;
 
 public abstract class DisplayBar extends GSprite{
 	Texture backgroundTexture = null;

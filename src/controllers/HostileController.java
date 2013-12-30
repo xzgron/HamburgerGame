@@ -6,7 +6,7 @@ import game.input.GTimer;
 import game.Game;
 import game.Main;
 import game.parts.GameWorld;
-import world.objects.food.GFood;
+import world.GFood;
 
 public class HostileController extends GController {
 

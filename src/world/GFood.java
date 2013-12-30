@@ -1,9 +1,8 @@
-package world.objects.food;
+package world;
 
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.opengl.Texture;
 
-import world.WorldObject;
 import controllers.GController;
 import game.*;
 

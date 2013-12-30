@@ -18,7 +18,7 @@ import org.lwjgl.opengl.Display;
 
 import controllers.Controlls;
 
-public class Inventory implements GamePart{
+public class InventoryMenu implements GamePart{
 	GSprite Inventory = new GSprite(Display.getWidth()/2,Display.getHeight()/2, 600, 480, "UI/Inventory");
 
 

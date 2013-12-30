@@ -1,5 +1,8 @@
 package world.objects.ingredients;
 
+import world.GIngredient;
+import world.objects.ingredients.interfaces.HealthGiving;
+
 public class Beef60Gram extends GIngredient implements HealthGiving{
 
 	public Beef60Gram(float x, float y) {

@@ -4,7 +4,7 @@ import game.parts.GameWorld;
 
 import java.util.LinkedList;
 
-import world.objects.food.GFood;
+import world.GFood;
 
 public abstract class GController {
 

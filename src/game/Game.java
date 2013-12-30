@@ -4,11 +4,11 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.util.LinkedList;
 
-import game.parts.Actionbar;
+import game.parts.HUD;
 import game.parts.GameWorld;
 import game.parts.GameMenu;
 import game.parts.Intro;
-import game.parts.Inventory;
+import game.parts.InventoryMenu;
 import game.parts.Options;
 import game.parts.StartMenu;
 
@@ -21,11 +21,13 @@ public class Game {
 	}
 
 	private GamePart intro = new Intro();
-	private GamePart gameWorld = new GameWorld();
 	private GamePart startMenu = new StartMenu();
+
+	private GamePart gameWorld = new GameWorld();
 	private GamePart gameMenu = new GameMenu();
-	private GamePart actionbar = new Actionbar();
-	private GamePart inventory = new Inventory();
+	
+	private GamePart HUD = new HUD();
+	private GamePart inventoryMenu = new InventoryMenu();
 	private GamePart options = new Options();
 
 	private LinkedList<GState> gameStateList = new LinkedList<GState>();
@@ -47,7 +49,7 @@ public class Game {
 			gameMenu.handleInput();
 			break;
 		case INVENTORY_MENU:
-			inventory.handleInput();
+			inventoryMenu.handleInput();
 			break;
 		case GAME:
 			gameWorld.handleInput();
@@ -70,7 +72,7 @@ public class Game {
 			gameMenu.update();
 			break;
 		case INVENTORY_MENU:
-			inventory.update();
+			inventoryMenu.update();
 			break;
 		case GAME:
 			gameWorld.update();
@@ -99,13 +101,13 @@ public class Game {
 		case INVENTORY_MENU:
 			glClearColor(1, 1, 1, 1);
 			gameWorld.render();
-			actionbar.render();
-			inventory.render();
+			HUD.render();
+			inventoryMenu.render();
 			break;
 		case GAME:
 			glClearColor(1, 1, 1, 1);
 			gameWorld.render();
-			actionbar.render();
+			HUD.render();
 			break;
 		case OPTIONS:
 			options.render();

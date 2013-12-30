@@ -1,9 +1,7 @@
-package world.objects.ingredients;
+package world;
 
 import java.util.LinkedList;
 
-import world.WorldObject;
-import world.objects.food.GFood;
 import game.GSprite;
 
 

@@ -1,9 +1,10 @@
 package world.objects.food;
 
-import world.HealthBar;
+import world.GFood;
 import world.WorldObject;
 import controllers.HostileController;
 import game.*;
+import game.HUDMaterial.HealthBar;
 import game.parts.GameWorld;
 
 public class BlueBerry extends GFood {

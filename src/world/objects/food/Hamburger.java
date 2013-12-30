@@ -2,13 +2,17 @@ package world.objects.food;
 
 import java.util.LinkedList;
 
-import world.HealthBar;
+import world.GFood;
+import world.GIngredient;
 import world.WorldObject;
 import world.objects.ingredients.*;
+import world.objects.ingredients.interfaces.Armor;
+import world.objects.ingredients.interfaces.HealthGiving;
 import game.GMath;
 import game.GSprite;
 import game.GPhysics;
 import game.Game;
+import game.HUDMaterial.HealthBar;
 import game.parts.GameWorld;
 
 public class Hamburger extends GFood {

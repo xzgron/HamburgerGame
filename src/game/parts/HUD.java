@@ -6,8 +6,6 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
-import world.ArmorBar;
-import world.HealthBar;
 import world.objects.food.Hamburger;
 
 
@@ -15,8 +13,10 @@ import game.GImage;
 import game.GSprite;
 import game.GText;
 import game.GamePart;
+import game.HUDMaterial.ArmorBar;
+import game.HUDMaterial.HealthBar;
 
-public class Actionbar implements GamePart{
+public class HUD implements GamePart{
 	GSprite background = new GSprite(Display.getWidth()/2, Display.getHeight()-40 , Display.getWidth()-400, 80, "UI/actionbar");
 	
 	HealthBar healthBar = new HealthBar(15+150, 15, 300, 20, GameWorld.getPlayer());
@@ -27,7 +27,7 @@ public class Actionbar implements GamePart{
 	GSprite armorBarBackground = new GSprite(armorBar.getX(), armorBar.getY() , armorBar.getTexWidth() + 6, armorBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
 	TrueTypeFont armorInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), false);
 	
-	public Actionbar() {
+	public HUD() {
 		healthBar.setColor(0.2f, 0.8f, 0.2f, 1f);
 		healthBar.setBackgroundColor(0.8f, 0.2f, 0.2f, 1f);
 		

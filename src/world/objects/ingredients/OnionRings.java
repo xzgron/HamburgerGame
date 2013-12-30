@@ -1,5 +1,8 @@
 package world.objects.ingredients;
 
+import world.GIngredient;
+import world.objects.ingredients.interfaces.Activateable;
+
 public class OnionRings extends GIngredient implements Activateable{
 
 	public OnionRings(float x, float y, float size) {
