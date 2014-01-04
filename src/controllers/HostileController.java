@@ -25,22 +25,22 @@ public class HostileController extends GController {
 			food.stop();
 		
 		if (waitTimer.hasExceeded()) {
-			float dx = GameWorld.getPlayer().getX() - food.getX();
-			float dy = GameWorld.getPlayer().getGroundYPos() - food.getGroundYPos();
+			float dx = Main.game.world.getPlayer().getX() - food.getX();
+			float dy = Main.game.world.getPlayer().getGroundYPos() - food.getGroundYPos();
 			
 			float ovalDistance = GMath.getLength(dx,dy*2);
 			
-			dx = dx/ovalDistance * GameWorld.getPlayer().getRadius();
-			dy = dy/ovalDistance * GameWorld.getPlayer().getRadius();
+			dx = dx/ovalDistance * Main.game.world.getPlayer().getRadius();
+			dy = dy/ovalDistance * Main.game.world.getPlayer().getRadius();
 			float r = GMath.getLength(dx,dy);
 			
-			if (GMath.getDistance(GameWorld.getPlayer(), food) < r + 100 /*&& !GPhysics.objectsOverlapp(GameWorld.getPlayer(), food)*/) {
+			if (GMath.getDistance(Main.game.world.getPlayer(), food) < r + 100 /*&& !GPhysics.objectsOverlapp(Main.game.world.getPlayer(), food)*/) {
 				if (!food.isInAir()) {
-					food.setSpeedByVector(250, GameWorld.getPlayer().getX() - food.getX(), GameWorld.getPlayer().getY() - food.getY());
+					food.setSpeedByVector(250, Main.game.world.getPlayer().getX() - food.getX(), Main.game.world.getPlayer().getY() - food.getY());
 					food.setZSpeed(170);
 				}
 			} else {
-				food.tryGroundWalk(GameWorld.getPlayer().getX() - food.getX(), GameWorld.getPlayer().getY() - food.getY());
+				food.tryGroundWalk(Main.game.world.getPlayer().getX() - food.getX(), Main.game.world.getPlayer().getY() - food.getY());
 				food.tryJump();
 			}
 		}

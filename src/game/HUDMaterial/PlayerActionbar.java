@@ -15,6 +15,7 @@ import world.objects.food.Hamburger;
 import world.objects.ingredients.interfaces.Activateable;
 
 import game.GamePart;
+import game.Main;
 import game.input.GKeyboard;
 import game.input.GMouse;
 import game.parts.GameWorld;
@@ -43,25 +44,34 @@ public class PlayerActionbar {
 		// minus selectedSlot är den avstängda slotten.
 		
 		int prevSelectedSlot = selectedSlot;
-		int vissibleSlots = 0;
 		
-		for(int i = 0; i < slots.length; i++){
+		int vissibleSlots = 0;
+	
+		for(int i = 0; i < slots.length; i++){ //räknar ut antalet vissible slots
 			if(slots[i].getItem() == null){
 				vissibleSlots = i;
 				break;
 				}
 		}
 		
+		for(int i = 0; i < vissibleSlots; i++){ //clicka
+			if(slots[i].isClicked(GMouse.BUTTON_LEFT)){
+				selectedSlot = i+1;
+				if(selectedSlot == prevSelectedSlot)
+					selectedSlot = -selectedSlot;
+				}
+		}
+
 		
 		if(GMouse.getDWheel() < 0 /*&& selectedSlot > 0*/){
-			selectedSlot -= Controlls.ACTIONBAR_SCROLL_DIRECTION;
+			selectedSlot += Controlls.ACTIONBAR_SCROLL_DIRECTION;
 			if(selectedSlot < 1)
 				selectedSlot = vissibleSlots;
 			if(selectedSlot > vissibleSlots)
 				selectedSlot = 1;
 			}
 		else if(GMouse.getDWheel() > 0 /*&& selectedSlot > 0*/){
-			selectedSlot += Controlls.ACTIONBAR_SCROLL_DIRECTION;
+			selectedSlot -= Controlls.ACTIONBAR_SCROLL_DIRECTION;
 			if(selectedSlot < 1)
 				selectedSlot = vissibleSlots;
 			if(selectedSlot > vissibleSlots)
@@ -102,7 +112,7 @@ public class PlayerActionbar {
 	public void update() {// updaterar vilka slots som är synliga och var de ska
 							// vara
 
-		Hamburger player = GameWorld.getPlayer();
+		Hamburger player = Main.game.world.getPlayer();
 
 		// Detta ger oss en upp och ner vänd lista av players alla activerabara
 		// ingredienser.

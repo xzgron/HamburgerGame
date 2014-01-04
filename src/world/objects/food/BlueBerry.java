@@ -1,13 +1,14 @@
-package world.objects.food;
+package world.objects.food.hostile;
 
 import world.WorldObject;
 import world.objects.GFood;
+import world.objects.HostileFood;
 import controllers.HostileController;
 import game.*;
 import game.HUDMaterial.HealthBar;
 import game.parts.GameWorld;
 
-public class BlueBerry extends GFood {
+public class BlueBerry extends HostileFood {
 
 	HealthBar healthBar = new HealthBar(0, -30, 50, 7,  this);
 
@@ -27,12 +28,12 @@ public class BlueBerry extends GFood {
 		
 
 		setWalkingSpeed(GMath.random(60, 100));
-		setJumpingForce((float)Math.sqrt(getWeight())*120);
-		
+		setJumpingForce((float)Math.sqrt(getWeight())*120);		
 		setDeathTexture("shadow");
 		setDeathSound("blueberry/death" + (int)GMath.random(1,4));
 
 	}
+
 
 	public void render() {
 		super.render();
@@ -44,12 +45,12 @@ public class BlueBerry extends GFood {
 	
 	//////////ACTION////////////////////
 	public void collidedWith(WorldObject go) {
-		if (go == GameWorld.getPlayer()){
+		if (go ==  Main.game.world.getPlayer()){
 			float dx = getXSpeed()-go.getXSpeed();
 			float dy = getYSpeed()-go.getYSpeed();
-			float dmg = GMath.getLength(dx,dy)*getWeight()/1000;
-			if((dx > 0) == (getXSpeed() > 0) && (dy > 0) == (getYSpeed() > 0))
-				((GFood) go).damage((int) dmg);
+			float dmg = (float) (GMath.getLength(dx,dy)*Math.sqrt(getWeight())/500); // genom 1000 om roten ur
+
+				((GFood) go).damage((int) dmg,this);
 			
 			addSpeed(go.getXSpeed(), go.getYSpeed(), 0);
 		}

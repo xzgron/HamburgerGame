@@ -132,6 +132,6 @@ public class GPhysics {
 	}
 
 	public static void useGravity(GFood gf) {
-		gf.accelerate(0,0,-GameWorld.getGravity());
+		gf.accelerate(0,0,-Main.game.world.getGravity());
 	}
 }

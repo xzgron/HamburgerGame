@@ -32,29 +32,29 @@ public class GameWorld extends GamePart {
 
 	public static ArrayList<WorldObject> worldObjects = new ArrayList<WorldObject>();
 
-	private static float gravity = 800;
+	private float gravity = 800;
 
-	private static Player player = new Player(0, 0);;
+	private Player player = new Player(0, 0);;
 
 	public GameWorld() {
 		player.setController(new PlayerController());
-		addGO(player);
-		addGO(new Tree(150, 30, 700,700));
-		addGO(new Tree(350, 80, 800,700));
-		addGO(new Tree(50, 170, 900,700));
+		spawn(player);
+		spawn(new Tree(150, 30, 700,700));
+		spawn(new Tree(350, 80, 800,700));
+		spawn(new Tree(50, 170, 900,700));
 		
 
 		for (int i = 0; i < 5; i++)
-			addGO(new BlueBerry(GMath.random(500,-500),
+			spawn(new BlueBerry(GMath.random(500,-500),
 					GMath.random(500,-500), GMath.random(20,30)));
 
-		addGO(new BlueBerry(GMath.random(500,-500),
+		spawn(new BlueBerry(GMath.random(500,-500),
 				GMath.random(500,-500), 70));
 	}
 	
 	///////////MAIN PART////////////////
 	public void handleInput() {
-		if(isKeyDown(KEY_ESCAPE))
+		if(GKeyboard.isKeyPressed(KEY_ESCAPE))
 			Main.game.setGameState(GState.GAME_MENU);
 		
 	
@@ -66,7 +66,7 @@ public class GameWorld extends GamePart {
 	public void update() {
 		for	(WorldObject go : worldObjects){ //rensa dštt
 			if(go.getClass().isAssignableFrom(GFood.class) && ((GFood) go).isDead())
-				removeGO(go);
+				deSpawn(go);
 			}
 		
 		for (WorldObject go : worldObjects)
@@ -97,11 +97,11 @@ public class GameWorld extends GamePart {
 	/////////////HANTERA OBJECT/////////////
 	
 
-	public void addGO(WorldObject GO) {
+	public void spawn(WorldObject GO) {
 		worldObjects.add(GO);
 	}
 
-	public void removeGO(WorldObject GO) {
+	public void deSpawn(WorldObject GO) {
 		worldObjects.remove(GO);
 	}
 
@@ -129,6 +129,7 @@ public class GameWorld extends GamePart {
 			}
 		}
 		//////////OBJECT …VER ANDRA SKA RENDRAS EFTER/////////FUNKAR F…R TILLF€LLET..
+		moved = true;
 		while (moved) {
 			moved = false;
 			for (int i = 0; i < worldObjects.size() - 1; i++) {
@@ -169,12 +170,12 @@ public class GameWorld extends GamePart {
 	}
 	
 	
-	public static float getGravity() {
+	public float getGravity() {
 		return gravity;
 	}
 
 
-	public static Hamburger getPlayer(){
+	public Player getPlayer(){
 		return player;
 	}
 	

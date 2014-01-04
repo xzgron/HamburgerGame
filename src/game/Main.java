@@ -82,7 +82,15 @@ public class Main {
 			unprossesedSeconds += delta_time;
 			time = newTime;
 			// //////////////////////
-
+			
+			// ////////////R€KNA UT FPS//////////
+			deltaTimePerWantedFps += delta_time;
+			if (frames % wanted_fps == 0) {
+				fps = Math.round(wanted_fps / deltaTimePerWantedFps);
+				deltaTimePerWantedFps = 0;
+			}
+			// //////////////////////////
+				
 	
 			// ///UPPDATERA TITEL/////////
 			Display.setTitle(title + "   fps: " + fps);
@@ -96,17 +104,7 @@ public class Main {
 				GKeyboard.update();
 				GMouse.update();
 				unprossesedSeconds -= getDelta();
-				
-				
-				// ////////////R€KNA UT FPS//////////
-				deltaTimePerWantedFps += delta_time;
-				if (frames % wanted_fps == 0) {
-					fps = Math.round(wanted_fps / deltaTimePerWantedFps);
-					deltaTimePerWantedFps = 0;
 				}
-				// //////////////////////////
-
-			}
 			// /////////////////
 			
 			render();

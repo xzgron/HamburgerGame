@@ -13,6 +13,7 @@ import game.GImage;
 import game.GSprite;
 import game.GText;
 import game.GamePart;
+import game.Main;
 import game.HUDMaterial.ArmorBar;
 import game.HUDMaterial.HealthBar;
 import game.HUDMaterial.PlayerActionbar;
@@ -20,14 +21,14 @@ import game.HUDMaterial.PlayerActionbar;
 public class HUD extends GamePart{
 	
 	///////////HEALTHBAR////////
-	HealthBar healthBar = new HealthBar(15+150, 15, 300, 20, GameWorld.getPlayer());
+	HealthBar healthBar = new HealthBar(15+150, 15, 300, 20, Main.game.world.getPlayer());
 	GSprite healthBarBackground = new GSprite(healthBar.getX(), healthBar.getY() , healthBar.getTexWidth() + 6, healthBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
 	TrueTypeFont healthInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), false);
 	
 	//////////////////
 	
 	////////ARMORBAR///////
-	ArmorBar armorBar = new ArmorBar(15+150, 50, 300, 20,(Hamburger) GameWorld.getPlayer());
+	ArmorBar armorBar = new ArmorBar(15+150, 50, 300, 20,(Hamburger) Main.game.world.getPlayer());
 	GSprite armorBarBackground = new GSprite(armorBar.getX(), armorBar.getY() , armorBar.getTexWidth() + 6, armorBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
 	TrueTypeFont armorInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), false);	
 	///////////////////////

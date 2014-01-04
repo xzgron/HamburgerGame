@@ -19,11 +19,11 @@ public class Game {
 	private GamePart intro = new Intro();
 	private GamePart startMenu = new StartMenu();
 
-	private GameWorld world = new GameWorld();
+	public GameWorld world;
 	private GamePart gameMenu = new GameMenu();
 	
-	private GamePart HUD = new HUD();
-	private GamePart inventoryMenu = new InventoryMenu();
+	private GamePart HUD;
+	private GamePart inventoryMenu;
 	private GamePart options = new Options();
 
 	private LinkedList<GState> gameStateList = new LinkedList<GState>();
@@ -69,6 +69,7 @@ public class Game {
 			gameMenu.update();
 			break;
 		case INVENTORY_MENU:
+			HUD.update();
 			inventoryMenu.update();
 			break;
 		case GAME:
@@ -124,6 +125,12 @@ public class Game {
 		case INVENTORY_MENU:
 			break;
 		case GAME:
+			if(world == null)
+				world = new GameWorld();
+			if(HUD == null)
+				HUD = new HUD();
+			if(inventoryMenu == null)
+				inventoryMenu = new InventoryMenu();
 			break;
 		case OPTIONS:
 			break;
