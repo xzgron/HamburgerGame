@@ -34,7 +34,6 @@ public class HamburgerEquipmentbar {
 	}
 	
 	public void handleInput(){
-		
 		if(GMouse.getDWheel() < 0){
 			for(HamburgerEquipmentSlot slot: slots)
 				slot.move(0,5);

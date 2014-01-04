@@ -19,9 +19,11 @@ import org.newdawn.slick.opengl.Texture;
 import controllers.Controlls;
 import controllers.PlayerController;
 import controllers.GController;
+import world.Player;
 import world.WorldObject;
 import world.objects.*;
 import world.objects.food.*;
+import world.objects.food.hostile.BlueBerry;
 import world.objects.nature.Tree;
 import static org.lwjgl.input.Keyboard.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -32,7 +34,7 @@ public class GameWorld extends GamePart {
 
 	private static float gravity = 800;
 
-	private static Hamburger player = new Hamburger(0, 0, 100);;
+	private static Player player = new Player(0, 0);;
 
 	public GameWorld() {
 		player.setController(new PlayerController());
@@ -127,11 +129,15 @@ public class GameWorld extends GamePart {
 			}
 		}
 		//////////OBJECT …VER ANDRA SKA RENDRAS EFTER/////////FUNKAR F…R TILLF€LLET..
-		for (int i = 0; i < worldObjects.size() - 1; i++) {
-			if (GPhysics.objectsOverlapp(worldObjects.get(i), worldObjects.get(i + 1)) && worldObjects.get(i).getFootZPos() >= worldObjects.get(i+1).getHeadZPos()) {
-				temp = worldObjects.get(i); // object i flyttas innan i + 1
-				worldObjects.set(i, worldObjects.get(i + 1));
-				worldObjects.set(i + 1, temp);
+		while (moved) {
+			moved = false;
+			for (int i = 0; i < worldObjects.size() - 1; i++) {
+				if (GPhysics.objectsOverlapp(worldObjects.get(i), worldObjects.get(i + 1)) && worldObjects.get(i).getFootZPos() >= worldObjects.get(i+1).getHeadZPos()) {
+					temp = worldObjects.get(i); // object i flyttas innan i + 1
+					worldObjects.set(i, worldObjects.get(i + 1));
+					worldObjects.set(i + 1, temp);
+					moved = true;
+				}
 			}
 		}
 		

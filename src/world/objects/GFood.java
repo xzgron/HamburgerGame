@@ -66,12 +66,12 @@ public abstract class GFood extends WorldObject {
 
 	// ///////////ABOUT HEALTH/////////////////////
 
-	public void aboveDamage(int amt){
-		damage(amt);
+	public void aboveDamage(int amt, WorldObject attacker){
+		damage(amt, attacker);
 	}
 
 	
-	public void damage(int amt) {
+	public void damage(int amt, WorldObject attacker) {
 		if(amt < 0)
 			return;
 		currentHealth -= amt;
@@ -81,8 +81,8 @@ public abstract class GFood extends WorldObject {
 		}
 	}
 	
-	public void underDamage(int amt){
-		damage(amt);
+	public void underDamage(int amt, WorldObject attacker){
+		damage(amt, attacker);
 	}
 
 	public void heal(int amt) {
@@ -112,7 +112,7 @@ public abstract class GFood extends WorldObject {
 	}
 
 	public boolean isDead() {
-		if (getHealth() == 0)
+		if (getHealth() <= 0)
 			return true;
 		else
 			return false;

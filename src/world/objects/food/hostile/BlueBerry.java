@@ -46,7 +46,7 @@ public class BlueBerry extends HostileFood {
 	
 	//////////ACTION////////////////////
 	public void collidedWith(WorldObject go) {
-		if (go ==  Main.game.world.getPlayer()){
+		if (go == Main.game.world.getPlayer()){
 			float dx = getXSpeed()-go.getXSpeed();
 			float dy = getYSpeed()-go.getYSpeed();
 			float dmg = (float) (GMath.getLength(dx,dy)*Math.sqrt(getWeight())/500); // genom 1000 om roten ur

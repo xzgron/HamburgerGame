@@ -3,6 +3,8 @@ package world.objects;
 import java.util.LinkedList;
 
 import world.WorldObject;
+import world.objects.ingredients.interfaces.Armor;
+import world.objects.ingredients.interfaces.HealthGiving;
 
 import game.GSprite;
 
@@ -31,8 +33,13 @@ public abstract class GIngredient extends GItem{
 		
 	}
 	
-	public boolean isPositionLegal(LinkedList<GIngredient> list, int requestedPosition){
+	public boolean isPositionLegal(LinkedList<GIngredient> list){
 		return true;
+	}
+	
+	public boolean isDamageable(){
+		return (this instanceof Armor || this instanceof HealthGiving);
+		
 	}
 	
 	public int getMaxDurability(){

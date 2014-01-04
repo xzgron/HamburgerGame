@@ -19,7 +19,7 @@ public class Game {
 	private GamePart intro = new Intro();
 	private GamePart startMenu = new StartMenu();
 
-	private GamePart gameWorld = new GameWorld();
+	private GameWorld world = new GameWorld();
 	private GamePart gameMenu = new GameMenu();
 	
 	private GamePart HUD = new HUD();
@@ -48,7 +48,7 @@ public class Game {
 			inventoryMenu.handleInput();
 			break;
 		case GAME:
-			gameWorld.handleInput();
+			world.handleInput();
 			HUD.handleInput();
 			break;
 		case OPTIONS:
@@ -72,7 +72,7 @@ public class Game {
 			inventoryMenu.update();
 			break;
 		case GAME:
-			gameWorld.update();
+			world.update();
 			HUD.update();
 			break;
 		case OPTIONS:
@@ -93,18 +93,18 @@ public class Game {
 			break;
 		case GAME_MENU:
 			glClearColor(1, 1, 1, 1);
-			gameWorld.render();
+			world.render();
 			gameMenu.render();
 			break;
 		case INVENTORY_MENU:
 			glClearColor(1, 1, 1, 1);
-			gameWorld.render();
+			world.render();
 			HUD.render();
 			inventoryMenu.render();
 			break;
 		case GAME:
 			glClearColor(1, 1, 1, 1);
-			gameWorld.render();
+			world.render();
 			HUD.render();
 			break;
 		case OPTIONS:
