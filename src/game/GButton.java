@@ -53,8 +53,8 @@ public class GButton extends GSprite{
 			b = false;
 	}
 
-	public void restart(int i){
-		wasHeldIn[i] = false;
+	public void restart(int button){
+		wasHeldIn[button] = false;
 	}
 	
 

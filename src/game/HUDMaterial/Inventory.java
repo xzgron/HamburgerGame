@@ -69,6 +69,7 @@ public class Inventory {
 		return false;
 	
 	}
+	
 	public void restartButtons(){
 		for (int y = 0; y < slots[0].length; y++)
 			for (int x = 0; x < slots.length; x++)
