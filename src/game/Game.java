@@ -162,8 +162,4 @@ public class Game {
 		gameStateList.removeLast();
 	}
 
-	public static void focusPoint(float x, float y) {
-		glTranslatef(-x + Main.window_width / 2, -y + Main.window_height / 2, 0);
-	}
-
 }

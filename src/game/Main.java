@@ -6,6 +6,8 @@ import game.input.GMouse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -121,11 +123,27 @@ public class Main {
 
 	private static void initDisplay() {
 		try {
-			Display.setDisplayMode(new DisplayMode(window_width, window_height));
+			String[] displayOptions = {"Fullscreen", "800x600", "1200x800"};
+			int i = JOptionPane.showOptionDialog(null, "", "Display thing", 0, 0, null, displayOptions, -1);
+			switch(i){
+			case 0:
+				Display.setFullscreen(true);
+				break;
+			case 1:
+				window_width = 800;
+				window_height = 600;
+				Display.setDisplayMode(new DisplayMode(window_width, window_height));
+				break;
+			case 2:
+				window_width = 1200;
+				window_height = 800;
+				Display.setDisplayMode(new DisplayMode(window_width, window_height));
+				break;
+			}
 			Display.setResizable(false);
+			
 			Display.create();
 			Display.setVSyncEnabled(true);
-
 		} catch (LWJGLException e) {
 			Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
 		}

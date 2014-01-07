@@ -19,7 +19,10 @@ import static org.lwjgl.opengl.GL11.*;
 import static game.Game.*;
 public class GameWorld extends GamePart {
 
-	public static ArrayList<WorldObject> worldObjects = new ArrayList<WorldObject>();
+	public float xTranslation = 0;
+	public float yTranslation = 0;
+	
+	public static LinkedList<WorldObject> worldObjects = new LinkedList<WorldObject>();
 
 	private float gravity = 800;
 
@@ -71,7 +74,7 @@ public class GameWorld extends GamePart {
 				yPos = GMath.random(1,1.5f)*Display.getHeight()/2+player.getY();
 			else
 				yPos = -GMath.random(1,1.5f)*Display.getHeight()/2+player.getY();
-			spawn(new BlueBerry(xPos,yPos, GMath.random(20,30)+blueberrySize));
+			spawn(new BlueBerry(xPos,yPos, GMath.random(20,30)+(float)Math.sqrt(blueberrySize)));
 			blueberrySize+=0.2f;
 			spawnTimer.reset();
 		}
@@ -90,11 +93,16 @@ public class GameWorld extends GamePart {
 			prevSize = worldObjects.size();
 		}
 		handleCollision();
+		
+		///////////FOCUSA PLAYER///////////
+		xTranslation = -player.getX() + Display.getWidth() / 2f;
+		yTranslation = -player.getY() + Display.getHeight() / 2f;
+		///////////
 	}
 
 	public void render() {
 		glPushMatrix();
-		Game.focusPoint(player.getX(),player.getY());
+		glTranslatef(xTranslation,yTranslation,0);
 		renderGrass();
 		sortObjects();
 		for (WorldObject go : worldObjects)
@@ -151,7 +159,7 @@ public class GameWorld extends GamePart {
 		while (moved) {
 			moved = false;
 			for (int i = 0; i < worldObjects.size() - 1; i++) {
-				if (/*GPhysics.objectsOverlapp(worldObjects.get(i), worldObjects.get(i + 1)) &&*/ worldObjects.get(i).getFootZPos() -1 >= worldObjects.get(i+1).getHeadZPos()) {
+				if (GPhysics.objectsOverlapp(worldObjects.get(i), worldObjects.get(i + 1)) && worldObjects.get(i).getFootZPos() -1 >= worldObjects.get(i+1).getHeadZPos()) {
 					temp = worldObjects.get(i); // object i flyttas innan i + 1
 					worldObjects.set(i, worldObjects.get(i + 1));
 					worldObjects.set(i + 1, temp);
@@ -195,6 +203,14 @@ public class GameWorld extends GamePart {
 
 	public Player getPlayer(){
 		return player;
+	}
+	
+	public float getXTranslation(){	
+		return xTranslation;
+	}
+	
+	public float getYTranslation(){	
+		return yTranslation;
 	}
 	
 }

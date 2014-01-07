@@ -8,6 +8,7 @@ import game.GMath;
 import game.GSprite;
 import game.Game;
 import game.Main;
+import game.input.GMouse;
 
 public abstract class WorldObject extends GSprite{
 
@@ -331,9 +332,16 @@ public abstract class WorldObject extends GSprite{
 	}
 	
 	public void collidedWith(WorldObject go){
-		
 	}
 	
 /////////////////////////////////////////
 	
+	//////////////////WORLD TRANSLATION////////////
+	public boolean isCursorWithin(){
+		return GMath.isPosWithinSquare(GMouse.getX()+Main.game.world.getXTranslation(),GMouse.getY()+Main.game.world.getYTranslation(),getX(), getY(), getTexWidth(), getTexHeight());
+	}
+	
+	
+	
+	//////////////////////////////////
 }
