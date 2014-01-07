@@ -2,9 +2,12 @@ package game;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.awt.Font;
 import java.util.LinkedList;
 
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 
 import game.parts.*;
 
@@ -19,11 +22,11 @@ public class Game {
 	private GamePart intro = new Intro();
 	private GamePart startMenu = new StartMenu();
 
-	private GamePart gameWorld = new GameWorld();
+	public GameWorld world;
 	private GamePart gameMenu = new GameMenu();
 	
-	private GamePart HUD = new HUD();
-	private GamePart inventoryMenu = new InventoryMenu();
+	private GamePart HUD;
+	private GamePart inventoryMenu;
 	private GamePart options = new Options();
 
 	private LinkedList<GState> gameStateList = new LinkedList<GState>();
@@ -48,7 +51,7 @@ public class Game {
 			inventoryMenu.handleInput();
 			break;
 		case GAME:
-			gameWorld.handleInput();
+			world.handleInput();
 			HUD.handleInput();
 			break;
 		case OPTIONS:
@@ -69,10 +72,11 @@ public class Game {
 			gameMenu.update();
 			break;
 		case INVENTORY_MENU:
+			HUD.update();
 			inventoryMenu.update();
 			break;
 		case GAME:
-			gameWorld.update();
+			world.update();
 			HUD.update();
 			break;
 		case OPTIONS:
@@ -93,18 +97,18 @@ public class Game {
 			break;
 		case GAME_MENU:
 			glClearColor(1, 1, 1, 1);
-			gameWorld.render();
+			world.render();
 			gameMenu.render();
 			break;
 		case INVENTORY_MENU:
 			glClearColor(1, 1, 1, 1);
-			gameWorld.render();
+			world.render();
 			HUD.render();
 			inventoryMenu.render();
 			break;
 		case GAME:
 			glClearColor(1, 1, 1, 1);
-			gameWorld.render();
+			world.render();
 			HUD.render();
 			break;
 		case OPTIONS:
@@ -112,7 +116,7 @@ public class Game {
 			break;
 		}
 	}
-
+	TrueTypeFont loadingInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 32), false);	
 	public void setGameState(GState STATE) {
 		switch (STATE) {
 		case INTRO:
@@ -124,6 +128,25 @@ public class Game {
 		case INVENTORY_MENU:
 			break;
 		case GAME:
+
+			if(world == null){
+				Main.cleanseDisplay();
+				loadingInfo.drawString(Display.getWidth()/2-100, Display.getHeight()/2-200, "Loading World..",Color.black);
+				Display.update();
+				world = new GameWorld();
+				}
+			if(HUD == null){
+				Main.cleanseDisplay();
+				loadingInfo.drawString(Display.getWidth()/2-100, Display.getHeight()/2-200, "Loading HUD..",Color.black);
+				Display.update();
+				HUD = new HUD();
+			}
+			if(inventoryMenu == null){
+				Main.cleanseDisplay();
+				loadingInfo.drawString(Display.getWidth()/2-100, Display.getHeight()/2-200, "Loading Inventory..",Color.black);
+				Display.update();
+				inventoryMenu = new InventoryMenu();
+			}
 			break;
 		case OPTIONS:
 			break;

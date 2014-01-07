@@ -21,14 +21,16 @@ public abstract class GFood extends WorldObject {
 
 	private GController controller;
 
-	public GFood(float xPos, float yPos, float texWidth, float texHeight, float footPos,
+	public GFood(float xPos, float yPos, float texWidth, float texHeight, String texture, float footPos,
 			float headPos, int weight, int health) {
-		super(xPos, yPos, texWidth, texHeight, footPos, headPos);
+		super(xPos, yPos, texWidth, texHeight, "food/"+texture, footPos, headPos);
+		setTexFolder("food/");
+		
 		maxHealth = health;
 		currentHealth = maxHealth;
 		setRadius(texWidth/2);
 		setWeight(weight);
-		setTexFolder("food/");
+		
 	}
 
 	public void update() {
@@ -66,12 +68,12 @@ public abstract class GFood extends WorldObject {
 
 	// ///////////ABOUT HEALTH/////////////////////
 
-	public void aboveDamage(int amt){
-		damage(amt);
+	public void aboveDamage(int amt, WorldObject attacker){
+		damage(amt, attacker);
 	}
 
 	
-	public void damage(int amt) {
+	public void damage(int amt, WorldObject attacker) {
 		if(amt < 0)
 			return;
 		currentHealth -= amt;
@@ -81,8 +83,8 @@ public abstract class GFood extends WorldObject {
 		}
 	}
 	
-	public void underDamage(int amt){
-		damage(amt);
+	public void underDamage(int amt, WorldObject attacker){
+		damage(amt, attacker);
 	}
 
 	public void heal(int amt) {
@@ -112,7 +114,7 @@ public abstract class GFood extends WorldObject {
 	}
 
 	public boolean isDead() {
-		if (getHealth() == 0)
+		if (getHealth() <= 0)
 			return true;
 		else
 			return false;

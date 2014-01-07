@@ -21,11 +21,14 @@ import controllers.Controlls;
 public class Inventory {
 
 	InventorySlot[][] slots;
+	float slotSize = 60;
+	float itemSize = 50;
+	float yPos;
+	float xPos;
 
 	public Inventory(float xPos, float yPos, int width, int height) {
-		float slotSize = 70;
-		float itemSize = 60;
-
+		this.xPos = xPos;
+		this.yPos = yPos;
 		slots = new InventorySlot[width][height];
 		for (int x = 0; x < slots.length; x++)
 			for (int y = 0; y < slots[0].length; y++) {
@@ -36,7 +39,12 @@ public class Inventory {
 				slots[x][y].setColor(0.2f, 0.2f, 0.7f, 0.9f);
 			}
 	}
-
+	public void handleInput(){
+		for (int x = 0; x < slots.length; x++)
+			for (int y = 0; y < slots[0].length; y++)
+				slots[x][y].handleInput();
+	}
+	
 	public void update() {
 		for (int x = 0; x < slots.length; x++)
 			for (int y = 0; y < slots[0].length; y++)
@@ -50,13 +58,52 @@ public class Inventory {
 
 	}
 
-	public void add(GItem i) {
+	public boolean add(GItem i) {
 		for (int y = 0; y < slots[0].length; y++)
 			for (int x = 0; x < slots.length; x++)
 				if (slots[x][y].getItem() == null){
 					slots[x][y].setItem(i);
-					return;
+					return true;
 					}
 		System.out.println("Inventory is full");
+		return false;
+	
+	}
+	
+	public void restartButtons(){
+		for (int y = 0; y < slots[0].length; y++)
+			for (int x = 0; x < slots.length; x++)
+				slots[x][y].restart(0);
+	}
+	public boolean loot(GItem i) { //returnerar om det gick eller inte
+		if(add(i)){
+			Main.game.world.deSpawn(i);
+			return true;
+		}
+		else return false;
+			
+	}
+	public void setPosition(float xPos, float yPos){
+		this.xPos = xPos;
+		this.yPos = yPos;
+		for (int x = 0; x < slots.length; x++)
+			for (int y = 0; y < slots[0].length; y++) {
+				slots[x][y].setPosition(xPos - slotSize * slots.length / 2 + x
+						* slotSize + slotSize / 2, yPos - slotSize * slots[0].length / 2
+						+ y * slotSize + slotSize / 2);
+			}
+	
+	}
+	public float getTopBorderY(){
+		return yPos - slots[0].length/2f * slotSize;
+	}
+	public float getBottomBorderY(){
+		return yPos + slots[0].length/2f * slotSize;
+	}
+	public float getRightBorderX(){
+		return xPos + slots.length/2f * slotSize  ;
+	}
+	public float getLeftBorderX(){
+		return xPos - slots.length/2f * slotSize  ;
 	}
 }

@@ -1,6 +1,7 @@
 package game;
 
 import static java.lang.Math.*;
+import game.input.GMouse;
 import world.WorldObject;
 
 public class GMath {
@@ -94,4 +95,7 @@ public class GMath {
 		
 	}
 	
+	public static boolean isPosWithinSquare(float x,float y, float sx , float sy, float sw, float sh){
+		return (x >= sx - sw/2 && x <= sx+sw/2 && y >= sy - sh/2 && y <= sy+sh/2);
+	}
 }

@@ -3,6 +3,8 @@ import static java.lang.Math.*;
 import static org.lwjgl.input.Mouse.isButtonDown;
 import static org.lwjgl.opengl.GL11.*;
 
+import game.input.GMouse;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -158,12 +160,6 @@ public class GSprite {
 	}
 	
 	public boolean isCursorWithin(){
-		int mx = Mouse.getX();
-		//Detta kan behšva justeras.
-		int my = Display.getHeight()-Mouse.getY();
-		if(mx >= getX() - getTexWidth()/2 && mx <= getX()+getTexWidth()/2 && my >= getY() - getTexHeight()/2 && my <= getY()+getTexHeight()/2)
-			return true;
-		else 
-			return false;
+		return GMath.isPosWithinSquare(GMouse.getX(),GMouse.getY(),getX(), getY(), getTexWidth(), getTexHeight());
 	}
 }

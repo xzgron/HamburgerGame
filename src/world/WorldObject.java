@@ -28,9 +28,9 @@ public abstract class WorldObject extends GSprite{
 	
 	private Shadow shadow = null; ///////skugga??
 	
-	public WorldObject(float xPos, float yPos, float texWidth, float texHeight, float footPos, float headPos) {
+	public WorldObject(float xPos, float yPos, float texWidth, float texHeight, String texture, float footPos, float headPos) {
 		super(xPos, yPos, texWidth, texHeight);
-
+		setTexture(texture);
 		this.headPos = headPos;
 		this.footPos = footPos;
 	}

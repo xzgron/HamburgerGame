@@ -25,6 +25,8 @@ public class GSound {
 	private static LinkedList<String> audioLocations = new LinkedList<String>();
 
 	public static Audio getAudio(String fileName){
+		if(fileName.substring(fileName.length()-4, fileName.length()).equals("null"))
+			return null;
 		Audio a = null;
 		
 		for (int i = 0; i < sounds.size(); i++)

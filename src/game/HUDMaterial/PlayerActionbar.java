@@ -12,9 +12,11 @@ import world.objects.GFood;
 import world.objects.GIngredient;
 import world.objects.GItem;
 import world.objects.food.Hamburger;
-import world.objects.ingredients.interfaces.Activateable;
+import world.objects.ingredients.bases.Activateable;
+import world.objects.ingredients.bases.ShiftClickAble;
 
 import game.GamePart;
+import game.Main;
 import game.input.GKeyboard;
 import game.input.GMouse;
 import game.parts.GameWorld;
@@ -40,28 +42,52 @@ public class PlayerActionbar {
 	}
 
 	public void handleInput() {
+		
+		if(selectedSlot >= 1){
+			if(Mouse.isButtonDown(Controlls.FIRST_ABILITY_BUTTON))
+				getSelectedItem().useFirstAbility(Main.game.world.getPlayer());
+			if(Mouse.isButtonDown(Controlls.SECOND_ABILITY_BUTTON))
+				getSelectedItem().useSecondAbility(Main.game.world.getPlayer());
+		}
+		
+
 		// minus selectedSlot är den avstängda slotten.
 		
 		int prevSelectedSlot = selectedSlot;
-		int vissibleSlots = 0;
 		
-		for(int i = 0; i < slots.length; i++){
+		int vissibleSlots = 0;
+	
+		for(int i = 0; i < slots.length; i++){ //räknar ut antalet vissible slots
 			if(slots[i].getItem() == null){
 				vissibleSlots = i;
 				break;
 				}
 		}
 		
+		if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+			for(int i = vissibleSlots-1; i >= 0; i--)
+				if(slots[i].getItem() instanceof ShiftClickAble)
+					((ShiftClickAble)slots[i].getItem()).useShiftAbility(Main.game.world.getPlayer());
+		}
+		
+		for(int i = 0; i < vissibleSlots; i++){ //clicka
+			if(slots[i].isClicked(GMouse.BUTTON_LEFT)){
+				selectedSlot = i+1;
+				if(selectedSlot == prevSelectedSlot)
+					selectedSlot = -selectedSlot;
+				}
+		}
+
 		
 		if(GMouse.getDWheel() < 0 /*&& selectedSlot > 0*/){
-			selectedSlot -= Controlls.ACTIONBAR_SCROLL_DIRECTION;
+			selectedSlot += Controlls.ACTIONBAR_SCROLL_DIRECTION;
 			if(selectedSlot < 1)
 				selectedSlot = vissibleSlots;
 			if(selectedSlot > vissibleSlots)
 				selectedSlot = 1;
 			}
 		else if(GMouse.getDWheel() > 0 /*&& selectedSlot > 0*/){
-			selectedSlot += Controlls.ACTIONBAR_SCROLL_DIRECTION;
+			selectedSlot -= Controlls.ACTIONBAR_SCROLL_DIRECTION;
 			if(selectedSlot < 1)
 				selectedSlot = vissibleSlots;
 			if(selectedSlot > vissibleSlots)
@@ -102,7 +128,7 @@ public class PlayerActionbar {
 	public void update() {// updaterar vilka slots som är synliga och var de ska
 							// vara
 
-		Hamburger player = GameWorld.getPlayer();
+		Hamburger player = Main.game.world.getPlayer();
 
 		// Detta ger oss en upp och ner vänd lista av players alla activerabara
 		// ingredienser.
@@ -133,7 +159,7 @@ public class PlayerActionbar {
 				slot.render();
 	}
 	
-	public GItem getSelectedItem(){
-		return slots[selectedSlot-1].getItem();
+	public Activateable getSelectedItem(){
+		return (Activateable) slots[selectedSlot-1].getItem();
 	}
 }

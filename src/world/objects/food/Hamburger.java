@@ -6,8 +6,8 @@ import world.WorldObject;
 import world.objects.GFood;
 import world.objects.GIngredient;
 import world.objects.ingredients.*;
-import world.objects.ingredients.interfaces.Armor;
-import world.objects.ingredients.interfaces.HealthGiving;
+import world.objects.ingredients.bases.Armor;
+import world.objects.ingredients.bases.HealthGiving;
 import game.GMath;
 import game.GSprite;
 import game.GPhysics;
@@ -19,17 +19,22 @@ public class Hamburger extends GFood {
 
 	LinkedList<GIngredient> equipments = new LinkedList<GIngredient>();
 
-	public Hamburger(float xPos, float yPos, float texSize) {
-		super(xPos, yPos, 0, 0, 0, 0, 0, 0);
+	public Hamburger(float xPos, float yPos) {
+		super(xPos, yPos, 0, 0, null, 0, 0, 0, 0);
 
-		 equipments.add(new HamburgerBreadUnderPart(xPos, yPos));
+		equip(new Beef90Gram(xPos, yPos));
+		equip(new Sallad(xPos, yPos));
+		equip(new BreadOverPartSmall(xPos, yPos));
+		
+		equip(0,new OnionRings(xPos, yPos));
+		equip(0,new BreadUnderPartSmall(xPos, yPos));
 
-		equipments.add(new OnionRings(xPos, yPos));
-		equipments.add(new Beef90Gram(xPos, yPos));
+
+		
 		//equipments.add(new Beef60Gram(xPos, yPos));
-		equipments.add(new Sallad(xPos, yPos));
+		
 		// equipments.add(new Cheese(xPos, yPos));
-		 equipments.add(new HamburgerBreadOverPart(xPos, yPos));
+
 		createShadow();
 
 		setWalkingSpeed(200);
@@ -39,9 +44,10 @@ public class Hamburger extends GFood {
 	public void update() {
 		super.update();
 		// /UPDATE PREV POSITION//////
-		for (GIngredient gi : equipments)
+		for (GIngredient gi : equipments){
+			gi.update();
 			gi.updatePrevPos();
-
+		}
 		updateEquipmentPos();
 	}
 
@@ -58,18 +64,54 @@ public class Hamburger extends GFood {
 	public void updateEquipmentPos() {
 		equipments.get(0).setPosition(getX(), getY(), getZ());
 
-		float totalHeight = equipments.get(0).getHeight();
+		float totalHeight = equipments.get(0).getHeight() + equipments.get(0).getFootZPos() - getZ();
 
 		for (int i = 1; i < equipments.size(); i++) {
 			GIngredient gi = equipments.get(i);
 
-			gi.setPosition(getX(), getY(), getZ() + totalHeight + gi.getZ()
-					- gi.getFootZPos());
-
+	
+			
+			gi.setPosition(getX(), getY(), getZ() + totalHeight + gi.getZ()	- gi.getFootZPos());
+			
 			totalHeight += gi.getHeight();
+
+
 		}
 	}
-
+	public boolean isEquipmentLegal(){
+		if(isDead())
+			return false;
+		boolean legal = true;
+		for(GIngredient ingredient: getEquipments())
+			if(!ingredient.isPositionLegal(getEquipments()))
+				legal = false;
+		
+		return legal;
+			
+	}
+	
+	public boolean equip(int position, GIngredient ingredient){ //returnerar om det gick.
+		getEquipments().add(position, ingredient);
+		if(isEquipmentLegal())
+			return true;
+		else{
+			getEquipments().remove(ingredient);
+			return false;
+		}
+			
+	}
+	
+	public boolean equip(GIngredient ingredient){ //returnerar om det gick.
+		getEquipments().add(ingredient);
+		if(isEquipmentLegal())
+			return true;
+		else{
+			getEquipments().removeLast();
+			return false;
+		}
+			
+	}
+	
 	public LinkedList<GIngredient> getEquipments() {
 		return equipments;
 	}
@@ -145,9 +187,9 @@ public class Hamburger extends GFood {
 		return weight;
 	}
 
-	// //////////////ABOUT HEALTH///////////////////
+	// //////////////DAMAGE///////////////////
 	
-	public void aboveDamage(int amt){
+	public void aboveDamage(int amt, WorldObject attacker){
 		for (int i = equipments.size() - 1; i >= 0; i--) {
 			GIngredient gi = equipments.get(i);
 			if (gi instanceof HealthGiving || gi instanceof Armor) {
@@ -160,32 +202,83 @@ public class Hamburger extends GFood {
 				break;
 			}
 		}
-		if (getHealth() <= 0)
+		if (isDead())
 			this.die();
 	}
 	
 
+	public void damage(int amt, WorldObject attacker) {
+		float attackerMidLineZPos = (attacker.getFootZPos() + attacker.getHeadZPos())/2;
 
-	public void damage(int amt) {
-		for (int i = equipments.size() - 1; i >= 0; i--) {
-			GIngredient gi = equipments.get(i);
-			if (gi instanceof HealthGiving) {
-				gi.use(amt);
-				if(gi.getDurability() <= 0){
-					amt = -gi.getDurability();
-					gi.setDurability(0);
-					if(equipments.size() > 1)
-						equipments.remove(gi);
-				}
-				else
+		GIngredient damagedIngredient = null;
+		GIngredient hitIngredient = null;
+
+		
+		
+		if(equipments.getLast().getHeadZPos() <= attackerMidLineZPos)
+			hitIngredient = equipments.getLast();
+		else if(equipments.getFirst().getFootZPos() >= attackerMidLineZPos)
+			hitIngredient = equipments.getFirst();
+		else 
+			for (GIngredient gi: equipments) {
+				if (gi.getFootZPos() <= attackerMidLineZPos && gi.getHeadZPos() >= attackerMidLineZPos) {
+					hitIngredient = gi;
 					break;
+				}
 			}
+				
+		if(hitIngredient.isDamageable()){ // träffar något som kan skadas.
+			damagedIngredient = hitIngredient;
+		}	
+		else if(attackerMidLineZPos - hitIngredient.getFootZPos() >= hitIngredient.getHeadZPos() - attackerMidLineZPos){ // närmare under
+			boolean foundSomething = false;
+			for (int i = equipments.indexOf(hitIngredient); i >= 0; --i){ //sök neråt
+				if(equipments.get(i).isDamageable()){
+						damagedIngredient = equipments.get(i);
+						foundSomething = true;
+						break;
+					}
+				}	
+			if(!foundSomething)
+				for (int i = equipments.indexOf(hitIngredient); i < equipments.size(); ++i){ //sök neråt
+					if(equipments.get(i).isDamageable()){
+							damagedIngredient = equipments.get(i);
+							break;
+						}
+					}
+			
+		} else { // närmare över
+			boolean foundSomething = false;
+			for (int i = equipments.indexOf(hitIngredient); i < equipments.size(); ++i){ //sök neråt
+				if(equipments.get(i).isDamageable()){
+						damagedIngredient = equipments.get(i);
+						foundSomething = true;
+						break;
+					}
+				}	
+			if(!foundSomething)
+				for (int i = equipments.indexOf(hitIngredient); i >= 0; --i){ //sök neråt
+					if(equipments.get(i).isDamageable()){
+							damagedIngredient = equipments.get(i);
+							break;
+						}
+					}
 		}
-		if (getHealth() <= 0) 
+				
+		damagedIngredient.use(amt);		
+		
+		if(damagedIngredient.getDurability() <= 0){			
+			damagedIngredient.setDurability(0);				
+			if(equipments.size() > 1)			
+				equipments.remove(damagedIngredient);
+		}
+		
+		if (isDead())
 			this.die();
 	}
+	
 
-	public void underDamage(int amt){
+	public void underDamage(int amt, WorldObject attacker){
 		for (int i = 0; i < equipments.size(); i++) {
 			GIngredient gi = equipments.get(i);
 			if (gi instanceof HealthGiving || gi instanceof Armor) {
@@ -198,9 +291,14 @@ public class Hamburger extends GFood {
 				break;
 			}
 		}	
-		if (getHealth() <= 0)
+		if (isDead())
 			this.die();
 	}
+	
+	
+	//////////////////////////////////////////
+	
+	// //////////////ABOUT HEALTH///////////////////
 	
 	public int getHealth() {
 		int health = 0;
@@ -219,7 +317,7 @@ public class Hamburger extends GFood {
 			}
 		return health;
 	}
-
+	
 	public int getArmor() {
 		int armor = 0;
 		for (GIngredient gi : equipments)
@@ -290,7 +388,7 @@ public class Hamburger extends GFood {
 	public void landedOn(WorldObject go) {
 		if (go instanceof GFood) {
 			float dmg = -(getZSpeed() - go.getZSpeed()) * getWeight() / 1000;
-			((GFood) go).damage((int) dmg);
+			((GFood) go).damage((int) dmg,this);
 
 			if (!((GFood) go).isDead())
 				jump();

@@ -22,6 +22,9 @@ public class Intro extends GamePart {
 	Texture symbol = GTexture.getTexture("food/blueberry");
 	public Intro() {
 		introSound.playAsMusic(1, 1, false);
+		Main.cleanseDisplay();
+		GImage.draw(symbol, Display.getWidth()/2, Display.getHeight()/2, 300,300);
+		Display.update();
 	}
 	
 	public void handleInput() {

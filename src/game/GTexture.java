@@ -8,6 +8,8 @@ public class GTexture {
 	private static LinkedList<String> textureLocations = new LinkedList<String>();
 
 	public static Texture getTexture(String fileName) {
+		if(fileName.substring(fileName.length()-4, fileName.length()).equals("null"))
+			return null;
 		Texture t = null;
 		for (int i = 0; i < textures.size(); i++){
 			if (textureLocations.get(i).equals(fileName)){

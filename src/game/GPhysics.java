@@ -120,7 +120,8 @@ public class GPhysics {
 		
 		if(dist > totRadius) //utanför varandras max radie = snabbt sätt att säga ingen collision.
 			return false; 
-		return true;
+		else
+			return true;
 	}
 	
 	public static boolean isPosWithinTex(float x, float y, GSprite go){
@@ -131,7 +132,7 @@ public class GPhysics {
 			return false;
 	}
 
-	public static void useGravity(GFood gf) {
-		gf.accelerate(0,0,-GameWorld.getGravity());
+	public static void useGravity(WorldObject go) {
+		go.accelerate(0,0,-Main.game.world.getGravity());
 	}
 }

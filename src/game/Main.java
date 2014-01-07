@@ -68,6 +68,12 @@ public class Main {
 		Display.sync(wanted_fps);
 	}
 
+	public static void cleanseDisplay(){
+		glClear(GL_COLOR_BUFFER_BIT);
+		glLoadIdentity();
+		glClearColor(1,1,1,1);
+	}
+
 	private static void gameLoop() {
 		long frames = 0;
 		float deltaTimePerWantedFps = 0;
@@ -82,7 +88,15 @@ public class Main {
 			unprossesedSeconds += delta_time;
 			time = newTime;
 			// //////////////////////
-
+			
+			// ////////////R€KNA UT FPS//////////
+			deltaTimePerWantedFps += delta_time;
+			if (frames % wanted_fps == 0) {
+				fps = Math.round(wanted_fps / deltaTimePerWantedFps);
+				deltaTimePerWantedFps = 0;
+			}
+			// //////////////////////////
+				
 	
 			// ///UPPDATERA TITEL/////////
 			Display.setTitle(title + "   fps: " + fps);
@@ -96,17 +110,7 @@ public class Main {
 				GKeyboard.update();
 				GMouse.update();
 				unprossesedSeconds -= getDelta();
-				
-				
-				// ////////////R€KNA UT FPS//////////
-				deltaTimePerWantedFps += delta_time;
-				if (frames % wanted_fps == 0) {
-					fps = Math.round(wanted_fps / deltaTimePerWantedFps);
-					deltaTimePerWantedFps = 0;
 				}
-				// //////////////////////////
-
-			}
 			// /////////////////
 			
 			render();
@@ -165,4 +169,5 @@ public class Main {
 	public static void close() {
 		isCloseRequested = true;
 	}
+
 }

@@ -48,7 +48,14 @@ public class GButton extends GSprite{
 		return(wasHeldIn[button] && Mouse.isButtonDown(button));
 	}
 	
+	public void restart(){
+		for(boolean b: wasHeldIn)
+			b = false;
+	}
 
+	public void restart(int button){
+		wasHeldIn[button] = false;
+	}
 	
 
 	

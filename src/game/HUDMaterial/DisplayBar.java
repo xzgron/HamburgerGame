@@ -14,6 +14,7 @@ import static org.lwjgl.opengl.GL11.glVertex2f;
 import game.GImage;
 import game.GSprite;
 import game.GTexture;
+import game.input.GTimer;
 
 import org.newdawn.slick.opengl.Texture;
 
@@ -22,11 +23,23 @@ import world.objects.GFood;
 public abstract class DisplayBar extends GSprite{
 	Texture backgroundTexture = null;
 	
+	GTimer damageColorTimer = new GTimer(-1);
+	float prevCurrent;
+	
 	float backgroundRed = 1;
 	float backgroundGreen = 1;
 	float backgroundBlue = 1;
 	float backgroundAlpha = 0;
 	
+	float damageRed = 1;
+	float damageGreen = 1;
+	float damageBlue = 1;
+	float damageAlpha = 0;
+	
+	float tempRed;
+	float tempGreen;
+	float tempBlue;
+	float tempAlpha;
 	
 	GFood owner;
 
@@ -35,12 +48,39 @@ public abstract class DisplayBar extends GSprite{
 	public DisplayBar(float xPos, float yPos, float texWidth, float texHeight, String texture, GFood owner) {
 		super(xPos, yPos, texWidth, texHeight, texture);
 		this.owner = owner;
+		prevCurrent = owner.getHealth();
+		tempRed = this.getRed();
+		tempGreen = this.getGreen();
+		tempBlue = this.getBlue();
+		tempAlpha = this.getAlpha();
 	}
 
 	public DisplayBar(float xPos, float yPos, float texWidth, float texHeight, GFood owner){
 		super(xPos, yPos, texWidth, texHeight);
 		this.owner = owner;
+		prevCurrent = owner.getHealth();
+		tempRed = this.getRed();
+		tempGreen = this.getGreen();
+		tempBlue = this.getBlue();
+		tempAlpha = this.getAlpha();
 	}
+	
+	public void update(){
+		if(prevCurrent > getCurrent()){
+			super.setColor(damageRed, damageGreen, damageBlue, damageAlpha);		
+			damageColorTimer.setLength(0.1f);
+			damageColorTimer.reset();
+		}
+
+		if(damageColorTimer.hasExceeded()){
+			super.setColor(tempRed, tempGreen, tempBlue, tempAlpha);		
+			damageColorTimer.setLength(-1);
+		}
+		
+		prevCurrent = getCurrent();
+	}
+
+
 
 	public void render(){
 		draw(getMax(),getCurrent());
@@ -75,6 +115,22 @@ public abstract class DisplayBar extends GSprite{
 		backgroundGreen = g;
 		backgroundBlue = b;
 		backgroundAlpha = a;
+	}
+	
+	public void setDamageColor(float r, float g, float b, float a){
+		damageRed = r;
+		damageGreen = g;
+		damageBlue = b;
+		damageAlpha = a;
+	}
+	
+	public void setColor(float r, float g, float b, float a){
+		super.setColor(r, g, b, a);
+		
+		tempRed = this.getRed();
+		tempGreen = this.getGreen();
+		tempBlue = this.getBlue();
+		tempAlpha = this.getAlpha();
 	}
 	
 	public void setBackgroundTexture(Texture texture){
