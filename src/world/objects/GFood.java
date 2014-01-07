@@ -21,14 +21,16 @@ public abstract class GFood extends WorldObject {
 
 	private GController controller;
 
-	public GFood(float xPos, float yPos, float texWidth, float texHeight, float footPos,
+	public GFood(float xPos, float yPos, float texWidth, float texHeight, String texture, float footPos,
 			float headPos, int weight, int health) {
-		super(xPos, yPos, texWidth, texHeight, footPos, headPos);
+		super(xPos, yPos, texWidth, texHeight, "food/"+texture, footPos, headPos);
+		setTexFolder("food/");
+		
 		maxHealth = health;
 		currentHealth = maxHealth;
 		setRadius(texWidth/2);
 		setWeight(weight);
-		setTexFolder("food/");
+		
 	}
 
 	public void update() {

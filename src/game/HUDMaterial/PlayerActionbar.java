@@ -12,7 +12,8 @@ import world.objects.GFood;
 import world.objects.GIngredient;
 import world.objects.GItem;
 import world.objects.food.Hamburger;
-import world.objects.ingredients.interfaces.Activateable;
+import world.objects.ingredients.bases.Activateable;
+import world.objects.ingredients.bases.ShiftClickAble;
 
 import game.GamePart;
 import game.Main;
@@ -41,6 +42,15 @@ public class PlayerActionbar {
 	}
 
 	public void handleInput() {
+		
+		if(selectedSlot >= 1){
+			if(Mouse.isButtonDown(Controlls.FIRST_ABILITY_BUTTON))
+				getSelectedItem().useFirstAbility(Main.game.world.getPlayer());
+			if(Mouse.isButtonDown(Controlls.SECOND_ABILITY_BUTTON))
+				getSelectedItem().useSecondAbility(Main.game.world.getPlayer());
+		}
+		
+
 		// minus selectedSlot Šr den avstŠngda slotten.
 		
 		int prevSelectedSlot = selectedSlot;
@@ -52,6 +62,12 @@ public class PlayerActionbar {
 				vissibleSlots = i;
 				break;
 				}
+		}
+		
+		if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
+			for(int i = vissibleSlots-1; i >= 0; i--)
+				if(slots[i].getItem() instanceof ShiftClickAble)
+					((ShiftClickAble)slots[i].getItem()).useShiftAbility(Main.game.world.getPlayer());
 		}
 		
 		for(int i = 0; i < vissibleSlots; i++){ //clicka
@@ -143,7 +159,7 @@ public class PlayerActionbar {
 				slot.render();
 	}
 	
-	public GItem getSelectedItem(){
-		return slots[selectedSlot-1].getItem();
+	public Activateable getSelectedItem(){
+		return (Activateable) slots[selectedSlot-1].getItem();
 	}
 }

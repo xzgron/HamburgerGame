@@ -1,28 +1,17 @@
 package game.parts;
 
-import game.GImage;
-import game.GMath;
-import game.GPhysics;
-import game.GSound;
-import game.GTexture;
-import game.Game;
-import game.GamePart;
-import game.Main;
-import game.input.GKeyboard;
+import game.*;
+import game.input.*;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
+import java.awt.Font;
+import java.util.*;
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
 
-import controllers.Controlls;
-import controllers.PlayerController;
-import controllers.GController;
-import world.Player;
-import world.WorldObject;
+import controllers.*;
+import world.*;
 import world.objects.*;
-import world.objects.food.*;
 import world.objects.food.hostile.BlueBerry;
 import world.objects.nature.Tree;
 import static org.lwjgl.input.Keyboard.*;
@@ -37,6 +26,9 @@ public class GameWorld extends GamePart {
 	private Player player = new Player(0, 0);;
 
 	public GameWorld() {
+
+		
+		
 		player.setController(new PlayerController());
 		spawn(player);
 		spawn(new Tree(150, 30, 700,700));
@@ -57,20 +49,46 @@ public class GameWorld extends GamePart {
 		if(GKeyboard.isKeyPressed(KEY_ESCAPE))
 			Main.game.setGameState(GState.GAME_MENU);
 		
-	
 		if(GKeyboard.isKeyPressed(Controlls.INVENTORY_KEY))
 			Main.game.setGameState(GState.INVENTORY_MENU);
-	
 	}
-	
+	float blueberrySize = 0;
+	GTimer spawnTimer = new GTimer(0.3f);
 	public void update() {
+		
+		///////SPAWNA BLÅBÄR/////////////
+		if(spawnTimer.hasExceeded()){
+			float xPos;
+			float yPos;
+			
+			if((int)GMath.random(0,2) == 1)
+				xPos = GMath.random(1,1.5f)*Display.getWidth()/2+player.getX();
+			else
+				xPos = -GMath.random(1,1.5f)*Display.getWidth()/2+player.getX();
+			
+
+			if((int)GMath.random(0,2) == 1)
+				yPos = GMath.random(1,1.5f)*Display.getHeight()/2+player.getY();
+			else
+				yPos = -GMath.random(1,1.5f)*Display.getHeight()/2+player.getY();
+			spawn(new BlueBerry(xPos,yPos, GMath.random(20,30)+blueberrySize));
+			blueberrySize+=0.2f;
+			spawnTimer.reset();
+		}
+	////////////////
+			
 		for	(WorldObject go : worldObjects){ //rensa dött
 			if(go.getClass().isAssignableFrom(GFood.class) && ((GFood) go).isDead())
 				deSpawn(go);
 			}
 		
-		for (WorldObject go : worldObjects)
-			go.update();
+		int prevSize = worldObjects.size();
+		for (int i = 0; i < worldObjects.size(); i++){
+			worldObjects.get(i).update();
+			if(worldObjects.size() < prevSize)
+				i--;
+			prevSize = worldObjects.size();
+		}
 		handleCollision();
 	}
 
@@ -133,7 +151,7 @@ public class GameWorld extends GamePart {
 		while (moved) {
 			moved = false;
 			for (int i = 0; i < worldObjects.size() - 1; i++) {
-				if (GPhysics.objectsOverlapp(worldObjects.get(i), worldObjects.get(i + 1)) && worldObjects.get(i).getFootZPos() >= worldObjects.get(i+1).getHeadZPos()) {
+				if (/*GPhysics.objectsOverlapp(worldObjects.get(i), worldObjects.get(i + 1)) &&*/ worldObjects.get(i).getFootZPos() -1 >= worldObjects.get(i+1).getHeadZPos()) {
 					temp = worldObjects.get(i); // object i flyttas innan i + 1
 					worldObjects.set(i, worldObjects.get(i + 1));
 					worldObjects.set(i + 1, temp);

@@ -6,8 +6,8 @@ import world.WorldObject;
 import world.objects.GFood;
 import world.objects.GIngredient;
 import world.objects.ingredients.*;
-import world.objects.ingredients.interfaces.Armor;
-import world.objects.ingredients.interfaces.HealthGiving;
+import world.objects.ingredients.bases.Armor;
+import world.objects.ingredients.bases.HealthGiving;
 import game.GMath;
 import game.GSprite;
 import game.GPhysics;
@@ -20,14 +20,14 @@ public class Hamburger extends GFood {
 	LinkedList<GIngredient> equipments = new LinkedList<GIngredient>();
 
 	public Hamburger(float xPos, float yPos) {
-		super(xPos, yPos, 0, 0, 0, 0, 0, 0);
+		super(xPos, yPos, 0, 0, null, 0, 0, 0, 0);
 
 		equip(new Beef90Gram(xPos, yPos));
 		equip(new Sallad(xPos, yPos));
-		equip(new HamburgerBreadOverPart(xPos, yPos));
+		equip(new BreadOverPartSmall(xPos, yPos));
 		
 		equip(0,new OnionRings(xPos, yPos));
-		equip(0,new HamburgerBreadUnderPart(xPos, yPos));
+		equip(0,new BreadUnderPartSmall(xPos, yPos));
 
 
 		
@@ -44,9 +44,10 @@ public class Hamburger extends GFood {
 	public void update() {
 		super.update();
 		// /UPDATE PREV POSITION//////
-		for (GIngredient gi : equipments)
+		for (GIngredient gi : equipments){
+			gi.update();
 			gi.updatePrevPos();
-
+		}
 		updateEquipmentPos();
 	}
 

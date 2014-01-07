@@ -26,7 +26,7 @@ public class InventorySlot extends GButton{
 
 	private float itemTexSize; // visuell storlek av objektet
 
-	TrueTypeFont durabilityFont = new TrueTypeFont(new Font("Times New Roman",Font.BOLD, 12), false);
+	static TrueTypeFont durabilityFont = new TrueTypeFont(new Font("Times New Roman",Font.BOLD, 12), false);
 
 	public InventorySlot(float x, float y, float size, float itemSize) {
 		super(x, y, size, size);
@@ -55,7 +55,7 @@ public class InventorySlot extends GButton{
 
 	public void handleInput(){ // hanterar dra och släppa
 
-		if(GMouse.isButtonReleased(GMouse.BUTTON_LEFT) && isCursorWithin() && grabbedSlot != null && grabbedSlot.getItem() != null){ //byta plats om släpps över.
+		if(GMouse.isButtonReleased(GMouse.BUTTON_LEFT) && isCursorWithin() && grabbedSlot != null && grabbedSlot.getItem() != null && grabbedSlot != this){ //byta plats om släpps över.
 			switchItem(grabbedSlot);
 		}
 		
@@ -141,14 +141,19 @@ public class InventorySlot extends GButton{
 		GItem thisItem = this.getItem(); 
 		
 		if(slot instanceof HamburgerEquipmentSlot){
-			this.setItem(slotItem);
+			if(thisItem != null)
+				slot.setItem(null);
 			slot.setItem(thisItem);
+			this.setItem(slotItem);
 	
 			if(slotItem == null && !((HamburgerEquipmentSlot)slot).getOwner().isDead()){ // ifall en eqslot byts ut mot inget ska allt det alltid funka så länge inte ägaren dör av det
 				return true;
 			}
 			if(!((HamburgerEquipmentSlot)slot).isEquipmentLegal()){
 				this.setItem(thisItem);
+				
+				if(thisItem != null)
+					slot.setItem(null);
 				slot.setItem(slotItem);
 				return false;
 			}

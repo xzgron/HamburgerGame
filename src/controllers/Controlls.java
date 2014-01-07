@@ -1,6 +1,7 @@
 package controllers;
 
 import static org.lwjgl.input.Keyboard.*;
+import game.input.GMouse;
 
 public class Controlls {
 	
@@ -14,6 +15,9 @@ public class Controlls {
 	static public int INVENTORY_KEY = KEY_I;
 	
 	static public int ACTIONBAR_SCROLL_DIRECTION = 1;
+	
+	static public int FIRST_ABILITY_BUTTON = GMouse.BUTTON_LEFT;
+	static public int SECOND_ABILITY_BUTTON = GMouse.BUTTON_RIGHT;
 	
 
 }

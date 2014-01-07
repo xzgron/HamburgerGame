@@ -2,9 +2,12 @@ package game;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.awt.Font;
 import java.util.LinkedList;
 
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 
 import game.parts.*;
 
@@ -113,7 +116,7 @@ public class Game {
 			break;
 		}
 	}
-
+	TrueTypeFont loadingInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 32), false);	
 	public void setGameState(GState STATE) {
 		switch (STATE) {
 		case INTRO:
@@ -125,12 +128,25 @@ public class Game {
 		case INVENTORY_MENU:
 			break;
 		case GAME:
-			if(world == null)
+
+			if(world == null){
+				Main.cleanseDisplay();
+				loadingInfo.drawString(Display.getWidth()/2-100, Display.getHeight()/2-200, "Loading World..",Color.black);
+				Display.update();
 				world = new GameWorld();
-			if(HUD == null)
+				}
+			if(HUD == null){
+				Main.cleanseDisplay();
+				loadingInfo.drawString(Display.getWidth()/2-100, Display.getHeight()/2-200, "Loading HUD..",Color.black);
+				Display.update();
 				HUD = new HUD();
-			if(inventoryMenu == null)
+			}
+			if(inventoryMenu == null){
+				Main.cleanseDisplay();
+				loadingInfo.drawString(Display.getWidth()/2-100, Display.getHeight()/2-200, "Loading Inventory..",Color.black);
+				Display.update();
 				inventoryMenu = new InventoryMenu();
+			}
 			break;
 		case OPTIONS:
 			break;

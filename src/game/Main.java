@@ -68,6 +68,12 @@ public class Main {
 		Display.sync(wanted_fps);
 	}
 
+	public static void cleanseDisplay(){
+		glClear(GL_COLOR_BUFFER_BIT);
+		glLoadIdentity();
+		glClearColor(1,1,1,1);
+	}
+
 	private static void gameLoop() {
 		long frames = 0;
 		float deltaTimePerWantedFps = 0;
@@ -163,4 +169,5 @@ public class Main {
 	public static void close() {
 		isCloseRequested = true;
 	}
+
 }

@@ -35,10 +35,12 @@ public class HamburgerEquipmentbar {
 	
 	public void handleInput(){
 		if(GMouse.getDWheel() < 0){
+			yPos += 5;
 			for(HamburgerEquipmentSlot slot: slots)
 				slot.move(0,5);
 		}
 		if(GMouse.getDWheel() > 0){
+			yPos -= 5;
 			for(HamburgerEquipmentSlot slot: slots)
 				slot.move(0,-5);
 		}

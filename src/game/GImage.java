@@ -1,19 +1,6 @@
 package game;
 
-import java.awt.Font;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-
-import javax.imageio.ImageIO;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.util.ResourceLoader;
 
 import static org.lwjgl.opengl.GL11.*;
 

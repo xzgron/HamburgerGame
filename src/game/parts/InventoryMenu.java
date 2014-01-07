@@ -2,8 +2,11 @@ package game.parts;
 
 import static game.input.GKeyboard.isKeyPressed;
 
+import java.awt.Font;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.TrueTypeFont;
 
 import world.objects.ingredients.*;
 
@@ -20,11 +23,12 @@ public class InventoryMenu extends GamePart {
 	HamburgerEquipmentbar equipment = new HamburgerEquipmentbar(inventory.getRightBorderX()+40, inventory.getBottomBorderY()-30,Main.game.world.getPlayer());
 	EraseSlot eraser = new EraseSlot(inventory.getRightBorderX()-30, inventory.getTopBorderY()-30, 60, 50, "buttons/bars");
 	
-	public InventoryMenu(){
+	public InventoryMenu(){		
 		eraser.setColor(0.7f,0.2f,0.2f,0.9f);
 		inventory.add(new Cheese(0,0));
 		inventory.add(new Sallad(0,0));
 		inventory.add(new Beef90Gram(0,0));
+		inventory.add(new BreadUnderPartSuperSize(0,0));
 	}
 	
 	public void handleInput() {

@@ -14,7 +14,7 @@ public class GTimer {
 	}
 	
 	public boolean hasExceeded(){
-		return (Main.getTime() >= startTime + length); 
+		return (Main.getTime() >= startTime + length) && length >= 0; 
 	}
 	
 	public void reset(){

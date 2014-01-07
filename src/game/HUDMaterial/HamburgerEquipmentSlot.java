@@ -72,7 +72,6 @@ public class HamburgerEquipmentSlot extends InventorySlot{
 			slot.setItem(null);
 	
 			if(!isEquipmentLegal()){
-
 				this.setItem(null);
 				slot.setItem(slotItem);
 				return false;
