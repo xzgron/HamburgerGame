@@ -9,6 +9,10 @@ public class GMath {
 		return (float)sqrt(x*x+y*y);	
 	}
 	
+	public static float getLength(float x, float y,float z){
+		return (float)sqrt(x*x+y*y + z*z);	
+	}
+	
 	public static float getDistance(float x1,float y1,float x2, float y2) {
 		return (float) sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 	}
@@ -37,8 +41,8 @@ public class GMath {
 
 	}
 
-	public static float getAngle(WorldObject go1, WorldObject go2) {
-		return getAngle(go1.getX(),go1.getGroundYPos(),go2.getX(),go2.getGroundYPos());
+	public static float getAngle(GSprite go1, GSprite go2) {
+		return getAngle(go1.getX(),go1.getY(),go2.getX(),go2.getY());
 	}
 	
 	public static float getSphereVolume(float radius){

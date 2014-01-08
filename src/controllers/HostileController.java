@@ -19,14 +19,18 @@ public class HostileController extends GController {
 		
 		if (food.justLanded()) {
 			waitTimer.reset();
-		}
-
-		if(!food.isInAir())
 			food.stop();
+		}
 		
-		if (waitTimer.hasExceeded()) {
+		if(food.isOnGround())
+			food.stop();
+
+		if(waitTimer.getExceededTime() > 1.5f && food.isOnGround())
+			food.jump();
+		
+		if (waitTimer.hasExceeded() && food.isOnGround()) {
 			float dx = Main.game.world.getPlayer().getX() - food.getX();
-			float dy = Main.game.world.getPlayer().getGroundYPos() - food.getGroundYPos();
+			float dy = Main.game.world.getPlayer().getY() - food.getY();
 			
 			float ovalDistance = GMath.getLength(dx,dy*2);
 			

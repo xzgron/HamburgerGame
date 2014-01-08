@@ -34,7 +34,6 @@ public class PlayerController extends GController {
 		if (!food.isInAir() && food.isWalking())
 			food.setZSpeed(120);
 		
-		
 		if (isKeyDown(Controlls.JUMP_KEY) && !jumping) {
 			jumping = true;
 			food.jump();

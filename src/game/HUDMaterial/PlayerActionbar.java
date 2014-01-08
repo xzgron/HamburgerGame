@@ -43,7 +43,7 @@ public class PlayerActionbar {
 
 	public void handleInput() {
 		
-		if(selectedSlot >= 1){
+		if(selectedSlot >= 1 && slots[selectedSlot-1].getItem() != null){
 			if(Mouse.isButtonDown(Controlls.FIRST_ABILITY_BUTTON))
 				getSelectedItem().useFirstAbility(Main.game.world.getPlayer());
 			if(Mouse.isButtonDown(Controlls.SECOND_ABILITY_BUTTON))

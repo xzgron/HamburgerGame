@@ -1,14 +1,14 @@
 package world;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-import static java.lang.Math.toRadians;
+import static java.lang.Math.*;
 import game.GImage;
 import game.GMath;
+import game.GPhysics;
 import game.GSprite;
 import game.Game;
 import game.Main;
 import game.input.GMouse;
+import world.objects.*;
 
 public abstract class WorldObject extends GSprite{
 
@@ -39,6 +39,7 @@ public abstract class WorldObject extends GSprite{
 	
 	///////////////MAIN STUFF//////////
 	public void update(){
+		GPhysics.handleGroundCollision(this);
 	}
 	
 	public void render(){
@@ -49,6 +50,7 @@ public abstract class WorldObject extends GSprite{
 
 	
 	/////////////////////////////////////COLLISION////////////////////////////////////
+	
 	
 	public void setRadius(float f){
 		radius = f;
@@ -109,7 +111,7 @@ public abstract class WorldObject extends GSprite{
 	}
 	
 	public float getFootZPos(){
-		return(zPos - texHeight/2 + texHeight*footPos);
+		return(getZ() - texHeight/2 + texHeight*footPos);
 	}
 	
 	public float getFootZPrev() {
@@ -119,20 +121,6 @@ public abstract class WorldObject extends GSprite{
 	////////////////////////////////////////////
 
 	
-	//grounden är kort sagt gubben yPos värde för footen när objectet står i marken
-	///////////////GROUNDPOSITION//////////////////////////
-	
-	public void setGroundPos(float y){
-		yPos = y - texHeight/2 + texHeight*footPos;
-	}
-	
-	public float getGroundYPos(){
-		return(yPos + texHeight/2 - texHeight*getFootPosVar());
-	}
-	
-	public float getGroundYPrev() {
-		return(getYPrev() + texHeight/2 - texHeight*getFootPosVar());
-	}
 	
 	/////////////////////////////////////////
 	// höjden är höjden i z mellan huvud och fot
@@ -148,44 +136,8 @@ public abstract class WorldObject extends GSprite{
 	
 	
 	///////////////////////////////COORDINATER//////////////////////////////////
-	
-	//////////SPEED///////////////
-	public void setSpeedByAngle(float amt, float angle){
-		float xs = (float) (amt * cos(toRadians(angle)));
-		float ys = (float) (amt * sin(toRadians(angle)));
-		setSpeed(xs,ys);
-	}
-	
-	public void setSpeedByVector(float amt, float xDirection, float yDirection){
-		float directionLength = GMath.getDistance(0, 0, xDirection, yDirection);
-		xDirection = xDirection/directionLength*amt;
-		yDirection = yDirection/directionLength*amt;
-		setSpeed(xDirection,yDirection);
-	}
-	
-	public void setSpeed(float x, float y, float z) {
-		xSpeed = x;
-		ySpeed = y;
-		zSpeed = z;
-		
-	}
-	
-	public void setSpeed(float x, float y) {
-		xSpeed = x;
-		ySpeed = y;
-		
-	}
-	
-	public void setZSpeed(float z){
-		zSpeed = z;
-	}
-	
-	public void stop(){
-		xSpeed = 0;
-		ySpeed = 0;
-		
-	}
-////////////////////////////////////
+
+////////////////////POSITION///////////////////
 	
 	public void setPosition(float x, float y, float z){
 		xPos = x;
@@ -195,6 +147,13 @@ public abstract class WorldObject extends GSprite{
 	
 
 	/////////////PREVIOUS POSITION///////////
+	public void updatePrevPos(){
+		xPrev = xPos;
+		yPrev = yPos;
+		zPrev = zPos;
+		
+	}
+	
 	public float getXPrev(){
 		return xPrev;
 	}
@@ -207,15 +166,23 @@ public abstract class WorldObject extends GSprite{
 		return zPrev;
 	}
 	
-	
-	public void updatePrevPos(){
-		xPrev = xPos;
-		yPrev = yPos;
-		zPrev = zPos;
-		
+	//////////////////////////// ZPOS ///////////////
+	public void setZ(float z){
+		zPos = z;
 	}
 	
-	////////////////////////////
+	public float getZ(){
+		return zPos;
+	}
+	
+	
+	
+	///////////////////SPEED////////////////
+	public void useSpeed(){
+		xPos += xSpeed * Main.getDelta();
+		yPos += ySpeed * Main.getDelta();
+		zPos += zSpeed * Main.getDelta();
+	}
 	
 	public float getXSpeed(){
 		return xSpeed;
@@ -229,15 +196,50 @@ public abstract class WorldObject extends GSprite{
 	}
 	
 	public float getXYSpeed(){
-		return GMath.getDistance(0,0,xSpeed,ySpeed);
+		return GMath.getLength(xSpeed,ySpeed);
+	}
+	
+	public float getXYZSpeed(){
+		return GMath.getLength(xSpeed,ySpeed,zSpeed);
 	}
 	
 	
-	public void useSpeed(){
-		xPos += xSpeed * Main.getDelta();
-		yPos += ySpeed * Main.getDelta();
-		zPos += zSpeed * Main.getDelta();
+	
+	public void setZSpeed(float z){
+		zSpeed = z;
 	}
+	
+	public void setSpeed(float x, float y) {
+		xSpeed = x;
+		ySpeed = y;
+		
+	}
+	
+	public void setSpeed(float x, float y, float z) {
+		xSpeed = x;
+		ySpeed = y;
+		zSpeed = z;
+	}
+	
+	public void setSpeedByAngle(float amt, float angle){
+		float xs = (float) (amt * cos(toRadians(angle)));
+		float ys = (float) (amt * sin(toRadians(angle)));
+		setSpeed(xs,ys);
+	}
+	
+	public void setSpeedByVector(float amt, float xDir, float yDir){
+		float directionLength = GMath.getDistance(0, 0, xDir, yDir);
+		xDir = xDir/directionLength*amt;
+		yDir = yDir/directionLength*amt;
+		setSpeed(xDir,yDir);
+	}
+	public void setSpeedByVector(float amt, float xDir, float yDir, float zDir){
+		float directionLength = GMath.getLength(xDir, yDir,zDir);
+		xDir = xDir/directionLength*amt;
+		yDir = yDir/directionLength*amt;
+		zDir = zDir/directionLength*amt;
+		setSpeed(xDir,yDir,zDir);
+	}	
 	
 	public void addSpeed(float x, float y, float z){
 		xSpeed += x;
@@ -245,45 +247,63 @@ public abstract class WorldObject extends GSprite{
 		zSpeed += z;
 		
 	}
+	
+	public void stop(){
+		setSpeed(0,0);		
+	}
+	
+	////////////////ACCELERATION///////////////
 	public void accelerate(float xAcc, float yAcc, float zAcc){
 		xSpeed += xAcc * Main.getDelta();
 		ySpeed += yAcc * Main.getDelta();
 		zSpeed += zAcc * Main.getDelta();
-		
+	}
+	public void accelerateByAngle(float amt, float angle){
+		float xs = (float) (amt * cos(toRadians(angle)));
+		float ys = (float) (amt * sin(toRadians(angle)));
+		accelerate(xs*Main.getDelta(),ys*Main.getDelta(),0);
+	}
+	public void accelerateByVector(float amt, float xDir, float yDir, float zDir){
+		float directionLength = GMath.getLength(xDir, yDir,zDir);
+		xDir = xDir/directionLength*amt;
+		yDir = yDir/directionLength*amt;
+		zDir = zDir/directionLength*amt;
+		accelerate(xDir,yDir,zDir);
 	}
 	
-	public void setZ(float z){
-		zPos = z;
-	}
-	
-	public float getZ(){
-		return zPos;
-	}
+
+
 	
 
 	//////////////////////////////
 	
-	//////////////////////////////////COMMAND HELP//////////////////////
+	//////////////////////////////////COMMAND HELP////////////////////// //foot och head medfšr avrundings fel 
 	
 	public boolean justLanded(){
-		return(getZPrev() > 0 && getZ() == 0);
+		return(getFootZPrev() > 0.0001f && getFootZPos() <= 0.0001f);
 
 	}
 	
 	public boolean justJumped(){
-		return (getZPrev() == 0 && getZ() > 0);
+		return (getFootZPrev() == 0.0001f && getFootZPos() > 0.0001f);
 
+	}
+	
+	public boolean isInAir(){
+		return(getFootZPos() > 0.0001f);
+	}
+	
+	public boolean isOnGround(){
+		return(getFootZPos() <= 0.0001f);
 	}
 
 	public boolean isWalking(){
 		return(xSpeed != 0 || ySpeed != 0);
 	}
 	
-	public boolean isInAir(){
-		return(getZ() > 0);
-	}
+
 	
-////////////////////////////OTHERS//////////////////////////
+////////////////////////////SCALING//////////////////////////
 	
 	public void scale(float f){
 		texHeight *= f;
@@ -306,6 +326,13 @@ public abstract class WorldObject extends GSprite{
 	}
 	public void removeShadow(){
 		shadow = null;
+	}
+	
+	public float getShadowRadius(){
+		if(shadow != null)
+			return shadow.getRadius();
+		else
+			return 0;
 	}
 	
 ///////////SURFACE/////////
@@ -338,7 +365,7 @@ public abstract class WorldObject extends GSprite{
 	
 	//////////////////WORLD TRANSLATION////////////
 	public boolean isCursorWithin(){
-		return GMath.isPosWithinSquare(GMouse.getX()+Main.game.world.getXTranslation(),GMouse.getY()+Main.game.world.getYTranslation(),getX(), getY(), getTexWidth(), getTexHeight());
+		return GMath.isPosWithinSquare(GMouse.getX()+Main.game.world.getXTranslation(),GMouse.getY()+Main.game.world.getYTranslation(),getX(), getY()+getZ(), getTexWidth(), getTexHeight());
 	}
 	
 	

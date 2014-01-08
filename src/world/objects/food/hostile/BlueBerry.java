@@ -1,5 +1,6 @@
 package world.objects.food.hostile;
 
+import world.Player;
 import world.WorldObject;
 import world.objects.GFood;
 import world.objects.HostileFood;
@@ -14,7 +15,6 @@ public class BlueBerry extends HostileFood {
 
 	public BlueBerry(float xPos, float yPos, float size) {
 		super(xPos, yPos, size, size,"Blueberrys/B" + ((int) (Math.random() * 4)), 0.13f, 0.73f, (int)(GMath.getSphereVolume(size/2)/700+1), (int)(GMath.getSphereVolume(size/2)/700+1));
-
 		setRadius(size/2.1f);
 		
 		healthBar.setFollow(true);
@@ -45,7 +45,7 @@ public class BlueBerry extends HostileFood {
 	
 	//////////ACTION////////////////////
 	public void collidedWith(WorldObject go) {
-		if (go == Main.game.world.getPlayer()){
+		if (go instanceof Player){
 			float dx = getXSpeed()-go.getXSpeed();
 			float dy = getYSpeed()-go.getYSpeed();
 			float dmg = (float) (GMath.getLength(dx,dy)*Math.sqrt(getWeight())/500); // genom 1000 om roten ur

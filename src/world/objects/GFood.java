@@ -42,14 +42,10 @@ public abstract class GFood extends WorldObject {
 			stop();
 		
 		GPhysics.useGravity(this);
+		GPhysics.handleGroundCollision(this);
 		
 		updatePrevPos();
 		useSpeed();
-		
-		if (getZ() <= 0){
-			setZ(0);
-			setZSpeed(0);
-			}
 		
 
 
@@ -99,7 +95,7 @@ public abstract class GFood extends WorldObject {
 	public void die() {
 		setTexture(deathTexture);
 		if(deathSound != null)
-			deathSound.playAsSoundEffect(1, 1, false);
+			deathSound.playAsSoundEffect(1, 1, false,getX()-Main.game.world.getXTranslation(),getY()-Main.game.world.getYTranslation(),getZ());
 		
 		setIfSurface(true);
 		removeShadow();

@@ -64,18 +64,13 @@ public class Hamburger extends GFood {
 	public void updateEquipmentPos() {
 		equipments.get(0).setPosition(getX(), getY(), getZ());
 
-		float totalHeight = equipments.get(0).getHeight() + equipments.get(0).getFootZPos() - getZ();
-
 		for (int i = 1; i < equipments.size(); i++) {
 			GIngredient gi = equipments.get(i);
 
 	
-			
-			gi.setPosition(getX(), getY(), getZ() + totalHeight + gi.getZ()	- gi.getFootZPos());
-			
-			totalHeight += gi.getHeight();
-
-
+			//System.out.println(getGroundYPos());
+			gi.setPosition(getX(), getY(),0);
+			gi.setFootZPos(equipments.get(i-1).getHeadZPos());
 		}
 	}
 	public boolean isEquipmentLegal(){
@@ -154,23 +149,6 @@ public class Hamburger extends GFood {
 
 	// grounden är kort sagt i mitten av skuggan
 
-	// ////////////GROUND POSITION////////////////////////
-
-	public void setGroundYPos(float y) {
-		yPos = (y + equipments.getFirst().getTexHeight() / 2 - equipments
-				.getFirst().getTexHeight()
-				* equipments.getFirst().getFootPosVar());
-	}
-
-	public float getGroundYPos() {
-		return (equipments.getFirst().getGroundYPos());
-	}
-
-	public float getGroundYPrev() {
-		return (equipments.getFirst().getGroundYPrev());
-	}
-
-	// //////////////////////////////////////////////////////////////////////
 
 	// ///////////////SIZES//////////
 
@@ -190,10 +168,13 @@ public class Hamburger extends GFood {
 	// //////////////DAMAGE///////////////////
 	
 	public void aboveDamage(int amt, WorldObject attacker){
+		if(isDead())
+			return;
+		
 		for (int i = equipments.size() - 1; i >= 0; i--) {
 			GIngredient gi = equipments.get(i);
 			if (gi instanceof HealthGiving || gi instanceof Armor) {
-				gi.use(amt);
+				gi.damage(amt);
 				if(gi.getDurability() <= 0){
 					gi.setDurability(0);
 					if(equipments.size() > 1)
@@ -208,6 +189,9 @@ public class Hamburger extends GFood {
 	
 
 	public void damage(int amt, WorldObject attacker) {
+		if(isDead())
+			return;
+		
 		float attackerMidLineZPos = (attacker.getFootZPos() + attacker.getHeadZPos())/2;
 
 		GIngredient damagedIngredient = null;
@@ -265,7 +249,7 @@ public class Hamburger extends GFood {
 					}
 		}
 				
-		damagedIngredient.use(amt);		
+		damagedIngredient.damage(amt);		
 		
 		if(damagedIngredient.getDurability() <= 0){			
 			damagedIngredient.setDurability(0);				
@@ -279,10 +263,12 @@ public class Hamburger extends GFood {
 	
 
 	public void underDamage(int amt, WorldObject attacker){
+		if(isDead())
+			return;
 		for (int i = 0; i < equipments.size(); i++) {
 			GIngredient gi = equipments.get(i);
 			if (gi instanceof HealthGiving || gi instanceof Armor) {
-				gi.use(amt);
+				gi.damage(amt);
 				if(gi.getDurability() <= 0){
 					gi.setDurability(0);
 					if(equipments.size() > 1)
@@ -335,6 +321,12 @@ public class Hamburger extends GFood {
 			}
 		return armor;
 	}
+	
+	
+	public void die(){
+		
+	}
+
 
 	// ///////////////////////////
 

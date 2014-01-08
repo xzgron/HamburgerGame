@@ -39,9 +39,7 @@ public class GameWorld extends GamePart {
 		spawn(new Tree(50, 170, 900,700));
 		
 
-		for (int i = 0; i < 5; i++)
-			spawn(new BlueBerry(GMath.random(500,-500),
-					GMath.random(500,-500), GMath.random(20,30)));
+
 
 		spawn(new BlueBerry(GMath.random(500,-500),
 				GMath.random(500,-500), 70));
@@ -56,7 +54,7 @@ public class GameWorld extends GamePart {
 			Main.game.setGameState(GState.INVENTORY_MENU);
 	}
 	float blueberrySize = 0;
-	GTimer spawnTimer = new GTimer(0.3f);
+	GTimer spawnTimer = new GTimer(10f);
 	public void update() {
 		
 		///////SPAWNA BLB€R/////////////
@@ -146,7 +144,7 @@ public class GameWorld extends GamePart {
 		while (moved) {
 			moved = false;
 			for (int i = 0; i < worldObjects.size() - 1; i++) {
-				if (worldObjects.get(i).getGroundYPos() > worldObjects.get(i + 1).getGroundYPos()) {
+				if (worldObjects.get(i).getY() > worldObjects.get(i + 1).getY()) {
 					temp = worldObjects.get(i); // object i flyttas innan i + 1
 					worldObjects.set(i, worldObjects.get(i + 1));
 					worldObjects.set(i + 1, temp);
@@ -159,7 +157,7 @@ public class GameWorld extends GamePart {
 		while (moved) {
 			moved = false;
 			for (int i = 0; i < worldObjects.size() - 1; i++) {
-				if (GPhysics.objectsOverlapp(worldObjects.get(i), worldObjects.get(i + 1)) && worldObjects.get(i).getFootZPos() -1 >= worldObjects.get(i+1).getHeadZPos()) {
+				if (/*GPhysics.objectsOverlapp(worldObjects.get(i), worldObjects.get(i + 1)) &&*/ worldObjects.get(i).getFootZPos() -1 >= worldObjects.get(i+1).getHeadZPos()) {
 					temp = worldObjects.get(i); // object i flyttas innan i + 1
 					worldObjects.set(i, worldObjects.get(i + 1));
 					worldObjects.set(i + 1, temp);
@@ -170,7 +168,7 @@ public class GameWorld extends GamePart {
 		
 		////G…RA OBJECT FRAMF…R PLAYER GENOMSKINLIGA///
 		for (WorldObject go : worldObjects) {
-			if (go != player && go.getGroundYPos() > player.getGroundYPos() && GPhysics.isPosWithinTex(player.getX(), player.getY() - player.getFootZPos(), go) && go.getFootZPos() < player.getHeadZPos() && go.getHeight() > player.getHeight()) {
+			if (go != player && go.getY() > player.getY() && GPhysics.isPosWithinTex(player.getX(), player.getY() - player.getFootZPos(), go) && go.getFootZPos() < player.getHeadZPos() && go.getHeight() > player.getHeight()) {
 				go.setAlpha(0.5f);
 			} else
 				go.setAlpha(1);

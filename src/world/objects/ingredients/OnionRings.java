@@ -28,7 +28,7 @@ public class OnionRings extends GIngredient implements Activateable{
 			float xDir = GMouse.getX() - Display.getWidth()/2;
 			float yDir = GMouse.getY() - Display.getHeight()/2;
 			float speed = GMath.getLength(xDir, yDir)*6f;
-			Main.game.world.spawn(new OnionRingProjectile(getX(),getY(),getHeadZPos(),xDir,yDir, speed));
+			Main.game.world.spawn(new OnionRingProjectile(getX(),getY(),getFootZPos(),xDir,yDir, speed));
 			castTimer.reset();
 		}
 		

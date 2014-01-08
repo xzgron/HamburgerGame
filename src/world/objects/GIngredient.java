@@ -3,8 +3,7 @@ package world.objects;
 import java.util.LinkedList;
 
 import world.WorldObject;
-import world.objects.ingredients.bases.Armor;
-import world.objects.ingredients.bases.HealthGiving;
+import world.objects.ingredients.bases.*;
 
 import game.GSprite;
 
@@ -63,12 +62,16 @@ public abstract class GIngredient extends GItem{
 			
 	}
 	
-	public boolean recover(int amt){ // returnerar om det gick
-		if(durability+amt <= maxDurability){
-			durability += amt;
-			return true;
-		}
-		return false;
+	public void damage(int amt){ // returnerar om det gick
+		durability -= amt;
+		if(durability < 0)
+			durability = 0;
+	}
+	
+	public void recover(int amt){ // returnerar om det gick
+		durability += amt;
+		if(durability > maxDurability)
+			durability = maxDurability;
 	}
 	
 	public boolean isEmpty(){

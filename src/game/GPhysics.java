@@ -22,7 +22,7 @@ public class GPhysics {
 		//KÖR STRÄCK COLLISION AND SHIT////
 		
 		float dx = go1.getX() - go2.getX(); //frŒn go2 till go1
-		float dy = go1.getGroundYPos() - go2.getGroundYPos();
+		float dy = go1.getY() - go2.getY();
 		
 		float dist = getLength(dx,dy); //avstŒndet mellan objekten
 		
@@ -112,7 +112,7 @@ public class GPhysics {
 		//KÖR STRÄCK COLLISION AND SHIT////
 		
 		float dx = go1.getX() - go2.getX(); //frŒn go2 till go1
-		float dy = go1.getGroundYPos() - go2.getGroundYPos();
+		float dy = go1.getY() - go2.getY();
 		
 		float dist = getLength(dx,dy*2);
 		
@@ -134,5 +134,12 @@ public class GPhysics {
 
 	public static void useGravity(WorldObject go) {
 		go.accelerate(0,0,-Main.game.world.getGravity());
+	}
+	
+	public static void handleGroundCollision(WorldObject go){
+		if(go.getFootZPos() < 0){
+			go.setFootZPos(0);
+			go.setZSpeed(0);
+			}
 	}
 }

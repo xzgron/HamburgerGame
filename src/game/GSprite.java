@@ -90,6 +90,10 @@ public class GSprite {
 	}
 	
 	public void moveByVector(float amt, float xDirection, float yDirection){
+		if(xDirection == 0 && yDirection == 0){
+			//System.out.println("Illegal movement" + this);
+			return;
+		}
 		float directionLength = GMath.getDistance(0, 0, xDirection, yDirection);
 		xDirection = xDirection/directionLength*amt;
 		yDirection = yDirection/directionLength*amt;

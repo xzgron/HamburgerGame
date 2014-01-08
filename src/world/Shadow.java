@@ -10,7 +10,7 @@ public class Shadow {
 	
 	WorldObject owner;
 	
-	Texture texture = GTexture.getTexture("food/shadow");
+	static Texture texture = GTexture.getTexture("food/shadow");
 	
 	public Shadow(WorldObject go) {
 		owner = go;
@@ -18,7 +18,11 @@ public class Shadow {
 	}
 	
 	public void render(){
-		GImage.draw(texture, owner.getX(), owner.getGroundYPos(), owner.getTexWidth()+ (owner.getFootZPos()/2), ( owner.getTexWidth()+ (owner.getFootZPos()/2))/2, 1, 1, 1, owner.getAlpha());	
+		GImage.draw(texture, owner.getX(), owner.getY(), owner.getTexWidth()+ (owner.getFootZPos()/2), ( owner.getTexWidth()+ (owner.getFootZPos()/2))/2, 1, 1, 1, owner.getAlpha());	
+	}
+
+	public float getRadius(){
+		return (owner.getTexWidth()+ (owner.getFootZPos()/2))/2;
 	}
 
 }

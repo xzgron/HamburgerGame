@@ -21,9 +21,11 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class GSound {
 
+	public static boolean isOn = false;
+	
 	private static LinkedList<Audio> sounds = new LinkedList<Audio>();
 	private static LinkedList<String> audioLocations = new LinkedList<String>();
-
+	
 	public static Audio getAudio(String fileName){
 		if(fileName.substring(fileName.length()-4, fileName.length()).equals("null"))
 			return null;

@@ -123,7 +123,7 @@ public class Main {
 
 	private static void initDisplay() {
 		try {
-			String[] displayOptions = {"Fullscreen", "800x600", "1200x800"};
+			String[] displayOptions = {"Fullscreen", "800x600", "1200x720"};
 			int i = JOptionPane.showOptionDialog(null, "", "Display thing", 0, 0, null, displayOptions, -1);
 			switch(i){
 			case 0:
@@ -136,7 +136,7 @@ public class Main {
 				break;
 			case 2:
 				window_width = 1200;
-				window_height = 800;
+				window_height = 720;
 				Display.setDisplayMode(new DisplayMode(window_width, window_height));
 				break;
 			}
