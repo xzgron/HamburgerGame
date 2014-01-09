@@ -280,21 +280,21 @@ public abstract class WorldObject extends GSprite{
 	//////////////////////////////////COMMAND HELP////////////////////// //foot och head medfšr avrundings fel 
 	
 	public boolean justLanded(){
-		return(getFootZPrev() > 0.0001f && getFootZPos() <= 0.0001f);
+		return(getFootZPrev() > 0.00001f && getFootZPos() <= 0.00001f);
 
 	}
 	
 	public boolean justJumped(){
-		return (getFootZPrev() == 0.0001f && getFootZPos() > 0.0001f);
+		return (getFootZPrev() <= 0.00001f && getFootZPos() > 0.00001f);
 
 	}
 	
 	public boolean isInAir(){
-		return(getFootZPos() > 0.0001f);
+		return(getFootZPos() > 0.00001f);
 	}
 	
 	public boolean isOnGround(){
-		return(getFootZPos() <= 0.0001f);
+		return(getFootZPos() <= 0.00001f);
 	}
 
 	public boolean isWalking(){

@@ -137,7 +137,7 @@ public class GPhysics {
 	}
 	
 	public static void handleGroundCollision(WorldObject go){
-		if(go.getFootZPos() < 0){
+		if(go.getFootZPos() < -0.0001){
 			go.setFootZPos(0);
 			go.setZSpeed(0);
 			}

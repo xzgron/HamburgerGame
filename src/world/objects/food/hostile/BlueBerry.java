@@ -16,7 +16,6 @@ public class BlueBerry extends HostileFood {
 	public BlueBerry(float xPos, float yPos, float size) {
 		super(xPos, yPos, size, size,"Blueberrys/B" + ((int) (Math.random() * 4)), 0.13f, 0.73f, (int)(GMath.getSphereVolume(size/2)/700+1), (int)(GMath.getSphereVolume(size/2)/700+1));
 		setRadius(size/2.1f);
-		
 		healthBar.setFollow(true);
 		healthBar.setBackgroundColor(0.8f,0,0,1);
 		healthBar.setColor(0, 0.8f,0,1);

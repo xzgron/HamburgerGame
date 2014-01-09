@@ -93,6 +93,7 @@ public abstract class GFood extends WorldObject {
 	}
 
 	public void die() {
+		currentHealth = 0;
 		setTexture(deathTexture);
 		if(deathSound != null)
 			deathSound.playAsSoundEffect(1, 1, false,getX()-Main.game.world.getXTranslation(),getY()-Main.game.world.getYTranslation(),getZ());
@@ -171,9 +172,13 @@ public abstract class GFood extends WorldObject {
 	}
 
 	
-	public void tryJump() {
-		if (!isInAir())
+	public boolean tryJump() {
+		if (isOnGround()){
 			jump();
+			return true;	
+		}
+		else 
+			return false;
 	}
 
 	public void walk(float a) {
@@ -187,13 +192,17 @@ public abstract class GFood extends WorldObject {
 	}
 
 	
-	public void tryGroundWalk(float a) {
-		if (!isInAir())
+	public boolean tryGroundWalk(float a) {
+		if (isOnGround()){
 			setSpeedByAngle(walkingSpeed, a);
+			return true;
+			}
+		else 
+			return false;
 	}
 	
 	public void tryGroundWalk(float xDir,float yDir) {
-		if (!isInAir())
+		if (isOnGround())
 			setSpeedByVector(walkingSpeed, xDir,yDir);
 	}
 

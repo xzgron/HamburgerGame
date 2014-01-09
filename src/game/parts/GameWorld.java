@@ -54,24 +54,29 @@ public class GameWorld extends GamePart {
 			Main.game.setGameState(GState.INVENTORY_MENU);
 	}
 	float blueberrySize = 0;
-	GTimer spawnTimer = new GTimer(10f);
-	public void update() {
-		
+	GTimer spawnTimer = new GTimer(1f);
+	
+	public void update() {		
 		///////SPAWNA BLÅBÄR/////////////
 		if(spawnTimer.hasExceeded()){
-			float xPos;
-			float yPos;
+			float xPos = GMath.random(-1f,1f)*Display.getWidth()/2+player.getX();
+			float yPos = GMath.random(-1f,1f)*Display.getHeight()/2+player.getY();
+			int side = (int)GMath.random(0,4);
+			switch(side){
+			case 0:
+				xPos = 100+Display.getWidth()/2+player.getX();
+				break;
+			case 1:
+				xPos = -100-Display.getWidth()/2+player.getX();
+				break;
+			case 2:
+				yPos = 100+Display.getHeight()/2+player.getY();
+				break;
+			case 3:
+				yPos = -100-Display.getHeight()/2+player.getY();
+				break;
 			
-			if((int)GMath.random(0,2) == 1)
-				xPos = GMath.random(1,1.5f)*Display.getWidth()/2+player.getX();
-			else
-				xPos = -GMath.random(1,1.5f)*Display.getWidth()/2+player.getX();
-			
-
-			if((int)GMath.random(0,2) == 1)
-				yPos = GMath.random(1,1.5f)*Display.getHeight()/2+player.getY();
-			else
-				yPos = -GMath.random(1,1.5f)*Display.getHeight()/2+player.getY();
+			}
 			spawn(new BlueBerry(xPos,yPos, GMath.random(20,30)+(float)Math.sqrt(blueberrySize)));
 			blueberrySize+=0.2f;
 			spawnTimer.reset();

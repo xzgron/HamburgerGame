@@ -1,5 +1,7 @@
 package controllers;
 
+import org.lwjgl.input.Keyboard;
+
 import game.GMath;
 import game.GPhysics;
 import game.input.GTimer;
@@ -16,19 +18,19 @@ public class HostileController extends GController {
 	}
 	
 	public void handle(GFood food) {
-		
+		if(Keyboard.isKeyDown(Keyboard.KEY_0))
+			food.tryJump();
+
 		if (food.justLanded()) {
 			waitTimer.reset();
-			food.stop();
 		}
 		
 		if(food.isOnGround())
 			food.stop();
 
-		if(waitTimer.getExceededTime() > 1.5f && food.isOnGround())
-			food.jump();
 		
-		if (waitTimer.hasExceeded() && food.isOnGround()) {
+		if (waitTimer.hasExceeded()) {		
+			
 			float dx = Main.game.world.getPlayer().getX() - food.getX();
 			float dy = Main.game.world.getPlayer().getY() - food.getY();
 			
@@ -38,14 +40,16 @@ public class HostileController extends GController {
 			dy = dy/ovalDistance * Main.game.world.getPlayer().getRadius();
 			float r = GMath.getLength(dx,dy);
 			
+			//attack
 			if (GMath.getDistance(Main.game.world.getPlayer(), food) < r + 100 /*&& !GPhysics.objectsOverlapp(Main.game.world.getPlayer(), food)*/) {
-				if (!food.isInAir()) {
-					food.setSpeedByVector(250, Main.game.world.getPlayer().getX() - food.getX(), Main.game.world.getPlayer().getY() - food.getY());
+				if (food.isOnGround()) {
 					food.setZSpeed(170);
+					food.setSpeedByVector(250, Main.game.world.getPlayer().getX() - food.getX(), Main.game.world.getPlayer().getY() - food.getY());		
 				}
+			// gŒ
 			} else {
-				food.tryGroundWalk(Main.game.world.getPlayer().getX() - food.getX(), Main.game.world.getPlayer().getY() - food.getY());
-				food.tryJump();
+				if(food.tryJump())
+					food.tryGroundWalk(Main.game.world.getPlayer().getX() - food.getX(), Main.game.world.getPlayer().getY() - food.getY());
 			}
 		}
 	}
