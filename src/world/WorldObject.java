@@ -209,10 +209,12 @@ public abstract class WorldObject extends GSprite{
 		zSpeed = z;
 	}
 	
+	public void setXYSpeed(float speed){
+		setSpeedByVector(speed, getXSpeed(), getYSpeed());
+	}
 	public void setSpeed(float x, float y) {
 		xSpeed = x;
-		ySpeed = y;
-		
+		ySpeed = y;	
 	}
 	
 	public void setSpeed(float x, float y, float z) {
@@ -228,7 +230,7 @@ public abstract class WorldObject extends GSprite{
 	}
 	
 	public void setSpeedByVector(float amt, float xDir, float yDir){
-		float directionLength = GMath.getDistance(0, 0, xDir, yDir);
+		float directionLength = GMath.getLength(xDir, yDir);
 		xDir = xDir/directionLength*amt;
 		yDir = yDir/directionLength*amt;
 		setSpeed(xDir,yDir);
@@ -297,7 +299,7 @@ public abstract class WorldObject extends GSprite{
 		return(getFootZPos() <= 0.00001f);
 	}
 
-	public boolean isWalking(){
+	public boolean isMoving(){
 		return(xSpeed != 0 || ySpeed != 0);
 	}
 	

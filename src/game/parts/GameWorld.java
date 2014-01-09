@@ -54,7 +54,7 @@ public class GameWorld extends GamePart {
 			Main.game.setGameState(GState.INVENTORY_MENU);
 	}
 	float blueberrySize = 0;
-	GTimer spawnTimer = new GTimer(1f);
+	GTimer spawnTimer = new GTimer(0.3f);
 	
 	public void update() {		
 		///////SPAWNA BLÅBÄR/////////////
