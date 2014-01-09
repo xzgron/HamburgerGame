@@ -261,7 +261,7 @@ public abstract class WorldObject extends GSprite{
 	public void accelerateByAngle(float amt, float angle){
 		float xs = (float) (amt * cos(toRadians(angle)));
 		float ys = (float) (amt * sin(toRadians(angle)));
-		accelerate(xs*Main.getDelta(),ys*Main.getDelta(),0);
+		accelerate(xs,ys,0);
 	}
 	public void accelerateByVector(float amt, float xDir, float yDir, float zDir){
 		float directionLength = GMath.getLength(xDir, yDir,zDir);
