@@ -25,8 +25,11 @@ public abstract class WorldObject extends GSprite{
 	private float footPos = 0;
 	private float headPos = 1;
 	
-	private boolean surface = false; ///////om något ska ligga på marken
+	//private boolean solid = true; // ett icke solidt object flyttar varken sig själv eller den den träffar 
+	private boolean surface = false; ///////om något ska ligga på marken det renderas under allt annat och det
+	//sker ingen collision alls
 	
+
 	private Shadow shadow = null; ///////skugga??
 	
 	public WorldObject(float xPos, float yPos, float texWidth, float texHeight, String texture, float footPos, float headPos) {

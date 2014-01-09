@@ -17,10 +17,10 @@ import world.objects.projectiles.OnionRingProjectile;
 
 public class Banana extends GIngredient implements Activateable{
 
-	GTimer castTimer = new GTimer(0.4f);
+	GTimer castTimer = new GTimer(0.3f);
 	GTimer recoverTimer = new GTimer(2f);
 	public Banana(float x, float y) {
-		super(x, y, 100,100,"banana", 0.45f, 0.55f,49,12,3);
+		super(x, y, 100,100,"banana", 0.45f, 0.55f,49,30,3);
 	}
 
 	public void useFirstAbility(WorldObject user) {

@@ -28,7 +28,7 @@ public class BananaProjectile extends GProjectile {
 			boolean right) {
 		super(xPos, yPos, zPos, 70, 70, "ingredients/banana1", 0.3f, 0.7f);
 		setRadius(35f);
-		setWeight(9);
+		setWeight(10);
 		setSpeedByVector(speed, xDir, yDir);
 		moveByVector(10, xDir, yDir);
 		this.caster = caster;
@@ -47,7 +47,9 @@ public class BananaProjectile extends GProjectile {
 			banana.recover(1);
 		} else if (!objectsHit.contains(obj)) {
 			if (obj instanceof HostileFood && this.isMoving()) {
-				((GFood) obj).damage(30, this);
+				//float dSpeed = GMath.getLength(getXSpeed()-obj.getXSpeed(), getYSpeed()-obj.getYSpeed());
+				//float damage = GPhysics.calculateDamage(dSpeed,getWeight(),2.5f);
+				((GFood) obj).damage(40,this);
 			}
 		}
 		objectsHit.addLast(obj);
@@ -64,11 +66,7 @@ public class BananaProjectile extends GProjectile {
 		}
 		
 		
-		/*
-		 * float xDir = caster.getX() - getX(); float yDir = caster.getY() -
-		 * getY(); accelerateByVector(5000, xDir, yDir, 0);
-		 */
-		if (isInAir()) {
+		if (isInAir()) { //snurr
 			float bonusAngleStart = 60f;
 			float recoverTime = 0.4f;
 			
@@ -83,6 +81,10 @@ public class BananaProjectile extends GProjectile {
 			if(getXYSpeed() > startSpeed) //inte fšr fort
 				setXYSpeed(startSpeed);
 		}
+		
+		
+		
+		//annat
 		setZSpeed(0);
 		super.update();
 		GPhysics.handleGroundCollision(this);

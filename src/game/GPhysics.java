@@ -142,4 +142,8 @@ public class GPhysics {
 			go.setZSpeed(0);
 			}
 	}
+	
+	public static float calculateDamage(float speed, float weight,float multiplyer){
+		return speed*weight*multiplyer/1000f;
+	}
 }
