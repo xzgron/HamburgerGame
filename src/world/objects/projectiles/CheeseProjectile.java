@@ -12,7 +12,7 @@ public class CheeseProjectile extends GProjectile{
 
 	
 	public CheeseProjectile(float xPos, float yPos, float zPos, float xDir, float yDir, float speed) {
-		super(xPos, yPos, zPos, 70, 70, "ingredients/Cheese", 0.45f, 0.55f);
+		super(xPos, yPos, zPos, 70, 70, "ingredients/ost_bullet", 0.45f, 0.55f);
 		setRadius(35);
 		setWeight(5);
 		setSpeedByVector(speed,xDir,yDir);

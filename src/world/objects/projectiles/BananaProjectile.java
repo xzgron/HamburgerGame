@@ -49,7 +49,7 @@ public class BananaProjectile extends GProjectile {
 			}
 		}
 		objectsHit.addLast(obj);
-		
+
 	}
 
 	public void update() {
@@ -68,7 +68,7 @@ public class BananaProjectile extends GProjectile {
 		setZSpeed(0);
 		super.update();
 		GPhysics.handleGroundCollision(this);
-		
+
 		if (!isInAir()) {
 			stop();
 		}
