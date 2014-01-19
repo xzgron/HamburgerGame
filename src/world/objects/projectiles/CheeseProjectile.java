@@ -5,7 +5,7 @@ import game.Main;
 import world.WorldObject;
 import world.objects.GFood;
 import world.objects.GProjectile;
-import world.objects.HostileFood;
+import world.objects.food.HostileFood;
 
 public class CheeseProjectile extends GProjectile{
 

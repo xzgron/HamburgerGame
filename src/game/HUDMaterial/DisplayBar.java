@@ -14,7 +14,7 @@ import static org.lwjgl.opengl.GL11.glVertex2f;
 import game.GImage;
 import game.GSprite;
 import game.GTexture;
-import game.input.GTimer;
+import game.tools.GTimer;
 
 import org.newdawn.slick.opengl.Texture;
 

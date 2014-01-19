@@ -1,8 +1,10 @@
 package game.parts;
 
-import static game.input.GKeyboard.isKeyPressed;
+import static game.tools.GKeyboard.isKeyPressed;
 
 import java.awt.Font;
+
+import options.Controlls;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -10,7 +12,6 @@ import org.newdawn.slick.TrueTypeFont;
 
 import world.objects.ingredients.*;
 
-import controllers.Controlls;
 import game.GamePart;
 import game.Main;
 import game.HUDMaterial.EraseSlot;

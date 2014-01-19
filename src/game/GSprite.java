@@ -3,7 +3,7 @@ import static java.lang.Math.*;
 import static org.lwjgl.input.Mouse.isButtonDown;
 import static org.lwjgl.opengl.GL11.*;
 
-import game.input.GMouse;
+import game.tools.GMouse;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +15,6 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
-import controllers.GController;
 
 
 public class GSprite {

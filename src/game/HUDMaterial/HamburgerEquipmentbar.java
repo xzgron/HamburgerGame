@@ -1,7 +1,7 @@
 package game.HUDMaterial;
 
 import game.Main;
-import game.input.GMouse;
+import game.tools.GMouse;
 
 import java.util.LinkedList;
 

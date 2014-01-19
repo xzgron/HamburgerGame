@@ -1,4 +1,4 @@
-package game.input;
+package game.tools;
 
 import game.Main;
 

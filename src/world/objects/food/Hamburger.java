@@ -15,7 +15,7 @@ import game.Game;
 import game.HUDMaterial.HealthBar;
 import game.parts.GameWorld;
 
-public class Hamburger extends GFood {
+public abstract class Hamburger extends GFood {
 
 	LinkedList<GIngredient> equipments = new LinkedList<GIngredient>();
 
@@ -35,10 +35,10 @@ public class Hamburger extends GFood {
 		
 		// equipments.add(new Cheese(xPos, yPos));
 
-		createShadow();
+	}
 
-		setWalkingSpeed(200);
-		setJumpingForce(4000);
+	public void handleAI(){
+		
 	}
 
 	public void update() {
@@ -375,23 +375,6 @@ public class Hamburger extends GFood {
 
 	// /////////////////////////////
 
-	// /////////////////COMBAT/////////////////
 
-	public void landedOn(WorldObject go) {
-		if (go instanceof GFood) {
-			float dmg = -(getZSpeed() - go.getZSpeed()) * getWeight() / 1000;
-			((GFood) go).damage((int) dmg,this);
 
-			if (!((GFood) go).isDead())
-				jump();
-		}
-	}
-
-	public void gotLandedOnBy(WorldObject go) {
-
-	}
-
-	public void collidedWith(WorldObject go) {
-
-	}
 }

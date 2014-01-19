@@ -2,12 +2,13 @@ package world.objects.ingredients;
 
 import game.GMath;
 import game.Main;
-import game.input.GMouse;
-import game.input.GTimer;
+import game.tools.GMouse;
+import game.tools.GTimer;
+
+import options.Controlls;
 
 import org.lwjgl.opengl.Display;
 
-import controllers.Controlls;
 import world.WorldObject;
 import world.objects.GIngredient;
 import world.objects.ingredients.bases.Activateable;

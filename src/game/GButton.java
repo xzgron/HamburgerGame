@@ -1,7 +1,7 @@
 package game;
 
 import game.GSprite;
-import game.input.GMouse;
+import game.tools.GMouse;
 
 import org.lwjgl.input.Mouse;
 

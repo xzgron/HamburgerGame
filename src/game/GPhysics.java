@@ -11,7 +11,7 @@ import world.WorldObject;
 import world.objects.GFood;
 public class GPhysics {
 	
-	
+	public static float viewPoint = 2f; // 2 är från sin(30°) vilket betyder att view vinkeln är 30°
 	
 	public static boolean handleCollision(WorldObject go1, WorldObject go2) {
 		if (go1.isSurface()||go2.isSurface())
@@ -34,7 +34,7 @@ public class GPhysics {
 			return false; 
 		
 	
-		float ovalDist = GMath.getLength(dx,dy*2);
+		float ovalDist = GMath.getLength(dx,dy*viewPoint);
 		
 		/*
 		float x1 = dx/ovalDistance * go1.getRadius(); //go1:s x värde på kanten mot go2
@@ -114,7 +114,7 @@ public class GPhysics {
 		float dx = go1.getX() - go2.getX(); //från go2 till go1
 		float dy = go1.getY() - go2.getY();
 		
-		float dist = getLength(dx,dy*2);
+		float dist = getLength(dx,dy*viewPoint);
 		
 		float totRadius = go1.getRadius()+go2.getRadius();
 		
@@ -146,4 +146,11 @@ public class GPhysics {
 	public static float calculateDamage(float speed, float weight,float multiplyer){
 		return speed*weight*multiplyer/1000f;
 	}
+	
+	public static float getWorldRadius(float radius, float xDir, float yDir){
+		float ovalDistance = GMath.getLength(xDir,yDir*viewPoint);
+		float distance = GMath.getLength(xDir,yDir);
+		return radius* distance/ovalDistance;	
+	}
+
 }

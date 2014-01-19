@@ -5,13 +5,9 @@ import org.newdawn.slick.opengl.Texture;
 
 import world.WorldObject;
 
-import controllers.GController;
 import game.*;
 
 public abstract class GFood extends WorldObject {
-
-	float walkingSpeed = 100; // pixels per second
-	float jumpingForce = 1000; // utgångs kraft från ett hopp v = jf/w
 
 	int maxHealth;
 	int currentHealth;
@@ -19,13 +15,11 @@ public abstract class GFood extends WorldObject {
 	Texture deathTexture = null;
 	Audio deathSound = null;
 
-	private GController controller;
-
 	public GFood(float xPos, float yPos, float texWidth, float texHeight, String texture, float footPos,
 			float headPos, int weight, int health) {
 		super(xPos, yPos, texWidth, texHeight, "food/"+texture, footPos, headPos);
 		setTexFolder("food/");
-		
+		createShadow();
 		maxHealth = health;
 		currentHealth = maxHealth;
 		setRadius(texWidth/2);
@@ -33,10 +27,11 @@ public abstract class GFood extends WorldObject {
 		
 	}
 
+	public abstract void handleAI();
+	
 	public void update() {
 		if(!isDead()){
-			if (controller != null)
-				controller.handle(this);
+			handleAI();
 		}
 		else
 			stop();
@@ -51,16 +46,6 @@ public abstract class GFood extends WorldObject {
 
 	}
 
-	// ///////////CONTROLLING/////////////
-	public void setController(GController controller) {
-		this.controller = controller;
-	}
-
-	public void removeController() {
-		controller = null;
-	}
-
-	// ////////////////////////////////
 
 	// ///////////ABOUT HEALTH/////////////////////
 
@@ -143,56 +128,27 @@ public abstract class GFood extends WorldObject {
 
 	// ////////////////////////////
 
-	// ///////////MOVING PREFERENCES/////////////
-
-	public void setWalkingSpeed(float f) {
-		walkingSpeed = f;
-	}
-
-	public float getWalkingSpeed() {
-		return walkingSpeed;
-	}
-
-	public void setJumpingForce(float f) {
-		jumpingForce = f;
-	}
-
-	public float getJumpingForce() {
-		return jumpingForce;
-	}
 
 	// //////MOVEMENT HANDLING//////////////
 
-	public void jump() {
-		jump(jumpingForce);
-	}
-	
-	public void jump(float force){
+
+	public void airJump(float force){
 		setZSpeed(force/(float)Math.sqrt(getWeight()));
 	}
 
 	
-	public boolean tryJump() {
+	public boolean tryJump(float force) {
 		if (isOnGround()){
-			jump();
+			airJump(force);
 			return true;	
 		}
 		else 
 			return false;
 	}
 
-	public void walk(float a) {
-		setSpeedByAngle(walkingSpeed, a);
-
-	}
-
-	public void walk(float xDir,float yDir) {
-		setSpeedByVector(walkingSpeed, xDir,yDir);
-
-	}
 
 	
-	public boolean tryGroundWalk(float a) {
+	public boolean tryWalk(float walkingSpeed, float a) {
 		if (isOnGround()){
 			setSpeedByAngle(walkingSpeed, a);
 			return true;
@@ -201,7 +157,7 @@ public abstract class GFood extends WorldObject {
 			return false;
 	}
 	
-	public void tryGroundWalk(float xDir,float yDir) {
+	public void tryWalk(float walkingSpeed, float xDir,float yDir) {
 		if (isOnGround())
 			setSpeedByVector(walkingSpeed, xDir,yDir);
 	}
@@ -210,17 +166,11 @@ public abstract class GFood extends WorldObject {
 
 	// /////////////COLLISION//////////////////
 
-	public void landedOn(WorldObject go) {
-		jump();
-	}
+	public abstract void landedOn(WorldObject go);
 	
-	public void gotLandedOnBy(WorldObject go) {
-		
-	}
+	public abstract void gotLandedOnBy(WorldObject go);
 
-	public void collidedWith(WorldObject go) {
-
-	}
+	public abstract void collidedWith(WorldObject go);
 
 	// ///////////////////////////////////////
 }

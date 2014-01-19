@@ -1,15 +1,17 @@
 package game.parts;
 
 import game.*;
-import game.input.*;
+import game.tools.*;
 
 import java.awt.Font;
 import java.util.*;
+
+import options.*;
+
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
 
-import controllers.*;
 import world.*;
 import world.objects.*;
 import world.objects.food.hostile.BlueBerry;
@@ -26,23 +28,15 @@ public class GameWorld extends GamePart {
 
 	private float gravity = 800;
 
-	private Player player = new Player(0, 0);;
+	private Player player = new Player(0, 0);
 
 	public GameWorld() {
-
-		
-		
-		player.setController(new PlayerController());
 		spawn(player);
 		spawn(new Tree(150, 30, 700,700));
 		spawn(new Tree(350, 80, 800,700));
 		spawn(new Tree(50, 170, 900,700));
-		
 
-
-
-		spawn(new BlueBerry(GMath.random(500,-500),
-				GMath.random(500,-500), 70));
+		//spawn(new BlueBerry(GMath.random(500,-500),GMath.random(500,-500), 70));
 	}
 	
 	///////////MAIN PART////////////////
@@ -82,12 +76,7 @@ public class GameWorld extends GamePart {
 			spawnTimer.reset();
 		}
 	////////////////
-			
-		for	(WorldObject go : worldObjects){ //rensa dštt
-			if(go.getClass().isAssignableFrom(GFood.class) && ((GFood) go).isDead())
-				deSpawn(go);
-			}
-		
+
 		int prevSize = worldObjects.size();
 		for (int i = 0; i < worldObjects.size(); i++){
 			worldObjects.get(i).update();
@@ -140,7 +129,7 @@ public class GameWorld extends GamePart {
 		for (int i = 0; i < worldObjects.size(); i++) 
 			for (int j = i +1 ; j < worldObjects.size(); j++)
 				GPhysics.handleCollision(worldObjects.get(i), worldObjects.get(j));
-		}
+	}
 
 	private void sortObjects() {
 		boolean moved = true;

@@ -1,7 +1,7 @@
-package controllers;
+package options;
 
 import static org.lwjgl.input.Keyboard.*;
-import game.input.GMouse;
+import game.tools.GMouse;
 
 public class Controlls {
 	

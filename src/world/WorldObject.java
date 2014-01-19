@@ -7,7 +7,7 @@ import game.GPhysics;
 import game.GSprite;
 import game.Game;
 import game.Main;
-import game.input.GMouse;
+import game.tools.GMouse;
 import world.objects.*;
 
 public abstract class WorldObject extends GSprite{

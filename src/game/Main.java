@@ -1,7 +1,7 @@
 package game;
 
-import game.input.GKeyboard;
-import game.input.GMouse;
+import game.tools.GKeyboard;
+import game.tools.GMouse;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

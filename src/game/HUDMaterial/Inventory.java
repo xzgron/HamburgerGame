@@ -8,15 +8,16 @@ import game.Game;
 import game.GamePart;
 import game.Main;
 import game.Game.GState;
-import static game.input.GKeyboard.*;
+import static game.tools.GKeyboard.*;
 
 import java.util.ArrayList;
+
+import options.Controlls;
 
 import org.lwjgl.opengl.Display;
 
 import world.objects.GItem;
 
-import controllers.Controlls;
 
 public class Inventory {
 

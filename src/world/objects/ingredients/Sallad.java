@@ -1,8 +1,8 @@
 package world.objects.ingredients;
 
-import controllers.Controlls;
-import game.input.GMouse;
-import game.input.GTimer;
+import options.Controlls;
+import game.tools.GMouse;
+import game.tools.GTimer;
 import world.WorldObject;
 import world.objects.GIngredient;
 import world.objects.ingredients.bases.Activateable;

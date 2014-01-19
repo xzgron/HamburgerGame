@@ -13,7 +13,7 @@ import game.GTexture;
 import game.Game;
 import game.GamePart;
 import game.Main;
-import game.input.GTimer;
+import game.tools.GTimer;
 
 public class Intro extends GamePart {
 

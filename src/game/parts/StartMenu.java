@@ -8,7 +8,7 @@ import game.GTexture;
 import game.Game;
 import game.GamePart;
 import game.Main;
-import game.input.GMouse;
+import game.tools.GMouse;
 
 import java.util.LinkedList;
 

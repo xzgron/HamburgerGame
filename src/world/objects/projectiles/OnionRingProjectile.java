@@ -4,7 +4,7 @@ import game.Main;
 import world.WorldObject;
 import world.objects.GFood;
 import world.objects.GProjectile;
-import world.objects.HostileFood;
+import world.objects.food.HostileFood;
 
 public class OnionRingProjectile extends GProjectile{
 	public OnionRingProjectile(float xPos, float yPos, float zPos, float xDir, float yDir, float speed) {

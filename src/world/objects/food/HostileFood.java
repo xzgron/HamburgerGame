@@ -1,9 +1,10 @@
-package world.objects;
+package world.objects.food;
 
+import world.objects.GFood;
 import game.Main;
-import game.input.GTimer;
+import game.tools.GTimer;
 
-public class HostileFood extends GFood{
+public abstract class HostileFood extends GFood{
 
 	public HostileFood(float xPos, float yPos, float texWidth, float texHeight, String texture,
 			float footPos, float headPos, int weight, int health) {

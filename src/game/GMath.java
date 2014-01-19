@@ -1,7 +1,7 @@
 package game;
 
 import static java.lang.Math.*;
-import game.input.GMouse;
+import game.tools.GMouse;
 import world.WorldObject;
 
 public class GMath {

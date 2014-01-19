@@ -12,7 +12,7 @@ import game.GImage;
 import game.GMath;
 import game.GSprite;
 import game.GamePart;
-import game.input.GMouse;
+import game.tools.GMouse;
 
 public class InventorySlot extends GButton{
 	

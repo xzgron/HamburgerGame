@@ -5,11 +5,11 @@ import java.util.LinkedList;
 import game.GMath;
 import game.GPhysics;
 import game.Main;
-import game.input.GTimer;
+import game.tools.GTimer;
 import world.WorldObject;
 import world.objects.GFood;
 import world.objects.GProjectile;
-import world.objects.HostileFood;
+import world.objects.food.HostileFood;
 import world.objects.ingredients.Banana;
 
 public class BananaProjectile extends GProjectile {
@@ -67,8 +67,8 @@ public class BananaProjectile extends GProjectile {
 		
 		
 		if (isInAir()) { //snurr
-			float bonusAngleStart = 60f;
-			float recoverTime = 0.4f;
+			float bonusAngleStart = 90f;
+			float recoverTime = 0.6f;
 			
 			float bonusAngle = bonusAngleStart - despawnTimer.getPastTime() * bonusAngleStart/recoverTime;
 			if (bonusAngle < -bonusAngleStart) //nŠr vinkeln gŒtt tillbaka

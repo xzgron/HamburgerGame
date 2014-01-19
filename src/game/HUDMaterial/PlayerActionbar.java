@@ -2,11 +2,12 @@ package game.HUDMaterial;
 
 import java.util.LinkedList;
 
+import options.Controlls;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
-import controllers.Controlls;
 
 import world.objects.GFood;
 import world.objects.GIngredient;
@@ -17,9 +18,9 @@ import world.objects.ingredients.bases.ShiftClickAble;
 
 import game.GamePart;
 import game.Main;
-import game.input.GKeyboard;
-import game.input.GMouse;
 import game.parts.GameWorld;
+import game.tools.GKeyboard;
+import game.tools.GMouse;
 
 public class PlayerActionbar {
 
