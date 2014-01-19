@@ -14,8 +14,8 @@ public class Sallad extends GIngredient implements Activateable, ShiftClickAble{
 	
 	GTimer flyTimer = new GTimer(0.25f);
 	public Sallad(float x, float y) {
-		super(x, y, 120,120,"sallad", 0.45f, 0.55f,50, 10, -1);
-		setTexture("sallad");
+		super(x, y, 120,120,"sallad1", 0.45f, 0.55f,50, 10, -1);
+		setTexture("sallad1");
 	}
 
 	public void update(){
