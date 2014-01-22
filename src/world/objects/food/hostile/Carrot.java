@@ -18,12 +18,12 @@ public class Carrot extends HostileFood{
 	
 	private float attackJumpForce; // utgångs kraft från ett hopp v = jf/w
 
-	private GTimer jumpWaitTimer = new GTimer(0.3f);
+	private GTimer jumpWaitTimer = new GTimer(0.8f);
 	
 	private HealthBar healthBar = new HealthBar(0, -30, 50, 7,  this);
 	
 	public Carrot(float xPos, float yPos) {
-		super(xPos, yPos, 40, 125, "Carrot/carrot", 0.1f, 0.9f, 75, 75);
+		super(xPos, yPos, 40, 125, "Carrot/carrot", 0.05f, 0.85f, 75, 75);
 		setRadius(20);
 		
 		setDeathTexture("shadow");
