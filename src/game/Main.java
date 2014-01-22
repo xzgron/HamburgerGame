@@ -126,6 +126,8 @@ public class Main {
 			String[] displayOptions = {"Fullscreen", "800x600", "1200x720"};
 			int i = JOptionPane.showOptionDialog(null, "", "Display thing", 0, 0, null, displayOptions, -1);
 			switch(i){
+			case -1:
+				System.exit(0);
 			case 0:
 				Display.setFullscreen(true);
 				break;

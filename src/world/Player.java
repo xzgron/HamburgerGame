@@ -29,15 +29,13 @@ public class Player extends Hamburger{
 	///////////////////////////////////
 	
 	//////////////COMBAT///////////////
-	
-	
+	float landingOnDamageMultiplier = 1;
+	float projectileDamageMultiplier = 1;
 	
 	///////////////////////////////////
 	
 	//////////////LEVEL///////////////
-	private int experience = 0;
-	private int level = 1;
-	private int levelPoint = 1;
+	public LevelHandler level = new LevelHandler();
 	///////////////////////////////////
 
 	public Player(float xPos, float yPos) {
@@ -75,25 +73,6 @@ public class Player extends Hamburger{
 	}
 	
 	
-	//////////////EXP OCH LEVEL////////////////
-	public void grantExperience(int amt){
-		experience += amt;
-		if(experience >= getExperienceToNextLevel()){
-			experience -= getExperienceToNextLevel();
-			levelUp();
-		}
-	}
-	
-	public void levelUp(){
-		level += 1;
-		levelPoint += 1;
-	}
-	
-	public int getExperienceToNextLevel(){
-		return level*100;
-	}
-	//////////////////////////////////////////
-
 	
 	///////////////////COMBAT/////////////////
 

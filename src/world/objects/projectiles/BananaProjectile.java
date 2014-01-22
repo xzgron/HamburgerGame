@@ -25,7 +25,7 @@ public class BananaProjectile extends GProjectile {
 	public BananaProjectile(float xPos, float yPos, float zPos, float xDir,
 			float yDir, float speed, WorldObject caster, Banana banana,
 			boolean right) {
-		super(xPos, yPos, zPos, 80, 80, "ingredients/banana1", 0.3f, 0.7f);
+		super(xPos, yPos, zPos, 80, 80, "bananarang", 0.3f, 0.7f);
 		setRadius(40f);
 		setWeight(9);
 		setSpeedByVector(speed, xDir, yDir);
@@ -53,11 +53,10 @@ public class BananaProjectile extends GProjectile {
 	}
 
 	public void update() {
-<<<<<<< HEAD
 		
-		for(int i = 0; i < hitTime.size();i++){
-			if(hitTime.get(i).getPastTime() > 0.2f){ //tid för borttagning av objects som den redan träffat
-				hitTime.remove(i); //så den kan träffa igen.
+		for(int i = 0; i < hitTimes.size();i++){
+			if(hitTimes.get(i).getPastTime() > 0.2f){ //tid för borttagning av objects som den redan träffat
+				hitTimes.remove(i); //så den kan träffa igen.
 				objectsHit.remove(i);
 			}
 		}
@@ -69,26 +68,19 @@ public class BananaProjectile extends GProjectile {
 			
 			float bonusAngle = bonusAngleStart - despawnTimer.getPastTime() * bonusAngleStart/recoverTime;
 			if (bonusAngle < -bonusAngleStart) //när vinkeln gått tillbaka
-=======
-		/*
-		 * float xDir = caster.getX() - getX(); float yDir = caster.getY() -
-		 * getY(); accelerateByVector(5000, xDir, yDir, 0);
-		 */
-		if (isInAir()) {
-			float bonusAngle = 60 - despawnTimer.getPastTime() * 180;
-			if (bonusAngle < -60)
->>>>>>> bfb4136db21de0f403ed2925bd4c40ee6ad6c16c
 				bonusAngle = 0;
+			
 			float angle = GMath.getAngle(this, caster) + angleDirection
 					* bonusAngle;
-			accelerateByAngle(5000, angle);
+			this.accelerateByAngle(5000, angle);
 		}
-		setZSpeed(0);
+		
+		this.setZSpeed(0);
 		super.update();
 		GPhysics.handleGroundCollision(this);
 
-		if (!isInAir()) {
-			stop();
+		if (this.isOnGround()) {
+			this.stop();
 		}
 	}
 

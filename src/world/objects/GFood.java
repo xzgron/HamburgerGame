@@ -36,7 +36,7 @@ public abstract class GFood extends WorldObject {
 		else
 			stop();
 		
-		GPhysics.useGravity(this);
+		GPhysics.handleGravity(this);
 		GPhysics.handleGroundCollision(this);
 		
 		updatePrevPos();

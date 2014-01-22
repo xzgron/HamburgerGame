@@ -24,10 +24,10 @@ public abstract class Hamburger extends GFood {
 
 		equip(new Beef90Gram(xPos, yPos));
 		equip(new Sallad(xPos, yPos));
-		equip(new BreadOverPartSmall(xPos, yPos));
+		equip(new BreadTop(xPos, yPos));
 		
 		equip(0,new OnionRings(xPos, yPos));
-		equip(0,new BreadUnderPartSmall(xPos, yPos));
+		equip(0,new BreadBottom(xPos, yPos));
 
 
 		

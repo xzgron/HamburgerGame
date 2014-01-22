@@ -14,20 +14,19 @@ public class Sallad extends GIngredient implements Activateable, ShiftClickAble{
 	
 	GTimer flyTimer = new GTimer(0.25f);
 	public Sallad(float x, float y) {
-		super(x, y, 120,120,"sallad1", 0.45f, 0.55f,50, 10, -1);
-		setTexture("sallad1");
+		super(x, y, 120, 60,"sallad", 0.40f, 0.60f,50, 10, -1);
 	}
 
 	public void update(){
 		if(getTexWidth() > 120)
-			setSize(getTexWidth()-10,getTexHeight()-10);
+			setSize(getTexWidth()-10,getTexHeight()-5);
 		activated = false;
 	}
 	
 	public void useFirstAbility(WorldObject user) {
 		activated = true;
 		if(getTexWidth() < 200)
-			setSize(200,200);
+			setSize(200,100);
 		if(user.getZSpeed() < 0)
 			user.setZSpeed(user.getZSpeed()/2);
 		
@@ -35,7 +34,7 @@ public class Sallad extends GIngredient implements Activateable, ShiftClickAble{
 
 	public void useSecondAbility(WorldObject user) {
 		if(flyTimer.hasExceeded()){
-			setSize(250,250);
+			setSize(250,125);
 			user.setZSpeed(user.getZSpeed() + 30000/user.getWeight());
 			flyTimer.reset();
 		}

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import world.objects.GIngredient;
 
-public class OverPartIngredient  extends GIngredient {
+public class OverPartIngredient extends GIngredient {
 
 	public OverPartIngredient(float xPos, float yPos, float texWidth,
 			float texHeight, String texture, float footPos, float headPos,

@@ -20,7 +20,7 @@ public class OnionRings extends GIngredient implements Activateable{
 	GTimer castTimer = new GTimer(0.8f);
 	GTimer recoverTimer = new GTimer(2f);
 	public OnionRings(float x, float y) {
-		super(x, y, 100,100,"onionRings", 0.45f, 0.55f,49,12,6);
+		super(x, y, 100,50,"onionRings", 0.40f, 0.60f,49,12,6);
 	}
 
 	public void useFirstAbility(WorldObject user) {

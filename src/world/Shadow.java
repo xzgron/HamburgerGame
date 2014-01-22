@@ -19,11 +19,17 @@ public class Shadow {
 	}
 	
 	public void render(){
-		GImage.draw(texture, owner.getX(), owner.getY(), owner.getTexWidth()+ (owner.getFootZPos()/2), ( owner.getTexWidth()+ (owner.getFootZPos()/2))/GPhysics.viewPoint, 1, 1, 1, owner.getAlpha());	
+		GImage.draw(texture, owner.getX(), owner.getY(), getTexWidth(), getTexHeight(), 1, 1, 1, owner.getAlpha());	
 	}
 
 	public float getRadius(){
-		return (owner.getTexWidth()+ (owner.getFootZPos()/2))/2;
+		return getTexWidth()/2;
+	}
+	public float getTexHeight(){
+		return getTexWidth()/GPhysics.viewPoint;
+	}
+	public float getTexWidth(){
+		return (float)(owner.getTexWidth()+owner.getFootZPos()/3);
 	}
 
 }

@@ -30,7 +30,7 @@ public class InventoryMenu extends GamePart {
 		inventory.add(new Sallad(0,0));
 		inventory.add(new Beef90Gram(0,0));
 		inventory.add(new Banana(0,0));
-		inventory.add(new BreadUnderPartSuperSize(0,0));
+		inventory.add(new BreadBottomHuge(0,0));
 	}
 	
 	public void handleInput() {

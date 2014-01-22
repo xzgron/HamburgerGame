@@ -15,6 +15,7 @@ import org.newdawn.slick.opengl.Texture;
 import world.*;
 import world.objects.*;
 import world.objects.food.hostile.BlueBerry;
+import world.objects.food.hostile.Carrot;
 import world.objects.nature.Tree;
 import static org.lwjgl.input.Keyboard.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -32,9 +33,9 @@ public class GameWorld extends GamePart {
 
 	public GameWorld() {
 		spawn(player);
-		spawn(new Tree(150, 30, 700,700));
-		spawn(new Tree(350, 80, 800,700));
-		spawn(new Tree(50, 170, 900,700));
+		spawn(new Tree(150, 30, 350,700));
+		spawn(new Tree(350, 80, 400,700));
+		spawn(new Tree(50, 170, 450,700));
 
 		//spawn(new BlueBerry(GMath.random(500,-500),GMath.random(500,-500), 70));
 	}
@@ -48,7 +49,7 @@ public class GameWorld extends GamePart {
 			Main.game.setGameState(GState.INVENTORY_MENU);
 	}
 	float blueberrySize = 0;
-	GTimer spawnTimer = new GTimer(0.3f);
+	GTimer spawnTimer = new GTimer(1f);
 	
 	public void update() {		
 		///////SPAWNA BLB€R/////////////
@@ -71,7 +72,10 @@ public class GameWorld extends GamePart {
 				break;
 			
 			}
-			spawn(new BlueBerry(xPos,yPos, GMath.random(20,30)+(float)Math.sqrt(blueberrySize)));
+			if(Math.random() > 0.1)
+				spawn(new BlueBerry(xPos,yPos, GMath.random(20,30)+(float)Math.sqrt(blueberrySize)));
+			else
+				spawn(new Carrot(xPos, yPos));
 			blueberrySize+=0.2f;
 			spawnTimer.reset();
 		}

@@ -19,7 +19,7 @@ public class Cheese extends GIngredient implements Activateable{
 	GTimer castTimer = new GTimer(0.09f);
 	GTimer recoverTimer = new GTimer(0.1f);
 	public Cheese(float x, float y) {
-		super(x, y, 115,115,"Cheese", 0.5f, 0.55f, 57, 30, 100);
+		super(x, y, 115,80,"cheese", 0.45f, 0.55f, 57, 30, 100);
 	}
 
 	public void useFirstAbility(WorldObject user) {

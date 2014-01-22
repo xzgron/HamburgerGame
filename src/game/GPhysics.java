@@ -132,7 +132,7 @@ public class GPhysics {
 			return false;
 	}
 
-	public static void useGravity(WorldObject go) {
+	public static void handleGravity(WorldObject go) {
 		go.accelerate(0,0,-Main.game.world.getGravity());
 	}
 	

@@ -13,6 +13,7 @@ public class GImage {
 				tex.bind();
 			else
 				glBindTexture(GL_TEXTURE_2D, 0);
+			
 			glColor4f(1, 1, 1, 1);
 			glTranslatef(x, y, 0);
 			glBegin(GL_QUADS);
@@ -42,6 +43,7 @@ public class GImage {
 				tex.bind();
 			else
 				glBindTexture(GL_TEXTURE_2D, 0);
+			
 			glColor4f(r, g, b, t);
 
 			glTranslatef(x, y, 0);
@@ -72,6 +74,7 @@ public class GImage {
 				tex.bind();
 			else
 				glBindTexture(GL_TEXTURE_2D, 0);
+			
 			glColor4f(r, g, b, t);
 
 			glTranslatef(x, y, 0);
