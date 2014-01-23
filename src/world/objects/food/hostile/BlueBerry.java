@@ -64,10 +64,8 @@ public class BlueBerry extends HostileFood {
 
 				//attack
 				if (GMath.getDistance(target, this) < r + 100 /*&& !GPhysics.objectsOverlapp(Main.game.world.getPlayer(), this)*/) {
-					if (this.isOnGround()) {
-						this.tryWalk(attackJumpSpeed, dx, dy);
-						this.tryJump(attackJumpForce);	
-					}
+					this.tryWalk(attackJumpSpeed, dx, dy);
+					this.tryJump(attackJumpForce);	
 				// gŒ
 				} else {
 					if(this.tryJump(jumpForce))

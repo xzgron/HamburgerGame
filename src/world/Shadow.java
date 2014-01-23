@@ -21,7 +21,6 @@ public class Shadow {
 	
 	public void render(){
 		GImage.draw(texture, owner.getX(), owner.getY(), getTexWidth(), getTexHeight(), 1, 1, 1, owner.getAlpha());	
-		GImage.draw(null, owner.getX(), owner.getY(), 13,13,1,1,1,0.5f );
 	}
 
 	public float getRadius(){

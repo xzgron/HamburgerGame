@@ -53,20 +53,24 @@ public class Carrot extends HostileFood{
 
 			float dx = target.getX() - this.getX();
 			float dy = target.getY() - this.getY();
-
+			
 			float r = GPhysics.getWorldRadius(target.getRadius(), dx, dy);
 
 			//attack
 			float dist = GMath.getDistance(target, this);
-			if (dist < r + 300 /*&& !GPhysics.objectsOverlapp(Main.game.world.getPlayer(), this)*/) {
-				if (this.isOnGround()) {
-					this.tryWalk(dist/1.6f, dx, dy);
-					this.tryJump(attackJumpForce);	
+			if (dist < r + 300) {
+				if(dist < 100){
+					this.tryJump(jumpForce);
+					this.tryWalk(walkingSpeed, -dx, -dy);
+				}
+				else{
+					this.tryJump(attackJumpForce);
+					this.tryWalk(dist, dx, dy);
 				}
 			// gŒ
 			} else {
-				if(this.tryJump(jumpForce))
-					this.tryWalk(walkingSpeed, dx, dy);
+				this.tryJump(jumpForce);
+				this.tryWalk(walkingSpeed, dx, dy);
 			}
 		}
 		
