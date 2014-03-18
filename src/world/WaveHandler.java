@@ -3,6 +3,7 @@ package world;
 import org.lwjgl.opengl.Display;
 
 import world.objects.food.hostile.BlueBerry;
+import world.objects.food.hostile.Carrot;
 import game.GMath;
 import game.parts.GameWorld;
 import game.tools.GTimer;
@@ -42,6 +43,8 @@ public class WaveHandler {
 					float[] pos = getPosOutsideScreen(world);
 					world.spawn(new BlueBerry(pos[0], pos[1], GMath.random(20, 30),world.getPlayer()));
 				}
+				float[] pos = getPosOutsideScreen(world);
+				world.spawn(new Carrot(pos[0], pos[1], world.getPlayer()));
 			}
 			break;
 		case 2:
