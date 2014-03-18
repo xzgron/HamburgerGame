@@ -2,9 +2,9 @@ package world.objects.ingredients;
 
 import game.GMath;
 import game.Main;
+import game.parts.GameWorld;
 import game.tools.GMouse;
 import game.tools.GTimer;
-
 import options.Controlls;
 
 import org.lwjgl.opengl.Display;
@@ -23,25 +23,27 @@ public class OnionRings extends GIngredient implements Activateable{
 		super(x, y, 100,50,"onionRings", 0.40f, 0.60f,49,12,6);
 	}
 
-	public void useFirstAbility(WorldObject user) {
+	@Override
+	public void useFirstAbility(WorldObject user,GameWorld world) {
 
 		while(castTimer.hasExceeded() && use(1)){
 			float xDir = GMouse.getX() - Display.getWidth()/2;
 			float yDir = GMouse.getY() - Display.getHeight()/2;
 			float speed = GMath.getLength(xDir, yDir)*6f;
-			Main.game.world.spawn(new OnionRingProjectile(getX(),getY(),getFootZPos(),xDir,yDir, speed));
+			world.spawn(new OnionRingProjectile(getX(),getY(),getFootZPos(),xDir,yDir, speed));
 			castTimer.reset();
 		}
 		
 	}
 
-
-	public void useSecondAbility(WorldObject user) {
+	@Override
+	public void useSecondAbility(WorldObject user, GameWorld world) {
 
 
 	}
-
-	public void update(){
+	
+	@Override
+	public void update(GameWorld world){
 		if(recoverTimer.hasExceeded()){
 			recover(1);
 			recoverTimer.reset();

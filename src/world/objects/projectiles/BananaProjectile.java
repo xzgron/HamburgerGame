@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import game.GMath;
 import game.GPhysics;
 import game.Main;
+import game.parts.GameWorld;
 import game.tools.GTimer;
 import world.WorldObject;
 import world.objects.GFood;
@@ -38,21 +39,23 @@ public class BananaProjectile extends GProjectile {
 		else
 			angleDirection = 1;
 	}
-
-	public void collidedWith(WorldObject obj) {
+	
+	@Override
+	public void collidedWith(WorldObject obj, GameWorld world) {
 		if (despawnTimer.hasExceeded() && obj == caster) {
-			Main.game.world.deSpawn(this);
+			world.deSpawn(this);
 			banana.recover(1);
 		} else if (!objectsHit.contains(obj)) {
 			if (obj instanceof HostileFood) {
-				((GFood) obj).damage(50, this);
+				((GFood) obj).damage(50, this,world);
 			}
 		}
 		objectsHit.addLast(obj);
 
 	}
 
-	public void update() {
+	@Override
+	public void update(GameWorld world) {
 		
 		for(int i = 0; i < hitTimes.size();i++){
 			if(hitTimes.get(i).getPastTime() > 0.2f){ //tid för borttagning av objects som den redan träffat
@@ -76,8 +79,8 @@ public class BananaProjectile extends GProjectile {
 		}
 		
 		this.setZSpeed(0);
-		super.update();
-		GPhysics.handleGroundCollision(this);
+		super.update(world);
+		GPhysics.handleGroundCollision(this,world);
 
 		if (this.isOnGround()) {
 			this.stop();

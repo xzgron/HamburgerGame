@@ -42,4 +42,8 @@ public class GTimer {
 		return length/1000000000.0f;
 	}
 
+	public boolean hasExceeded(float time) {
+		return (Main.getTime() >= startTime + time) && time >= 0; 
+	}
+
 }

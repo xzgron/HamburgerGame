@@ -13,7 +13,7 @@ import game.tools.GTimer;
 
 public class BlueBerry extends HostileFood {
 	
-	private WorldObject target = Main.game.world.getPlayer();
+	private WorldObject target;
 	
 	private float walkingSpeed; // pixels per second
 	private float jumpForce; // utgŒngs kraft frŒn ett hopp v = jf/w
@@ -27,7 +27,7 @@ public class BlueBerry extends HostileFood {
 	
 
 	
-	public BlueBerry(float xPos, float yPos, float size) {
+	public BlueBerry(float xPos, float yPos, float size, WorldObject target) {
 		super(xPos, yPos, size, size,"Blueberrys/B" + ((int) (Math.random() * 4)), 0.13f, 0.73f, (int)(GMath.getSphereVolume(size/2)/700+1), (int)(GMath.getSphereVolume(size/2)/700+1));
 		setRadius(size/2.1f);
 		
@@ -42,9 +42,11 @@ public class BlueBerry extends HostileFood {
 		jumpForce = (float)Math.sqrt(getWeight())*120f;
 		attackJumpForce = (float)Math.sqrt(getWeight())*250f;
 		attackJumpSpeed = 170f;
+		
+		this.target = target;
 	}
 
-
+	@Override
 	public void handleAI(){
 		
 			if (this.justLanded()) {
@@ -75,6 +77,7 @@ public class BlueBerry extends HostileFood {
 
 	}
 	
+	@Override
 	public void render() {
 		super.render();
 		if(!isDead())
@@ -84,18 +87,19 @@ public class BlueBerry extends HostileFood {
 	
 	
 	//////////ACTION////////////////////
-
-	public void landedOn(WorldObject go) {
+	@Override
+	public void landedOn(WorldObject go, GameWorld world) {
 		
 	}
 	
-	public void collidedWith(WorldObject go) {
+	@Override
+	public void collidedWith(WorldObject go, GameWorld world) {
 		if (go == target && go instanceof GFood){
 			float dx = getXSpeed()-go.getXSpeed();
 			float dy = getYSpeed()-go.getYSpeed();
 			float dmg = (float) (GMath.getLength(dx,dy)*Math.sqrt(getWeight())/500); // genom 1000 om roten ur
 			if((dx > 0) == (getXSpeed() > 0) && (dy > 0) == (getYSpeed() > 0)){ //ršr sig mot targeten
-				((GFood) go).damage((int) dmg,this);
+				((GFood) go).damage((int) dmg,this,world);
 				airJump(jumpForce);
 			}
 			addSpeed(go.getXSpeed(), go.getYSpeed(), 0);
@@ -104,8 +108,8 @@ public class BlueBerry extends HostileFood {
 
 		setSpeedByVector(200, getX() - go.getX(), getY() - go.getY());
 	}
-
-	public void gotLandedOnBy(WorldObject go) {
+	@Override
+	public void gotLandedOnBy(WorldObject go, GameWorld world) {
 		
 	}
 

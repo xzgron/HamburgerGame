@@ -8,14 +8,13 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
-
+import world.Player;
 import world.objects.GFood;
 import world.objects.GIngredient;
 import world.objects.GItem;
 import world.objects.food.Hamburger;
 import world.objects.ingredients.bases.Activateable;
 import world.objects.ingredients.bases.ShiftClickAble;
-
 import game.GamePart;
 import game.Main;
 import game.parts.GameWorld;
@@ -23,7 +22,9 @@ import game.tools.GKeyboard;
 import game.tools.GMouse;
 
 public class PlayerActionbar {
-
+	Player player;
+	GameWorld world;
+	
 	int selectedSlot = 1;
 
 	InventorySlot[] slots = new InventorySlot[10];
@@ -34,7 +35,9 @@ public class PlayerActionbar {
 	float slotSize = 70;
 	float itemSize = 60;
 
-	public PlayerActionbar() {
+	public PlayerActionbar(Player player, GameWorld world) {
+		this.player = player;
+		this.world = world;
 		for (int i = 0; i < slots.length; i++)
 			slots[i] = new InventorySlot(xPos - slotSize * slots.length / 2 + i
 					* slotSize + slotSize / 2, yPos, slotSize, itemSize,
@@ -46,9 +49,9 @@ public class PlayerActionbar {
 		
 		if(selectedSlot >= 1 && slots[selectedSlot-1].getItem() != null){
 			if(Mouse.isButtonDown(Controlls.FIRST_ABILITY_BUTTON))
-				getSelectedItem().useFirstAbility(Main.game.world.getPlayer());
+				getSelectedItem().useFirstAbility(player,world);
 			if(Mouse.isButtonDown(Controlls.SECOND_ABILITY_BUTTON))
-				getSelectedItem().useSecondAbility(Main.game.world.getPlayer());
+				getSelectedItem().useSecondAbility(player,world);
 		}
 		
 
@@ -68,7 +71,7 @@ public class PlayerActionbar {
 		if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
 			for(int i = vissibleSlots-1; i >= 0; i--)
 				if(slots[i].getItem() instanceof ShiftClickAble)
-					((ShiftClickAble)slots[i].getItem()).useShiftAbility(Main.game.world.getPlayer());
+					((ShiftClickAble)slots[i].getItem()).useShiftAbility(player,world);
 		}
 		
 		for(int i = 0; i < vissibleSlots; i++){ //clicka
@@ -128,8 +131,6 @@ public class PlayerActionbar {
 
 	public void update() {// updaterar vilka slots som Šr synliga och var de ska
 							// vara
-
-		Hamburger player = Main.game.world.getPlayer();
 
 		// Detta ger oss en upp och ner vŠnd lista av players alla activerabara
 		// ingredienser.

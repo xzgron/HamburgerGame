@@ -2,6 +2,7 @@ package world.objects.food;
 
 import world.objects.GFood;
 import game.Main;
+import game.parts.GameWorld;
 import game.tools.GTimer;
 
 public abstract class HostileFood extends GFood{
@@ -14,16 +15,18 @@ public abstract class HostileFood extends GFood{
 	GTimer deathTimer = new GTimer(-1);
 	float deathTime = 10f;
 	
-	public void update(){
-		super.update();
+	@Override
+	public void update(GameWorld world){
+		super.update(world);
 		if(isDead() && deathTimer.hasExceeded()){
-			Main.game.world.deSpawn(this);
+			world.deSpawn(this);
 		}	
 		
 	}
 	
-	public void die(){
-		super.die();
+	@Override
+	public void die(GameWorld world){
+		super.die(world);
 		deathTimer.setLength(deathTime);
 		deathTimer.reset();
 	}

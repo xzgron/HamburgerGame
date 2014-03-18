@@ -1,6 +1,7 @@
 package world.objects;
 
 import game.GPhysics;
+import game.parts.GameWorld;
 import world.WorldObject;
 
 public class GProjectile extends WorldObject {
@@ -14,9 +15,8 @@ public class GProjectile extends WorldObject {
 
 	}
 
-	public void update(){
-		GPhysics.handleGravity(this);
-		
+	public void update(GameWorld world){
+		GPhysics.handleGravity(this, world);
 		updatePrevPos();
 		useSpeed();
 		

@@ -6,6 +6,8 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
+import world.LevelHandler;
+import world.WaveHandler;
 import world.objects.food.Hamburger;
 
 
@@ -21,21 +23,28 @@ import game.HUDMaterial.PlayerActionbar;
 public class HUD extends GamePart{
 	
 	///////////HEALTHBAR////////
-	HealthBar healthBar = new HealthBar(15+150, 15, 300, 20, Main.game.world.getPlayer());
-	GSprite healthBarBackground = new GSprite(healthBar.getX(), healthBar.getY() , healthBar.getTexWidth() + 6, healthBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
+	HealthBar healthBar;
+	GSprite healthBarBackground;
 	static TrueTypeFont healthInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), false);
 	//////////////////
 	
 	////////ARMORBAR///////
-	ArmorBar armorBar = new ArmorBar(15+150, 50, 300, 20,(Hamburger) Main.game.world.getPlayer());
-	GSprite armorBarBackground = new GSprite(armorBar.getX(), armorBar.getY() , armorBar.getTexWidth() + 6, armorBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
+	ArmorBar armorBar;
+	GSprite armorBarBackground;
 	static TrueTypeFont armorInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), false);	
 	///////////////////////
 	
+	static TrueTypeFont levelInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 40), false);	
+	WaveHandler level;
 	///////////ACTIONBAR///////////
-	PlayerActionbar actionbar = new PlayerActionbar();
+	PlayerActionbar actionbar;
 	
-	public HUD() {
+	public HUD(GameWorld world) {
+		armorBar = new ArmorBar(15+150, 50, 300, 20,(Hamburger) world.getPlayer());
+		healthBar = new HealthBar(15+150, 15, 300, 20, world.getPlayer());
+		healthBarBackground = new GSprite(healthBar.getX(), healthBar.getY() , healthBar.getTexWidth() + 6, healthBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
+		actionbar = new PlayerActionbar(world.getPlayer(), world);
+		armorBarBackground = new GSprite(armorBar.getX(), armorBar.getY() , armorBar.getTexWidth() + 6, armorBar.getTexHeight() + 6, 0.8f,0.8f,0.8f,1f);
 
 		healthBar.setColor(0.2f, 0.8f, 0.2f, 1f);
 		healthBar.setBackgroundColor(0.8f, 0.2f, 0.2f, 1f);
@@ -44,6 +53,8 @@ public class HUD extends GamePart{
 		armorBar.setColor(0.4f, 0.4f, 0.4f, 1f);
 		armorBar.setBackgroundColor(0.2f, 0.2f, 0.2f, 1f);
 		armorBar.setDamageColor(0.8f, 0.8f, 0.8f, 1f);
+		
+		level = world.waveHandler;
 	}
 	
 	public void handleInput() {
@@ -71,6 +82,8 @@ public class HUD extends GamePart{
 			armorBar.render();
 			armorInfo.drawString(armorBar.getX()-145, armorBar.getY()-14, (int)armorBar.getCurrent() + "/" + (int)armorBar.getMax() + "   ARMOR", Color.black);
 		}
+		
+		levelInfo.drawString(Display.getWidth()/2-10,20, "Wave:"+ level.getLevel(), Color.white);
 	}
 
 }

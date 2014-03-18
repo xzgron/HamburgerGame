@@ -4,8 +4,8 @@ import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.opengl.Texture;
 
 import world.WorldObject;
-
 import game.*;
+import game.parts.GameWorld;
 
 public abstract class GFood extends WorldObject {
 
@@ -29,15 +29,15 @@ public abstract class GFood extends WorldObject {
 
 	public abstract void handleAI();
 	
-	public void update() {
+	public void update(GameWorld world) {
 		if(!isDead()){
 			handleAI();
 		}
 		else
 			stop();
 		
-		GPhysics.handleGravity(this);
-		GPhysics.handleGroundCollision(this);
+		GPhysics.handleGravity(this , world);
+		GPhysics.handleGroundCollision(this, world);
 		
 		updatePrevPos();
 		useSpeed();
@@ -49,23 +49,23 @@ public abstract class GFood extends WorldObject {
 
 	// ///////////ABOUT HEALTH/////////////////////
 
-	public void aboveDamage(int amt, WorldObject attacker){
-		damage(amt, attacker);
+	public void aboveDamage(int amt, WorldObject attacker, GameWorld world){
+		damage(amt, attacker,world);
 	}
 
 	
-	public void damage(int amt, WorldObject attacker) {
+	public void damage(int amt, WorldObject attacker, GameWorld world) {
 		if(amt < 0)
 			return;
 		currentHealth -= amt;
 		if (currentHealth <= 0) {
 			currentHealth = 0;
-			this.die();
+			this.die(world);
 		}
 	}
 	
-	public void underDamage(int amt, WorldObject attacker){
-		damage(amt, attacker);
+	public void underDamage(int amt, WorldObject attacker, GameWorld world){
+		damage(amt, attacker,world);
 	}
 
 	public void heal(int amt) {
@@ -77,11 +77,11 @@ public abstract class GFood extends WorldObject {
 			currentHealth = maxHealth;
 	}
 
-	public void die() {
+	public void die(GameWorld world) {
 		currentHealth = 0;
 		setTexture(deathTexture);
 		if(deathSound != null)
-			deathSound.playAsSoundEffect(1, 1, false,getX()-Main.game.world.getXTranslation(),getY()-Main.game.world.getYTranslation(),getZ());
+			deathSound.playAsSoundEffect(1, 1, false);
 		
 		setIfSurface(true);
 		removeShadow();
@@ -96,10 +96,7 @@ public abstract class GFood extends WorldObject {
 	}
 
 	public boolean isDead() {
-		if (getHealth() <= 0)
-			return true;
-		else
-			return false;
+		return (getHealth() <= 0);
 	}
 	
 	public void setHealth(int h){
@@ -166,11 +163,11 @@ public abstract class GFood extends WorldObject {
 
 	// /////////////COLLISION//////////////////
 
-	public abstract void landedOn(WorldObject go);
+	public abstract void landedOn(WorldObject go, GameWorld world);
 	
-	public abstract void gotLandedOnBy(WorldObject go);
+	public abstract void gotLandedOnBy(WorldObject go, GameWorld world);
 
-	public abstract void collidedWith(WorldObject go);
+	public abstract void collidedWith(WorldObject go, GameWorld world);
 
 	// ///////////////////////////////////////
 }

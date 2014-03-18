@@ -1,13 +1,13 @@
 package game.HUDMaterial;
 
 import static org.lwjgl.input.Keyboard.*;
-
 import game.GButton;
 import game.GSprite;
 import game.Game;
 import game.GamePart;
 import game.Main;
 import game.Game.GState;
+import game.parts.GameWorld;
 import static game.tools.GKeyboard.*;
 
 import java.util.ArrayList;
@@ -76,9 +76,9 @@ public class Inventory {
 			for (int x = 0; x < slots.length; x++)
 				slots[x][y].restart(0);
 	}
-	public boolean loot(GItem i) { //returnerar om det gick eller inte
+	public boolean loot(GItem i, GameWorld world) { //returnerar om det gick eller inte
 		if(add(i)){
-			Main.game.world.deSpawn(i);
+			world.deSpawn(i);
 			return true;
 		}
 		else return false;

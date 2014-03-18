@@ -20,11 +20,15 @@ import game.HUDMaterial.Inventory;
 import game.HUDMaterial.InventorySlot;
 
 public class InventoryMenu extends GamePart {
-	Inventory inventory = Main.game.world.getPlayer().getInventory();
-	HamburgerEquipmentbar equipment = new HamburgerEquipmentbar(inventory.getRightBorderX()+40, inventory.getBottomBorderY()-30,Main.game.world.getPlayer());
-	EraseSlot eraser = new EraseSlot(inventory.getRightBorderX()-30, inventory.getTopBorderY()-30, 60, 50, "buttons/bars");
+	Inventory inventory;
+	HamburgerEquipmentbar equipment;
+	EraseSlot eraser;
 	
-	public InventoryMenu(){		
+	public InventoryMenu(GameWorld world){
+		inventory = world.getPlayer().getInventory();
+		equipment = new HamburgerEquipmentbar(inventory.getRightBorderX()+40, inventory.getBottomBorderY()-30,world.getPlayer());
+		eraser = new EraseSlot(inventory.getRightBorderX()-30, inventory.getTopBorderY()-30, 60, 50, "buttons/bars");
+		
 		eraser.setColor(0.7f,0.2f,0.2f,0.9f);
 		inventory.add(new Cheese(0,0));
 		inventory.add(new Sallad(0,0));

@@ -7,10 +7,18 @@ import org.lwjgl.opengl.Display;
 
 import game.GPhysics;
 import game.HUDMaterial.Inventory;
+import game.parts.GameWorld;
 import world.objects.GFood;
 import world.objects.food.Hamburger;
 
 public class Player extends Hamburger{
+	////////////INVENTORY//////////////
+	public MoneyPouch money = new MoneyPouch();
+	///////////////////////////////////
+	
+	//////////////LEVEL///////////////
+	public LevelHandler level = new LevelHandler();
+	///////////////////////////////////
 	
 	////////////INVENTORY//////////////
 	private Inventory inventory = new Inventory(Display.getWidth()/2-80,Display.getHeight()/2+80, 6,3);
@@ -34,16 +42,13 @@ public class Player extends Hamburger{
 	
 	///////////////////////////////////
 	
-	//////////////LEVEL///////////////
-	public LevelHandler level = new LevelHandler();
-	///////////////////////////////////
 
 	public Player(float xPos, float yPos) {
 		super(xPos, yPos);
 	}
 	
 	public void handleAI(){		
-	//GÅ//
+	//GÔøΩ//
 	float x = 0;
 	float y = 0;
 	if (isKeyDown(Controlls.UP_KEY))
@@ -76,10 +81,10 @@ public class Player extends Hamburger{
 	
 	///////////////////COMBAT/////////////////
 
-	public void landedOn(WorldObject go) {
+	public void landedOn(WorldObject go, GameWorld world) {
 		if (go instanceof GFood) {
 			float dmg = GPhysics.calculateDamage(go.getZSpeed() - getZSpeed(), getWeight(), 1f);
-			((GFood) go).damage((int) dmg,this);
+			((GFood) go).damage((int) dmg,this, world);
 
 			if (!((GFood) go).isDead())
 				airJump(jumpForce);
@@ -87,11 +92,11 @@ public class Player extends Hamburger{
 		
 	}
 
-	public void gotLandedOnBy(WorldObject go) {
+	public void gotLandedOnBy(WorldObject go, GameWorld world) {
 
 	}
 
-	public void collidedWith(WorldObject go) {
+	public void collidedWith(WorldObject go, GameWorld world) {
 
 	}
 	

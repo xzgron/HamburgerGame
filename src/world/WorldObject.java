@@ -7,8 +7,10 @@ import game.GPhysics;
 import game.GSprite;
 import game.Game;
 import game.Main;
+import game.parts.GameWorld;
 import game.tools.GMouse;
 import world.objects.*;
+import world.*;
 
 public abstract class WorldObject extends GSprite{
 
@@ -41,8 +43,8 @@ public abstract class WorldObject extends GSprite{
 	
 	
 	///////////////MAIN STUFF//////////
-	public void update(){
-		GPhysics.handleGroundCollision(this);
+	public void update(GameWorld world){
+		GPhysics.handleGroundCollision(this, world);
 	}
 	
 	public void render(){
@@ -355,22 +357,22 @@ public abstract class WorldObject extends GSprite{
 	
 ///////////////COLLISION//////////////////
 	
-	public void landedOn(WorldObject go){
+	public void landedOn(WorldObject go, GameWorld world){
 		
 	}
 	
-	public void gotLandedOnBy(WorldObject go){
+	public void gotLandedOnBy(WorldObject go, GameWorld world){
 		
 	}
 	
-	public void collidedWith(WorldObject go){
+	public void collidedWith(WorldObject go, GameWorld world){
 	}
 	
 /////////////////////////////////////////
 	
 	//////////////////WORLD TRANSLATION////////////
-	public boolean isCursorWithin(){
-		return GMath.isPosWithinSquare(GMouse.getX()+Main.game.world.getXTranslation(),GMouse.getY()+Main.game.world.getYTranslation(),getX(), getY()+getZ(), getTexWidth(), getTexHeight());
+	public boolean isCursorWithin(GameWorld world){
+		return GMath.isPosWithinSquare(GMouse.getX()+world.getXTranslation(),GMouse.getY()+world.getYTranslation(),getX(), getY()+getZ(), getTexWidth(), getTexHeight());
 	}
 	
 	

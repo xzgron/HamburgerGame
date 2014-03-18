@@ -36,21 +36,23 @@ public abstract class Hamburger extends GFood {
 		// equipments.add(new Cheese(xPos, yPos));
 
 	}
-
+	@Override
 	public void handleAI(){
 		
 	}
-
-	public void update() {
-		super.update();
+	
+	@Override
+	public void update(GameWorld world) {
+		super.update(world);
 		// /UPDATE PREV POSITION//////
 		for (GIngredient gi : equipments){
-			gi.update();
+			gi.update(world);
 			gi.updatePrevPos();
 		}
 		updateEquipmentPos();
 	}
 
+	@Override
 	public void render() {
 		updateEquipmentPos();
 		renderShadow();
@@ -116,33 +118,33 @@ public abstract class Hamburger extends GFood {
 	// ///////////////////////////HEADS AND FOOTS////////////////////////////
 
 	// huvudet bestämmer procentuellt var på bilden som går i taget...?
-
+	@Override
 	public void setHeadZPos(float f) {
 		setZ(f + equipments.getLast().getTexHeight() / 2
 				- equipments.getLast().getTexHeight()
 				* equipments.getLast().getHeadPosVar());
 	}
-
+	@Override
 	public float getHeadZPos() {
 		return (equipments.getLast().getHeadZPos());
 	}
-
+	@Override
 	public float getHeadZPrev() {
 		return (equipments.getLast().getHeadZPrev());
 	}
 
 	// foten bestämmer procentuellt var på bilden som går i marken
-
+	@Override
 	public void setFootZPos(float f) {
 		setZ(f + equipments.getFirst().getTexHeight() / 2
 				- equipments.getFirst().getTexHeight()
 				* equipments.getFirst().getFootPosVar());
 	}
-
+	@Override
 	public float getFootZPos() {
 		return (equipments.getFirst().getFootZPos());
 	}
-
+	@Override
 	public float getFootZPrev() {
 		return (equipments.getFirst().getFootZPrev());
 	}
@@ -151,13 +153,13 @@ public abstract class Hamburger extends GFood {
 
 
 	// ///////////////SIZES//////////
-
+	@Override
 	public float getHeight() {
 		return equipments.getLast().getHeadZPos()
 				- equipments.get(0).getFootZPos();
 
 	}
-
+	@Override
 	public int getWeight() {
 		int weight = 0;
 		for (GIngredient gi : equipments)
@@ -166,8 +168,8 @@ public abstract class Hamburger extends GFood {
 	}
 
 	// //////////////DAMAGE///////////////////
-	
-	public void aboveDamage(int amt, WorldObject attacker){
+	@Override
+	public void aboveDamage(int amt, WorldObject attacker, GameWorld world){
 		if(isDead())
 			return;
 		
@@ -184,11 +186,11 @@ public abstract class Hamburger extends GFood {
 			}
 		}
 		if (isDead())
-			this.die();
+			this.die(world);
 	}
 	
-
-	public void damage(int amt, WorldObject attacker) {
+	@Override
+	public void damage(int amt, WorldObject attacker, GameWorld world) {
 		if(isDead())
 			return;
 		
@@ -258,11 +260,11 @@ public abstract class Hamburger extends GFood {
 		}
 		
 		if (isDead())
-			this.die();
+			this.die(world);
 	}
 	
-
-	public void underDamage(int amt, WorldObject attacker){
+	@Override
+	public void underDamage(int amt, WorldObject attacker, GameWorld world){
 		if(isDead())
 			return;
 		for (int i = 0; i < equipments.size(); i++) {
@@ -278,14 +280,14 @@ public abstract class Hamburger extends GFood {
 			}
 		}	
 		if (isDead())
-			this.die();
+			this.die(world);
 	}
 	
 	
 	//////////////////////////////////////////
 	
 	// //////////////ABOUT HEALTH///////////////////
-	
+	@Override
 	public int getHealth() {
 		int health = 0;
 		for (GIngredient gi : equipments)
@@ -294,7 +296,7 @@ public abstract class Hamburger extends GFood {
 			}
 		return health;
 	}
-
+	@Override
 	public int getMaxHealth() {
 		int health = 0;
 		for (GIngredient gi : equipments)
@@ -322,14 +324,14 @@ public abstract class Hamburger extends GFood {
 		return armor;
 	}
 	
-	
-	public void die(){
+	@Override
+	public void die(GameWorld world){
 		
 	}
 
 
 	// ///////////////////////////
-
+	@Override
 	public float getRadius() {
 		float rMax = 0;
 		for (GIngredient gi : equipments)
@@ -337,12 +339,12 @@ public abstract class Hamburger extends GFood {
 				rMax = Math.max(rMax, gi.getRadius());
 		return rMax;
 	}
-
+	@Override
 	public float getTexHeight() {
 		return equipments.getLast().getHeadZPos()
 				- equipments.getFirst().getFootZPos();
 	}
-
+	@Override
 	public float getTexWidth() {
 		float wMax = 0;
 		for (GIngredient gi : equipments)

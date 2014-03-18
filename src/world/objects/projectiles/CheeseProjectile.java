@@ -2,6 +2,7 @@ package world.objects.projectiles;
 
 import game.GMath;
 import game.Main;
+import game.parts.GameWorld;
 import world.WorldObject;
 import world.objects.GFood;
 import world.objects.GProjectile;
@@ -20,21 +21,25 @@ public class CheeseProjectile extends GProjectile{
 
 	}
 	
-	public void collidedWith(WorldObject obj){
+	@Override
+	public void collidedWith(WorldObject obj, GameWorld world){
 		if(obj instanceof HostileFood){
-			((GFood) obj).damage(25, this);
+			((GFood) obj).damage(25, this,world);
 		}
-		if(obj!=Main.game.world.getPlayer() && !(obj instanceof GProjectile))
-			Main.game.world.deSpawn(this);
+		if(obj!=world.getPlayer() && !(obj instanceof GProjectile))
+			world.deSpawn(this);
 	}
-	public void landedOn(WorldObject obj){
-		collidedWith(obj);
+	
+	@Override
+	public void landedOn(WorldObject obj, GameWorld world){
+		collidedWith(obj,world);
 	}
 
-	public void update(){
-		super.update();
+	@Override
+	public void update(GameWorld world){
+		super.update(world);
 		if(!isInAir()){
-			Main.game.world.deSpawn(this);
+			world.deSpawn(this);
 		}
 	}
 

@@ -4,6 +4,7 @@ import game.GMath;
 import game.GPhysics;
 import game.Main;
 import game.HUDMaterial.HealthBar;
+import game.parts.GameWorld;
 import game.tools.GTimer;
 import world.WorldObject;
 import world.objects.GFood;
@@ -11,7 +12,7 @@ import world.objects.food.HostileFood;
 
 public class Carrot extends HostileFood{
 	
-	private WorldObject target = Main.game.world.getPlayer();
+	private WorldObject target;
 	
 	private float walkingSpeed; // pixels per second
 	private float jumpForce; // utgångs kraft från ett hopp v = jf/w
@@ -22,7 +23,7 @@ public class Carrot extends HostileFood{
 	
 	private HealthBar healthBar = new HealthBar(0, -30, 50, 7,  this);
 	
-	public Carrot(float xPos, float yPos) {
+	public Carrot(float xPos, float yPos, WorldObject target) {
 		super(xPos, yPos, 40, 125, "Carrot/carrot", 0.05f, 0.85f, 75, 75);
 		setRadius(20);
 		
@@ -37,6 +38,8 @@ public class Carrot extends HostileFood{
 		walkingSpeed = GMath.random(60, 100);
 		jumpForce = (float)Math.sqrt(getWeight())*120f;
 		attackJumpForce = 5000;
+		
+		this.target = target;
 	}
 
 	@Override
@@ -75,12 +78,14 @@ public class Carrot extends HostileFood{
 		}
 		
 	}
-	public void update(){
+	@Override
+	public void update(GameWorld world){
 		if(this.getZSpeed() < 0)
 			this.accelerate(0, -400, 0);
-		super.update();
+		super.update(world);
 	}
-	                    
+
+	@Override
 	public void render() {
 		super.render();
 		if(!isDead())
@@ -88,19 +93,19 @@ public class Carrot extends HostileFood{
 	}
 
 	@Override
-	public void landedOn(WorldObject go) {
+	public void landedOn(WorldObject go, GameWorld world) {
 		if(go == target)
-			((GFood)go).damage(20, this);	
+			((GFood)go).damage(20, this,world);	
 	}
 
 	@Override
-	public void gotLandedOnBy(WorldObject go) {
+	public void gotLandedOnBy(WorldObject go, GameWorld world) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void collidedWith(WorldObject go) {
+	public void collidedWith(WorldObject go, GameWorld world) {
 		// TODO Auto-generated method stub
 		
 	}

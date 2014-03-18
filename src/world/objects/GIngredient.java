@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 import world.WorldObject;
 import world.objects.ingredients.bases.*;
-
 import game.GSprite;
+import game.parts.GameWorld;
 
 //Ingredients är npgot som hamburgaren kan ha på sig
 
@@ -27,7 +27,7 @@ public abstract class GIngredient extends GItem{
 	}
 
 	@Override
-	public void update() {
+	public void update(GameWorld world) {
 		// TODO Auto-generated method stub
 		
 	}

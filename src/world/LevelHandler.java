@@ -8,6 +8,7 @@ public class LevelHandler {
 	
 	
 	
+	
 	public void grantExperience(int amt){
 		experience += amt;
 		if(experience >= getExperienceToNextLevel()){

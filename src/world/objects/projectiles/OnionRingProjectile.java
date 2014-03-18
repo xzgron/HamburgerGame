@@ -1,6 +1,7 @@
 package world.objects.projectiles;
 
 import game.Main;
+import game.parts.GameWorld;
 import world.WorldObject;
 import world.objects.GFood;
 import world.objects.GProjectile;
@@ -15,23 +16,24 @@ public class OnionRingProjectile extends GProjectile{
 		moveByVector(10,xDir,yDir);
 
 	}
-	
-	public void collidedWith(WorldObject obj){
+	@Override
+	public void collidedWith(WorldObject obj,GameWorld world){
 		if(obj instanceof HostileFood){
-			((GFood) obj).damage(50, this);
+			((GFood) obj).damage(50, this,world);
 			if(!((GFood)obj).isDead()){
-				Main.game.world.deSpawn(this);
+				world.deSpawn(this);
 			}
 		}
+	}	
+	@Override
+	public void landedOn(WorldObject obj,GameWorld world){
+		collidedWith(obj,world);
 	}
-	public void landedOn(WorldObject obj){
-		collidedWith(obj);
-	}
-
-	public void update(){
-		super.update();
+	@Override
+	public void update(GameWorld world){
+		super.update(world);
 		if(!isInAir()){
-			Main.game.world.deSpawn(this);
+			world.deSpawn(this);
 		}
 	}
 }

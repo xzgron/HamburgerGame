@@ -22,7 +22,7 @@ public class Game {
 	private GamePart intro = new Intro();
 	private GamePart startMenu = new StartMenu();
 
-	public GameWorld world;
+	private GameWorld world;
 	private GamePart gameMenu = new GameMenu();
 	
 	private GamePart HUD;
@@ -139,13 +139,13 @@ public class Game {
 				Main.cleanseDisplay();
 				loadingInfo.drawString(Display.getWidth()/2-100, Display.getHeight()/2-200, "Loading HUD..",Color.black);
 				Display.update();
-				HUD = new HUD();
+				HUD = new HUD(world);
 			}
 			if(inventoryMenu == null){
 				Main.cleanseDisplay();
 				loadingInfo.drawString(Display.getWidth()/2-100, Display.getHeight()/2-200, "Loading Inventory..",Color.black);
 				Display.update();
-				inventoryMenu = new InventoryMenu();
+				inventoryMenu = new InventoryMenu(world);
 			}
 			break;
 		case OPTIONS:

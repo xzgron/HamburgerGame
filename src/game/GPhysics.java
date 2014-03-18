@@ -13,7 +13,7 @@ public class GPhysics {
 	
 	public static float viewPoint = 2f; // 2 är från sin(30°) vilket betyder att view vinkeln är 30°
 	
-	public static boolean handleCollision(WorldObject go1, WorldObject go2) {
+	public static boolean handleCollision(WorldObject go1, WorldObject go2, GameWorld world) {
 		if (go1.isSurface()||go2.isSurface())
 			return false;
 		
@@ -63,8 +63,8 @@ public class GPhysics {
 		///////////////GO1 landar pÂ GO2//////////////
 		if(go1.getFootZPrev() > go2.getHeadZPrev()){
 			go1.setFootZPos(go2.getHeadZPos());
-			go1.landedOn(go2);
-			go2.gotLandedOnBy(go1);
+			go1.landedOn(go2,world);
+			go2.gotLandedOnBy(go1, world);
 			return true;
 		}
 		//////////////////////////////////////////////
@@ -72,8 +72,8 @@ public class GPhysics {
 		/////////////////GO2 landar pÂ GO1/////////////////
 		else if(go2.getFootZPrev() > go1.getHeadZPrev()){ //object två var över object 1
 			go2.setFootZPos(go1.getHeadZPos());
-			go2.landedOn(go1);
-			go1.gotLandedOnBy(go2);
+			go2.landedOn(go1, world);
+			go1.gotLandedOnBy(go2,world);
 			return true;
 		}
 		//////////////////////////////////////////////
@@ -96,8 +96,8 @@ public class GPhysics {
 		}
 		
 		//System.out.println(GMath.getDistance(go1.xPos, go1.getGroundPos(),go2.xPos,go2.getGroundPos()));
-		go1.collidedWith(go2);
-		go2.collidedWith(go1);
+		go1.collidedWith(go2,world);
+		go2.collidedWith(go1,world);
 		
 		//go1.setSpeed(0, 0);
 		//go2.setSpeed(0, 0);
@@ -132,11 +132,11 @@ public class GPhysics {
 			return false;
 	}
 
-	public static void handleGravity(WorldObject go) {
-		go.accelerate(0,0,-Main.game.world.getGravity());
+	public static void handleGravity(WorldObject go, GameWorld world) {
+		go.accelerate(0,0,-world.getGravity());
 	}
 	
-	public static void handleGroundCollision(WorldObject go){
+	public static void handleGroundCollision(WorldObject go, GameWorld world){
 		if(go.getFootZPos() < -0.0001){
 			go.setFootZPos(0);
 			go.setZSpeed(0);
