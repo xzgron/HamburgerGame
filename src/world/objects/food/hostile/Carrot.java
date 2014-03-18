@@ -37,7 +37,7 @@ public class Carrot extends HostileFood{
 		
 		walkingSpeed = GMath.random(60, 100);
 		jumpForce = (float)Math.sqrt(getWeight())*720f;
-		attackJumpForce = 5000;
+		attackJumpForce = 1000;
 		
 		this.target = target;
 	}
@@ -95,7 +95,8 @@ public class Carrot extends HostileFood{
 	@Override
 	public void landedOn(WorldObject go, GameWorld world) {
 		if(go == target)
-			((GFood)go).damage(20, this,world);	
+			((GFood)go).damage(60, this,world);	
+		  airJump(attackJumpForce);
 	}
 
 	@Override
@@ -109,5 +110,6 @@ public class Carrot extends HostileFood{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }
