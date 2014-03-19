@@ -117,11 +117,8 @@ public abstract class GFood extends WorldObject {
 	// /////////////////////////////
 
 	// /////////COLLISION HANDLING///////
-	public void landedOn(GFood gf) {
-	}
 
-	public void collidedWith(GFood gf) {
-	}
+	
 
 	// ////////////////////////////
 
