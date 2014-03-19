@@ -47,7 +47,7 @@ public class Carrot extends HostileFood{
 		if (this.justLanded()) {
 			jumpWaitTimer.reset();
 		}
-		
+	
 		if(this.isOnGround())
 			this.stop();
 
