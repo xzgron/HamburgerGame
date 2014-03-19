@@ -101,7 +101,7 @@ public class Carrot extends HostileFood{
 
 	@Override
 	public void gotLandedOnBy(WorldObject go, GameWorld world) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
