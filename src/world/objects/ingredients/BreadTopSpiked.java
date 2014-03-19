@@ -16,7 +16,6 @@ public class BreadTopSpiked extends OverPartIngredient implements Armor{
 	
 	@Override
 	public void gotLandedOnBy(WorldObject go, GameWorld world) {
-		
 		if(go instanceof HostileFood){
 				((GFood)go).underDamage(90, go,world);	
 		}

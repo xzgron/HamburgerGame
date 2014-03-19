@@ -12,6 +12,8 @@ import game.tools.GMouse;
 import world.objects.*;
 import world.*;
 
+// detta är basklassen för allt som finns i världen. Allt detta ärver av denna klass. Klassen erbjuder förflytning, hur saker ska renderas, alternativ skugga osv.
+
 public abstract class WorldObject extends GSprite{
 
 	private float xPrev, yPrev, zPrev;

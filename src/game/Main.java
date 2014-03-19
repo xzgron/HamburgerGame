@@ -75,6 +75,8 @@ public class Main {
 		glLoadIdentity();
 		glClearColor(1,1,1,1);
 	}
+	
+	//detta är lopen som går om och om igen under spelets gång och uppdaterar skärmen. Den leder vidare till Game classen
 
 	private static void gameLoop() {
 		long frames = 0;

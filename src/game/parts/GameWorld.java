@@ -22,6 +22,8 @@ import world.objects.nature.Tree;
 import static org.lwjgl.input.Keyboard.*;
 import static org.lwjgl.opengl.GL11.*;
 import static game.Game.*;
+
+// objects listan innehåller allt som finns i spelet. det uppdateras och renderas sedan. Det finns även en del här som ritar ut gräset i bakgrunden
 public class GameWorld extends GamePart {
 
 	private float xTranslation = 0;
