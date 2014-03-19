@@ -354,6 +354,24 @@ public abstract class Hamburger extends GFood {
 
 	// /////////////////////////
 
+	
+	
+///////////////COLLISION//////////////////
+	@Override
+	public void landedOn(WorldObject go, GameWorld world){
+		equipments.getFirst().landedOn(go, world);
+	}
+	@Override
+	public void gotLandedOnBy(WorldObject go, GameWorld world){
+		equipments.getLast().gotLandedOnBy(go, world);
+	}
+	@Override
+	public void collidedWith(WorldObject go, GameWorld world){
+		
+	}
+
+/////////////////////////////////////////
+
 	// ///////////////////SORTING//////////////////
 /*
 	public LinkedList<GIngredient> sortOut(Class c) {

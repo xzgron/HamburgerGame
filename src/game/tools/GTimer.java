@@ -38,6 +38,10 @@ public class GTimer {
 		
 	}
 	
+	public float getTimeLeft(){
+		return (startTime + length - Main.getTime())/1000000000.0f;
+	}
+	
 	public float getLength(){
 		return length/1000000000.0f;
 	}

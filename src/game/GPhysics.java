@@ -65,6 +65,8 @@ public class GPhysics {
 			go1.setFootZPos(go2.getHeadZPos());
 			go1.landedOn(go2,world);
 			go2.gotLandedOnBy(go1, world);
+			if(go2.getZSpeed() < 0)
+				go2.setZSpeed(0);
 			return true;
 		}
 		//////////////////////////////////////////////
@@ -74,6 +76,8 @@ public class GPhysics {
 			go2.setFootZPos(go1.getHeadZPos());
 			go2.landedOn(go1, world);
 			go1.gotLandedOnBy(go2,world);
+			if(go2.getZSpeed() < 0)
+				go2.setZSpeed(0);
 			return true;
 		}
 		//////////////////////////////////////////////

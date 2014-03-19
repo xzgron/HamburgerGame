@@ -83,7 +83,7 @@ public class HUD extends GamePart{
 			armorInfo.drawString(armorBar.getX()-145, armorBar.getY()-14, (int)armorBar.getCurrent() + "/" + (int)armorBar.getMax() + "   ARMOR", Color.black);
 		}
 		
-		levelInfo.drawString(Display.getWidth()/2-10,20, "Wave:"+ level.getLevel(), Color.white);
+		levelInfo.drawString(Display.getWidth()/2-10,20, "Wave:"+ level.getLevel() + "  " + (int)level.waveTime.getTimeLeft(), Color.white);
 	}
 
 }

@@ -9,7 +9,7 @@ import game.parts.GameWorld;
 import game.tools.GTimer;
 
 public class WaveHandler {
-	GTimer waveTime = new GTimer(1);
+	public GTimer waveTime = new GTimer(1);
 	int releaseCounter = 0; //-1 betyder vågen är avstängd 0 betyder ohanterad ny våg
 	int currentWave = 0;
 

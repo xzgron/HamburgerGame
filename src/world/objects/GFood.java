@@ -160,10 +160,13 @@ public abstract class GFood extends WorldObject {
 
 	// /////////////COLLISION//////////////////
 
+	@Override
 	public abstract void landedOn(WorldObject go, GameWorld world);
 	
+	@Override
 	public abstract void gotLandedOnBy(WorldObject go, GameWorld world);
 
+	@Override
 	public abstract void collidedWith(WorldObject go, GameWorld world);
 
 	// ///////////////////////////////////////
