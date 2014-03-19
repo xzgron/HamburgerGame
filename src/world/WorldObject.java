@@ -31,6 +31,7 @@ public abstract class WorldObject extends GSprite{
 	private boolean surface = false; ///////om nŒgot ska ligga pŒ marken det renderas under allt annat och det
 	//sker ingen collision alls
 	
+	//private boolean inAir = true;
 
 	private Shadow shadow = null; ///////skugga??
 	
@@ -296,8 +297,15 @@ public abstract class WorldObject extends GSprite{
 
 	}
 	
+	/*public void setInAir(boolean b){ // om man ska kunna gŒ pŒ saker
+		inAir = b;
+	}*/
+	
 	public boolean isInAir(){
-		return(getFootZPos() > 0.00001f);
+		/*if(getFootZPos() > 0.00001f)
+			inAir = false;
+		return inAir;*/
+		return (getFootZPos() > 0.00001f);
 	}
 	
 	public boolean isOnGround(){

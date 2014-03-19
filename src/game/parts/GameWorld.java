@@ -61,8 +61,6 @@ public class GameWorld extends GamePart {
 	*/
 	public void update() {		
 		waveHandler.update(this);
-		if(getAliveHostileFood().size() == 0 && isKeyDown(KEY_RETURN))
-			waveHandler.nextWave();
 		
 		///////SPAWNA BL�B€R/////////////
 		/*

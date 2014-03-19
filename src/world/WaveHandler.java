@@ -34,7 +34,7 @@ public class WaveHandler {
 				waveTime.setLength(20);
 			}
 			if (waveTime.hasExceeded()){
-				return false;
+				nextWave();
 			}
 
 			if (releaseCounter == 1 && waveTime.hasExceeded(0)) {
