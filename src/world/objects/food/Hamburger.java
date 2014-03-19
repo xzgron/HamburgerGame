@@ -363,7 +363,7 @@ public abstract class Hamburger extends GFood {
 	}
 	@Override
 	public void gotLandedOnBy(WorldObject go, GameWorld world){
-		System.out.println("hej");
+
 		equipments.getLast().gotLandedOnBy(go, world);
 	}
 	@Override

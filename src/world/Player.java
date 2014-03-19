@@ -93,11 +93,10 @@ public class Player extends Hamburger{
 	}
 
 	public void gotLandedOnBy(WorldObject go, GameWorld world) {
-
+		super.gotLandedOnBy(go,world);
 	}
-
 	public void collidedWith(WorldObject go, GameWorld world) {
-
+		super.collidedWith(go, world);
 	}
 	
 	//////////////////////////////////////////

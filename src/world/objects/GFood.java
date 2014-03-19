@@ -79,6 +79,7 @@ public abstract class GFood extends WorldObject {
 
 	public void die(GameWorld world) {
 		currentHealth = 0;
+		setZSpeed(0);
 		setTexture(deathTexture);
 		if(deathSound != null)
 			deathSound.playAsSoundEffect(1, 1, false);

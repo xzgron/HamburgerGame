@@ -9,7 +9,7 @@ import world.objects.food.HostileFood;
 
 public class OnionRingProjectile extends GProjectile{
 	public OnionRingProjectile(float xPos, float yPos, float zPos, float xDir, float yDir, float speed) {
-		super(xPos, yPos, zPos, 85, 42.5f,  "../ingredients/onionRings", 0.40f, 0.60f);
+		super(xPos, yPos, zPos, 85, 42.5f,  "../ingredients/onion", 0.40f, 0.60f);
 		setRadius(42f);
 		setWeight(10);
 		setSpeedByVector(speed,xDir,yDir);

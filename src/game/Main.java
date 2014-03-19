@@ -178,6 +178,7 @@ public class Main {
 		Display.destroy();
 		Keyboard.destroy();
 		Mouse.destroy();
+		System.exit(0);
 	}
 
 	public static long getTime() {
