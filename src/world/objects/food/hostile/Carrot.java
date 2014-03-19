@@ -37,7 +37,7 @@ public class Carrot extends HostileFood{
 		
 		walkingSpeed = GMath.random(60, 100);
 		jumpForce = (float)Math.sqrt(getWeight())*720f;
-		attackJumpForce = 1000;
+		attackJumpForce = 5000;
 		
 		this.target = target;
 	}
