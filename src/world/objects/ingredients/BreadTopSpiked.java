@@ -11,7 +11,7 @@ import world.objects.ingredients.bases.OverPartIngredient;
 public class BreadTopSpiked extends OverPartIngredient implements Armor{
 
 	public BreadTopSpiked(float x, float y) {
-		super(x, y, 103,50,"hamburgerBreadOverPartBad", 0.34f, 0.66f, 51, 30, 200);
+		super(x, y, 123,70,"Breadtopspike", 0.34f, 0.66f, 51, 30, 200);
 	}
 	
 	@Override
