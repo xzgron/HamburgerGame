@@ -17,6 +17,7 @@ import world.objects.*;
 import world.objects.food.HostileFood;
 import world.objects.food.hostile.BlueBerry;
 import world.objects.food.hostile.Carrot;
+import world.objects.nature.Bush;
 import world.objects.nature.Tree;
 import static org.lwjgl.input.Keyboard.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -39,6 +40,8 @@ public class GameWorld extends GamePart {
 		spawn(new Tree(150, 30, 350,700));
 		spawn(new Tree(350, 80, 400,700));
 		spawn(new Tree(50, 170, 450,700));
+		spawn(new Bush(5, 100, 40,40));
+		spawn(new Bush(5, 90, 100,100));
 
 		waveHandler.nextWave();
 		//spawn(new BlueBerry(GMath.random(500,-500),GMath.random(500,-500), 70));

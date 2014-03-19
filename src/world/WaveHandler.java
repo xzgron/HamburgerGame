@@ -43,8 +43,10 @@ public class WaveHandler {
 					float[] pos = getPosOutsideScreen(world);
 					world.spawn(new BlueBerry(pos[0], pos[1], GMath.random(20, 30),world.getPlayer()));
 				}
+				for(int i = 0; i< 5; i++){
 				float[] pos = getPosOutsideScreen(world);
 				world.spawn(new Carrot(pos[0], pos[1], world.getPlayer()));
+				}
 			}
 			break;
 		case 2:
