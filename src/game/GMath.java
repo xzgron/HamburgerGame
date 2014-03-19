@@ -4,7 +4,10 @@ import static java.lang.Math.*;
 import game.tools.GMouse;
 import world.WorldObject;
 
+// här sker all basik matte som vi har fått lära oss i skolan för det mesta. 
+
 public class GMath {
+	
 	public static float getLength(float x, float y){
 		return (float)sqrt(x*x+y*y);	
 	}

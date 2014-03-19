@@ -11,6 +11,9 @@ import world.WorldObject;
 import world.objects.GFood;
 public class GPhysics {
 	
+	// här hanteras allt som är specifikt för spelet likt hur collision ska hanteras och andra fysiska egenskaper som skada
+	// eller gravitation etc.
+	
 	public static float viewPoint = 2f; // 2 är från sin(30°) vilket betyder att view vinkeln är 30°
 	
 	public static boolean handleCollision(WorldObject go1, WorldObject go2, GameWorld world) {

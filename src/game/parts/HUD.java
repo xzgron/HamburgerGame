@@ -20,6 +20,8 @@ import game.HUDMaterial.ArmorBar;
 import game.HUDMaterial.HealthBar;
 import game.HUDMaterial.PlayerActionbar;
 
+// det här är allt som synns över världen när man spelar likt liv osv. 
+
 public class HUD extends GamePart{
 	
 	///////////HEALTHBAR////////

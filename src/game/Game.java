@@ -14,7 +14,10 @@ import game.parts.*;
 public class Game {
 
 	// //en pixel motsvarar en mm i verkligheten säger vi.
-
+	
+	// härifrån sköts hela spelet. Main klassen tar hand om det som måste göras likt att synca fps:en eller uppdatera skärmen.
+	// härifrån väljs allt som ska finnas i spelet, likt menu och ladningsskärm etc. 
+	// i parts mappen finns alla klasser som är delar av spelet likt menu och intro etc. Se GameWorld classen i parts mappen för mer info om själva spelet
 	public static enum GState {
 		INTRO, START_MENU, GAME_MENU, GAME, INVENTORY_MENU, OPTIONS
 	}
