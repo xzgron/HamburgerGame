@@ -21,6 +21,7 @@ public class CheeseProjectile extends GProjectile{
 
 	}
 	
+	
 	@Override
 	public void collidedWith(WorldObject obj, GameWorld world){
 		if(obj instanceof HostileFood){
@@ -28,6 +29,7 @@ public class CheeseProjectile extends GProjectile{
 		}
 		if(obj!=world.getPlayer() && !(obj instanceof GProjectile))
 			world.deSpawn(this);
+		
 	}
 	
 	@Override
