@@ -20,8 +20,8 @@ import org.newdawn.slick.opengl.Texture;
 
 public class StartMenu extends GamePart {
 	
-	GSprite background = new GSprite(Display.getWidth() / 2,
-			Display.getHeight() / 2, Display.getWidth(), Display.getHeight(), "UI/gameMenuBackground");	
+	GSprite background = new GSprite(Display.getWidth()/2,Display.getHeight()/2, Display.getWidth(), Display.getHeight(), "UI/background");
+	
 	GButton startButton = new GButton(Display.getWidth()/2,Display.getHeight()/2-100, 300, 80);
 	GButton optionButton = new GButton(Display.getWidth()/2,Display.getHeight()/2, 300, 80);
 	GButton exitButton = new GButton(Display.getWidth()/2,Display.getHeight()/2+100, 300, 80);
