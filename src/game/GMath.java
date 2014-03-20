@@ -114,6 +114,7 @@ public class GMath {
 		float v1y = l1y2-l1y1;
 		float v2x = l2x2-l2x1;
 		float v2y = l2y2-l2y1;
+		return null;
 
 		/*
 		float c1 = v1x*l1y1 - v1y*l1x1;

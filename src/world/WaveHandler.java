@@ -38,7 +38,7 @@ public class WaveHandler {
 			}
 
 			if (releaseCounter == 1 && waveTime.hasExceeded(0)) {
-				for (int i = 0; i < 3; i++) {
+				for (int i = 0; i < 18; i++) {
 					releaseCounter++;
 					float[] pos = getPosOutsideScreen(world);
 					world.spawn(new BlueBerry(pos[0], pos[1], GMath.random(20, 30),world.getPlayer()));

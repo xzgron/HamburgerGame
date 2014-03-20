@@ -40,7 +40,7 @@ public class BlueBerry extends HostileFood {
 
 		walkingSpeed = GMath.random(60, 100);
 		jumpForce = (float)Math.sqrt(getWeight())*120f;
-		attackJumpForce = (float)Math.sqrt(getWeight())*220f;
+		attackJumpForce = (float)Math.sqrt(getWeight())*250f;
 		attackJumpSpeed = 170f;
 		
 		this.target = target;
