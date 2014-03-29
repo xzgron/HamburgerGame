@@ -1,5 +1,6 @@
 package world.objects.ingredients;
 
+import game.GPhysics;
 import game.parts.GameWorld;
 import world.WorldObject;
 import world.objects.GFood;
@@ -17,7 +18,7 @@ public class BreadTopSpiked extends OverPartIngredient implements Armor{
 	@Override
 	public void gotLandedOnBy(WorldObject go, GameWorld world) {
 		if(go instanceof HostileFood){
-				((GFood)go).underDamage(90, go,world);	
+				((GFood)go).underDamage((int) GPhysics.calculateDamage((Math.abs(go.getZSpeed()-this.getZSpeed())), go.getWeight(), 1), go,world);	
 		}
 	}
 }
