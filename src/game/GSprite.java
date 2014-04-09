@@ -134,6 +134,15 @@ public class GSprite {
 	public float getTexHeight(){
 	 return texHeight;
 	}
+	
+	public void setTexWidth(float w){
+		texWidth = w;
+	}
+	
+	public void setTexHeight(float h){
+	 texHeight = h;
+	}
+	
 
 
 	public void setColor(float r, float g, float b, float a) {

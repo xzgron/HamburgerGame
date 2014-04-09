@@ -84,6 +84,12 @@ public class Carrot extends HostileFood{
 			this.accelerate(0, -400, 0);
 		super.update(world);
 	}
+	@Override
+	public void die(GameWorld world){
+		super.die(world);
+		setTexWidth(70);
+		setTexHeight(40);
+	}
 
 	@Override
 	public void render() {
