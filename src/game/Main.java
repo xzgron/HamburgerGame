@@ -145,7 +145,6 @@ public class Main {
 				break;
 			}
 			Display.setResizable(false);
-			
 			Display.create();
 			Display.setVSyncEnabled(true);
 		} catch (LWJGLException e) {

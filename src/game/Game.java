@@ -19,7 +19,7 @@ public class Game {
 	// härifrån väljs allt som ska finnas i spelet, likt menu och ladningsskärm etc. 
 	// i parts mappen finns alla klasser som är delar av spelet likt menu och intro etc. Se GameWorld classen i parts mappen för mer info om själva spelet
 	public static enum GState {
-		INTRO, START_MENU, GAME_MENU, GAME, INVENTORY_MENU, OPTIONS
+		INTRO, START_MENU, GAME_MENU, GAME, INVENTORY_MENU, OPTIONS, DEATH_SCREEN
 	}
 
 	private GamePart intro = new Intro();
@@ -31,6 +31,8 @@ public class Game {
 	private GamePart HUD;
 	private GamePart inventoryMenu;
 	private GamePart options = new Options();
+	
+	private GamePart deathScreen = new DeathScreen();
 
 	private LinkedList<GState> gameStateList = new LinkedList<GState>();
 
@@ -57,6 +59,9 @@ public class Game {
 			world.handleInput();
 			HUD.handleInput();
 			break;
+		case DEATH_SCREEN:
+			deathScreen.handleInput();
+			break;
 		case OPTIONS:
 			options.handleInput();
 			break;
@@ -81,6 +86,10 @@ public class Game {
 		case GAME:
 			world.update();
 			HUD.update();
+			break;
+		case DEATH_SCREEN:
+			world.update();
+			deathScreen.update();
 			break;
 		case OPTIONS:
 			options.update();
@@ -114,17 +123,23 @@ public class Game {
 			world.render();
 			HUD.render();
 			break;
+		case DEATH_SCREEN:
+			world.render();
+			deathScreen.render();
+			break;
 		case OPTIONS:
 			options.render();
 			break;
 		}
 	}
 	TrueTypeFont loadingInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 32), false);	
-	public void setGameState(GState STATE) {
-		switch (STATE) {
+	public void setGameState(GState state) {
+		switch (state) {
 		case INTRO:
 			break;
 		case START_MENU:
+			if(gameStateList.getLast() == GState.DEATH_SCREEN)
+				world = null;
 			break;
 		case GAME_MENU:
 			break;
@@ -151,10 +166,12 @@ public class Game {
 				inventoryMenu = new InventoryMenu(world);
 			}
 			break;
+		case DEATH_SCREEN:
+			break;
 		case OPTIONS:
 			break;
 		}
-		gameStateList.add(STATE);
+		gameStateList.add(state);
 	}
 	
 	public GState getGameState() {

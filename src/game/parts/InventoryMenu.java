@@ -25,7 +25,7 @@ public class InventoryMenu extends GamePart {
 	EraseSlot eraser;
 	
 	public InventoryMenu(GameWorld world){
-		inventory = world.getPlayer().getInventory();
+		inventory = world.getPlayer().inventory;
 		equipment = new HamburgerEquipmentbar(inventory.getRightBorderX()+40, inventory.getBottomBorderY()-30,world.getPlayer());
 		eraser = new EraseSlot(inventory.getRightBorderX()-30, inventory.getTopBorderY()-30, 60, 50, "buttons/bars");
 		

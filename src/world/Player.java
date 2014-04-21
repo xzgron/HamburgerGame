@@ -6,6 +6,8 @@ import options.Controlls;
 import org.lwjgl.opengl.Display;
 
 import game.GPhysics;
+import game.Game.GState;
+import game.Main;
 import game.HUDMaterial.Inventory;
 import game.parts.GameWorld;
 import world.objects.GFood;
@@ -21,11 +23,8 @@ public class Player extends Hamburger{
 	///////////////////////////////////
 	
 	////////////INVENTORY//////////////
-	private Inventory inventory = new Inventory(Display.getWidth()/2-80,Display.getHeight()/2+80, 6,3);
+	public Inventory inventory = new Inventory(Display.getWidth()/2-80,Display.getHeight()/2+80, 6,3);
 	
-	public Inventory getInventory(){
-		return inventory;
-	}
 	///////////////////////////////////
 	
 	////////////////MOVEMENT///////////
@@ -47,6 +46,7 @@ public class Player extends Hamburger{
 		super(xPos, yPos);
 	}
 	
+	@Override
 	public void handleAI(){		
 	//G�//
 	float x = 0;
@@ -80,7 +80,7 @@ public class Player extends Hamburger{
 	
 	
 	///////////////////COMBAT/////////////////
-
+	@Override
 	public void landedOn(WorldObject go, GameWorld world) {
 		if (go instanceof GFood) {
 			float dmg = GPhysics.calculateDamage(go.getZSpeed() - getZSpeed(), getWeight(), 1f);
@@ -91,13 +91,21 @@ public class Player extends Hamburger{
 		}
 		
 	}
-
+	@Override
 	public void gotLandedOnBy(WorldObject go, GameWorld world) {
 		super.gotLandedOnBy(go,world);
 	}
+	@Override
 	public void collidedWith(WorldObject go, GameWorld world) {
 		super.collidedWith(go, world);
 	}
 	
 	//////////////////////////////////////////
+	
+	@Override
+	public void die(GameWorld world){
+		super.die(world);
+		Main.game.setGameState(GState.DEATH_SCREEN);
+	}
+	
 }
