@@ -36,7 +36,10 @@ public class HUD extends GamePart{
 	static TrueTypeFont armorInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 24), false);	
 	///////////////////////
 	
-	static TrueTypeFont levelInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 40), false);	
+	static TrueTypeFont waveInfo = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 30), false);
+	static TrueTypeFont waveTime = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 30), false);	
+	static TrueTypeFont enemyCounter = new TrueTypeFont(new Font("Times New Roman", Font.BOLD, 30), false);	
+
 	WaveHandler level;
 	GameWorld world;
 	///////////ACTIONBAR///////////
@@ -74,6 +77,12 @@ public class HUD extends GamePart{
 
 	public void render() {
 		actionbar.render();
+		int resAdapt = 0;
+		if(Display.getWidth()>850)
+		resAdapt=Display.getWidth()/6;
+		
+		if(Display.isFullscreen())
+			resAdapt=Display.getWidth()/5-20;
 		
 		
 		{ //HEALTHBAR//
@@ -86,8 +95,11 @@ public class HUD extends GamePart{
 			armorBar.render();
 			armorInfo.drawString(armorBar.getX()-145, armorBar.getY()-14, (int)armorBar.getCurrent() + "/" + (int)armorBar.getMax() + "   ARMOR", Color.black);
 		}
-		
-		levelInfo.drawString(Display.getWidth()/2-10,20, "Wave:"+ level.getLevel() + "  " + (int)level.waveTime.getTimeLeft() + "  " + world.getAliveHostileFood().size(), Color.white);
+		waveTime.drawString(Display.getWidth()/2+67+resAdapt,0,"Time until next wave: " + (int)level.waveTime.getTimeLeft(), Color.white);
+		enemyCounter.drawString(Display.getWidth()/2+90+resAdapt,30,"Enemies remaining: " + world.getAliveHostileFood().size(), Color.white);
+		waveInfo.drawString(Display.getWidth()/2+264+resAdapt,60, "Wave:"+ level.getLevel());
+
+
 	}
 
 }
