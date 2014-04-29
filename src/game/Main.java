@@ -74,6 +74,7 @@ public class Main {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glLoadIdentity();
 		glClearColor(1,1,1,1);
+		Display.update();
 	}
 	
 	//detta är lopen som går om och om igen under spelets gång och uppdaterar skärmen. Den leder vidare till Game classen
